@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tom Cunningham &amp; Ali Merali, OpenAI">
-<meta name="dcterms.date" content="2025-08-21">
+<meta name="dcterms.date" content="2025-10-20">
 
 <title>Stylized Facts about AI &amp; Human Capabilities</title>
 <style>
@@ -51,10 +51,13 @@ div.csl-indent {
 <script src="stylized-facts_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="stylized-facts_files/libs/quarto-html/anchor.min.js"></script>
 <link href="stylized-facts_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="stylized-facts_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="stylized-facts_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="stylized-facts_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="stylized-facts_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="stylized-facts_files/libs/bootstrap/bootstrap-7c2cfecef5d241a2062cff771c0be089.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="stylized-facts_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="stylized-facts_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="stylized-facts_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="stylized-facts_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script>window.MathJax = {
          loader: { load: ['[custom]/xypic.js'],
                    paths: {custom: 'https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/'}},
@@ -85,7 +88,7 @@ div.csl-indent {
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
-<main class="content page-columns page-full column-page-left" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -94,7 +97,7 @@ div.csl-indent {
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta column-body">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -106,7 +109,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 21, 2025</p>
+      <p class="date">October 20, 2025</p>
     </div>
   </div>
   
@@ -116,7 +119,7 @@ div.csl-indent {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    We discuss stylized facts about the capabilities of frontier AI models, and how they compare to human capabilities. We discuss various candidates for the “missing capability” which would unlock a greater economic impact.
+    We discuss stylized facts about the capabilities of recent AI models and how they compare to human capabilities. We particularly draw attention to a common latent factor of capabilities among AI models, and the fact that this latent factor is different from the distribution of human capabilities. We discuss various candidates for the “missing capability” which would unlock a greater economic impact.
   </div>
 </div>
 
@@ -171,12 +174,12 @@ div.csl-indent {
   <li><a href="#llm-augmentation-studies" id="toc-llm-augmentation-studies"><span class="header-section-number">4</span> LLM Augmentation Studies</a>
   <ul>
   <li><a href="#there-are-a-variety-of-augmentation-studies-on-the-effect-of-ai-assistants." id="toc-there-are-a-variety-of-augmentation-studies-on-the-effect-of-ai-assistants."><span class="header-section-number">4.1</span> There are a variety of “augmentation” studies on the effect of AI assistants.</a></li>
-  <li><a href="#there-are-few-benchmarks-of-augmentation" id="toc-there-are-few-benchmarks-of-augmentation"><span class="header-section-number">4.2</span> There are few benchmarks of augmentation</a></li>
-  <li><a href="#empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers." id="toc-empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers."><span class="header-section-number">4.3</span> Empirical evidence on a variety of tasks suggests lower-skilled workers have much higher productivity gains than higher-skilled workers.</a></li>
+  <li><a href="#empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers." id="toc-empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers."><span class="header-section-number">4.2</span> Empirical evidence on a variety of tasks suggests lower-skilled workers have much higher productivity gains than higher-skilled workers.</a></li>
+  <li><a href="#there-are-few-benchmarks-of-augmentation" id="toc-there-are-few-benchmarks-of-augmentation"><span class="header-section-number">4.3</span> There are few benchmarks of augmentation</a></li>
   <li><a href="#human-ai-teams-do-not-reliably-outperform-the-better-of-human-or-ai-performance-individually" id="toc-human-ai-teams-do-not-reliably-outperform-the-better-of-human-or-ai-performance-individually"><span class="header-section-number">4.4</span> Human + AI teams do not reliably outperform the better of human or AI performance individually</a></li>
   <li><a href="#humans-often-misperceive-the-abilities-of-llms." id="toc-humans-often-misperceive-the-abilities-of-llms."><span class="header-section-number">4.5</span> Humans often misperceive the abilities of LLMs.</a></li>
   </ul></li>
-  <li><a href="#llm-economic-impact" id="toc-llm-economic-impact"><span class="header-section-number">5</span> LLM Economic Impact</a>
+  <li><a href="#implications-for-llm-economic-impact" id="toc-implications-for-llm-economic-impact"><span class="header-section-number">5</span> Implications for LLM Economic Impact</a>
   <ul>
   <li><a href="#the-price-of-inference-for-a-fixed-level-of-capability-has-been-falling-at-10xyear-or-faster." id="toc-the-price-of-inference-for-a-fixed-level-of-capability-has-been-falling-at-10xyear-or-faster."><span class="header-section-number">5.1</span> The price of inference for a fixed level of capability has been falling at 10X/year or faster.</a></li>
   <li><a href="#the-cost-of-inference-for-frontier-capabilities-has-remained-roughly-stable." id="toc-the-cost-of-inference-for-frontier-capabilities-has-remained-roughly-stable."><span class="header-section-number">5.2</span> The cost of inference for frontier capabilities has remained roughly stable.</a></li>
@@ -184,7 +187,7 @@ div.csl-indent {
   <li><a href="#llms-are-almost-always-cheaper-than-humans" id="toc-llms-are-almost-always-cheaper-than-humans"><span class="header-section-number">5.4</span> LLMs are almost always cheaper than humans</a></li>
   <li><a href="#the-economic-impact-of-llms-has-been-modest-so-far" id="toc-the-economic-impact-of-llms-has-been-modest-so-far"><span class="header-section-number">5.5</span> The economic impact of LLMs has been modest so far</a></li>
   <li><a href="#we-may-not-be-able-to-direct-technical-change" id="toc-we-may-not-be-able-to-direct-technical-change"><span class="header-section-number">5.6</span> We may not be able to direct technical change</a></li>
-  <li><a href="#a-univariate-model-of-machine-intelligence-will-be-a-poor-fit" id="toc-a-univariate-model-of-machine-intelligence-will-be-a-poor-fit"><span class="header-section-number">5.7</span> A univariate model of machine intelligence will be a poor fit</a></li>
+  <li><a href="#a-univariate-model-of-machine-and-human-intelligence-will-be-a-poor-fit" id="toc-a-univariate-model-of-machine-and-human-intelligence-will-be-a-poor-fit"><span class="header-section-number">5.7</span> A univariate model of machine and human intelligence will be a poor fit</a></li>
   <li><a href="#wages-are-unlikely-to-be-pinned-down-by-the-price-of-compute" id="toc-wages-are-unlikely-to-be-pinned-down-by-the-price-of-compute"><span class="header-section-number">5.8</span> Wages are unlikely to be pinned down by the price of compute</a></li>
   </ul></li>
   <li><a href="#appendix-offcuts" id="toc-appendix-offcuts"><span class="header-section-number">6</span> Appendix / Offcuts</a></li>
@@ -198,13 +201,30 @@ div.csl-indent {
 - "Paste Image" (might need an extension), use ![ARC-AGI-1](images/image1.png){.column-margin}
 - Slides @ https://docs.google.com/presentation/d/1_ZgY3nItQ_EjkI9qrrqWj_2oQ1N5dIw1y4wpF-5mcwo/edit?slide=id.p#slide=id.p
 -->
+<!-- TO ADD:
+
+   - "A Survey on Large Language Model Benchmarks" https://arxiv.org/pdf/2508.15361
+
+- People to share with for comments:
+
+   - Rishi Bommasani
+   - Joel
+   - 
+
+-->
 <p><strong>This document attempts to summarize facts about AI and human capabilities relevant for understanding the economic impacts of AI.</strong></p>
 <p>This document does not contain non-public information about the capabilities of OpenAI’s models or our research directions. None of the statements reflect the views of OpenAI.</p>
 <section id="overview" class="level1 page-columns page-full" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
 <section id="we-want-to-characterize-ai-capabilities" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="we-want-to-characterize-ai-capabilities"><span class="header-section-number">1.1</span> We want to characterize AI capabilities</h2>
-<p><strong>The goal of this note is to give a crisp characterization of AI capabilities:</strong> (1) what tasks can current AI models do?; (2) how do different AI models differ?; (3) how do AI abilities differ from human abilities?; (4) what are reasonable expectations about future AI abilities?</p>
+<p><strong>The goal of this note is to give a crisp characterization of AI capabilities.</strong> We wish to answer questions like these:</p>
+<ol type="1">
+<li>What types of tasks can AI models do / cannot do?</li>
+<li>How do different AI models differ?</li>
+<li>How do AI abilities differ from human abilities?</li>
+<li>What are reasonable expectations about future AI abilities?</li>
+</ol>
 <p><strong>A running theme will be that the characterization of AI capabilities is <em>difficult</em>:</strong> there is a long history of struggle in making accurate generalizations about the capabilities of artificial intelligence. There is little consensus on how to describe the abilities of contemporary models.</p>
 <p>In this note we list a series of well-documented facts about AI capabilities, and make some more opinionated generalizations. The target audience is economists who are interested in modeling the effects of AI on various situations.</p>
 </section>
@@ -215,7 +235,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stylized-facts_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><a href="stylized-facts_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="stylized-facts_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -276,27 +296,62 @@ div.csl-indent {
 </div></div><p><strong>The problem of defining machine intelligence is notoriously difficult.</strong> Many tests or tasks have been proposed as benchmarks of intelligence but they have been consistently disappointing: when computers pass the test we find they still don’t exhibit general-purpose intelligence.</p>
 <p>The table in the margin shows a sparse history of when computers could achieve various .</p>
 <p>Scott Alexander <a href="https://www.astralcodexten.com/p/sakana-strawberry-and-scary-ai">says</a> <em>“The history of AI is people saying ‘We’ll believe AI is Actually Intelligent when it does X!’ – and then, after AI does X, not believing it’s Actually Intelligent.”</em></p>
+<p>Some well-known attempts to define a scale:</p>
+<ul>
+<li><p><span class="citation" data-cites="legg2007definitions">Legg and Hutter (<a href="#ref-legg2007definitions" role="doc-biblioref">2007</a>)</span> proposed “intelligence measures an agent’s ability to achieve goals in a wide range of environments,” after surveying 70 different definitions of intelligence.</p></li>
+<li><p><span class="citation" data-cites="chollet2019measureintelligence">Chollet (<a href="#ref-chollet2019measureintelligence" role="doc-biblioref">2019</a>)</span> proposes intelligence be defined as “skill-acquisition efficiency”, and proposed a formal benchmark (ARC-AGI).</p></li>
+<li><p><span class="citation" data-cites="morris2023levels">Morris et al. (<a href="#ref-morris2023levels" role="doc-biblioref">2023</a>)</span> proposed five “levels of AGI”, based on the percentile human performance across all tasks. E.g. they classified ChatGPT as being able to do a <em>“wide range of non-physical tasks, including metacognitive tasks like learning new skills equal to or somewhat better than an unskilled human.”</em></p></li>
+<li><p>In 2024 OpenAI developed (but did not release) a five-level metric of AGI.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
+</ul>
 </section>
 <section id="there-is-no-standard-taxonomy-of-ai-capabilities." class="level2 page-columns page-full" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="there-is-no-standard-taxonomy-of-ai-capabilities."><span class="header-section-number">1.4</span> There is no standard taxonomy of AI capabilities.</h2>
 <p>There are hundreds of different AI benchmarks of capability. People often group those benchmarks informally into groups, e.g.&nbsp;“agentic”, “reasoning”, “general knowledge”, however there is no generally-accepted taxonomy of abilities.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><img src="images/image2.png" class="img-fluid"></div></div>
-<p>Some papers have proposed canonical taxonomies but none have yet been widely adopted:</p>
-<ul>
+<p>Some papers have proposed standardized taxonomies but none have yet been widely adopted:</p>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/image2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Taxonomy from @zhou2025generalscales"><img src="images/image2.png" class="img-fluid figure-img" alt="Taxonomy from Lexin Zhou et al. (2025)"></a></p>
+<figcaption>Taxonomy from <span class="citation" data-cites="zhou2025generalscales">Lexin Zhou et al. (<a href="#ref-zhou2025generalscales" role="doc-biblioref">2025</a>)</span></figcaption>
+</figure>
+</div></div><ul>
 <li><span class="citation" data-cites="zhou2025generalscales">Lexin Zhou et al. (<a href="#ref-zhou2025generalscales" role="doc-biblioref">2025</a>)</span> propose an index of 18 different human-interpretable capabilities. They use an LLM to label hundreds of tasks from benchmarks according to the demand for each capability thereby allowing for the prediction of LLM capabilities on new benchmarks or tasks.</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/2025-10-19-15-07-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Taxonomy from @huber2025llmsblooms"><img src="images/2025-10-19-15-07-10.png" class="img-fluid figure-img" alt="Taxonomy from Huber and Niklaus (2025)"></a></p>
+<figcaption>Taxonomy from <span class="citation" data-cites="huber2025llmsblooms">Huber and Niklaus (<a href="#ref-huber2025llmsblooms" role="doc-biblioref">2025</a>)</span></figcaption>
+</figure>
+</div></div><ul>
 <li><span class="citation" data-cites="huber2025llmsblooms">Huber and Niklaus (<a href="#ref-huber2025llmsblooms" role="doc-biblioref">2025</a>)</span> organize benchmark tasks according to “Bloom’s Taxonomy”, a heirarchical framework designed to classify educational learning objectives for humans, with 6 levels: Remember, Understand, Apply, Analyze, Evaluate, Create. They say there are a lack of benchmarks to measure the two highest levels (“evaluate” and “create”).</li>
 </ul>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/2025-10-19-14-47-17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Taxonomy from @hendrycks2025agidefinition"><img src="images/2025-10-19-14-47-17.png" class="img-fluid figure-img" alt="Taxonomy from Hendrycks et al. (2025)"></a></p>
+<figcaption>Taxonomy from <span class="citation" data-cites="hendrycks2025agidefinition">Hendrycks et al. (<a href="#ref-hendrycks2025agidefinition" role="doc-biblioref">2025</a>)</span></figcaption>
+</figure>
+</div></div><ul>
+<li><span class="citation" data-cites="hendrycks2025agidefinition">Hendrycks et al. (<a href="#ref-hendrycks2025agidefinition" role="doc-biblioref">2025</a>)</span> define capabilities along 10 dimensions, based on the Cattell-Horn-Carroll (CHC) theory of cognitive abilities.</li>
+</ul>
 </section>
-<section id="there-does-appears-to-be-a-single-latent-component-of-intelligence-across-llms" class="level2" data-number="1.5">
+<section id="there-does-appears-to-be-a-single-latent-component-of-intelligence-across-llms" class="level2 page-columns page-full" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="there-does-appears-to-be-a-single-latent-component-of-intelligence-across-llms"><span class="header-section-number">1.5</span> There does appears to be a single latent component of intelligence across LLMs</h2>
 <p>We discuss these facts in more detail below.</p>
-<p><strong>Historically, AI capabilities have been very concentrated.</strong> For most of the history of AI specialized systems were built for different tasks, thus DeepBlue was good at Chess and Watson was good at Jeopardy, but each of them was bad at the other task.</p>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/image4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="From @ruan2024observational"><img src="images/image4.png" class="img-fluid figure-img" alt="From Ruan, Maddison, and Hashimoto (2024)"></a></p>
+<figcaption>From <span class="citation" data-cites="ruan2024observational">Ruan, Maddison, and Hashimoto (<a href="#ref-ruan2024observational" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div></div><p><strong>Historically, the AI capabilities distribution was very varied.</strong> For most of the history of AI specialized systems were built for different tasks, thus DeepBlue was good at Chess and Watson was good at Jeopardy, but each of them was bad at the other task.</p>
 <p><strong>LLM abilities are highly correlated across models.</strong> LLM performance is very highly correlated across benchmarks: if model A beats model B on benchmark X, then it very likely also beats model B on benchmark Y. We discuss some literature below which tries to quantify the strength of this correlation.</p>
 <p><strong>AI researchers treat intelligence as a scalar.</strong> A common sentiment among AI researchers is that it is best to spend time on making a model generally better, rather than fine-tuning for a specific case. This sentiment famously named the “bitter lesson” by <span class="citation" data-cites="sutton2019bitter">Sutton (<a href="#ref-sutton2019bitter" role="doc-biblioref">2019</a>)</span>:</p>
 <blockquote class="blockquote">
 <p>“general methods that leverage computation are ultimately the most effective, and by a large margin.”</p>
 </blockquote>
-<p><strong>Work on “scaling laws” treats model intelligence as a scalar.</strong> A large part of academic and industry work on AI is spent estimating “scaling laws”, i.e.&nbsp;predicting model performance based on various inputs (e.g.&nbsp;training compute, training data size, model scale, and test-time compute). Most work on scaling laws uses a scalar outcome to represent model intelligence, e.g.&nbsp;prediction error on a corpus, or performance on a difficult benchmark. In principle scaling laws could estimate a <em>vector</em> of intelligence outputs however this is relatively rare, researchers tend to treat a single scalar as a sufficient proxy for model intelligence.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><strong>Work on “scaling laws” treats model intelligence as a scalar.</strong> A large part of academic and industry work on AI is spent estimating “scaling laws”, i.e.&nbsp;predicting model performance based on various inputs (e.g.&nbsp;training compute, training data size, model scale, and test-time compute). Most work on scaling laws uses a scalar outcome to represent model intelligence, e.g.&nbsp;prediction error on a corpus, or performance on a difficult benchmark. In principle scaling laws could estimate a <em>vector</em> of intelligence outputs however this is relatively rare, researchers tend to treat a single scalar as a sufficient proxy for model intelligence.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <!-- TO ADD: discuss more seriously reasoning models: e.g. o4-mini is frontier at math, but not at general knowledge.  -->
 <!-- TO ADD: if there's one latent component, why do labs offer so many models? (1) API customers generally talk about a price-quality frontier; (2) ; -->
 <!-- **This is an equilibrium outcome.**  -->
@@ -315,7 +370,7 @@ div.csl-indent {
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stylized-facts_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><a href="stylized-facts_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="stylized-facts_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div></div></div>
@@ -335,7 +390,7 @@ div.csl-indent {
 <p><strong>Latent factors for human and LLM ability appear to be significantly different.</strong></p>
 <ul>
 <li><p>Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4 was able to get human-level scores at most aptitude tests: SAT, LSAT, civil service. But GPT-4 did not have the aptitudes passing such tests implies for humans.</p></li>
-<li><p>LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara ↔︎ Kazakh), can combine knowledge from two very different domains.</p></li>
+<li><p>LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara to Kazakh), can combine knowledge from two very different domains.</p></li>
 </ul>
 </section>
 <section id="there-is-some-bottleneck-on-llms-impact-but-disagreement-about-where" class="level2" data-number="1.7">
@@ -343,9 +398,9 @@ div.csl-indent {
 <p><strong>In 2023 many people thought GPT-4 could do a significant fraction of work:</strong></p>
 <ul>
 <li><p><span class="citation" data-cites="eloundou2023gpts">Eloundou et al. (<a href="#ref-eloundou2023gpts" role="doc-biblioref">2023</a>)</span>: estimated that GPT-4 would reduce the time required by at least 50% for between 14% and 56% of all tasks in the economy.</p></li>
-<li><p><span class="citation" data-cites="chui2023economic">Chui et al. (<a href="#ref-chui2023economic" role="doc-biblioref">2023</a>)</span> (McKinsey): <em>“the total percentage of hours that could theoretically be automated by integrating technologies that exist today … [is] 60–70 percent.”</em></p>
-<p>In retrospect this seems overly optimistic: GPT-4 performs very well on tests but there’s something about real-world tasks that trip it up.</p></li>
+<li><p><span class="citation" data-cites="chui2023economic">Chui et al. (<a href="#ref-chui2023economic" role="doc-biblioref">2023</a>)</span> (McKinsey): <em>“the total percentage of hours that could theoretically be automated by integrating technologies that exist today … [is] 60–70 percent.”</em></p></li>
 </ul>
+<p>In retrospect this seems to have been overly optimistic: GPT-4 performs very well on tests but there’s something about real-world tasks that trip it up.</p>
 <p><a href="https://x.com/karpathy/status/1855659091877937385">Andrej Karpathy</a>, Nov 2024:</p>
 <blockquote class="blockquote">
 <p>“Even though by many accounts (evals), LLMs are inching well into top expert territory (e.g.&nbsp;in math and coding etc.), you wouldn’t hire them over a person for the most menial jobs. It’s an interesting challenge how we can create evals for all the”easy” stuff that is secretly hard. Very long context windows, coherence, autonomy, common sense, multimodal I/O that works, … How do we build good “menial job” evals?“*</p>
@@ -375,24 +430,48 @@ div.csl-indent {
 <td>Questions on aptitude tests are usually drawn from a standard pool, and don’t involve truly novel chains of deduction.</td>
 </tr>
 <tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
 <td><strong>Long context</strong></td>
 <td>Questions on aptitude tests have short prompts, real-world problems involve rich context.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><strong>Self-awareness</strong></td>
 <td>Humans have tacit knowledge of what is appropriate in a situation, not included on aptitude tests.</td>
 </tr>
 <tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
 <td><strong>Accuracy and calibration</strong></td>
 <td>Aptitude tests reward guessing.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><strong>Qualitative outputs</strong></td>
 <td>Questions on aptitude tests have right or wrong answers, real-world work requires creative constraint satisfaction.</td>
 </tr>
 <tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
 <td><strong>Interactive exploration</strong></td>
 <td>Questions on aptitude tests do not require a series of decisions, navigating an uncertain situation.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><strong>Long horizon tasks</strong></td>
@@ -430,15 +509,15 @@ div.csl-indent {
 
 <div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/image3.png" class="img-fluid figure-img"></p>
+<p><a href="images/image3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="From @spangher2024generalized"><img src="images/image3.png" class="img-fluid figure-img" alt="From Spangher et al. (2024)"></a></p>
 <figcaption>From <span class="citation" data-cites="spangher2024generalized">Spangher et al. (<a href="#ref-spangher2024generalized" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div></div><ul>
-<li><span class="citation" data-cites="burnell2023reveal">Burnell et al. (<a href="#ref-burnell2023reveal" role="doc-biblioref">2023</a>)</span> look at variation across 29 LLMs and 27 tasks, find 3 factors representing “reasoning, comprehension and core language modeling.” The models are mostly from 2022, i.e.&nbsp;prior to GPT-4.</li>
-<li><span class="citation" data-cites="ilic2024positive">Ilić and Gignac (<a href="#ref-ilic2024positive" role="doc-biblioref">2024</a>)</span> tested over 500 LLMs on 12 different evaluations. They found “strong empirical evidence for a positive manifold and a general factor of ability” and that the “number of LLM parameters correlated positively with this general ability”.</li>
-<li><span class="citation" data-cites="spangher2024generalized">Spangher et al. (<a href="#ref-spangher2024generalized" role="doc-biblioref">2024</a>)</span> propose a method of aggregating LLM performance across a general space of benchmarks into a single ‘Goodness’ number. They find a very strong positive correlation between such performance and the Elo rating approach of LMArena.</li>
-<li><span class="citation" data-cites="owen2024predictable">Owen (<a href="#ref-owen2024predictable" role="doc-biblioref">2024</a>)</span> analyzes models across five orders of magnitude of compute scaling and their relationship with model benchmark performance. They find that “compute scaling provides a promising basis to forecast AI capabilities in diverse benchmarks” </li>
-<li><span class="citation" data-cites="ruan2024observational">Ruan, Maddison, and Hashimoto (<a href="#ref-ruan2024observational" role="doc-biblioref">2024</a>)</span> create “observational scaling laws” from the performance of ∼100 publically available LLMs. They find that the variance in performance of models across benchmarks is dominated by a single large component.</li>
+<li><p><span class="citation" data-cites="burnell2023reveal">Burnell et al. (<a href="#ref-burnell2023reveal" role="doc-biblioref">2023</a>)</span> look at variation across 29 LLMs and 27 benchmarks (all prior to GPT-4). The first 3 factors explain 33%, 31%, and 17% of performance, and they interpret those factors as “reasoning”, “comprehension” and “core language modeling.” They say “capabilities are not monolithic. Instead, they are better explained by three well-delineated factors that represent reasoning, comprehension and core language modeling.”</p></li>
+<li><p><span class="citation" data-cites="ilic2024positive">Ilić and Gignac (<a href="#ref-ilic2024positive" role="doc-biblioref">2024</a>)</span> tested over 500 LLMs on 12 different evaluations. They found “strong empirical evidence for a positive manifold and a general factor of ability” and that the “number of LLM parameters correlated positively with this general ability”.</p></li>
+<li><p><span class="citation" data-cites="spangher2024generalized">Spangher et al. (<a href="#ref-spangher2024generalized" role="doc-biblioref">2024</a>)</span> propose a method of aggregating LLM performance across a general space of benchmarks into a single ‘Goodness’ number. They find a very strong positive correlation between such performance and the Elo rating approach of LMArena.</p></li>
+<li><p><span class="citation" data-cites="owen2024predictable">Owen (<a href="#ref-owen2024predictable" role="doc-biblioref">2024</a>)</span> analyzes models across five orders of magnitude of compute scaling and their relationship with model benchmark performance. They find that “compute scaling provides a promising basis to forecast AI capabilities in diverse benchmarks” </p></li>
+<li><p><span class="citation" data-cites="ruan2024observational">Ruan, Maddison, and Hashimoto (<a href="#ref-ruan2024observational" role="doc-biblioref">2024</a>)</span> create “observational scaling laws” from the performance of ∼100 publically available LLMs. They find that the variance in performance of models across benchmarks is dominated by a single large component.</p></li>
 </ul>
 <div class="no-row-height column-margin column-container"><img src="images/image4.png" class="img-fluid" alt="From Ruan, Maddison, and Hashimoto (2024)"></div><p>Note that all of these studies are from 2024, none include reasoning models. However looking at leaderboards (e.g.&nbsp;<a href="https://artificialanalysis.ai/leaderboards/models">ArtificialAnalysis</a>), it’s still clear that there is a high correlation across benchmark scores. In fact, a PCA of LMArena Text benchmarks conducted in August 2025 suggests that the first component explains over 99% of variance for non-reasoning models and 97% of variance for reasoning models.</p>
 </section>
@@ -485,7 +564,7 @@ div.csl-indent {
 <p>There is typically a positive correlation betwen the tasks that humans find more difficult and ones LLMs struggle with the most.</p>
 <ul>
 <li><span class="citation" data-cites="zhou2024reliable">Lucy Zhou et al. (<a href="#ref-zhou2024reliable" role="doc-biblioref">2024</a>)</span> find a positive correlation between human difficulty and AI difficulty.</li>
-<li><span class="citation" data-cites="dreyfuss2025human">Dreyfuss and Raux (<a href="#ref-dreyfuss2025human" role="doc-biblioref">n.d.</a>)</span> find no correlation between human and AI success rate across a set of math questions, using GPT-3.5.</li>
+<li><span class="citation" data-cites="dreyfuss2025human">Dreyfuss and Raux (<a href="#ref-dreyfuss2025human" role="doc-biblioref">2025</a>)</span> find no correlation between human and AI success rate across a set of math questions, using GPT-3.5.</li>
 </ul>
 </section>
 <section id="llm-performance-degrades-significantly-with-context-length." class="level2" data-number="2.7">
@@ -507,7 +586,7 @@ div.csl-indent {
 <h2 data-number="2.9" class="anchored" data-anchor-id="llm-performance-on-related-sub-tasks-is-highly-variable."><span class="header-section-number">2.9</span> LLM Performance on related sub-tasks is highly variable.</h2>
 <p>LLMs generally have much smaller correlations in their ability to successfully complete similar tasks than humans.</p>
 <ul>
-<li><p><span class="citation" data-cites="dreyfuss2025human">Dreyfuss and Raux (<a href="#ref-dreyfuss2025human" role="doc-biblioref">n.d.</a>)</span> find that, fixing combined SAT scores humans have a 8x larger difference between subject scores than LLMs. Further, even within disciplines there’s evidence that LLMs performance on certain math questions is much less predictive of its mathematical ability in general than it is for humans.</p></li>
+<li><p><span class="citation" data-cites="dreyfuss2025human">Dreyfuss and Raux (<a href="#ref-dreyfuss2025human" role="doc-biblioref">2025</a>)</span> find that, fixing combined SAT scores humans have a 8x larger difference between subject scores than LLMs. Further, even within disciplines there’s evidence that LLMs performance on certain math questions is much less predictive of its mathematical ability in general than it is for humans.</p></li>
 <li><p>O*Net data suggests that most current jobs contain bundles of tasks that humans have strong positive correlations over their ability to complete. Given LLMs have much weaker correlations, it suggests that if this trend continues over time they will have to far exceed human performance on individual subtasks before being able to match selected human performance on overall jobs.</p></li>
 </ul>
 </section>
@@ -525,7 +604,7 @@ div.csl-indent {
 <ul>
 <li><span class="citation" data-cites="kwa2025longtasks">Kwa et al. (<a href="#ref-kwa2025longtasks" role="doc-biblioref">2025</a>)</span> find that the longest length of task that a frontier LLM has been able to complete with greater than 50% probability has been doubling every seven months over the last six years across a range of software engineering, cybersecurity, and general reasoning tasks. As of June 2025 it stands at just under two hours. A July 2025 update from METR shows that the time horizon is similar across other benchmarks testing quantitative and analytical skills and whilst there are larger differences in other domains (eg. web-browsing tasks) the rate of change over time is similar. The relationship between model success probability and the length of time it takes a human to complete a task is well fit with a logistic curve. The correlation in the errors of different models is high (79% between claude 3.7 and o1) even after accounting for task length and average model performance suggesting there are features of tasks beyond task length with predictive power for model performance. </li>
 </ul>
-<div class="no-row-height column-margin column-container"><img src="images/image5.png" class="img-fluid"></div><div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><img src="images/image6.png" class="img-fluid"></div></div>
+<div class="no-row-height column-margin column-container"><img src="images/image5.png" class="img-fluid"></div><p class="page-columns page-full"><a href="images/image6.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-8"><div class="no-row-height column-margin column-container"><img src="images/image6.png" class="img-fluid"></div></a></p>
 <ul>
 <li><span class="citation" data-cites="ord2025halflife">Ord (<a href="#ref-ord2025halflife" role="doc-biblioref">2025</a>)</span> argues that LLMs performance degradation over time is roughly consistent with a hypothesis of a constant half-life of success.</li>
 </ul>
@@ -560,19 +639,19 @@ div.csl-indent {
 <h2 data-number="2.15" class="anchored" data-anchor-id="llms-show-ability-in-augmenting-the-production-of-all-three-of-its-key-inputs-algorithmic-improvements-hardware-and-data."><span class="header-section-number">2.15</span> LLMs show ability in augmenting the production of all three of its key inputs (algorithmic improvements, hardware, and data).</h2>
 <p>LLMs are already able to write a significant proportion of the code used by frontier AI labs:</p>
 <ul>
-<li>OpenAI’s <span class="citation" data-cites="openai2025o3o4systemcard">(<a href="#ref-openai2025o3o4systemcard" role="doc-biblioref">2025</a>)</span> o3 succeeds autonomously on 44% of OpenAI’s pull-request (PR) tasks.</li>
-<li>Over 70% of Anthropic’s <span class="citation" data-cites="anthropic2025devday">(<a href="#ref-anthropic2025devday" role="doc-biblioref">2025</a>)</span> PRs are “authored” by LLMs.</li>
-<li>More than 25% of all the code at Google <span class="citation" data-cites="google2024codeai">(<a href="#ref-google2024codeai" role="doc-biblioref">2024</a>)</span> is written by AI.</li>
+<li>OpenAI’s -<span class="citation" data-cites="openai2025o3o4systemcard">OpenAI (<a href="#ref-openai2025o3o4systemcard" role="doc-biblioref">2025</a>)</span> o3 succeeds autonomously on 44% of OpenAI’s pull-request (PR) tasks.</li>
+<li>Over 70% of Anthropic’s -<span class="citation" data-cites="anthropic2025devday">Anthropic (<a href="#ref-anthropic2025devday" role="doc-biblioref">2025</a>)</span> PRs are “authored” by LLMs.</li>
+<li>More than 25% of all the code at Google -<span class="citation" data-cites="google2024codeai">Google (<a href="#ref-google2024codeai" role="doc-biblioref">2024</a>)</span> is written by AI.</li>
 </ul>
 <p>This includes the ability to autonomously come up with new algorithmic breakthroughs:</p>
 <ul>
 <li>A single kernel optimization in Gemini’s architecture from AlphaEvolve led to a 1% reduction in Gemini’s overall training time at Google DeepMind, likely saving at least tens of millions of dollars.</li>
-<li>Algorithmic improvements from LLMs are also able to improve hardware efficiency (Google <span class="citation" data-cites="google2025alphaevolve">(<a href="#ref-google2025alphaevolve" role="doc-biblioref">2025</a>)</span> reports a 0.7% saving in Google’s worldwide compute resources) and aid in the design of new TPU chips.</li>
+<li>Algorithmic improvements from LLMs are also able to improve hardware efficiency (Google -<span class="citation" data-cites="google2025alphaevolve">Google (<a href="#ref-google2025alphaevolve" role="doc-biblioref">2025</a>)</span> reports a 0.7% saving in Google’s worldwide compute resources) and aid in the design of new TPU chips.</li>
 </ul>
 <p>Further, published results from Open Source LLM creators underscore the importance of synthethic data for frontier model performance:</p>
 <ul>
-<li>Kimi-K2 <span class="citation" data-cites="kimi2025openagentic">(<a href="#ref-kimi2025openagentic" role="doc-biblioref">2025</a>)</span>, a leading open source model released in July 2025, finds “a key advancement… is the introduction of a synthetic data generation strategy to increase token utility.”</li>
-<li>DeepSeek <span class="citation" data-cites="xin2024deepseekprover">(<a href="#ref-xin2024deepseekprover" role="doc-biblioref">2024</a>)</span> trained an automated theorem proving LLM in 2024 and found the model trained on “large-scale synthetic data becomes significantly more powerful.”</li>
+<li>Kimi-K2 -<span class="citation" data-cites="kimi2025openagentic">Team et al. (<a href="#ref-kimi2025openagentic" role="doc-biblioref">2025</a>)</span>, a leading open source model released in July 2025, finds “a key advancement… is the introduction of a synthetic data generation strategy to increase token utility.”</li>
+<li>DeepSeek -<span class="citation" data-cites="xin2024deepseekprover">Xin et al. (<a href="#ref-xin2024deepseekprover" role="doc-biblioref">2024</a>)</span> trained an automated theorem proving LLM in 2024 and found the model trained on “large-scale synthetic data becomes significantly more powerful.”</li>
 </ul>
 <!-- 
 ## LLMs can produce long-form outputs that are preferred to a large share of human long-form outputs.
@@ -595,7 +674,7 @@ There are many fewer results on AI performance on long-form output, because thes
 <h2 data-number="2.17" class="anchored" data-anchor-id="there-are-few-benchmarks-in-which-humans-significantly-outperform-computers."><span class="header-section-number">2.17</span> There are few benchmarks in which humans significantly outperform computers.</h2>
 <p>It’s challenging to find benchmarks in which humans can still outperform computers. A recent list of <a href="https://docs.google.com/document/d/1cwvepQwLXoZJvgsBpUU5gXmgXml2TOqBRqRV_akfmbA/edit?tab=t.0">“useful benchmarks that have human scores beyond AI SOTA”</a> finds benchmarks that require UX usage have so far (Nov 2024) resisted saturation.</p>
 <p>Even on UX usage benchmarks, the difficulty for LLMs appear to be more about tooling (which may be more easily rectifiable) than planning capabilities (the OSWorld paper notes that 75% of failed attempts are due to inaccurate mouse clicks rather than planning mistakes).</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><img src="images/image8.jpg" class="img-fluid"></div></div>
+<p class="page-columns page-full"><a href="images/image8.jpg" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-9"><div class="no-row-height column-margin column-container"><img src="images/image8.jpg" class="img-fluid"></div></a></p>
 <!-- ## New benchmarks are being produced that stretch the limits of human ability.
 
 The Financial Times [reports](https://www.ft.com/content/866ad6e9-f8fe-451f-9b00-cb9f638c7c59) *“Tech groups are rushing to redesign how they test and evaluate their artificial intelligence models, as the fast advancing technology surpasses current benchmarks.”*  
@@ -625,19 +704,19 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <h2 data-number="2.20" class="anchored" data-anchor-id="llms-hallucinate-with-obscure-or-long-form-answers."><span class="header-section-number">2.20</span> LLMs hallucinate with obscure or long-form answers.</h2>
 <p>LLMs struggle with reliability and often make up plausible-sounding but factually incorrect hallucinations.</p>
 <ul>
-<li>GPT-4o and o1-preview hallucinate 30-60 % of the time when asked obscure factual questions, e.g.&nbsp;“Which Dutch player scored an open-play goal in the 2022 Netherlands vs Argentina game in the men’s FIFA World Cup?” <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</li>
-<li>When evaluated on a proprietary benchmark of open-ended questions they included incorrect facts in their answers around 80 % of the time <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
+<li>GPT-4o and o1-preview hallucinate 30-60 % of the time when asked obscure factual questions, e.g.&nbsp;“Which Dutch player scored an open-play goal in the 2022 Netherlands vs Argentina game in the men’s FIFA World Cup?” <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
+<li>When evaluated on a proprietary benchmark of open-ended questions they included incorrect facts in their answers around 80 % of the time <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</li>
 </ul>
-<p>However, there has been recent progress made in reducing hallucination rates. GPT-5, released in August 2025, had six times fewer hallucinations than o3 as measured by LongFact <span class="citation" data-cites="wei2024longformfactuality">(<a href="#ref-wei2024longformfactuality" role="doc-biblioref">2024</a>)</span> and FActScore <span class="citation" data-cites="min2023factscore">(<a href="#ref-min2023factscore" role="doc-biblioref">2023</a>)</span>.</p>
+<p>However, there has been recent progress made in reducing hallucination rates. GPT-5, released in August 2025, had six times fewer hallucinations than o3 as measured by LongFact -<span class="citation" data-cites="wei2024longformfactuality">Wei et al. (<a href="#ref-wei2024longformfactuality" role="doc-biblioref">2024</a>)</span> and FActScore -<span class="citation" data-cites="min2023factscore">Min et al. (<a href="#ref-min2023factscore" role="doc-biblioref">2023</a>)</span>.</p>
 </section>
 <section id="llms-struggle-to-give-calibrated-answers." class="level2 page-columns page-full" data-number="2.21">
 <h2 data-number="2.21" class="anchored" data-anchor-id="llms-struggle-to-give-calibrated-answers."><span class="header-section-number">2.21</span> LLMs struggle to give calibrated answers.</h2>
 <p>LLMs usually are not aware of what they know or do not know.</p>
 <ul>
 <li><p><span class="citation" data-cites="kadavath2022know">Kadavath et al. (<a href="#ref-kadavath2022know" role="doc-biblioref">2022</a>)</span> have found that large-parameter models are fairly well calibrated in standard benchmarks.</p></li>
-<li><p>However a recent OpenAI <span class="citation" data-cites="openai2024simpleqa">(<a href="#ref-openai2024simpleqa" role="doc-biblioref">2024</a>)</span> study found that models are fairly overconfident on tests of obscure facts:<br>
+<li><p>However a recent OpenAI -<span class="citation" data-cites="openai2024simpleqa">OpenAI (<a href="#ref-openai2024simpleqa" role="doc-biblioref">2024</a>)</span> study found that models are fairly overconfident on tests of obscure facts:<br>
 </p></li>
-<li><p>A Metactulus study in October 2024 found that pro human forecasters were “signficantly better” than top bots on a set of 113 forecasting questions across various domains (eg. politics, economics, the rate of technological progress, etc ) and that the bots displayed a positive bias (overestimating the likelihood of all events on average)<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p></li>
+<li><p>A Metactulus study in October 2024 found that pro human forecasters were “signficantly better” than top bots on a set of 113 forecasting questions across various domains (eg. politics, economics, the rate of technological progress, etc ) and that the bots displayed a positive bias (overestimating the likelihood of all events on average)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p></li>
 </ul>
 <div class="no-row-height column-margin column-container"><img src="images/image10.png" class="img-fluid"></div></section>
 </section>
@@ -646,89 +725,131 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <section id="llms-struggle-with-tasks-that-are-logically-complex-and-costly-to-verify-at-scale-and-those-that-require-ux-usage." class="level2 page-columns page-full" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="llms-struggle-with-tasks-that-are-logically-complex-and-costly-to-verify-at-scale-and-those-that-require-ux-usage."><span class="header-section-number">3.1</span> LLMs struggle with tasks that are logically complex (and costly to verify at scale) and those that require UX usage.</h2>
 <p>An analysis of 40 publicly available benchmarks found six that LLMs still find particularly challenging (Jun 2025):</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><img src="images/image11.png" class="img-fluid"></div></div>
+<p class="page-columns page-full"><a href="images/image11.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-10"><div class="no-row-height column-margin column-container"><img src="images/image11.png" class="img-fluid"></div></a></p>
 </section>
 <section id="the-human-time-to-complete-a-task-is-the-best-univariate-predictor-of-llm-success-rates" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="the-human-time-to-complete-a-task-is-the-best-univariate-predictor-of-llm-success-rates"><span class="header-section-number">3.2</span> The Human Time-to-Complete a task is the best univariate predictor of LLM success rates</h2>
 <p>Taking correlations between LLM performance in 40 benchmarks across nine different features, the human time-to-complete had the highest (negative) correlation.</p>
-<p><img src="images/image12.png" class="img-fluid"></p>
+<p><a href="images/image12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="images/image12.png" class="img-fluid"></a></p>
 <p>However, the strength of this correlation is mainly due to the strong correlation between human time-to-complete and whether a turn requires multiple-turns or is highly logically complex. Indeed, in a multivariable regression, time-to-complete has one of the weakest effects of any task attribute.</p>
-<p><img src="images/image13.png" class="img-fluid"></p>
+<p><a href="images/image13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="images/image13.png" class="img-fluid"></a></p>
 </section>
 <section id="the-ease-of-verifying-the-outputs-of-a-task-is-the-most-important-attribute-in-leading-llms-to-be-successful-at-a-task." class="level2 page-columns page-full" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-ease-of-verifying-the-outputs-of-a-task-is-the-most-important-attribute-in-leading-llms-to-be-successful-at-a-task."><span class="header-section-number">3.3</span> The ease of verifying the outputs of a task is the most important attribute in leading LLMs to be successful at a task.</h2>
 <p>If a task’s outputs are easily verifiable by both expert humans and a computer this is associated with a 1.4 unit (on a five-point scale) increase in frontier LLM performance on average.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><img src="images/image14.png" class="img-fluid"></div></div>
+<p class="page-columns page-full"><a href="images/image14.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-13"><div class="no-row-height column-margin column-container"><img src="images/image14.png" class="img-fluid"></div></a></p>
 <p>The degree to which the verification can occur autonomously (by computers not expert humans) has gotten more important with reasoning models.</p>
 </section>
 </section>
-<section id="llm-augmentation-studies" class="level1" data-number="4">
+<section id="llm-augmentation-studies" class="level1 page-columns page-full" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> LLM Augmentation Studies</h1>
-<section id="there-are-a-variety-of-augmentation-studies-on-the-effect-of-ai-assistants." class="level2" data-number="4.1">
+<p>We define AI “augmentation” as the effect of combined AI and human ability, compared to human-alone ability. These are sometimes also called “uplift” or “centaur” studies.</p>
+<section id="there-are-a-variety-of-augmentation-studies-on-the-effect-of-ai-assistants." class="level2 page-columns page-full" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="there-are-a-variety-of-augmentation-studies-on-the-effect-of-ai-assistants."><span class="header-section-number">4.1</span> There are a variety of “augmentation” studies on the effect of AI assistants.</h2>
-<p>These experiments compare behavior of workers with and without access to an AI system.</p>
-<p>Most studies find an increase in productivity:</p>
-<!-- TODO: add the METR uplift study and any others; for each give a very brief precis of results. Perhaps have separate tables for real-world and lab studies. -->
+<p>These RCTs compare behavior of workers with and without access to an AI system:</p>
+<div class="column-page">
 <table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 12%">
+<col style="width: 80%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Domain</th>
 <th>Reference(s)</th>
+<th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Legal tasks</td>
 <td><span class="citation" data-cites="choi2023legal">Choi, Monahan, and Schwarcz (<a href="#ref-choi2023legal" role="doc-biblioref">2023</a>)</span></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Software engineers</td>
 <td><span class="citation" data-cites="cui2024software">Cui et al. (<a href="#ref-cui2024software" role="doc-biblioref">2024</a>)</span></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><span class="citation" data-cites="hoffman2024software">Hoffman et al. (<a href="#ref-hoffman2024software" role="doc-biblioref">2024</a>)</span></td>
+<td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td><span class="citation" data-cites="gao2024github">Gao (<a href="#ref-gao2024github" role="doc-biblioref">2024</a>)</span></td>
+<td>“Accenture developers saw an 8.69% increase in pull requests … a 15% increase to the pull request merge rate … an 84% increase in successful builds … developers accepted around 30% of GitHub Copilot’s suggestions.”¹</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><span class="citation" data-cites="peng2023developerproductivity">Peng et al. (<a href="#ref-peng2023developerproductivity" role="doc-biblioref">2023</a>)</span></td>
+<td>“Completed the task 55.8% faster than the control group.”</td>
 </tr>
 <tr class="even">
+<td></td>
+<td><span class="citation" data-cites="becker2025developerproductivity">Becker et al. (<a href="#ref-becker2025developerproductivity" role="doc-biblioref">2025</a>)</span></td>
+<td>“Allowing AI actually increases completion time by 19%—AI tooling slowed developers down.”</td>
+</tr>
+<tr class="odd">
 <td>Consultants</td>
 <td><span class="citation" data-cites="dellacqua2023consultants">Dell’Acqua et al. (<a href="#ref-dellacqua2023consultants" role="doc-biblioref">2023</a>)</span></td>
+<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Writing tasks</td>
 <td><span class="citation" data-cites="noy2023writing">Noy and Zhang (<a href="#ref-noy2023writing" role="doc-biblioref">2023</a>)</span></td>
-</tr>
-<tr class="even">
-<td>Call centre workers</td>
-<td><span class="citation" data-cites="brynjolfsson2023callcenter">Brynjolfsson, Li, and Raymond (<a href="#ref-brynjolfsson2023callcenter" role="doc-biblioref">2023</a>)</span></td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>Translators</td>
-<td><span class="citation" data-cites="merali2024scaling">Merali (<a href="#ref-merali2024scaling" role="doc-biblioref">2024</a>)</span></td>
+<td>Call centre workers</td>
+<td><span class="citation" data-cites="brynjolfsson2023callcenter">Brynjolfsson, Li, and Raymond (<a href="#ref-brynjolfsson2023callcenter" role="doc-biblioref">2023</a>)</span></td>
+<td>“Increases worker productivity … by 15% on average … larger gains for lower-skilled workers.”</td>
 </tr>
 <tr class="even">
+<td>Translators</td>
+<td><span class="citation" data-cites="merali2024scaling">Merali (<a href="#ref-merali2024scaling" role="doc-biblioref">2024</a>)</span></td>
+<td>“Tenfold increase in model compute improved task completion speed by 12.3% … earnings/min by 16.1% … gains four times larger for lower-skilled workers.”</td>
+</tr>
+<tr class="odd">
 <td>Entrepreneurs</td>
 <td><span class="citation" data-cites="otis2024entrepreneurs">Otis et al. (<a href="#ref-otis2024entrepreneurs" role="doc-biblioref">2024</a>)</span></td>
+<td></td>
 </tr>
 </tbody>
 </table>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/2025-10-20-09-27-43.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Distribution of effect sizes, from @coupe2025impact"><img src="images/2025-10-20-09-27-43.png" class="img-fluid figure-img" alt="Distribution of effect sizes, from Coupé and Wu (2025)"></a></p>
+<figcaption>Distribution of effect sizes, from <span class="citation" data-cites="coupe2025impact">Coupé and Wu (<a href="#ref-coupe2025impact" role="doc-biblioref">2025</a>)</span></figcaption>
+</figure>
+</div></div><p><span class="citation" data-cites="coupe2025impact">Coupé and Wu (<a href="#ref-coupe2025impact" role="doc-biblioref">2025</a>)</span> survey 45 studies of the impact of genAI tools on productivity, they find an average productivity effect of around 17%, however with much variation. They also find strong signs of selection, suggesting the estimates are exaggerated.</p>
 </section>
-<section id="there-are-few-benchmarks-of-augmentation" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="there-are-few-benchmarks-of-augmentation"><span class="header-section-number">4.2</span> There are few benchmarks of augmentation</h2>
+<section id="empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers." class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers."><span class="header-section-number">4.2</span> Empirical evidence on a variety of tasks suggests lower-skilled workers have much higher productivity gains than higher-skilled workers.</h2>
+<p>The following RCTs find that augmentation has a larger effect on workers with lower pre-experimental productivity levels:</p>
 <ul>
-<li><span class="citation" data-cites="haupt2025ai">Haupt and Brynjolfsson (<a href="#ref-haupt2025ai" role="doc-biblioref">2025</a>)</span> argues for creating standardized benchmarks of augmentation/uplift they refer to as Centaur Evaluations.</li>
+<li><span class="citation" data-cites="brynjolfsson2023callcenter">Brynjolfsson, Li, and Raymond (<a href="#ref-brynjolfsson2023callcenter" role="doc-biblioref">2023</a>)</span>
+<ul>
+<li>Magnitude: “Access to AI assistance increases worker productivity, as measured by issues resolved per hour, by 15% on average, with substantial heterogeneity across workers.”</li>
+<li>Heterogeneity: “Less experienced and lower-skilled workers improve both the speed and quality of their output while the most experienced and highest-skilled workers see small gains in speed and small declines in quality.”</li>
+</ul></li>
+<li><span class="citation" data-cites="noy2023writing">Noy and Zhang (<a href="#ref-noy2023writing" role="doc-biblioref">2023</a>)</span></li>
+<li><span class="citation" data-cites="choi2023legal">Choi, Monahan, and Schwarcz (<a href="#ref-choi2023legal" role="doc-biblioref">2023</a>)</span></li>
+<li><span class="citation" data-cites="peng2023developerproductivity">Peng et al. (<a href="#ref-peng2023developerproductivity" role="doc-biblioref">2023</a>)</span>
+<ul>
+<li>Magnitude: “The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group.”</li>
+</ul></li>
 </ul>
 </section>
-<section id="empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers." class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="empirical-evidence-on-a-variety-of-tasks-suggests-lower-skilled-workers-have-much-higher-productivity-gains-than-higher-skilled-workers."><span class="header-section-number">4.3</span> Empirical evidence on a variety of tasks suggests lower-skilled workers have much higher productivity gains than higher-skilled workers.</h2>
-<p>Across four large-scale RCTs (<span class="citation" data-cites="brynjolfsson2023callcenter">Brynjolfsson, Li, and Raymond (<a href="#ref-brynjolfsson2023callcenter" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="noy2023writing">Noy and Zhang (<a href="#ref-noy2023writing" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="choi2023legal">Choi, Monahan, and Schwarcz (<a href="#ref-choi2023legal" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="peng2023developerproductivity">Peng et al. (<a href="#ref-peng2023developerproductivity" role="doc-biblioref">2023</a>)</span>) the productivity premium for workers in the bottom tercile of baseline performance is roughly 2–3X larger than for the top tercile, suggesting skill-levelling rather than skill-biased technological change.</p>
+<section id="there-are-few-benchmarks-of-augmentation" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="there-are-few-benchmarks-of-augmentation"><span class="header-section-number">4.3</span> There are few benchmarks of augmentation</h2>
+<ul>
+<li><span class="citation" data-cites="haupt2025ai">Haupt and Brynjolfsson (<a href="#ref-haupt2025ai" role="doc-biblioref">2025</a>)</span> argues for creating standardized benchmarks of augmentation/uplift they refer to as “centaur” evaluations.</li>
+</ul>
 </section>
 <section id="human-ai-teams-do-not-reliably-outperform-the-better-of-human-or-ai-performance-individually" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="human-ai-teams-do-not-reliably-outperform-the-better-of-human-or-ai-performance-individually"><span class="header-section-number">4.4</span> Human + AI teams do not reliably outperform the better of human or AI performance individually</h2>
@@ -740,7 +861,7 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <section id="humans-often-misperceive-the-abilities-of-llms." class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="humans-often-misperceive-the-abilities-of-llms."><span class="header-section-number">4.5</span> Humans often misperceive the abilities of LLMs.</h2>
 <ul>
-<li><p><span class="citation" data-cites="dreyfuss2025human">Dreyfuss and Raux (<a href="#ref-dreyfuss2025human" role="doc-biblioref">n.d.</a>)</span> find “projection of human difficulty onto AI predictably distorts subjects’ beliefs”.</p></li>
+<li><p><span class="citation" data-cites="dreyfuss2025human">Dreyfuss and Raux (<a href="#ref-dreyfuss2025human" role="doc-biblioref">2025</a>)</span> find “projection of human difficulty onto AI predictably distorts subjects’ beliefs”.</p></li>
 <li><p><span class="citation" data-cites="vafa2024humangeneralization">Vafa, Rambachan, and Mullainathan (<a href="#ref-vafa2024humangeneralization" role="doc-biblioref">2024</a>)</span> say “We collect a dataset of 19K examples of how humans make generalizations across 79 tasks from the MMLU and BIG-Bench benchmarks … based on short interactions, humans reach overconfident conclusions about the capabilities of the largest models.”</p></li>
 <li><p><span class="citation" data-cites="agarwal2024radiology">Agarwal et al. (<a href="#ref-agarwal2024radiology" role="doc-biblioref">2024</a>)</span> find that radiologists do not use AI data efficiently.</p></li>
 <li><p><span class="citation" data-cites="becker2025developerproductivity">Becker et al. (<a href="#ref-becker2025developerproductivity" role="doc-biblioref">2025</a>)</span> find that experienced software engineers inaccurately believe that they have experienced productivity speedups when using AI tools.</p></li>
@@ -757,20 +878,20 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 -[Eloundou et al. (2024)](https://www.science.org/doi/abs/10.1126/science.adj0998)*: “We find generally positive and statistically significant correlations between our LLM exposure measures and previous measurements targeting software and AI.”*   -->
 </section>
 </section>
-<section id="llm-economic-impact" class="level1 page-columns page-full" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> LLM Economic Impact</h1>
+<section id="implications-for-llm-economic-impact" class="level1 page-columns page-full" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Implications for LLM Economic Impact</h1>
 <section id="the-price-of-inference-for-a-fixed-level-of-capability-has-been-falling-at-10xyear-or-faster." class="level2 page-columns page-full" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="the-price-of-inference-for-a-fixed-level-of-capability-has-been-falling-at-10xyear-or-faster."><span class="header-section-number">5.1</span> The price of inference for a fixed level of capability has been falling at 10X/year or faster.</h2>
 
 <div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/image15.png" class="img-fluid figure-img"></p>
-<figcaption>From SHAI</figcaption>
+<p><a href="images/image15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="From @maslej2025aiindex"><img src="images/image15.png" class="img-fluid figure-img" alt="From Maslej et al. (2025)"></a></p>
+<figcaption>From <span class="citation" data-cites="maslej2025aiindex">Maslej et al. (<a href="#ref-maslej2025aiindex" role="doc-biblioref">2025</a>)</span></figcaption>
 </figure>
 </div></div><ul>
 <li><span class="citation" data-cites="maslej2025aiindex">Maslej et al. (<a href="#ref-maslej2025aiindex" role="doc-biblioref">2025</a>)</span> estimate that inference costs, for a given level of intelligence, fell over 2023-2024 at an annual rate between 9X to 900X per year.</li>
 </ul>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><img src="images/2025-07-16-22-25-34.png" class="img-fluid"></div></div>
+<p class="page-columns page-full"><a href="images/2025-07-16-22-25-34.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-16"><div class="no-row-height column-margin column-container"><img src="images/2025-07-16-22-25-34.png" class="img-fluid"></div></a></p>
 <ul>
 <li><a href="https://artificialanalysis.ai/trends">Artificial Analysis</a> track per-token price trends since 2022: within each tier of model intelligence, the price typically halves every few months.</li>
 </ul>
@@ -792,7 +913,15 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <section id="llms-are-almost-always-cheaper-than-humans" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="llms-are-almost-always-cheaper-than-humans"><span class="header-section-number">5.4</span> LLMs are almost always cheaper than humans</h2>
 <p><span class="citation" data-cites="metr2024capability">METR (<a href="#ref-metr2024capability" role="doc-biblioref">2024</a>)</span> compare the cost of humans and LLMs to do a variety of tasks, they say “when agents <em>can</em> do a task, they can often do so at a fraction of the cost of humans.”</p>
-<p><img src="images/image16.png" class="img-fluid"></p>
+<p><a href="images/image16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="images/image16.png" class="img-fluid"></a></p>
+<p>Similarly <span class="citation" data-cites="metr2025gpt5evaluation">METR (<a href="#ref-metr2025gpt5evaluation" role="doc-biblioref">2025</a>)</span>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/2025-09-19-16-04-34.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Agent Performance on HCAST &amp; RE-Bench by Cost"><img src="images/2025-09-19-16-04-34.png" class="img-fluid figure-img" alt="Agent Performance on HCAST &amp; RE-Bench by Cost"></a></p>
+<figcaption>Agent Performance on HCAST &amp; RE-Bench by Cost</figcaption>
+</figure>
+</div>
+<p>https://evaluations.metr.org/image/gpt_5_report/models_budget_comparison.png</p>
 <p>Exceptions:</p>
 <ul>
 <li>Computer transcription was for a period more accurate but less cost-effective than humans.</li>
@@ -806,7 +935,7 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <ul>
 <li><span class="citation" data-cites="bick2024rapid">Bick, Blandin, and Deming (<a href="#ref-bick2024rapid" role="doc-biblioref">2024</a>)</span>: 0.1-0.9% productivity boost on work tasks.</li>
 <li><span class="citation" data-cites="humlum2025large">Humlum and Vestergaard (<a href="#ref-humlum2025large" role="doc-biblioref">2025</a>)</span>: 3% average self-reported time saving.</li>
-<li><span class="citation" data-cites="rynjolfsson2025gdpbWillingess-to-Accept">(<a href="#ref-rynjolfsson2025gdpbWillingess-to-Accept" role="doc-biblioref"><strong>rynjolfsson2025gdpbWillingess-to-Accept?</strong></a>)</span>: Willingness-to-Accept (WTA) estimates are roughly 0.3% of GDP for 2025.</li>
+<li><span class="citation" data-cites="brynjolfsson2025gdpbWillingess-to-Accept">(<a href="#ref-brynjolfsson2025gdpbWillingess-to-Accept" role="doc-biblioref"><strong>brynjolfsson2025gdpbWillingess-to-Accept?</strong></a>)</span>: Willingness-to-Accept (WTA) estimates are roughly 0.3% of GDP for 2025.</li>
 </ul>
 <p><strong>Probably the biggest economic impact is on home production.</strong> Working on a paper documenting ChatGPT use. Note that Anthropic and Microsoft papers only focus on use at work tasks.</p>
 <p><strong>Enterprise impacts are still small.</strong> Most enterprises have adopted AI in some form, but they typically report small effects on revenue or costs.</p>
@@ -819,7 +948,7 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stylized-facts_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><a href="stylized-facts_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="stylized-facts_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div></div></div>
@@ -840,12 +969,12 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <p><strong>This may not be possible:</strong> augmenting AI and automating AI may be the same AI.</p>
 <p>If there is a single latent factor of model ability, then work to train an augmenting model looks very similar to work to train an automating model. The ability to significantly steer AI capabilities seems limited.</p>
 </section>
-<section id="a-univariate-model-of-machine-intelligence-will-be-a-poor-fit" class="level2 page-columns page-full" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="a-univariate-model-of-machine-intelligence-will-be-a-poor-fit"><span class="header-section-number">5.7</span> A univariate model of machine intelligence will be a poor fit</h2>
+<section id="a-univariate-model-of-machine-and-human-intelligence-will-be-a-poor-fit" class="level2 page-columns page-full" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="a-univariate-model-of-machine-and-human-intelligence-will-be-a-poor-fit"><span class="header-section-number">5.7</span> A univariate model of machine and human intelligence will be a poor fit</h2>
 
 <div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/2025-07-17-07-40-28.png" class="img-fluid figure-img"></p>
+<p><a href="images/2025-07-17-07-40-28.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="from @aschenbrenner2024situational"><img src="images/2025-07-17-07-40-28.png" class="img-fluid figure-img" alt="from Aschenbrenner (2024)"></a></p>
 <figcaption>from <span class="citation" data-cites="aschenbrenner2024situational">Aschenbrenner (<a href="#ref-aschenbrenner2024situational" role="doc-biblioref">2024</a>)</span></figcaption>
 </figure>
 </div></div><p>We sometimes describe AI capability by human equivalent, e.g.&nbsp;years of education (<span class="citation" data-cites="aschenbrenner2024situational">Aschenbrenner (<a href="#ref-aschenbrenner2024situational" role="doc-biblioref">2024</a>)</span>).</p>
@@ -863,6 +992,7 @@ Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/fron
 <li><span class="citation" data-cites="ide2024artificialintelligenceknowledgeeconomy">Ide and Talamas (<a href="#ref-ide2024artificialintelligenceknowledgeeconomy" role="doc-biblioref">2024</a>)</span></li>
 <li>Noah Smith (<a href="https://www.noahpinion.blog/p/plentiful-high-paying-jobs-in-the">2024</a>) on comparative advantage and wages.</li>
 <li><span class="citation" data-cites="acemoglu2024simple">Acemoglu (<a href="#ref-acemoglu2024simple" role="doc-biblioref">2024</a>)</span></li>
+<li>Jones (2025) “Artificial Intelligence in Research and Development.” He assumes that all tasks which an AI can do will be done by an AI in equilibrium (assumption 1, p8). However he also expects that significant progress through a reduction in the price of AI tasks.</li>
 </ul>
 <p>We argued above that equilibrium task-sharing has historically been true only for a small share of tasks.</p>
 <p>Equilibrium task-sharing would require either:</p>
@@ -940,8 +1070,14 @@ Burnell, Richard, Heng Hao, Andrew R. A. Conway, and José Hernández-Orallo. 20
 <div id="ref-choi2023legal" class="csl-entry" role="listitem">
 Choi, Jonathan H., Amy Monahan, and Daniel Schwarcz. 2023. <span>“AI Assistance in Legal Work: Evidence from a Field Experiment.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.4626276">https://doi.org/10.2139/ssrn.4626276</a>.
 </div>
+<div id="ref-chollet2019measureintelligence" class="csl-entry" role="listitem">
+Chollet, François. 2019. <span>“On the Measure of Intelligence.”</span> <a href="https://arxiv.org/abs/1911.01547">https://arxiv.org/abs/1911.01547</a>.
+</div>
 <div id="ref-chui2023economic" class="csl-entry" role="listitem">
 Chui, Michael, Eric Hazan, Roger Roberts, Alex Singla, and Kate Smaje. 2023. <span>“The Economic Potential of Generative AI.”</span> <a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier">https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier</a>.
+</div>
+<div id="ref-coupe2025impact" class="csl-entry" role="listitem">
+Coupé, Tom, and Weilun Wu. 2025. <span>“The Impact of Generative AI on Productivity: Results of an Early Meta-Analysis.”</span> 25/09. University of Canterbury, Department of Economics; Finance. <a href="https://doi.org/None">https://doi.org/None</a>.
 </div>
 <div id="ref-cui2024software" class="csl-entry" role="listitem">
 Cui, Yiming, Mert Demirer, Sonia Jaffe, Andreas Musolff, Sida Peng, and Tobias Salz. 2024. <span>“AI-Augmented Software Engineering: Evidence from a Large-Scale Field Experiment.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.4945566">https://doi.org/10.2139/ssrn.4945566</a>.
@@ -950,7 +1086,7 @@ Cui, Yiming, Mert Demirer, Sonia Jaffe, Andreas Musolff, Sida Peng, and Tobias S
 Dell’Acqua, Fabrizio, Edward McFowland, Ethan R. Mollick, Hila Lifshitz-Assaf, Katherine Kellogg, Saran Rajendran, Lisa Krayer, François Candelon, and Karim R. Lakhani. 2023. <span>“Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of AI on Knowledge Worker Productivity and Quality.”</span> <em>Harvard Business School Working Paper</em>. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=64700">https://www.hbs.edu/faculty/Pages/item.aspx?num=64700</a>.
 </div>
 <div id="ref-dreyfuss2025human" class="csl-entry" role="listitem">
-Dreyfuss, Bnaya, and Raphaël Raux. n.d. <span>“Human Learning about AI.”</span> <em>arXiv Preprint arXiv:2406.05408</em>. <a href="https://arxiv.org/abs/2406.05408">https://arxiv.org/abs/2406.05408</a>.
+Dreyfuss, Bnaya, and Raphaël Raux. 2025. <span>“Human Learning about AI: Projection of Difficulty Distorts Beliefs.”</span> <em>arXiv Preprint arXiv:2406.05408</em>. <a href="https://arxiv.org/abs/2406.05408">https://arxiv.org/abs/2406.05408</a>.
 </div>
 <div id="ref-eloundou2023gpts" class="csl-entry" role="listitem">
 Eloundou, Tyna, Sam Manning, Pamela Mishkin, and Daniel Rock. 2023. <span>“Gpts Are Gpts: An Early Look at the Labor Market Impact Potential of Large Language Models.”</span> <em>arXiv Preprint arXiv:2303.10130</em>.
@@ -969,6 +1105,9 @@ Google. 2024. <span>“Over 25% of Google’s Code Is Now Written by AI—and CE
 </div>
 <div id="ref-haupt2025ai" class="csl-entry" role="listitem">
 Haupt, Andreas, and Erik Brynjolfsson. 2025. <span>“Ai Should Not Be an Imitation Game: Centaur Evaluations.”</span> <em>URL Https://Www. Andyhaupt. Com/Assets/Papers/Centaur Evaluations. Pdf</em>.
+</div>
+<div id="ref-hendrycks2025agidefinition" class="csl-entry" role="listitem">
+Hendrycks, Dan, Dawn Song, Christian Szegedy, Honglak Lee, Yarin Gal, Erik Brynjolfsson, Sharon Li, et al. 2025. <span>“A Definition of AGI:”</span> <a href="https://www.agidefinition.ai/paper.pdf">https://www.agidefinition.ai/paper.pdf</a>.
 </div>
 <div id="ref-hoffman2024software" class="csl-entry" role="listitem">
 Hoffman, Daniel et al. 2024. <span>“The Impact of AI on Software Development Productivity: Evidence from GitHub Copilot.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.5007084">https://doi.org/10.2139/ssrn.5007084</a>.
@@ -997,6 +1136,9 @@ Kadavath, Saurav, Tom Conerly, Amanda Askell, et al. 2022. <span>“Language Mod
 <div id="ref-kwa2025longtasks" class="csl-entry" role="listitem">
 Kwa, Timothy, Xia Liu, Yu Yuan, Tanish Singh, et al. 2025. <span>“Measuring AI Ability to Complete Long Tasks.”</span> <em>arXiv Preprint arXiv:2503.14499</em>. <a href="https://arxiv.org/abs/2503.14499">https://arxiv.org/abs/2503.14499</a>.
 </div>
+<div id="ref-legg2007definitions" class="csl-entry" role="listitem">
+Legg, Shane, and Marcus Hutter. 2007. <span>“A Collection of Definitions of Intelligence.”</span> <em>Frontiers in Artificial Intelligence and Applications (Vol. 157)</em>, 17–24. <a href="https://arxiv.org/abs/0706.3639">https://arxiv.org/abs/0706.3639</a>.
+</div>
 <div id="ref-maslej2025aiindex" class="csl-entry" role="listitem">
 Maslej, Nestor, Loredana Fattorini, Raymond Perrault, Yolanda Gil, Vanessa Parli, Njenga Kariuki, Emily Capstick, et al. 2025. <span>“Artificial Intelligence Index Report 2025.”</span> <em>arXiv Preprint arXiv:2504.07139</em>.
 </div>
@@ -1006,6 +1148,9 @@ Merali, Ali. 2024. <span>“Scaling Laws for Economic Productivity: Experimental
 <div id="ref-metr2024capability" class="csl-entry" role="listitem">
 METR. 2024. <span>“An Update on Our General Capability Evaluations.”</span> <a href="https://metr.org/blog/2024-08-06-update-on-evaluations/" class="uri">https://metr.org/blog/2024-08-06-update-on-evaluations/</a>.
 </div>
+<div id="ref-metr2025gpt5evaluation" class="csl-entry" role="listitem">
+———. 2025. <span>“Details about METR’s Evaluation of OpenAI GPT-5.”</span> <a href="https://evaluations.metr.org/gpt-5-report/" class="uri">https://evaluations.metr.org/gpt-5-report/</a>.
+</div>
 <div id="ref-min2023factscore" class="csl-entry" role="listitem">
 Min, Sewon, Kalpesh Krishna, Xinxi Lyu, et al. 2023. <span>“FActScore: Fine-Grained Atomic Evaluation of Factual Precision in Long Form Text Generation.”</span> <em>arXiv Preprint arXiv:2305.14251</em>. <a href="https://arxiv.org/abs/2305.14251">https://arxiv.org/abs/2305.14251</a>.
 </div>
@@ -1014,6 +1159,9 @@ Mirzadeh, Iman, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, and
 </div>
 <div id="ref-miserendino2025swelancer" class="csl-entry" role="listitem">
 Miserendino, Samuel, Michele Wang, Tejal Patwardhan, and Johannes Heidecke. 2025. <a href="https://arxiv.org/abs/2502.12115">https://arxiv.org/abs/2502.12115</a>.
+</div>
+<div id="ref-morris2023levels" class="csl-entry" role="listitem">
+Morris, Meredith Ringel, Jascha Sohl-Dickstein, Noah Fiedel, Tris Warkentin, Allan Dafoe, Aleksandra Faust, Clement Farabet, and Shane Legg. 2023. <span>“Levels of AGI for Operationalizing Progress on the Path to AGI.”</span> <em>arXiv Preprint arXiv:2311.02462</em>.
 </div>
 <div id="ref-noy2023writing" class="csl-entry" role="listitem">
 Noy, Shakked, and Whitney Zhang. 2023. <span>“Experimental Evidence on the Productivity Effects of Generative Artificial Intelligence.”</span> <em>Science</em> 381 (6654): 187–92. <a href="https://doi.org/10.1126/science.adh2586">https://doi.org/10.1126/science.adh2586</a>.
@@ -1100,10 +1248,11 @@ Zhou, Lucy, Winfried Schellaert, Fernando Martínez-Plumed, et al. 2024. <span>�
 
 <ol>
 <li id="fn1"><p>We can think of the reduction either as Principal Components Analysis (we take weighted averages of all rows), or Principal Feature Analysis (we take a subset of rows that are highly predictive).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><span class="citation" data-cites="polo2024sloth">Polo et al. (<a href="#ref-polo2024sloth" role="doc-biblioref">2024</a>)</span> propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>https://assets.ctfassets.net/kftzwdyauwt9/67qJD51Aur3eIc96iOfeOP/71551c3d223cd97e591aa89567306912/o1_system_card.pdf<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://www.bloomberg.com/news/articles/2024-07-11/openai-sets-levels-to-track-progress-toward-superintelligent-ai<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><span class="citation" data-cites="polo2024sloth">Polo et al. (<a href="#ref-polo2024sloth" role="doc-biblioref">2024</a>)</span> propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>https://assets.ctfassets.net/kftzwdyauwt9/67qJD51Aur3eIc96iOfeOP/71551c3d223cd97e591aa89567306912/o1_system_card.pdf<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>https://www.metaculus.com/notebooks/28784/aibq3results/<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>https://assets.ctfassets.net/kftzwdyauwt9/67qJD51Aur3eIc96iOfeOP/71551c3d223cd97e591aa89567306912/o1_system_card.pdf<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>https://www.metaculus.com/notebooks/28784/aibq3results/<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -1189,6 +1338,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1299,6 +1450,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1525,6 +1677,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

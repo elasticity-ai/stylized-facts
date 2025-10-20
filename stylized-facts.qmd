@@ -19,6 +19,37 @@ bibliography: sources.bib
 #latex-auto-mk: false # this stops it from updating packages with tlmgr every compile
 format-links: false
 format:
+   html:
+      other-formats: false
+      lightbox: auto    # ← enables click-to-zoom for figures/images
+      page-layout: full
+      fontfamily: libertinus
+      default: true
+      grid:
+         margin-width: 400px
+      include-in-header:
+         - text: |
+            <script>window.MathJax = {
+                     loader: { load: ['[custom]/xypic.js'],
+                               paths: {custom: 'https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/'}},
+                  tex: {packages: {'[+]': ['xypic']},
+                     macros: {
+                        bm: ["\\boldsymbol{#1}", 1],
+                        ut: ["\\underbrace{#1}_{\\text{#2}}", 2],
+                        utt: ["\\underbrace{#1}_{\\substack{\\text{#2}\\\\\\text{#3}}}", 3]
+                     }}};
+            </script>
+            <style>
+               h1 {  border-bottom: 4px solid black;}
+               h2 {  border-bottom: 1px solid #ccc;}
+               p { margin-left: 20px; }
+               table { margin-left: 20px; }
+               ol { margin-left: 20px; }
+               ul { margin-left: 20px; }
+               dl { display: grid; grid-template-columns: 250px auto;}
+               dt { grid-column-start: 1; font-weight: bold; margin-right: 10px;  }
+               dd { grid-column-start: 2; }
+            </style>
    pdf:
       #fontfamily: libertinus
       include-in-header:
@@ -48,35 +79,6 @@ format:
               \end{center}
             }
             \makeatother
-   html:
-      page-layout: full
-      fontfamily: libertinus
-      default: true
-      grid:
-         margin-width: 400px
-      include-in-header:
-         - text: |
-            <script>window.MathJax = {
-                     loader: { load: ['[custom]/xypic.js'],
-                               paths: {custom: 'https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/'}},
-                  tex: {packages: {'[+]': ['xypic']},
-                     macros: {
-                        bm: ["\\boldsymbol{#1}", 1],
-                        ut: ["\\underbrace{#1}_{\\text{#2}}", 2],
-                        utt: ["\\underbrace{#1}_{\\substack{\\text{#2}\\\\\\text{#3}}}", 3]
-                     }}};
-            </script>
-            <style>
-               h1 {  border-bottom: 4px solid black;}
-               h2 {  border-bottom: 1px solid #ccc;}
-               p { margin-left: 20px; }
-               table { margin-left: 20px; }
-               ol { margin-left: 20px; }
-               ul { margin-left: 20px; }
-               dl { display: grid; grid-template-columns: 250px auto;}
-               dt { grid-column-start: 1; font-weight: bold; margin-right: 10px;  }
-               dd { grid-column-start: 2; }
-            </style>
 ---
 
 <!-- USEFUL THINGS
@@ -87,7 +89,17 @@ format:
 - Slides @ https://docs.google.com/presentation/d/1_ZgY3nItQ_EjkI9qrrqWj_2oQ1N5dIw1y4wpF-5mcwo/edit?slide=id.p#slide=id.p
 -->
 
+<!-- TO ADD:
 
+   - "A Survey on Large Language Model Benchmarks" https://arxiv.org/pdf/2508.15361
+
+- People to share with for comments:
+
+   - Rishi Bommasani
+   - Joel
+   - 
+
+-->
 
 
 **This document attempts to summarize facts about AI and human capabilities relevant for understanding the economic impacts of AI.**
@@ -98,7 +110,12 @@ This document does not contain non-public information about the capabilities of 
 
 ## We want to characterize AI capabilities
 
-**The goal of this note is to give a crisp characterization of AI capabilities:** (1) what tasks can current AI models do?; (2) how do different AI models differ?; (3) how do AI abilities differ from human abilities?; (4) what are reasonable expectations about future AI abilities?
+**The goal of this note is to give a crisp characterization of AI capabilities.** We wish to answer questions like these:
+   
+   1. What types of tasks can AI models do / cannot do?
+   2. How do different AI models differ?
+   3. How do AI abilities differ from human abilities?
+   4. What are reasonable expectations about future AI abilities?
 
 **A running theme will be that the characterization of AI capabilities is *difficult*:** there is a long history of struggle in making accurate generalizations about the capabilities of artificial intelligence. There is little consensus on how to describe the abilities of contemporary models.
 
@@ -157,24 +174,44 @@ The table in the margin shows a sparse history of when computers could achieve v
 
 Scott Alexander [says](https://www.astralcodexten.com/p/sakana-strawberry-and-scary-ai) *“The history of AI is people saying ‘We’ll believe AI is Actually Intelligent when it does X!’ – and then, after AI does X, not believing it’s Actually Intelligent.”*
 
+Some well-known attempts to define a scale:
+
+- @legg2007definitions proposed "intelligence measures an agent’s ability to achieve goals in a wide range of environments," after surveying 70 different definitions of intelligence.
+
+- @chollet2019measureintelligence proposes intelligence be defined as "skill-acquisition efficiency", and proposed a formal benchmark (ARC-AGI).
+
+- @morris2023levels proposed five "levels of AGI", based on the percentile human performance across all tasks. E.g. they classified ChatGPT as being able to do a *"wide range of non-physical tasks, including metacognitive tasks like learning new skills equal to or somewhat better than an unskilled human."*
+
+- In 2024 OpenAI developed (but did not release) a five-level metric of AGI.[^levels]
+
+[^levels]: https://www.bloomberg.com/news/articles/2024-07-11/openai-sets-levels-to-track-progress-toward-superintelligent-ai
 
 
 ## There is no standard taxonomy of AI capabilities.
 
 There are hundreds of different AI benchmarks of capability. People often group those benchmarks informally into groups, e.g. "agentic", "reasoning", "general knowledge", however there is no generally-accepted taxonomy of abilities.
 
-![](images/image2.png){.column-margin}
+Some papers have proposed standardized taxonomies but none have yet been widely adopted:
 
-Some papers have proposed canonical taxonomies but none have yet been widely adopted:
+![Taxonomy from @zhou2025generalscales](images/image2.png){.column-margin}
 
 - @zhou2025generalscales propose an index of 18 different human-interpretable capabilities. They use an LLM to label hundreds of tasks from benchmarks according to the demand for each capability thereby allowing for the prediction of LLM capabilities on new benchmarks or tasks.
+
+![Taxonomy from @huber2025llmsblooms](images/2025-10-19-15-07-10.png){.column-margin}
+
 - @huber2025llmsblooms organize benchmark tasks according to "Bloom's Taxonomy", a heirarchical framework designed to classify educational learning objectives for humans, with 6 levels: Remember, Understand, Apply, Analyze, Evaluate, Create. They say there are a lack of benchmarks to measure the two highest levels ("evaluate" and "create").
+
+![Taxonomy from @hendrycks2025agidefinition](images/2025-10-19-14-47-17.png){.column-margin}
+
+- @hendrycks2025agidefinition define capabilities along 10 dimensions, based on the Cattell-Horn-Carroll (CHC) theory of cognitive abilities.
 
 ## There does appears to be a single latent component of intelligence across LLMs
 
 We discuss these facts in more detail below.
 
-**Historically, AI capabilities have been very concentrated.** For most of the history of AI specialized systems were built for different tasks, thus DeepBlue was good at Chess and Watson was good at Jeopardy, but each of them was bad at the other task.
+![From @ruan2024observational](images/image4.png){.column-margin}
+
+**Historically, the AI capabilities distribution was very varied.** For most of the history of AI specialized systems were built for different tasks, thus DeepBlue was good at Chess and Watson was good at Jeopardy, but each of them was bad at the other task.
 
 **LLM abilities are highly correlated across models.** LLM performance is very highly correlated across benchmarks: if model A beats model B on benchmark X, then it very likely also beats model B on benchmark Y. We discuss some literature below which tries to quantify the strength of this correlation.
 
@@ -233,7 +270,7 @@ We discuss these facts in more detail below.
 
    - Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4 was able to get human-level scores at most aptitude tests: SAT, LSAT, civil service. But GPT-4 did not have the aptitudes passing such tests implies for humans.
 
-   - LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara ↔ Kazakh), can combine knowledge from two very different domains.
+   - LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara to Kazakh), can combine knowledge from two very different domains.
 
 
 ## There is *some* bottleneck on LLMs impact, but disagreement about where
@@ -244,7 +281,7 @@ We discuss these facts in more detail below.
 
 - @chui2023economic (McKinsey): *"the total percentage of hours that could theoretically be automated by integrating technologies that exist today ... [is] 60–70 percent."*
 
-   In retrospect this seems overly optimistic: GPT-4 performs very well on tests but there’s something about real-world tasks that trip it up.
+In retrospect this seems to have been overly optimistic: GPT-4 performs very well on tests but there’s something about real-world tasks that trip it up.
 
 [Andrej Karpathy](https://x.com/karpathy/status/1855659091877937385), Nov 2024:
 
@@ -263,11 +300,17 @@ We can ask why LLMs score well on aptitute tests but do not have the aptitude fo
 | Bottleneck                   | Description                                                                                                            |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | **Novel reasoning**          | Questions on aptitude tests are usually drawn from a standard pool, and don’t involve truly novel chains of deduction. |
+|                              |                                                                                                                        |
 | **Long context**             | Questions on aptitude tests have short prompts, real-world problems involve rich context.                              |
+|                            |                                                                                                                        |
 | **Self-awareness**           | Humans have tacit knowledge of what is appropriate in a situation, not included on aptitude tests.                     |
+|                             |                                                                                                                        |
 | **Accuracy and calibration** | Aptitude tests reward guessing.                                                                                        |
+|                             |                                                                                                                        |
 | **Qualitative outputs**      | Questions on aptitude tests have right or wrong answers, real-world work requires creative constraint satisfaction.    |
+|                             |                                                                                                                        |
 | **Interactive exploration**  | Questions on aptitude tests do not require a series of decisions, navigating an uncertain situation.                   |
+|                             |                                                                                                                        |
 | **Long horizon tasks**       | Aptitude tests answers are immediately verifiable, many real-world decisions have long-delayed consequences.           |
 |                              |                                                                                                                        |
 
@@ -306,9 +349,12 @@ Frontier models that surpass previous models on one benchmark usually outperform
 
 ![From @spangher2024generalized](images/image3.png){.column-margin}
   
-- @burnell2023reveal look at variation across 29 LLMs and 27 tasks, find 3 factors representing “reasoning, comprehension and core language modeling.” The models are mostly from 2022, i.e. prior to GPT-4.
+- @burnell2023reveal look at variation across 29 LLMs and 27 benchmarks (all prior to GPT-4). The first 3 factors explain 33%, 31%, and 17% of performance, and they interpret those factors as "reasoning", "comprehension" and "core language modeling." They say "capabilities are not monolithic. Instead, they are better explained by three well-delineated factors that represent reasoning, comprehension and core language modeling."
+
 - @ilic2024positive tested over 500 LLMs on 12 different evaluations. They found “strong empirical evidence for a positive manifold and a general factor of ability” and that the "number of LLM parameters correlated positively with this general ability".
+
 - @spangher2024generalized propose a method of aggregating LLM performance across a general space of benchmarks into a single 'Goodness' number. They find a very strong positive correlation between such performance and the Elo rating approach of LMArena. 
+
 - @owen2024predictable analyzes models across five orders of magnitude of compute scaling and their relationship with model benchmark performance. They find that "compute scaling provides a promising basis to forecast AI capabilities in diverse benchmarks"
 ![From @ruan2024observational](images/image4.png){.column-margin}
 - @ruan2024observational create "observational scaling laws" from the performance of ∼100 publically available LLMs. They find that the variance in performance of models across benchmarks is dominated by a single large component.
@@ -547,40 +593,59 @@ The degree to which the verification can occur autonomously (by computers not ex
 
 # LLM Augmentation Studies
 
+We define AI "augmentation" as the effect of combined AI and human ability, compared to human-alone ability. These are sometimes also called "uplift" or "centaur" studies.
+
 ## There are a variety of “augmentation” studies on the effect of AI assistants.  
 
-These experiments compare behavior of workers with and without access to an AI system. 
 
-Most studies find an increase in productivity:
+These RCTs compare behavior of workers with and without access to an AI system:
 
-<!-- TODO: add the METR uplift study and any others; for each give a very brief precis of results. Perhaps have separate tables for real-world and lab studies. -->
+::: {.column-page}
 
-   | Domain              | Reference(s)                   |
-   | ------------------- | ------------------------------ |
-   | Legal tasks         | @choi2023legal                 |
-   | Software engineers  | @cui2024software               |
-   |                     | @hoffman2024software           |
-   |                     | @gao2024github                 |
-   |                     | @peng2023developerproductivity |                             
-   | Consultants         | @dellacqua2023consultants      |
-   | Writing tasks       | @noy2023writing                |
-   | Call centre workers | @brynjolfsson2023callcenter    |
-   | Translators         | @merali2024scaling             |
-   | Entrepreneurs       | @otis2024entrepreneurs         |
+| Domain              | Reference(s)                     | Effect                                                                                                                                                                                                                 |
+| ------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Legal tasks         | @choi2023legal                   |                                                                                                                                                                                                                         |
+| Software engineers  | @cui2024software                 |                                                                                                                                                                                                                         |
+|                     | @hoffman2024software             |                                                                                                                                                                                                                         |
+|                     | @gao2024github                   | “Accenture developers saw an 8.69% increase in pull requests … a 15% increase to the pull request merge rate … an 84% increase in successful builds … developers accepted around 30% of GitHub Copilot’s suggestions.”¹ |
+|                     | @peng2023developerproductivity   | “Completed the task 55.8% faster than the control group.”                                                                                                                                                               |
+|                     | @becker2025developerproductivity | “Allowing AI actually increases completion time by 19%—AI tooling slowed developers down.”                                                                                                                              |
+| Consultants         | @dellacqua2023consultants        |                                                                                                                                                                             |
+| Writing tasks       | @noy2023writing                  |                                                                                                                                                                         |
+| Call centre workers | @brynjolfsson2023callcenter      | “Increases worker productivity … by 15% on average … larger gains for lower-skilled workers.”                                                                                                                           |
+| Translators         | @merali2024scaling               | “Tenfold increase in model compute improved task completion speed by 12.3% … earnings/min by 16.1% … gains four times larger for lower-skilled workers.”                                                                |
+| Entrepreneurs       | @otis2024entrepreneurs           |                                                                                                                                                                                                                         |
 
-## There are few benchmarks of augmentation
+:::
 
-- @haupt2025ai argues for creating standardized benchmarks of augmentation/uplift they refer to as Centaur Evaluations.
+   
+![Distribution of effect sizes, from @coupe2025impact](images/2025-10-20-09-27-43.png){.column-margin}
+
+@coupe2025impact survey 45 studies of the impact of genAI tools on productivity, they find an average productivity effect of around 17%, however with much variation. They also find strong signs of selection, suggesting the estimates are exaggerated.
+
+
 
 ## Empirical evidence on a variety of tasks suggests lower-skilled workers have much higher productivity gains than higher-skilled workers.
 
-Across four large-scale RCTs (@brynjolfsson2023callcenter, @noy2023writing, @choi2023legal, @peng2023developerproductivity) the productivity premium for workers in the bottom tercile of baseline performance is roughly 2–3X larger than for the top tercile, suggesting skill-levelling rather than skill-biased technological change.  
+The following RCTs find that augmentation has a larger effect on workers with lower pre-experimental productivity levels:
+
+- @brynjolfsson2023callcenter
+  - Magnitude: "Access to AI assistance increases worker productivity, as measured by issues resolved per hour, by 15% on average, with substantial heterogeneity across workers."
+  - Heterogeneity: "Less experienced and lower-skilled workers improve both the speed and quality of their output while the most experienced and highest-skilled workers see small gains in speed and small declines in quality."
+- @noy2023writing
+- @choi2023legal
+- @peng2023developerproductivity
+  - Magnitude: "The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group."
+
+## There are few benchmarks of augmentation
+
+- @haupt2025ai argues for creating standardized benchmarks of augmentation/uplift they refer to as "centaur" evaluations.
 
 ## Human + AI teams do not reliably outperform the better of human or AI performance individually
 
 - @vaccaro2024humanai across 16 decision-making tasks hybrid pairs under-performed the top human-or-AI agent in 70 % of cases, though they sometimes added creative diversity. 
 
- - agarwal2024radiology in a radiology-diagnosis experiment, human–AI collaboration improved accuracy by only 0.2 pp over AI-only and did **not** outperform selective automation.  
+- @agarwal2024radiology in a radiology-diagnosis experiment, human–AI collaboration improved accuracy by only 0.2 pp over AI-only and did **not** outperform selective automation.  
 
 ## Humans often misperceive the abilities of LLMs.
 
@@ -612,11 +677,11 @@ A similar discussion of the limitations of augmentation experiments is made in a
 -[Eloundou et al. (2024)](https://www.science.org/doi/abs/10.1126/science.adj0998)*: “We find generally positive and statistically significant correlations between our LLM exposure measures and previous measurements targeting software and AI.”*   -->
 
 
-# LLM Economic Impact
+# Implications for LLM Economic Impact
 
 ## The price of inference for a fixed level of capability has been falling at 10X/year or faster.
 
-![From SHAI](images/image15.png){.column-margin}
+![From @maslej2025aiindex](images/image15.png){.column-margin}
 
 - @maslej2025aiindex estimate that inference costs, for a given level of intelligence, fell over 2023-2024 at an annual rate between 9X to 900X per year.
 
@@ -646,6 +711,13 @@ There is a tradeoff between training cost and inference cost through model size.
 @metr2024capability compare the cost of humans and LLMs to do a variety of tasks, they say “when agents *can* do a task, they can often do so at a fraction of the cost of humans.” 
 
 ![](images/image16.png)
+
+Similarly @metr2025gpt5evaluation:
+
+![Agent Performance on HCAST & RE-Bench by Cost](images/2025-09-19-16-04-34.png)
+
+
+https://evaluations.metr.org/image/gpt_5_report/models_budget_comparison.png
 
 Exceptions:
 
@@ -733,6 +805,7 @@ Some models feature "equilibrium task-sharing": humans perform tasks that comptu
 - @ide2024artificialintelligenceknowledgeeconomy
 - Noah Smith ([2024](https://www.noahpinion.blog/p/plentiful-high-paying-jobs-in-the)) on comparative advantage and wages.
 - @acemoglu2024simple
+- Jones (2025) "Artificial Intelligence in Research and Development." He assumes that all tasks which an AI can do will be done by an AI in equilibrium (assumption 1, p8). However he also expects that significant progress through a reduction in the price of AI tasks.
 
 We argued above that equilibrium task-sharing has historically been true only for a small share of tasks. 
 
