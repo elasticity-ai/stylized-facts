@@ -1,0 +1,396 @@
+---
+title: Stylized Facts about AI Capabilities
+author:
+   - Tom Cunningham, METR
+   - Ali Merali, Yale
+title-slide: true
+draft: true
+format:
+  beamer:
+    fontsize: "10pt"
+engine: knitr
+bibliography: sources.bib
+# latex-auto-mk: false # this stops it from updating packages with tlmgr
+editor:
+  render-on-save: true
+header-includes:
+   - \newenvironment{figure*}{\begin{figure}}{\end{figure}}
+   - \newenvironment{table*}{\begin{table}}{\end{table}}
+   - \usepackage[english]{babel}
+   - \usepackage{morewrites}
+   - \newwrite\stuff
+   - \renewcommand{\arraystretch}{1.5}  % increase row distance in tables
+
+   - \usepackage{caption}
+   - \captionsetup[table]{labelformat=empty}  % removes “Table X”
+
+   - \usepackage[shortlabels]{enumitem}
+   - \setlist[description]{style=multiline,leftmargin=3cm,itemsep=20pt}
+   - \setlist[enumerate,1]{label=\arabic*., ref=\arabic*}
+   - \setlist[enumerate,2]{label=\alph*),  ref=\theenumi.\alph*}
+   - \setlist[itemize]{label=•} % optional
+
+   # - \usepackage{enumitem}
+   # - \setlist[description]{style=multiline,leftmargin=3cm,itemsep=20pt}
+
+   ## beamer
+   - \usetheme{boxes}
+   - \useoutertheme{metropolis}
+   - \useinnertheme{circles}
+   - \usecolortheme{dove}
+   # - \AtBeginSection[]{}  # remove section headers
+   ## fonts & colors
+   - \usefonttheme{serif}
+   - \AtBeginDocument{\fontsize{8}{8}\selectfont}
+   - \setbeamerfont{footnote}{size=\tiny}
+   - \setbeamercolor{block title example}{bg=orange,fg=white}
+   - \setbeamercolor{block body example}{bg=orange!20,fg=black}
+   - \setbeamercolor{frametitle}{bg=black,fg=white}
+   - \setbeamercolor{framesubtitle}{bg=black,fg=white}
+   - \setbeamercolor{section in head/foot}{bg=black,fg=white}
+   - \setbeamercolor{subsection in head/foot}{bg=black,fg=white}
+   - \makeatletter\newcommand{\@minipagerestore}{\setlength{\parskip}{1  em}}\makeatother
+   - \setlist{partopsep=0pt,topsep=0pt} % no padding above lists
+   # - \setlist{parsep=0pt} % no padding above lists
+   # - \setlist{nosep, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=5pt} % no padding above lists
+   # - \setlength{\topsep}{0pt}
+   # - \setlength{\partopsep}{0pt}
+   # - \setlength{\parskip}{0pt}
+---
+
+#  Background
+
+My background.
+: IIES Stockholm $\rightarrow$ Facebook $\rightarrow$ Twitter $\rightarrow$ Integrity Institute $\rightarrow$ OpenAI Economic Research $\rightarrow$ METR.
+
+: \
+
+: tom.cunningham@gmail.com
+
+My position.
+:     1. If AI becomes as smart as humans it will be enormously disruptive.
+
+      2. It's plausible that this will happen in the next decade.
+
+Founded in 2022.
+
+: Founded by ex-OpenAI researchers, building evals & undertstanding on how to detect worrying AI capabilities, especially ability for AI to do AI research. We're hiring!
+
+#  Model Evaluation and Threat Research (METR)
+
+Time horizon metric.
+: Idea: quantify LLM capability by sorting tasks according to "time horizon" (how long an expert human takes to do the task).
+
+      For each model find the horizon-length at which the LLM has a 50% success rate.
+
+![](images/2025-10-24-09-25-21.png)
+
+#  Model Evaluation and Threat Research (METR)
+
+<!-- More time horizons.
+: Sort other datasets of tasks according to human time-horizon: -->
+
+![](images/2025-10-22-07-39-43.png)
+
+
+#  How People Use ChatGPT
+
+800M weekly ChatGPT users.
+: Growth in both extensive and intensive margins despite substantial increase in competition.
+: ![](images/2025-10-22-07-30-51.png){width=5cm}
+
+<br />
+
+Around 2/3 of messages are not work-related.
+: GenAI's primary impact is *home production*, solving everyday problems. Plausible that it's a substitute for market labor.
+: ![](images/2025-10-22-07-32-21.png)
+
+
+# Stylized Facts about AI Capabilities
+
+Genesis of this work.
+
+: In summer 2024 OpenAI was preparing to launch the first reasoning model (strawberry/o1-preview), I was asked to help estimate the likely economic impact.
+
+      The new model performed far better on reasoning-intensive tasks (MATH, GPQA), comparable to a PhD student. What will be the impact of a model with PhD-level intelligence?
+
+      Ideal: plug a vector of capabilities into an economic model, & predict change in equilibrium.
+
+<!-- There is no standard economic model which I could plug this into to estimate the impact. -->
+
+
+#  Stylized Facts and Implications
+
+| Fact about AI                                            | Implication for Economics of AI             |
+| -------------------------------------------------------- | ------------------------------------------- |
+| 1. We have no standard metric for computer intelligence  | Opportunity for theorists.                  |
+| 2. LLM capabilities are highly correlated.               | Directed technical change may be difficult. |
+| 3. LLM capabilities are growing rapidly.                 | Diffusion isn't primary cause of growth.    |
+| 4. LLM capabilities are distinct from human capabilites. | Need a two-factor model of ability.         |
+| 5. There is no consensus on the bottleneck.              | Opportunity for theorists.                  |
+| 6. Inference prices are falling at 10X/year.             | GDP share of compute may be small.                                             |
+| 7. LLMs can either do a task cheaply or not at all.      | Unlikely to be equilibrium task-sharing     |
+
+
+
+# We have no standard metric for computer intelligence.
+
+**A graveyard of measures of human intelligence:**
+
+| Measure          | Interpretation                                                                       | Year Passed |
+| ---------------- | ------------------------------------------------------------------------------------ | ---- |
+| Chess            | Shannon: *"Chess is generally considered to require ‘thinking’ for skilful play."*   | 1997 |
+| Winograd | *"when people pass the test, we would say they were thinking."*                      | 2019 |
+| ARC-AGI          | *"the only formal benchmark of AGI progress."*                                       | 2024 |
+| MMMU             | *"Benchmark for Expert AGI."*                                                        | 2025 |
+| AGIEval          | *"general abilities ... in tasks pertinent to human cognition"* | 2025 |
+
+      
+
+There are some live proposals, none are canonical.
+:    - @morris2023levels (Google DeepMind) five "levels of AGI."
+     - OpenAI five "levels of AGI," not officially released.
+     - @hendrycks2025agidefinition "the definition of AGI."
+
+      Most definitions are either overly narrow or ambiguous.
+
+This is a hard problem!
+
+: It's intellectual quicksand, many smart people have got themselves stuck. Sensible to tread carefully.
+
+
+# Available Metrics of AI capability
+
+Two common metrics of AI capability.
+:     1. **Scores on benchmarks.** There are hundreds of different benchmarks, however no canonical set, and they often get "saturated" relatively quickly. Continual scramble to create new benchmarks.
+
+      1. **User pairwise preference.** Given two answers to a query, which do you prefer?  These are used by labs to measure user utility, also some 3rd-party data sources, esp. LMsys chatbot arena.
+
+Other metrics of AI capability.
+:     1. **Causal effect on user retention.** Used by labs but the results are not generally reported.
+      2. **Uplift effects on human productivity.** Hard to compare over time because you need the same humans.
+      3. **User willingness to pay.** Few studies, Brynjolfsson reports $100/user/month.
+      4. **Adoption.** Hard to infer value.
+
+
+# LLM capabilities are growing rapidly
+
+
+Benchmarks are falling rapidly.
+
+: It typically takes 18 months for LLM scores on a benchmark to go from 25% to 75%.
+: ![](images/image7.png){width=5cm}
+
+User preference scores are growing rapidly.
+
+: Models have 70% win-rate over 1yo models (150 Elo/year).
+: ![](images/2025-10-22-08-46-02.png){width=5cm}
+
+
+# Implication for Economic Forecasts
+
+There are many recent forecasts of AI's economic impact.
+: Economists typically forecast 0-1.5% range, AI people typically 3-30%+.
+   
+      ![](images/2025-10-23-04-50-05.png){width=5cm}
+
+# Implication for Economic Forecasts
+
+Economists' forecasts typically assume AI is a *one time* event.
+: Various assumptoins about speedups across tasks (from @trammell2025workflows):
+   
+      ![](images/2025-10-23-04-45-32.png){width=7cm}
+
+      @acemoglu2024simple and @aghion2024aigrowth derive growth rates by assuming diffusion speeds.
+
+      But AI capabilities are rapidly increasing -- these areas are expanding.
+
+#  Implication for Economic Forecasts
+
+Much growth is capabilities, not diffusion. 
+: Thought experiment: if we had frozen capabilities at gpt4o (May 2024), how much smaller would the impact be today? 
+
+      Some evidence from AB tests on platforms, which compare engagement with different models.
+
+
+```{tikz}
+\begin{tikzpicture}[scale=4]
+  \draw[<->] (1,0)  node[right] {time}--(0,0) -- (0,1);
+  \draw[gray!50!white] (.2,1)--(.2,0) node[left,rotate=90,gray] {2023};
+  \draw[gray!50!white] (.4,1)--(.4,0) node[left,rotate=90,gray] {2024};
+  \draw[gray!50!white] (.6,1)--(.6,0) node[left,rotate=90,gray] {2025};
+  \draw[gray!50!white] (.8,1)--(.8,0) node[left,rotate=90,gray] {2026};
+  \draw[gray!50!white] (1,1)--(1,0) node[left,rotate=90,gray] {2027};
+  \draw[dashed] (0.45,1)--(0.45,0);
+  \draw[domain=0.1:.65,smooth,samples=100,blue!25!white,very thick] plot (\x,{0.08*exp(4*\x)});
+  \draw[domain=0.1:.45,smooth,samples=100,blue,very thick] plot (\x,{0.08*exp(4*\x)});
+  \draw[blue,very thick] (0.45,0.48)--(0.65,0.48)  node[right,align=left] {frozen capabilities};
+
+  \draw[domain=0.1:.65,smooth,samples=100,red!25!white,very thick] plot (\x,{0.03*exp(4*\x)});
+  \draw[domain=0.1:.45,smooth,samples=100,red,very thick] plot (\x,{0.03*exp(4*\x)});
+  \draw[red,very thick] plot[smooth,tension=1] coordinates{(0.45,0.18) (0.55,0.24) (0.65,0.28)}
+      node[right,align=left] {realized value of AI};
+\end{tikzpicture}
+```
+
+
+# LLM capabilities are highly correlated
+
+Many studies find high correlations across scores.
+
+: E.g. @ruan2024observational finds the first factor explains 80% of variance: ![](images/image4.png){width=5cm}
+
+: There is also high correlation between scores on benchmarks and scores on user-preference rankings.
+
+# LLM capabilities are highly correlated
+
+What does capability correlation mean concretely?
+
+: The model that is best at math is also probably best at programming, medical advice, legal advice, general knowledge, etc.
+
+      It was not obvious that this would have happened. The best program at chess is not the best program at jeapordy, and vice-versa.
+
+Why should this be so?
+
+: A common interpretation is based on bitter lesson / manifold hypothesis / scaling laws: training a larger model makes it better at everything, by recovering deep latent structure of the world.
+
+Qualifications.
+:     1. There is still a tradeoff between *cost* and ability (usually cost and speed are highly correlated).
+
+      1. Different frontier models do have different specialities. However typically any frontier model today will beat *all* frontier models from 6 months ago.
+
+      2. Fine-tuning on proprietary data can make capabilities spiky.
+
+      3. Post-training with RL may induce less correlation.
+
+
+# Implication: we may not be able to direct technical change
+
+Should we direct AI towards augmenting instead of automating?
+: @brynjolfsson2023turing: *"an excessive focus on developing and deploying [human-level AI] can lead us into a trap ... when AI is focused on augmenting humans rather than mimicking them, then humans retain the power to insist on a share of the value created"*
+
+      \   
+      @acemoglu2021ai: *"our current trajectory automates work to an excessive degree while refusing to invest in human productivity."*
+
+Our ability to direct change may be limited.
+
+: If there is truly a single latent factor of model ability, then work to train an augmenting model looks very similar to work to train an automating model, & the ability to steer AI capabilities may be limited.
+
+
+# LLM capabilities are distinct from human capabilities
+
+Ideally we would compare human and LLM performance on the same tasks.
+
+:  If we had a full matrix of human and LLM performance we would be able to compare latent factors of each. Unfortunately there are few datasets which collect human performance across a range of distinct benchmarks. 
+
+Qualitatively, LLM and human abilities appear very different.
+
+:  Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4 was able to get human-level scores on SAT, LSAT, civil service exams, but not able to do those jobs.
+
+```{tikz}
+#| fig-column: center
+   \begin{tikzpicture}[scale=4]
+   \draw[<->] (1,0) -- node[midway,below]{ability 1} (0,0)
+      -- node[midway,rotate=90,above]{ability 2} (0,1.1);
+   \fill[green!50!black,opacity=0.5,rotate=65] (.3,-.2) ellipse (0.25 and 0.1);
+   \fill[red,opacity=0.5,rotate=10] (.5,.5) ellipse (0.3 and 0.1);
+   \node[green!50!black,align=left] at (.6,.3) {LLMs};
+   \node[red!50!black] at (.5,.8) {humans};
+   \draw[->,thick,green!50!black] (.26,.1)--(.45,.45);
+   %\fill[black!20!white] (0.5,0.5) ellipse (0.4 and 0.3);
+   \end{tikzpicture}
+```
+
+# Implication: a single-factor model will be a poor fit
+
+We sometimes describe AI capability by human equivalent.
+
+: E.g. years of education (@aschenbrenner2024situational)
+: ![](images/2025-07-17-07-40-28.png){width=5cm}
+
+Some models assume a common human/AI skill factor.
+
+: E.g. @ide2024artificialintelligenceknowledgeeconomy.
+
+What would a two-factor model look like?
+
+: - LLMs have PhD-level knowledge and reasoning.
+: - LLMs have preschool-level tactics.
+
+
+# There is no consensus on the bottleneck
+
+| Bottleneck                     | Status                                 |
+| ------------------------------ | -------------------------------------- |
+| Cost.                          | Does not seem an important bottleneck. |
+|                                |                                        |
+| Deductive reasoning.           | Much improved since 2024.              |
+| Information-gathering          | Much improved since 2024.              |
+| Accuracy / hallucination.      | Much improved since 2024.              |
+| Long context.                  | Much improved since 2024.              |
+| Multimodal inputs and outputs. | Much improved since 2024.              |
+| In-context learning.           | Much improved since 2024 (ARC-AGI).    |
+|                                |                                        |
+| Continual learning.            | Amodei, Karpathy, Hasssabis.           |
+| Novel situations               | Vafa et al. (2024) on world models.    |
+| Interactive decision-making.   | Still struggles.                       |
+| Human predictability           | Jagged frontier, Vafa et al. (2024)    |
+
+
+Note: once a problem has been well-defined, LLMs have a very strong track record of solving it.
+
+
+# Inference prices are falling at 10X/year
+
+From Artificial Analysis.
+: For given capabilities inference prices have been falling at 10X+/year.
+
+      ![](images/2025-10-20-12-31-11.png){width=6cm}
+
+Why are they falling?
+: Not because of lower margins -- we see the same trend looking at raw compute cost for open models.
+
+      Smaller models are getting better through (1) better training techniques; (2) more training compute; (3) more training data; (4) better training data.
+
+# LLMs can either do a task cheaply or not at all
+
+Ability to do tasks.
+: @metr2024capability say “when agents *can* do a task, they can often do so at a fraction of the cost of humans.” 
+
+      ![](images/image16.png){width=8cm}
+
+Some exceptions to this rule.
+: 
+      1. Voice transcription for a brief period.
+      2. Some reasoning tasks ([ARC-AGI](https://arcprize.org/arc-agi)), briefly.
+      3. Fixed costs (@svanberg2024beyond).
+
+# Implication: wages are unlikely to be pinned down by the price of compute
+
+Some models feature equilibrium task-sharing: 
+: Humans perform tasks that computers are able to do, but it is too expensive for computers:
+
+      - @trammell2023economic
+      - @ide2024artificialintelligenceknowledgeeconomy
+      - @smith2024
+      - @acemoglu2024simple
+
+Equilibrium task-sharing would require either:
+
+: 1. A dramatic increase in AI prices to perform a task:
+
+       - An increase in the compute required for new tasks (the price of frontier inference has been steady).
+       - An increase in compute costs (GPU rental prices have been steady, and the purchase/rent ratio has been stable).
+       - An increase in margins.
+   
+    1. A dramatic drop in human wages.
+
+
+#  End
+
+#  METR Uplift Study
+
+![](images/2025-10-24-09-37-52.png)
+
+#  Bibliography
+
