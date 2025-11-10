@@ -1,6 +1,7 @@
 ---
 title: Stylized Facts about AI & Human Capabilities
 author: "Tom Cunningham & Ali Merali"
+author: "Tom Cunningham & Ali Merali"
 abstract: We discuss stylized facts about the capabilities of recent AI models and how they compare to human capabilities. We particularly draw attention to a common latent factor of capabilities among AI models, and the fact that this latent factor is different from the distribution of human capabilities. We discuss various candidates for the “missing capability” which would unlock a greater economic impact.
 date: today
 toc: true
@@ -15,7 +16,7 @@ execute:
   cache: true # caches chunk output
 editor:
   render-on-save: true
-bibliography: sources.bib
+bibliography: stylized-facts.bib
 #latex-auto-mk: false # this stops it from updating packages with tlmgr every compile
 format-links: false
 format:
@@ -93,6 +94,8 @@ format:
 <!-- TO ADD:
 
    - "A Survey on Large Language Model Benchmarks" https://arxiv.org/pdf/2508.15361
+   - "Introducing the OECD AI Capability Indicators" https://www.oecd.org/en/publications/2025/06/introducing-the-oecd-ai-capability-indicators_7c0731f0/full-report/component-4.html
+   - "Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?" https://arxiv.org/abs/2504.13837
 
 - People to share with for comments:
 
@@ -207,6 +210,15 @@ There are hundreds of different AI benchmarks of capability.
 
 ![Taxonomy from @huber2025llmsblooms](images/2025-10-19-15-07-10.png){.column-margin}
 
+- @huber2025llmsblooms organize benchmark tasks according to "Bloom's Taxonomy", a heirarchical framework designed to classify educational learning objectives for humans, with 6 levels: Remember, Understand, Apply, Analyze, Evaluate, Create. They say there are a lack of benchmarks to measure the two highest levels ("evaluate" and "create").
+
+- @oecd2025aicapabilityindicatorsfullreport organize capabilities across nine dimensions. The criteria are mostly qualitative, and their scoring is done by a panel of experts with reference to various benchmark scores.[^oecd]
+
+[^oecd]: OECD's dimension: Language; Social interaction; Problem solving; Creativity; Metacognition and critical thinking; Knowledge, learning and memory; Vision; Manipulation; Robotic intelligence.
+
+- @oecd2025aicapabilityindicatorsfullreport organize capabilities across nine dimensions. The criteria are mostly qualitative, and their scoring is done by a panel of experts with reference to various benchmark scores.[^oecd]
+
+[^oecd]: OECD's dimension: Language; Social interaction; Problem solving; Creativity; Metacognition and critical thinking; Knowledge, learning and memory; Vision; Manipulation; Robotic intelligence.
 ![Taxonomy from @hendrycks2025agidefinition](images/2025-10-19-14-47-17.png){.column-margin}
 
 Some taxonomies have been proposed, but none have been widely adopted.
