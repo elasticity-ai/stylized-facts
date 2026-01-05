@@ -747,7 +747,9 @@ Equilibrium task-sharing would require either:
 
 # Appendix / Offcuts
 
-[Jason Wei blog post](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) *"The ease of training AI to solve a task is proportional to how verifiable the task is. All tasks that are possible to solve and easy to verify will be solved by AI".* Five specific factors:
+[Jason Wei blog post](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) *"The ease of training AI to solve a task is proportional to how verifiable the task is. All tasks that are possible to solve and easy to verify will be solved by AI".* 
+
+Five specific factors:
 
    1. Objective truth: everyone agrees what good solutions are
    2. Fast to verify: any given solution can be verified in a few seconds

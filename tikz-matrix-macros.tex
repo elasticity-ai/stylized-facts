@@ -1,0 +1,158 @@
+% Reusable helpers for stylized facts matrices
+% Usage:
+%   \input{tikz-matrix-macros.tex}
+%   \begin{tikzpicture}[scale=0.5]
+%     \sfDefineMatrix{<rowlabels>}{<columnlabels>}{<nrows>}{<ncols>}{<greencells>}{<redcells>}
+%     \sfDrawMatrix
+%   \end{tikzpicture}
+%
+% - <rowlabels>, <columnlabels> are comma-separated
+% - Cell lists are "col/row" (1-indexed), comma-separated, e.g., 1/1,2/3
+
+\newcommand{\sfDefineMatrix}[6]{%
+  \def\rowlabels{#1}%
+  \def\columnlabels{#2}%
+  \def\nrows{#3}%
+  \def\ncols{#4}%
+  \def\greencells{#5}%
+  \def\redcells{#6}%
+}
+
+% Count the number of items in a comma-separated list, store in a macro
+\newcounter{sfTmp}
+\newcommand{\sfCountItems}[2]{%
+  \begingroup
+    \edef\sfItems{#1}%
+    \setcounter{sfTmp}{0}%
+    \foreach \x [count=\i] in \sfItems {%
+      \setcounter{sfTmp}{\i}%
+    }%
+    \xdef#2{\arabic{sfTmp}}%
+  \endgroup
+}
+
+% Variant that infers nrows/ncols from the provided label lists
+\newcommand{\sfDefineMatrixAuto}[4]{%
+  \def\rowlabels{#1}%
+  \def\columnlabels{#2}%
+  \sfCountItems{#1}{\nrows}%
+  \sfCountItems{#2}{\ncols}%
+  \def\greencells{#3}%
+  \def\redcells{#4}%
+}
+
+% Paint a list of cells with the given color
+\newcommand{\sfPaintCells}[2]{%
+  \begingroup
+    \edef\celllist{#1}%
+    \foreach \c/\r in \celllist {%
+      \fill[#2] (\r - 1,\nrows - \c + 1) rectangle ++(1,-1);%
+    }%
+  \endgroup
+}
+
+% Draw labels, grid, and colored cells using the definitions above
+\newcommand{\sfDrawMatrix}{%
+  % Colored cells (bottom-first so later calls overlay earlier)
+  \sfPaintCells{\greencells}{green!50!black}%
+  \sfPaintCells{\redcells}{red!70!black}%
+  % Row labels
+  \foreach \label [count=\i from 1] in \rowlabels {%
+    \node[left] at (-0.2,\nrows - \i + 0.5) {\label};%
+  }%
+  % Column labels
+  \foreach \label [count=\j from 1] in \columnlabels {%
+    \node[rotate=90,right] at (\j-0.5,\nrows + 0.2) {\label};%
+  }%
+  % Grid
+  \draw[black] (0,0) grid (\ncols,\nrows);%
+}
+
+% ----- Matrix with per-cell one-letter color codes -----
+% Define with row/column labels and a list of "col/row/Code" entries.
+% Codes: G=green, R=red, O=orange, W=white(no fill)
+\def\sfG{G}\def\sfR{R}\def\sfO{O}\def\sfW{W}
+
+\newcommand{\sfDefineMatrixCodes}[3]{%
+  \def\rowlabels{#1}%
+  \def\columnlabels{#2}%
+  \sfCountItems{#1}{\nrows}%
+  \sfCountItems{#2}{\ncols}%
+  \def\cellcodes{#3}%
+}
+
+\newif\ifsfDoFill
+% Map single-letter code to a TikZ color spec in \sfColorTmp and toggle \sfDoFill
+% Uses pgfkeys choice handler for robustness
+\pgfkeys{
+  /sfcolor/.is choice,
+  /sfcolor/G/.code={\def\sfColorTmp{green!50!black}\sfDoFilltrue},
+  /sfcolor/R/.code={\def\sfColorTmp{red!70!black}\sfDoFilltrue},
+  % use only base xcolor colors to avoid requiring dvipsnames
+  /sfcolor/O/.code={\def\sfColorTmp{yellow!50!red}\sfDoFilltrue},
+  /sfcolor/W/.code={\def\sfColorTmp{}\sfDoFillfalse},
+}
+\newcommand{\sfColorFromCode}[1]{%
+  \sfDoFillfalse\def\sfColorTmp{}%
+  \pgfkeys{/sfcolor/#1}%
+}
+
+% Draw a matrix using the per-cell code list
+\newcommand{\sfDrawMatrixCodes}{%
+  % Fill coded cells
+  \begingroup
+    \edef\celllist{\cellcodes}%
+    \foreach \c/\r/\k in \celllist {%
+      \sfColorFromCode{\k}%
+      \ifsfDoFill
+        \fill[\sfColorTmp] (\r - 1,\nrows - \c + 1) rectangle ++(1,-1);%
+      \fi
+    }%
+  \endgroup
+  % Labels
+  \foreach \label [count=\i from 1] in \rowlabels {%
+    \node[left] at (-0.2,\nrows - \i + 0.5) {\label};%
+  }%
+  \foreach \label [count=\j from 1] in \columnlabels {%
+    \node[rotate=90,right] at (\j-0.5,\nrows + 0.2) {\label};%
+  }%
+  % Grid
+  \draw[black] (0,0) grid (\ncols,\nrows);%
+}
+
+% Grid-coded variant:
+% columns list, rows list, then flat list of codes of length nrows*ncols,
+% read row-major: for each row (top-to-bottom), left-to-right across columns.
+\newcommand{\sfDefineMatrixCodesGrid}[3]{%
+  \def\columnlabels{#1}%
+  \def\rowlabels{#2}%
+  \sfCountItems{#1}{\ncols}%
+  \sfCountItems{#2}{\nrows}%
+  \def\cellcodesgrid{#3}%
+}
+
+\newcommand{\sfDrawMatrixCodesGrid}{%
+  % Fill coded cells from flat list in row-major order
+  \begingroup
+    \edef\codelist{\cellcodesgrid}%
+    \foreach \code [count=\k from 1] in \codelist {%
+      \pgfmathtruncatemacro{\col}{mod(\k-1,\ncols)+1}%
+      \pgfmathtruncatemacro{\row}{floor((\k-1)/\ncols)+1}%
+      \sfColorFromCode{\code}%
+      \ifsfDoFill
+        \fill[\sfColorTmp] (\col - 1,\nrows - \row + 1) rectangle ++(1,-1);%
+      \fi
+    }%
+  \endgroup
+  % Labels
+  \foreach \label [count=\i from 1] in \rowlabels {%
+    \node[left] at (-0.2,\nrows - \i + 0.5) {\label};%
+  }%
+  \foreach \label [count=\j from 1] in \columnlabels {%
+    \node[rotate=90,right] at (\j-0.5,\nrows + 0.2) {\label};%
+  }%
+  % Grid
+  \draw[black] (0,0) grid (\ncols,\nrows);%
+}
+
+

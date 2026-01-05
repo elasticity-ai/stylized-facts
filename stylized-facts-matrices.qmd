@@ -1,0 +1,284 @@
+---
+title: Model-Task Matrices
+date: today
+toc: true
+number-sections: true
+toc-location: body
+note-location: margin
+toc-depth: 2
+engine: knitr
+execute:
+  echo: false
+  warning: false
+  error: false
+  cache: true # caches chunk output
+editor:
+  render-on-save: true
+bibliography: stylized-facts.bib
+#latex-auto-mk: false # this stops it from updating packages with tlmgr every compile
+format-links: false
+format:
+   html:
+      other-formats: false
+      self-contained: true
+      lightbox: auto    # ← enables click-to-zoom for figures/images
+      page-layout: full
+      fontfamily: libertinus
+      default: true
+      grid:
+         margin-width: 400px
+      include-in-header:
+         - text: |
+            <script>window.MathJax = {
+                     loader: { load: ['[custom]/xypic.js'],
+                               paths: {custom: 'https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/'}},
+                  tex: {packages: {'[+]': ['xypic']},
+                     macros: {
+                        bm: ["\\boldsymbol{#1}", 1],
+                        ut: ["\\underbrace{#1}_{\\text{#2}}", 2],
+                        utt: ["\\underbrace{#1}_{\\substack{\\text{#2}\\\\\\text{#3}}}", 3]
+                     }}};
+            </script>
+            <style>
+               h1 {  border-bottom: 4px solid black;}
+               h2 {  border-bottom: 1px solid #ccc;}
+               p { margin-left: 20px; }
+               table { margin-left: 20px; }
+               ol { margin-left: 20px; }
+               ul { margin-left: 20px; }
+               dl { display: grid; grid-template-columns: 10em auto;}
+               dt { grid-column-start: 1; font-weight: bold; margin-right: 10px;  }
+               dd { grid-column-start: 2; }
+            </style>
+---
+
+The goal of this document is to document facts & theory about how we can predict future dangerous capabilities.
+
+#        We want to predict dangerous capabilities
+
+```{tikz}
+#| fig-column: margin
+\begin{tikzpicture}[scale=0.5]
+  \input{tikz-matrix-macros.tex}
+
+  % Column-list, Row-list, then flat color codes row-major: (row 1 across cols), then row 2, etc.
+  % Example: 2 cols x 2 rows -> codes {O,R,O,G} maps to:
+  % (c1,r1)=O, (c2,r1)=R, (c1,r2)=O, (c2,r2)=G
+  \sfDefineMatrixCodesGrid{%
+     GPT-3,GPT-4,GPT-5,GPT-2026,GPT-2027,GPT-2028
+  }{%
+     Capital of Japan?,$\frac{d}{dx}x^x$ at $x=1$?,IMO 2025 Problem 5?,IMO 2025 Problem 6?,Drop-in remote worker,Make bioweapons,AI R\&D%
+  }{%
+     G,G,G,W,W,W,%
+     R,G,G,W,W,W,%
+     R,R,G,W,W,W,%
+     R,R,R,W,W,W,%
+     W,W,W,W,W,W,%
+     W,W,W,W,W,W%
+  }
+  \sfDrawMatrixCodesGrid
+\end{tikzpicture}
+```
+
+The figure at right illustrates the basic problem: we have some data on the abilities of different LLMs on a set of standardized questions, but we still have two problems:
+
+1. **Extrapolation:** we want to predict current models' abilities at novel tasks (i.e. tasks outside of existing evals/benchmarks).
+2. **Forecasting:** we want to predict future models' abilities at both existing and novel tasks.
+
+
+#     Aptitude tests are poor predictors of real-world abilities
+
+
+```{tikz}
+#| fig-column: margin
+\begin{tikzpicture}[scale=0.5]
+  \input{tikz-matrix-macros.tex}
+  \sfDefineMatrixCodesGrid{%
+     Lawyer,Doctor,Accountant,Phd Physicist,PhD Chemist,PhD Biologist,LLM
+  }{%
+     LSAT,MCAT,CPA exam,Physics Exam,Chemistry Exam,Biology Exam,Legal Work,Medical Work,Accounting Work,Physics Work,Chemistry Work,Biology Work%
+  }{%
+     G,R,R,R,R,R,G,%
+     R,G,R,R,R,R,G,%
+     R,R,G,R,R,R,G,%
+     R,R,R,G,R,R,G,%
+     R,R,R,R,G,R,G,%
+     R,R,R,R,R,G,G,%
+     G,R,R,R,R,R,R,%
+     R,G,R,R,R,R,R,%
+     R,R,G,R,R,R,R,%
+     R,R,R,G,R,R,R,%
+     R,R,R,R,G,R,R,%
+     R,R,R,R,R,G,R%
+  }
+  \sfDrawMatrixCodesGrid
+\end{tikzpicture}
+```
+
+The simplest way to test for LLM abilities is to get them to sit the same tests of aptitude we have for humans -- e.g. IQ, aptitude tests, college exams, licensing exams. We could then extrapolate real-world abilities based on their exam performance, e.g. whether they have PhD-level ability, or lawyer-level ability.
+
+However this has been very disappointing: it turns out that LLMs perform far better at exams than they can perform in the real world, so exam performance is a poor predictor of real-world abilities.
+
+
+\
+
+\ 
+
+#     We can build specific evals, but we still need to extrapolate and forecast
+
+```{tikz}
+#| fig-column: margin
+\begin{tikzpicture}[scale=0.5]
+  \input{tikz-matrix-macros.tex}
+
+  % Column-list, Row-list, then flat color codes row-major: (row 1 across cols), then row 2, etc.
+  % Example: 2 cols x 2 rows -> codes {O,R,O,G} maps to:
+  % (c1,r1)=O, (c2,r1)=R, (c1,r2)=O, (c2,r2)=G
+  \sfDefineMatrixCodesGrid{%
+     GPT-3,GPT-4,GPT-5,GPT-2026,GPT-2027,GPT-2028
+  }{%
+     Capital of Japan?,$\frac{d}{dx}x^x$ at $x=1$?,IMO Problem 5?,GDPval (work),WMDP (bioweapons),RE-bench (AI R\&D)%
+  }{%
+     G,G,G,W,W,W,%
+     R,G,G,W,W,W,%
+     R,R,G,W,W,W,%
+     R,R,O,W,W,W,%
+     R,R,R,W,W,W,%
+     R,R,R,W,W,W%
+  }
+  \sfDrawMatrixCodesGrid
+\end{tikzpicture}
+```
+
+
+We have built many evals for specific capabilities, e.g. real-world work, CBRN abilities, and AI R&D. However these haven't entirely solved the extrapolation and forecasting problems:
+
+1. There are millions of potential tasks, and we do not have a standard theory of how evals generalize.
+2. If all models fail some task, then it's unclear how to predict when a future model will be able to do that task.
+
+#     We can empirically extrapolate benchmark scores
+
+We can empirically observe the relationship between models and benchmark score, and use this to extrapolate into the future. This is the method used in Epoch's "Rosetta Stone" paper.
+
+Indeed multiple papers have found that eval scores are (1) highly correlated across models; and (2) appear to evolve relatively smoothly over time (or evolve smooothly against training compute). The following data is from METR's `all_runs` dataset:
+
+![](images/2025-11-10-09-17-28.png)
+
+This implies that there is some latent "LLM difficulty" among tasks. Although we observed above that LLM-difficulty appears to be different from human-difficulty: LLMs are very good at exams, very bad at practical work.
+
+However this has two drawbacks:
+
+1. This will only help us forecast future performance if we are confident that the question distribution is sufficiently *smooth* relative to underlying capabilities.[^smooth]  The way in which we assemble questions is typically fairly haphazard, so there is a great deal of uncertainty in doing this forecasting. In fact 
+
+[^smooth]: Suppose score is $f(x)$, where $x$ represents model-year or training-compute. We can predict $f(x)$ confidently from prior trends insofar as we expect $f(.)$ to be smooth.
+
+2. This method does not help us to extrapolate or forecast to tasks which do not occur in any benchmark.
+
+NOTE: it seems we only have a single task which a human can solve, but no LLM ever solves (`image_labeling/bouba_kiki_gradients`). Thus the remaining red tasks could be arbitrarily difficult.
+
+<!-- ```{tikz}
+#| fig-column: margin
+\begin{tikzpicture}[scale=0.5]
+  \input{tikz-matrix-macros.tex}
+  \sfDefineMatrixCodesGrid{%
+     GPT-3,GPT-4,GPT-5,GPT-2026,GPT-2027,GPT-2028
+  }{%
+     Benchmark A,Benchmark B,Benchmark C,Benchmark D,Benchmark E%
+  }{%
+     G,G,G,W,W,W,%
+     O,G,G,W,W,W,%
+     R,O,G,W,W,W,%
+     R,R,O,W,W,W,%
+     R,R,R,W,W,W%
+  }
+  \sfDrawMatrixCodesGrid
+\end{tikzpicture}
+``` -->
+
+
+
+#     We can use time horizon
+
+```{tikz}
+#| fig-column: margin
+\begin{tikzpicture}[scale=0.5]
+  \input{tikz-matrix-macros.tex}
+  \sfDefineMatrixAuto{%
+     Capital of Japan? (10s),$\frac{d}{dx}x^x$ at $x=1$? (1m),IMO Problem 5? (1h),Make bioweapon (10h),AI R\&D (1wk)}{%
+     GPT-3,GPT-4,GPT-5,GPT-2026,GPT-2027,GPT-2028}{%
+     1/1,1/2,2/2,1/3,2/3,3/3}{%
+     2/1,3/1,3/2}
+  \sfDrawMatrix
+\end{tikzpicture}
+```
+
+Finally we could assign each task a difficulty based on its *time horizon*. The graph below shows tasks sorted by estimated time horizon (the grey line at the bottom). We can see that long tasks have lower success rates:
+
+**Sorted by baseline time.** Note that the left-hand side (bottom blue bar) represents tasks without any baselined time.
+
+![](images/2025-11-10-09-18-38.png)
+
+1. **The tasks with estimates but no baselines are very disproportionately hard.** This is understandable: the tasks with estimaes but without baselines are (I think) those which humans failed to complete, & so probably those where our estimate was too low. Examples: `hash_collision/md4_modified`, `env_scientist/level9`, `spn_cryptanalysis/4-stage-spn`.
+2. **The relationship between `time` and `success` is noisier than in the latent factor model above.** This can be due to (1) we have a noisy measure of time; (2) there are other factors besides time. Examples:
+   - Tasks with short baselines but low success rates: `make_web_server/exp_last_digit` (31 mins), `gaia/0a3cd321` ().
+   - Tasks with long baselines but high success rates: `oxdna_simple/default`, `munge_data/easy` (577 mins).
+
+
+
+**Sorted by estimated time.** Note that the left-hand side (top blue bar) represents tasks without any estimated time.
+
+![](images/2025-11-10-09-19-22.png)
+
+1. **The relationship between `time` and `success` is noisier than in the latent factor model above.** This can be due to (1) we have a noisy measure of time; (2) there are other factors besides time. Examples:
+   - Tasks with short estimated time but low success rates: `credit_card_validity/add_check_digits` (3 mins); `make_web_server/exp_last_digit` (5 mins); 
+   - Tasks with long estimated time but high success rates: `oxdna_simple/default` (11 hours); `web_hacking/command_injection_hard` (8 hours).
+
+
+**An implication: there are some other important factors determining model success beside time.**
+
+![Predicting success from time horizon, $R^2$ is 83%.](images/2025-11-10-08-06-00.png){.column-margin}
+**Compare the scatter from the paper.** I need to think about reconciling this scatter plot from the paper (which has a very high R^2) with the data from the heatmaps above.
+
+
+![](images/2025-11-09-23-21-31.png){.column-margin}
+**We also see a stable trend in the time-series.**
+
+
+
+
+<!-- ```{tikz}
+#| fig-column: margin
+\begin{tikzpicture}[scale=4]
+  % Axes 0..1
+  \draw[->] (-0.05,0) -- (1.1,0) node[below] {$x$};
+  \draw[->] (0,-0.05) -- (0,1.1) node[left] {$y$};
+  % Ticks and labels
+  \foreach \t/\lab in {0/0,0.5/0.5,1/1} {
+    \draw (\t,0) -- (\t,-0.02) node[below] {\lab};
+    \draw (0,\t) -- (-0.02,\t) node[left] {\lab};
+  }
+  % Sigmoid s(x)=1/(1+e^{-k(x-0.5)}), inflection at x=0.5
+  \foreach \i in {1,...,5} {
+    \draw[thick,blue] plot[domain=0:1, samples=200, smooth, variable=\x] (\x,{1/(1+exp(-12*(\x-0.2)+\i))});
+  }
+  \draw[dashed,gray] (0.5,0) -- (0.5,1);
+  \draw[dashed,gray] (0,0.5) -- (1,0.5);
+\end{tikzpicture}
+``` -->
+
+#     We can use *estimated* difficulty
+
+If we could directly predict task-difficulty from the task description, this would help both extrapolation existing capabilities and forecasting future capabilities.
+
+1. **Regress success rate on task characteristics.** E.g. we generally believe that models struggle with multimedia, long context, situational awareness (this was investigated with "messiness factors" in the original time horizon paper).
+
+2. **Prompt a model to estimate task difficulty.** The prompt can include a lot of data about previous successes, and can be allowed to investigate the task, and attempt solution itself. In fact we know that we can *perfectly* predict success for a given (task,model) pair just by running the task on that model. Thus this entirely solves the extrapolation problem, as long as we have a well-defined task and solution. However it's not clear how well this will work for forecasting future capabiltiies: if the small model cannot solve the task on its own, then it may not know whether the large model can solve it.
+
+#     We can use uplift
+
+Another way of measuring dangerous capabilities is observing uplift, i.e. the relative abilities or speed of AI+human, compared to human alone.
+
+1. We have an observation on uplift among open source contributors in early 2025, showing 20% downlift.
+2. Ali Merali has a paper predicting uplift based on training compute, but I believe the statistical results are very weak.
+
+These datapoints are challenging to extrapolate.

@@ -1,0 +1,22 @@
+\documentclass[
+%% TIKZ_CLASSOPTION %%
+tikz
+]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{matrix}
+%% EXTRA_TIKZ_PREAMBLE_CODE %%
+\begin{document}
+%% TIKZ_CODE %%
+%#| fig-column: margin
+\begin{tikzpicture}[scale=0.5]
+  \input{tikz-matrix-macros.tex}
+  \sfDefineMatrixCodesGrid{%
+     GPT-3,GPT-4,GPT-5,GPT-2026,GPT-2027,GPT-2028
+  }{%
+     Perplexity%
+  }{%
+     R,O,G,W,W,W%
+  }
+  \sfDrawMatrixCodesGrid
+\end{tikzpicture}
+\end{document}

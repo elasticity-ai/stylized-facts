@@ -1,7 +1,6 @@
 ---
 title: Stylized Facts about AI & Human Capabilities
 author: "Tom Cunningham & Ali Merali"
-author: "Tom Cunningham & Ali Merali"
 abstract: We discuss stylized facts about the capabilities of recent AI models and how they compare to human capabilities. We particularly draw attention to a common latent factor of capabilities among AI models, and the fact that this latent factor is different from the distribution of human capabilities. We discuss various candidates for the “missing capability” which would unlock a greater economic impact.
 date: today
 toc: true
@@ -20,6 +19,7 @@ bibliography: stylized-facts.bib
 #latex-auto-mk: false # this stops it from updating packages with tlmgr every compile
 format-links: false
 format:
+#typst: default
    html:
       other-formats: false
       lightbox: auto    # ← enables click-to-zoom for figures/images
@@ -101,7 +101,6 @@ format:
 
    - Rishi Bommasani
    - Joel
-   - 
 
 -->
 
@@ -157,9 +156,9 @@ It is useful to think of a matrix of agents and tasks.
 
 We wish to find a low-dimensional factorization of this matrix.
 
-: In practice the matrix is enormous. We can think of the capability problem as finding a lower dimensional representation of this matrix, i.e. some small set of general-purpose capabilities that are highly predictive of whether an agent can do a task.^[We can think of the reduction either as Principal Components Analysis (we take weighted averages of all rows), or Principal Feature Analysis (we take a subset of rows that are highly predictive).]
+: In practice the matrix is enormous. We can think of the capability problem as finding a low-dimensional representation of this matrix, i.e. some small set of general-purpose capabilities that are highly predictive of whether an agent can do a task.^[We can think of the reduction either as Principal Components Analysis (we take weighted averages of all rows), or Principal Feature Analysis (we take a subset of rows that are highly predictive).]
 
-: A single-dimensional factorization would mean each agent would have a score representing their ability, and each task would have a score representing its difficulty. However we will see that a single-factor is often a poor fit, i.e. the relatively difficulty of tasks varies substantially across agents.
+: A single-dimensional factorization would mean each agent would have a latent ability, and each task would have a latent difficulty. However we will see that a single-factor is often a poor fit, i.e. the relatively difficulty of tasks varies substantially across agents.
 
 
 ## There is no standard measure of machine intelligence
@@ -183,17 +182,15 @@ Many proposed measures of AGI have already been satisfied.
 
 There are some proposed definitions but none have become canonical:
 
-:   @legg2007definitions surveyed 70 different definitions of intelligence as of 2007.
+:    - @legg2007universal proposed "intelligence measures an agent’s ability to achieve goals in a wide range of environments."^[Additionally, @legg2007definitions surveyed 70 different definitions of intelligence as of 2007.]
 
-     - @legg2007universal proposed "intelligence measures an agent’s ability to achieve goals in a wide range of environments."
-
-     - @chollet2019measureintelligence proposes intelligence be defined as "skill-acquisition efficiency", and proposed a formal benchmark (ARC-AGI).
+     - @chollet2019measureintelligence proposed intelligence be defined as "skill-acquisition efficiency", and proposed a formal benchmark (ARC-AGI).
 
      - @morris2023levels proposed five "levels of AGI", based on the percentile human performance across all tasks. E.g. they classified ChatGPT as being able to do a *"wide range of non-physical tasks, including metacognitive tasks like learning new skills equal to or somewhat better than an unskilled human."*
 
-     - In 2024 OpenAI developed (but did not release) a five-level metric of AGI.[^levels]
+     - In 2024 OpenAI internally developed a five-level scale of AGI, but it has not been publicly released.[^levels]
 
-     - @hendrycks2025agidefinition proposes an AGI definition based on 10 different sub-dimensions.
+     - @hendrycks2025agidefinition proposed an AGI definition based on 10 different sub-dimensions.
 
 
 
@@ -206,28 +203,34 @@ There are some proposed definitions but none have become canonical:
 There are hundreds of different AI benchmarks of capability.
 : These benchmarks are often informally grouped into types which test different types of ability, e.g. "knowledge", "reasoning", "programming", "agentic ability", however there is no generally-accepted taxonomy.
 
-![Taxonomy from @zhou2025generalscales](images/image2.png){.column-margin}
+![18-dimensional taxonomy from @zhou2025generalscales](images/image2.png){.column-margin}
 
-![Taxonomy from @huber2025llmsblooms](images/2025-10-19-15-07-10.png){.column-margin}
+![10-dimensional taxonomy from @huber2025llmsblooms](images/2025-10-19-15-07-10.png){.column-margin}
 
-- @huber2025llmsblooms organize benchmark tasks according to "Bloom's Taxonomy", a heirarchical framework designed to classify educational learning objectives for humans, with 6 levels: Remember, Understand, Apply, Analyze, Evaluate, Create. They say there are a lack of benchmarks to measure the two highest levels ("evaluate" and "create").
+![10-dimensional taxonomy from @hendrycks2025agidefinition](images/2025-10-19-14-47-17.png){.column-margin}
 
-- @oecd2025aicapabilityindicatorsfullreport organize capabilities across nine dimensions. The criteria are mostly qualitative, and their scoring is done by a panel of experts with reference to various benchmark scores.[^oecd]
+![From @ilic2024positive, showing their preferred 2-factor model](images/2025-10-21-15-33-31.png){.column-margin}
 
-[^oecd]: OECD's dimension: Language; Social interaction; Problem solving; Creativity; Metacognition and critical thinking; Knowledge, learning and memory; Vision; Manipulation; Robotic intelligence.
+![From @maimon2025iq](images/2025-12-05-06-36-08.png){.column-margin}
 
-- @oecd2025aicapabilityindicatorsfullreport organize capabilities across nine dimensions. The criteria are mostly qualitative, and their scoring is done by a panel of experts with reference to various benchmark scores.[^oecd]
+Some taxonomies of AI capabilities have been proposed but none have been widely adopted.
+: @burnell2023reveal look at variation across 29 LLMs and 27 benchmarks (all prior to GPT-4). The first 3 factors explain 33%, 31%, and 17% of performance, and they interpret those factors as "reasoning", "comprehension" and "core language modeling." They say "capabilities are not monolithic. Instead, they are better explained by three well-delineated factors that represent reasoning, comprehension and core language modeling."
+: @ilic2024positive tested 591 LLMs on 12 different evaluations, as of March 2024. In their preferred specification the first factor had a loading of 0.81, implying an R^2 of 0.66. They also found that the "number of LLM parameters correlated positively with this general ability."
+: @polo2025sloth propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following. However they do not seem to report overall variance explained by each of the factors.
+: @maimon2025iq analyze 60 LLMs on 44 tasks, and propose eight latent factors.
+: @zhou2025generalscales propose an index of 18 different human-interpretable capabilities (ADeLe). They use an LLM to label 16,000 "task instances" from 20 benchmarks, using rubrics to define each capability. This allows them to predict LLM performance on a task just based on its content, without any prior LLM successes. The scores on each dimension are 1-5, they note that they scores approximately correspond to frequency of achievement among humans, where score $L$ will be achieved by $1/10^{L-1}$ people.^["an item is at level $l$ if l is the highest number such that, in at least 95% of samples of $n = 10^l$ individuals, there is at least one correct."]
+response.")
+: @oecd2025aicapabilityindicatorsfullreport organize capabilities across nine dimensions. The criteria are mostly qualitative, and their scoring is done by a panel of experts with reference to various benchmark scores. OECD's dimension: Language; Social interaction; Problem solving; Creativity; Metacognition and critical thinking; Knowledge, learning and memory; Vision; Manipulation; Robotic intelligence.
+: @huber2025llmsblooms organize benchmark tasks according to "Bloom's Taxonomy", a heirarchical framework designed to classify educational learning objectives for humans, with 6 levels: Remember, Understand, Apply, Analyze, Evaluate, Create. They say there are a lack of benchmarks to measure the two highest levels ("evaluate" and "create").
+: @hendrycks2025agidefinition define capabilities along 10 dimensions, based on the Cattell-Horn-Carroll (CHC) theory of cognitive abilities. They give testable evals for only some of these capacities.
 
-[^oecd]: OECD's dimension: Language; Social interaction; Problem solving; Creativity; Metacognition and critical thinking; Knowledge, learning and memory; Vision; Manipulation; Robotic intelligence.
-![Taxonomy from @hendrycks2025agidefinition](images/2025-10-19-14-47-17.png){.column-margin}
+Many taxonomies are based on components of between-agent variation.
+: Many taxonomies are based on latent factors in variation in performance in a range of tasks.
 
-Some taxonomies have been proposed, but none have been widely adopted.
+    Some taxonomies are based on variation among human abilities (e.g. @hendrycks2025agidefinition, @huber2025llmsblooms). Some taxonomies are based on variation across LLM abilities (@burnell2023reveal, @ilic2024positive, @polo2025sloth, @maimon2025iq, @zhou2025generalscales).
 
-:  - @zhou2025generalscales propose an index of 18 different human-interpretable capabilities. They use an LLM to label hundreds of tasks from benchmarks according to the demand for each capability thereby allowing for the prediction of LLM capabilities on new benchmarks or tasks.
+    A difficulty with both of these approaches is that they are designed to measure variation *within* one type of agent (LLM or human), not *between* humans and LLMs. There is reason to expect that there exist important human-LLM differences that are orthogonal to within-human or within-LLM variation, e.g. types of tasks where humans show little variation, and LLMs show little variation, but there are large human-LLM differences in ability.^[A similar argument is made by Zachary Tidler et al. [here](https://aievaluation.substack.com/p/is-the-definition-of-agi-a-percentage).]
 
-:  - @huber2025llmsblooms organize benchmark tasks according to "Bloom's Taxonomy", a heirarchical framework designed to classify educational learning objectives for humans, with 6 levels: Remember, Understand, Apply, Analyze, Evaluate, Create. They say there are a lack of benchmarks to measure the two highest levels ("evaluate" and "create").
-
-: - @hendrycks2025agidefinition define capabilities along 10 dimensions, based on the Cattell-Horn-Carroll (CHC) theory of cognitive abilities, and give testable evals for each capacity.
 
 ## There does appears to be a single latent component of intelligence across LLMs
 
@@ -253,7 +256,14 @@ AI researchers often treat intelligence as a scalar.
 
 Much work on "scaling laws" treats model intelligence as a scalar.
 
-: A large part of academic and industry work on AI is spent estimating "scaling laws", i.e. predicting model performance based on various inputs (e.g. training compute, training data size, model scale, and test-time compute). Most work on scaling laws uses a scalar outcome to represent model intelligence, e.g. prediction error on a corpus, or performance on a difficult benchmark. In principle scaling laws could estimate a *vector* of intelligence outputs however this is relatively rare, researchers tend to treat a single scalar as a sufficient proxy for model intelligence.^[@polo2024sloth propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following.]
+: A large part of academic and industry work on AI is spent estimating "scaling laws", i.e. predicting model performance based on various inputs (e.g. training compute, training data size, model scale, and test-time compute). Most work on scaling laws uses a scalar outcome to represent model intelligence, e.g. prediction error on a corpus, or performance on a difficult benchmark. In principle scaling laws could estimate a *vector* of intelligence outputs however this is relatively rare, researchers tend to treat a single scalar as a sufficient proxy for model intelligence.^[polo2025sloth propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following.]
+
+Some theories of the latent component.
+
+: - The Bitter Lesson.
+   - The "cognitive core": ([Sean Goedeck](https://www.seangoedecke.com/cognitive-core/#fn-1))
+   - The Manifold Hypothesis.
+   - The Platonic Representation hypothesis.
 
 <!-- TO ADD: discuss more seriously reasoning models: e.g. o4-mini is frontier at math, but not at general knowledge.  -->
 
@@ -275,6 +285,45 @@ Much work on "scaling laws" treats model intelligence as a scalar.
 
 ```{tikz}
 #| fig-column: margin
+#| fig-cap: Illustration of LLM vs humans with a single dimension of ability.
+   \begin{tikzpicture}[scale=7]
+   \draw[thick,->] (0,0)  -- (1,0) node[anchor=north east]{ability};
+   \fill[red,opacity=0.5,thick,domain=0:1,samples=100] (0,0)-- plot(\x,{0.3*exp(-((\x-0.5)^2)/(0.2^2))}) -- (1,0) -- cycle;
+   \node[red!50!black] at (.5,.4) {humans};
+
+   \fill[green!50!black] (.1,.1) circle(0.03);
+   \fill[green!50!black] (.2,.1) circle(0.03);
+   \fill[green!50!black] (.3,.1) circle(0.03);
+   \fill[green!50!black] (.4,.1) circle(0.03);
+   \fill[green!50!black] (.5,.1) circle(0.03);
+   \node[green!50!black,below] at (.1,.3) {LLMs};
+\end{tikzpicture}
+```
+
+
+```{tikz}
+#| fig-column: margin
+#| fig-cap: Illustration of LLM vs humans with two dimensions of ability.
+   \begin{tikzpicture}[scale=7]
+      \draw[thick,<->] (1,0) -- node[midway,below]{ability 1} (0,0)
+         -- node[midway,rotate=90,above]{ability 2} (0,1.1);
+      % \fill[green!50!black,opacity=0.5,rotate=65] (.3,-.2) ellipse (0.25 and 0.1);
+      \fill[red,opacity=0.5,rotate=10] (.5,.5) ellipse (0.3 and 0.1);
+      
+      \node[red!50!black] at (.5,.8) {humans};
+      % \draw[->,thick,green!50!black] (.26,.1)--(.45,.45);
+
+      \fill[green!50!black] (.1,.1) circle(0.03);
+      \fill[green!50!black] (.2,.2) circle(0.03);
+      \fill[green!50!black] (.3,.3) circle(0.03);
+      \fill[green!50!black] (.4,.4) circle(0.03);
+      \node[green!30!black,align=left] at (.6,.3) {LLMs};
+\end{tikzpicture}
+```
+
+
+<!-- ```{tikz}
+#| fig-column: margin
    \begin{tikzpicture}[scale=4]
    \draw[<->] (1,0) -- node[midway,below]{ability 1} (0,0)
       -- node[midway,rotate=90,above]{ability 2} (0,1.1);
@@ -285,32 +334,33 @@ Much work on "scaling laws" treats model intelligence as a scalar.
    \draw[->,thick,green!50!black] (.26,.1)--(.45,.45);
    %\fill[black!20!white] (0.5,0.5) ellipse (0.4 and 0.3);
    \end{tikzpicture}
-```
+``` -->
 
 Humans have a fairly positive correlation among abilities.
 
-:  - There is a reasonable correlation among different measures of general ability (IQ, g-factor).
-   - There is a reasonable correlation between years of education, IQ, standardized tests score, and wage.
+:  There is a reasonable correlation among different measures of general ability (IQ, g-factor).
+
+    There is a reasonable correlation between years of education, IQ, standardized tests score, and wage.
 
 Ideally we would compare human and LLM performance on the same tasks.
 
-:  - If we had a full matrix of human and LLM performance we would be able to compare latent factors of each. Unfortunately there are few datasets which collect human performance across a range of distinct benchmarks. 
+: If we had a full matrix of human and LLM performance we would be able to compare latent factors of each. Unfortunately there are few datasets which collect human performance across a range of distinct benchmarks. 
 
 We can compare the average human with the average LLM.
 
-:  - Many benchmarks do report performance for the average or expert human, so we can make those comparisons. Additionally we can run LLMs on many human standardized tests and exams.
+: Many benchmarks do report performance for the average or expert human, so we can make those comparisons. Additionally we can run LLMs on many human standardized tests and exams.
 
 Latent factors for human and LLM ability appear to be significantly different.
 
-:     - Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4 was able to get human-level scores at most aptitude tests: SAT, LSAT, civil service. But GPT-4 did not have the aptitudes passing such tests implies for humans.
+: Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4 was able to get human-level scores at most aptitude tests: SAT, LSAT, civil service. But GPT-4 did not have the aptitudes passing such tests implies for humans.
 
-      - LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara to Kazakh), can combine knowledge from two very different domains.
+     LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara to Kazakh), can combine knowledge from two very different domains.
 
 ## There is *some* bottleneck on LLM abilities, but disagreement about where
 
 In 2023 many people thought GPT-4 could do a significant fraction of work:
 
-:     - @eloundou2023gpts estimated that GPT-4 would reduce the time required by at least 50% for between 14% and 56% of all tasks in the economy.
+:     - @eloundou2023gpts estimated that GPT-4 would halve the time required to perform a task for between 14% and 56% of all tasks in the economy.
 
       - @chui2023economic (McKinsey) claimed *"the total percentage of hours that could theoretically be automated by integrating technologies that exist today ... [is] 60–70 percent."*
 
@@ -324,11 +374,47 @@ AI researchers are not sure what is the bottleneck.
 
       [Shunyu Yao](https://ysymyth.github.io/The-Second-Half/), April 2025: 
 
-      > “AI has beat world champions at chess and Go, surpassed most humans on SAT and bar exams, and reached gold medal level on IOI and IMO. But the world hasn’t changed much, at least judged by economics and GDP. I call this the utility problem, and deem it the most important problem for AI.”*   
+      > “AI has beat world champions at chess and Go, surpassed most humans on SAT and bar exams, and reached gold medal level on IOI and IMO. But the world hasn’t changed much, at least judged by economics and GDP. I call this the utility problem, and deem it the most important problem for AI.”* 
 
 ## There are many candidates for the bottleneck
 
-Here we list a variety of abilities that LLMs lack, which might explain the bottleneck to adoption. To make the bottleneck question concrete: LLMs can pass many tests used to test for human aptitudes (SAT, LSAT, civil service exams), yet LLMs clearly lack the aptitude to perform the associated jobs. Thus there must be some other missing skill.
+Here we list a variety of abilities that LLMs lack, which might explain the bottleneck to adoption. To make the bottleneck question concrete: LLMs can pass many tests used to test for human aptitudes (SAT, LSAT, civil service exams), and many interview questions, yet LLMs clearly lack the aptitude to perform the associated jobs. Thus there must be some other missing skill.
+
+| Capability               | Benchmark                    | Apr 2023 (GPT-4) | Dec 2025  | Human  |
+| ------------------------ | ---------------------------- | :--------------: | :-------: | :----: |
+| Deductive reasoning      | MATH[^MATH]                  |       23%        |    98%    |        |
+|                          | GPQA[^GPQA]                  |       36%        |    93%    |        |
+| Information-gathering    | GAIA[^GAIA]                  |       15%        |    88%    |        |
+| Accuracy / Hallucination | SimpleQA Verified[^SimpleQA] |       ~30%       |    72%    |        |
+| Long context             | Needle[^needle]              |    50% @ 128K    | 99.7% @1M |        |
+| Multimodal inputs        | MMMU-Pro [^MMMU]             |       ~35%       |    81%    |  85%   |
+| In-context learning      | ARC-AGI[^ARCAGI]             |        7%        |    88%    | 77-98% |
+|                          | ARC-AGI 2[^ARCAGI]           |       ~0%        |    45%    |  98%   |
+
+
+[^needle]: https://cloud.google.com/blog/products/ai-machine-learning/the-needle-in-the-haystack-test-and-how-gemini-pro-solves-it
+[^MATH]:
+[^GPQA]:
+[^MRCR]: MRCR v2 (8-needle), 128k: https://deepmind.google/models/gemini/pro/
+[^SimpleQA]: https://arxiv.org/pdf/2509.07968v1 and https://blog.google/products/gemini/gemini-3/#gemini-3
+[^MMMU]: https://mmmu-benchmark.github.io/#leaderboard and https://blog.google/products/gemini/gemini-3/#gemini-3
+[^ARCAGI]: https://arcprize.org/leaderboard
+
+
+
+| Bottleneck                   | Benchmarks                       | Benchmarks  |
+| ---------------------------- | -------------------------------- | ----------- |
+| Continual learning.          | Amodei, Karpathy, Hasssabis.     |             |
+| Novel situations             | RL generalization, world models. |             |
+| Interactive decision-making. |                                  | BALROG, 44% |
+|                              |                                  |             |
+
+
+[^Balrog]: 
+
+
+Data density.
+: @vonwerra2025jaggeddata argues that jaggedness is mainly due to availability of data.
 
 Accuracy.
 : LLMs have often made confident false claims ("hallucinations"), and this has clearly been a barrier to their adoption. This behavior is not penalized in classic benchmarks which score only right and wrong answers, and so the LLM has an incentive to guess. Similarly user pairwise preference does not penalize hallucinations when the user is not immediately aware of the accuracy of claims.
@@ -348,11 +434,25 @@ High context.
 Continual learning.
 : Typically LLMs have been used in a *stateless* manner, where the model weights are fixed and only the prompt changes. This means that any learning about the environment must happen with a separate system, or by through recursive updates to the prompt. This has been cited by many people as a critical bottleneck: Karpathy, Hassabis, Altman, Amodei.
 
-   [Hassabis, August 2025](https://aipositive.substack.com/p/decoding-deepminds-vision-an-analysis)
+    [Hassabis, August 2025](https://aipositive.substack.com/p/decoding-deepminds-vision-an-analysis)
 
-   Dario Amodei, August 2025:
+    [Dwarkesh Patel, July 2025](https://www.dwarkesh.com/p/timelines-june-2025):
+
+    > "the fundamental problem is that LLMs don’t get better over time the way a human would. The lack of continual learning is a huge huge problem."
+
+    Dario Amodei, August 2025:
    
-   > "Models learn within the context… Maybe we'll train the model in such a way that it is specialized for learning over the context. You could, even during the context, update the model's weights… So, there are lots of ideas that are very close to the ideas we have now that could perhaps do [continual learning].”
+    > "Models learn within the context ... Maybe we'll train the model in such a way that it is specialized for learning over the context. You could, even during the context, update the model's weights ... So, there are lots of ideas that are very close to the ideas we have now that could perhaps do [continual learning].”
+
+    [Noam Brown, Nov 2025](https://x.com/polynoamial/status/1994439121243169176):
+
+    > "More research breakthroughs are probably needed to achieve AGI/ASI. (Continual learning and sample efficiency are two examples that researchers commonly point to.)"
+
+   [Shane Legg](https://www.youtube.com/watch?v=l3u_FAv33G0&t=3s):
+
+   > "So there are all sorts of things like this [continual learning and visual reasoning], that we currently see. I don't think there are fundamental blockers on any of these things. ... So my expectation is over a number of years these things will all get addressed. But they're not there yet.""
+
+   
 
 Planning / long-horizon decision-making.
 : @dorn2025temporal argue that current LLMs are poor at "sequential coherence", they estimate the time-length of ONET tasks as a proxy for sequential coherence required.
@@ -380,6 +480,19 @@ Cost.
 
 I have not added separate category for "reliability," meaning lack of randomness, because it is relatively to run an LLM in a mostly deterministic fashion, and so eliminate concerns about randomness.
 
+Other discussions of bottlenecks:
+
+- @toner2025takingjaggedness discusses reasons for jaggedness: (1) easier vs harder to verify tasks; (2) can you put the context in the context window; (3) level of adversarialness; (4) cognitive vs physical.
+- @heitmann2025trajectories 
+   - Performance on tasks that are hard to verify 
+   - Performance on long tasks (that take human workers a long time)
+   - Performance in complex environments
+   - Sufficiently low error rate
+   - Meta-awareness and calibration
+   - Adaptability to the deployment environment
+   - Continual learning post-deployment
+   - Original insights
+
 # LLM Performance on Tasks
 
 In this section we discuss performance on tasks that have a measurable output.
@@ -403,27 +516,19 @@ Since 2012 the rate of benchmark saturation seems to be increasing:
 
 ## LLM performance is highly correlated across benchmarks
 
-Frontier models that surpass previous models on one benchmark usually outperform them on most other benchmarks.
-
 ![From @spangher2024generalized](images/image3.png){.column-margin}
-  
-- @burnell2023reveal look at variation across 29 LLMs and 27 benchmarks (all prior to GPT-4). The first 3 factors explain 33%, 31%, and 17% of performance, and they interpret those factors as "reasoning", "comprehension" and "core language modeling." They say "capabilities are not monolithic. Instead, they are better explained by three well-delineated factors that represent reasoning, comprehension and core language modeling."
-
-![From @ilic2024positive, showing their preferred 2-factor model](images/2025-10-21-15-33-31.png){.column-margin}
-
-- @ilic2024positive tested 591 LLMs on 12 different evaluations, as of March 2024. In their preferred specification the first factor had a loading of 0.81, implying an R^2 of 0.66. They also found that the "number of LLM parameters correlated positively with this general ability."
-
-- @spangher2024generalized construct an aggregatation across benchmark scores (MPG = Model Performance and Goodness), which they find is highly correlated with Elo rating on LMArena. The strongest model in their dataset is o1-preview.
 
 ![From @ruan2024observational](images/image4.png){.column-margin}
 
-- @ruan2024observational create "observational scaling laws" from the performance of 77 LLMs (as of May 2024) on 8 benchmarks. They find the first component explains 80% of the variation, also that training compute is highly predictive of this factor (for open models, which have known scale). They also fit scaling laws for the effect of inference-time techniques such as Chain-of-Thought and Self-Consistency.
+Frontier models that surpass previous models on one benchmark usually outperform them on most other benchmarks.
 
-- @polo2025slothscalinglawsllm propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following. However they do not seem to report overall variance explained by each of the factors.
+: @spangher2024generalized construct an aggregatation across benchmark scores (MPG = Model Performance and Goodness), which they find is highly correlated with Elo rating on LMArena. The strongest model in their dataset is `o1-preview`.
 
-- @kipnis2025metabench find a small set of questions which are highly predictive of overall model scores, and that "a single underlying common factor whose Spearman correlation with the total score is r= 0.93."
+: @ruan2024observational create "observational scaling laws" from the performance of 77 LLMs (as of May 2024) on 8 benchmarks. They find the first component explains 80% of the variation, also that training compute is highly predictive of this factor (for open models, which have known scale). They also fit scaling laws for the effect of inference-time techniques such as Chain-of-Thought and Self-Consistency.
 
-- @maimon2025iq analyze 60 LLMs on 44 tasks, and propose eight latent factors.
+: @kipnis2025metabench find a small set of questions which are highly predictive of overall model scores, and that "a single underlying common factor whose Spearman correlation with the total score is r= 0.93."
+
+
 
 
 ## The best predictor of benchmark performance is training compute.
@@ -437,7 +542,7 @@ There is a well-known literature on "scaling laws" finding that pretraining loss
 
    Their fit finds that training data and model size should optimaly scale at the same rate. Their model predicted that it would be optimal to train a model with much smaller size and larger amount of data, compared to existing models. They trained such a model ("chinchilla") and indeed found that it significantly outperformed other models with the same compute inputs.
 
-- @choshen2024hitchhiker surveys scaling-law best-practices in 2025, and largely confirms the functional-form and parameters proposed in @hoffman2022computeoptimal.
+- @choshen2024hitchhiker surveys scaling-law best-practices in 2025, and largely confirms the functional-form and parameters proposed in @hoffmann2022computeoptimal.
 
 The classical "scaling laws" literature predicts the fit on training loss, meaning next-token prediction error.  There is a smaller literature which predicts performance on task benchmarks (note that these are usually from a model with post-training):
 
@@ -512,6 +617,8 @@ The performance of LLMs on certain benchmarks can vary signficantly depending on
 - @mirzadeh2024gsm find that adding irrelevant instructions to a prompt significantly lowers performance on grade-school level questions. However [Andrew Mayne (2024)](https://andrewmayne.com/2024/10/18/can-you-dramatically-improve-results-on-the-latest-large-language-model-reasoning-benchmark-with-a-simple-prompt/) shows that this performance penalty disappears when the prompt included a warning (“*this might be a trick question designed to confuse LLMs with additional information.”*).
 
 -  @valmeekam2024llms finds that translating an ordinary problem into an artificial language significantly lowers performance on planning problems (e.g. “mystery blocksworld” in PlanBench). However o1-preview was still able to perform at 50%.
+
+- @li2025perturbation find that performance on math problems degrades somewhat when reworded. The declines are particularly severe for small open-source models.
 
 
 ## Benchmark tasks that take humans longer are typically harder for LLMs.
@@ -671,22 +778,21 @@ These RCTs compare behavior of workers with and without access to an AI system:
 
 ::: {.column-page}
 
-| Domain               | Reference(s)                     | Productivity             | Quote                                                                                                                                                                                                                  |
-| -------------------- | -------------------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Software engineering | @cui2024software                 |                          |                                                                                                                                                                                                                        |
-|                      | @hoffman2024software             |                          |                                                                                                                                                                                                                        |
-|                      | @gao2024github                   | +9% pull requests/day    | “Accenture developers saw an 8.69% increase in pull requests … a 15% increase to the pull request merge rate … an 84% increase in successful builds … developers accepted around 30% of GitHub Copilot’s suggestions.” |
-|                      | @peng2023developerproductivity   | +126% tasks/minute       | "The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group." (implies +126% tasks/minute)                                                                     |
-|                      | @becker2025developerproductivity | -16% tasks/minute        | "Allowing AI actually increases completion time by 19%—AI tooling slowed developers down." (implies -16% tasks/minute)                                                                                                 |
-| Consultants          | @dellacqua2023consultants        |                          |                                                                                                                                                                                                                        |
-| Writing tasks        | @noy2023writing                  |                          |                                                                                                                                                                                                                        |
-| Call centre workers  | @brynjolfsson2023callcenter      | +15% issues/hour         | “Access to AI assistance increases worker productivity, as measured by issues resolved per hour, by 15% on average, with substantial heterogeneity across workers.”                                                    |
-| Translators          | @merali2024scaling               | +24% translations/minute | “With access to any AI model [time taken] was reduced ... [by] 31.1%.” (=+24% translations/minute)                                                                                                                     |
-| Entrepreneurs        | @otis2024entrepreneurs           | no statistically significant effect                         |                                                                                                                                                                                                                        |
-| Legal tasks          | @choi2023legal                   | +12%--+32% tasks/minute                         |                                                                                                                                                                                                                        |
-| Radiology            | @agarwal2024radiology            | +0.2%                    |                                                                                                                                                                                                                        |
-|                      |                                  |                          |                                                                                                                                                                                                                        |
-
+| Domain               | Reference(s)                     | Productivity                        | Quote                                                                                                                                                                                                                  |
+| -------------------- | -------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Software engineering | @cui2024software                 |                                     |                                                                                                                                                                                                                        |
+|                      | @hoffmann2025generative |                                     |                                                                                                                                                                                                                        |
+|                      | @gao2024github                   | +9% pull requests/day               | “Accenture developers saw an 8.69% increase in pull requests … a 15% increase to the pull request merge rate … an 84% increase in successful builds … developers accepted around 30% of GitHub Copilot’s suggestions.” |
+|                      | @peng2023developerproductivity   | +126% tasks/minute                  | "The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group." (implies +126% tasks/minute)                                                                     |
+|                      | @becker2025developerproductivity | -16% tasks/minute                   | "Allowing AI actually increases completion time by 19%—AI tooling slowed developers down." (implies -16% tasks/minute)                                                                                                 |
+| Consultants          | @dellacqua2023consultants        |                                     |                                                                                                                                                                                                                        |
+| Writing tasks        | @noy2023writing                  |                                     |                                                                                                                                                                                                                        |
+| Call centre workers  | @brynjolfsson2023callcenter      | +15% issues/hour                    | “Access to AI assistance increases worker productivity, as measured by issues resolved per hour, by 15% on average, with substantial heterogeneity across workers.”                                                    |
+| Translators          | @merali2024scaling               | +24% translations/minute            | “With access to any AI model [time taken] was reduced ... [by] 31.1%.” (=+24% translations/minute)                                                                                                                     |
+| Entrepreneurs        | @otis2024entrepreneurs           | no statistically significant effect |                                                                                                                                                                                                                        |
+| Legal tasks          | @choi2023legal                   | +12%--+32% tasks/minute             |                                                                                                                                                                                                                        |
+| Radiology            | @agarwal2024radiology            | +0.2%                               |                                                                                                                                                                                                                        |
+|                      |                                  |                                     |                                                                                                                                                                                                                        |
 :::
 
 
