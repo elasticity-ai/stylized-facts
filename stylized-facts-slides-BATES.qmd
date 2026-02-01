@@ -80,25 +80,29 @@ METR founded in 2022.
 : Founded by ex-OpenAI researchers, building evals & understanding on how to detect worrying AI capabilities, especially ability for AI to accelerate AI research. -->
 
 
-#  On My Mind #1
+#  Bay Area Tech-Econ Seminars
 
-We're running out of runway.
-: Time horizon is running out of long tasks.
+Twenty six seminars since 2022
+: 1,000 people on mailing list.
 
-![](images/2026-01-29-15-34-46.png)
+| Year | Spring Seminars | Fall Seminars |
+| ---- | :-------------: | :-----------: |
+| 2022 |        0        |       4       |
+| 2023 |        5        |       3       |
+| 2024 |        5        |       2       |
+| 2025 |        3        |       4       |
+      
+Organizers
+:   - Stacy Carlson (Amazon)
+    - Tom Cunningham (METR)
+    - Andrew Hobbs (USF)
+    - Guido Imbens (Stanford)
+    - Peter Lorentzen (USF)
+    - Rose Tan (Stanford)
+    - Sean Taylor (OpenAI)
+    
+: Thanks: Laura Ventura, Elizabeth Kuhn Wilsey.
 
-We're running out of runway.
-: Uplift experiment doesn't work when uplift is large.
-
-#  On My Mind #2
-
-Old LLMs.
-: .
-
-![](images/2026-01-29-15-38-13.png)
-
-New LLMs.
-: .
 
 #  Forecasts of AI & Growth, 2025-2035
 
