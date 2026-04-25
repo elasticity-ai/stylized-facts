@@ -4,7 +4,7 @@ date: today
 toc: true
 number-sections: true
 toc-location: body
-note-location: margin
+reference-location: document
 toc-depth: 2
 engine: knitr
 execute:
