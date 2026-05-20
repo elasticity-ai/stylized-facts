@@ -18,8 +18,37 @@ editor:
 bibliography: stylized-facts.bib
 #latex-auto-mk: false # this stops it from updating packages with tlmgr every compile
 format-links: false
-format:
 #typst: default
+format:
+   pdf:
+      #fontfamily: libertinus
+      include-in-header:
+         - text: |
+            %\usepackage{bm}
+            \usepackage{tikz}
+            \usepackage[all,2cell]{xy}
+            \UseAllTwocells
+            \usepackage{sectsty}
+            \usepackage{sidenotes}
+            \renewcommand{\marginnote}[2][]{\sidenotetext[#1]{\parbox{\marginparwidth}{#2}}}
+            %\renewcommand{\marginnote}[2][]{\@sidenotes@placemarginal{0}{\textsuperscript{1}~#2}}
+            \usepackage{enumitem}
+            \setlist[description]{style=multiline,leftmargin=5cm,itemsep=20pt}
+            \usepackage{xcolor}
+            \sectionfont{\color{red}\sectionrule{0pt}{0pt}{-4pt}{1pt}}
+            \subsectionfont{\color{red}\sectionrule{0pt}{0pt}{-4pt}{.1pt}}
+            \newcommand{\ut}[2]{\underbrace{#1}_{\text{#2}}}
+            \newcommand{\utt}[3]{\underbrace{#1}_{\substack{\text{#2}\\\text{#3}}}}
+            \newcommand{\bm}[1]{\boldsymbol{#1}}
+            \makeatletter
+            \renewcommand{\@maketitle}{
+              \begin{center}
+                {\LARGE\@title\par}
+                \vskip 1em
+                {\large\@author\hspace{1em}|\hspace{1em}\@date\par}
+              \end{center}
+            }
+            \makeatother
    html:
       other-formats: false
       lightbox: auto    # ← enables click-to-zoom for figures/images
@@ -52,35 +81,7 @@ format:
                dt { grid-column-start: 1; font-weight: bold; margin-right: 10px;  }
                dd { grid-column-start: 2; }
             </style>
-   pdf:
-      #fontfamily: libertinus
-      include-in-header:
-         - text: |
-            %\usepackage{bm}
-            \usepackage{tikz}
-            \usepackage[all,2cell]{xy}
-            \UseAllTwocells
-            \usepackage{sectsty}
-            \usepackage{sidenotes}
-            \renewcommand{\marginnote}[2][]{\sidenotetext[#1]{\parbox{\marginparwidth}{#2}}}
-            %\renewcommand{\marginnote}[2][]{\@sidenotes@placemarginal{0}{\textsuperscript{1}~#2}}
-            \usepackage{enumitem}
-            \setlist[description]{style=multiline,leftmargin=5cm,itemsep=20pt}
-            \usepackage{xcolor}
-            \sectionfont{\color{red}\sectionrule{0pt}{0pt}{-4pt}{1pt}}
-            \subsectionfont{\color{red}\sectionrule{0pt}{0pt}{-4pt}{.1pt}}
-            \newcommand{\ut}[2]{\underbrace{#1}_{\text{#2}}}
-            \newcommand{\utt}[3]{\underbrace{#1}_{\substack{\text{#2}\\\text{#3}}}}
-            \newcommand{\bm}[1]{\boldsymbol{#1}}
-            \makeatletter
-            \renewcommand{\@maketitle}{
-              \begin{center}
-                {\LARGE\@title\par}
-                \vskip 1em
-                {\large\@author\hspace{1em}|\hspace{1em}\@date\par}
-              \end{center}
-            }
-            \makeatother
+   
 ---
 
 <!-- USEFUL THINGS
@@ -528,8 +529,11 @@ Frontier models that surpass previous models on one benchmark usually outperform
 
 : @kipnis2025metabench find a small set of questions which are highly predictive of overall model scores, and that "a single underlying common factor whose Spearman correlation with the total score is r= 0.93."
 
+: @zhang2025trainbeforetest find that differences in model abilities across benchmarks decline substantially when the models are given a small fine-tuning on the specific benchmark (train-before-test).
 
+    > "train-before-test reduces the model-score matrix to essentially rank one, indicating that model potential is dominated by one latent factor, uncovered by train-before-test."
 
+    They also find that the latent factor is very highly correlated with pretraining perplexity.^[They also compare few-shot evaluation: "The overall average Kendall’s τ is 0.52 for direct evaluation (0-shot), 0.61 for direct evaluation (5-shot), and 0.76 for train-before-test (0-shot)."]
 
 ## The best predictor of benchmark performance is training compute.
 
