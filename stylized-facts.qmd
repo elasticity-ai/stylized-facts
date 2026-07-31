@@ -387,7 +387,7 @@ Here we list a variety of abilities that LLMs lack, which might explain the bott
 |                          | GPQA[^GPQA]                  |       36%        |    93%    |        |
 | Information-gathering    | GAIA[^GAIA]                  |       15%        |    88%    |        |
 | Accuracy / Hallucination | SimpleQA Verified[^SimpleQA] |       ~30%       |    72%    |        |
-| Long context             | Needle[^needle]              |    50% @ 128K    | 99.7% @1M |        |
+| Long context             | Needle[^needle]              |    50% @ 128K    | 99.7% @ 1M |        |
 | Multimodal inputs        | MMMU-Pro [^MMMU]             |       ~35%       |    81%    |  85%   |
 | In-context learning      | ARC-AGI[^ARCAGI]             |        7%        |    88%    | 77-98% |
 |                          | ARC-AGI 2[^ARCAGI]           |       ~0%        |    45%    |  98%   |

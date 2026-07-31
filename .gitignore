@@ -5,6 +5,7 @@
 *_files/
 .quarto/
 *.quarto_ipynb
+*.rmarkdown
 
 # Rendered HTML (regenerate with `quarto render`)
 *.html

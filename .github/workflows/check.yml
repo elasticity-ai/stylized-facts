@@ -30,5 +30,8 @@ jobs:
       - name: Bibliography formatting is normalized
         run: python3 tools/bib_normalize.py --check
 
+      - name: arXiv ids match their bib entries
+        run: python3 tools/arxiv_check.py --check
+
       - name: Document checks
         run: python3 tools/qmd_validate.py --all

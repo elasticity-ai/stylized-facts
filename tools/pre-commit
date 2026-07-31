@@ -21,5 +21,6 @@ if git diff --cached --name-only | grep -qE '\.(qmd|bib)$|^tools/|^references/';
         exit 1
     }
     python3 "tools/stylized-facts.bib.tests.py" --check
+    python3 tools/arxiv_check.py --check
     python3 tools/qmd_validate.py --all
 fi

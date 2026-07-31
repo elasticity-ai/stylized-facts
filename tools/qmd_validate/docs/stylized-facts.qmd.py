@@ -82,6 +82,34 @@ def check_image_attribution(ctx: ValidationContext) -> TestResult:
     )
 
 
+def check_no_accidental_citations(ctx: ValidationContext) -> TestResult:
+    """No stray `@token` that pandoc will try to resolve as a citation.
+
+    The citekey check only looks at keys starting with a letter, because that
+    is what a real citekey looks like. Pandoc is less fussy, so prose like
+
+        | Long context | Needle | 50% @ 128K | 99.7% @1M |
+
+    makes it hunt for a reference called `1M` and emit
+    "Citeproc: citation 1M not found" — a warning buried in render output that
+    nothing was watching. The neighbouring cell writes "@ 128K" with a space
+    and is fine, which is the fix.
+    """
+    text = strip_noise(ctx.qmd_text)
+    text = re.sub(r"\[[^\]]*\]\([^)]*\)", " ", text)  # drop link targets (emails, urls)
+    hits = []
+    for m in re.finditer(r"(?<![\w@/.])@(\d[\w:-]*)", text):
+        line = text.count("\n", 0, m.start()) + 1
+        hits.append(f"L{line}: @{m.group(1)}")
+    return TestResult(
+        name="No accidental @citations in prose",
+        ok=not hits,
+        category="internal",
+        detail="; ".join(hits[:6]) or "(clean)",
+        meta={"hits": hits},
+    )
+
+
 def check_no_build_residue(ctx: ValidationContext) -> TestResult:
     """No merge-conflict markers or stray rendering artifacts in the source.
 
@@ -228,6 +256,7 @@ def doc_checks():
         check_numeric_claims,
         check_images_exist,
         check_image_attribution,
+        check_no_accidental_citations,
         check_no_build_residue,
         check_todos_are_hidden,
         check_archive_coverage,

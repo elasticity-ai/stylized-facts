@@ -74,6 +74,8 @@ checked against sources offline. Built by `tools/fetch_papers.py`.
 
 - `references/text/<citekey>.txt` — plaintext, **committed**, the grep target
 - `references/manifest.csv` — per-key fetch status, **committed**
+- `references/arxiv-metadata.csv` — cached arXiv titles, **committed**, so
+  `make arxiv` runs offline. Refresh with `make arxiv-refresh`.
 - `references/pdf/<citekey>.pdf` — **git-ignored** (~200 MB)
 
 **Hard rule: checks read `references/text/` only, never `references/pdf/`.**
@@ -86,8 +88,9 @@ by hand, and the `pdftotext` caveats that shape how quote matching works.
 ## Tests
 
 ```bash
-make check          # the gate: bib conventions + document checks
+make check          # the gate: bib conventions + arXiv ids + document checks
 make bib            # normalize the .bib, then test it
+make arxiv          # verify arXiv ids point at the paper each entry claims
 make validate       # document checks only
 make render         # quarto render stylized-facts.qmd
 ```
@@ -109,6 +112,7 @@ CI runs it too (`.github/workflows/check.yml`), with no network and no PDFs.
 | Check | Catches |
 |---|---|
 | Citekeys resolve | A citation with no bibliography entry |
+| **arXiv ids match their entry** | A citation pointing at a different paper than it names |
 | Bibliography tests | Duplicate keys, malformed fields, missing years, arXiv URL form |
 | **Quotes appear in the cited source** | A quote that has drifted from what the paper actually says |
 | Numeric claims traced to source | A figure edited in the prose but not in the source, or vice versa |
@@ -139,10 +143,24 @@ To validate a new document, create
 
 Current, and reported by the tooling rather than hidden:
 
+- **Six bibliography entries point at the wrong arXiv paper**, two of them at
+  entirely unrelated work (`liu2024mathvista` -> "Credal Learning Theory";
+  `qiu2023videomme` -> a paper on covalent inhibitors). A seventh,
+  `jahani2024earning`, has an arXiv id that does not exist. Run `make arxiv`
+  for the list with both titles side by side.
+
+  All but one are uncited placeholder entries, and they share a signature —
+  plausible author/title/id combinations that are individually wrong — so they
+  are most likely unverified generated citations. Deciding whether to correct
+  the metadata or delete the entries is a judgement call, so they are left as
+  they are and reported.
+
 - **Two quotes do not match their source.** `make validate` names them with
   line numbers. Both look like version drift (a working paper revised after
   being quoted) rather than transcription error, but both need a human to
-  decide the fix. This is why `make check` currently exits non-zero.
+  decide the fix.
+
+These two are why `make check` currently exits non-zero.
 - **18 bibliography entries have no locator** and 19 are cited by no document.
   Advisory; see the `INFO` lines from `make bib`.
 - **37 of 115 works could not be fetched automatically** — mostly paywalled
