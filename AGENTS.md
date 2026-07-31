@@ -57,65 +57,112 @@ Rendering writes a lot of intermediate junk (`tikz*.log`, `*_cache/`, `*_files/`
   machine-generated PASS/FAIL block into the top of the `.bib` itself, so the
   current state is visible in the file you are already reading.
 
+
+Fix the mechanical parts automatically rather than by hand:
+
+```bash
+python3 tools/bib_normalize.py
+```
+
+It adds the trailing commas and canonicalizes arXiv URLs, and is idempotent.
+`--check` reports without writing.
+
 ## Local paper archive (`references/`)
 
-*Not yet built — see the plan below.*
+Local copies of the cited works, keyed by citekey, so quotes and claims can be
+checked against sources offline. Built by `tools/fetch_papers.py`.
 
-Local copies of every cited paper, keyed by citekey, so claims and quotes can be
-checked against sources offline:
+- `references/text/<citekey>.txt` — plaintext, **committed**, the grep target
+- `references/manifest.csv` — per-key fetch status, **committed**
+- `references/pdf/<citekey>.pdf` — **git-ignored** (~200 MB)
 
-- `references/pdf/<citekey>.pdf` — the PDF
-- `references/text/<citekey>.txt` — plaintext (`pdftotext`), the grep target
-- `references/manifest.csv` — one row per key with fetch status
+**Hard rule: checks read `references/text/` only, never `references/pdf/`.**
+The PDFs are absent in CI, so a check touching them would pass locally and fail
+there.
 
-**Design constraint:** every validation check must run from `references/text/`
-alone. The PDFs may be absent (git-lfs not pulled, or a CI checkout), so nothing
-in the test suite may depend on them.
+See [references/README.md](references/README.md) for coverage, how to fill a gap
+by hand, and the `pdftotext` caveats that shape how quote matching works.
 
 ## Tests
 
-*Not yet built — see the plan below.*
-
-```sh
-python3 tools/stylized-facts.bib.tests.py   # bib conventions; updates the block in the .bib
-python3 tools/qmd_validate.py --all         # document checks
-python3 tools/qmd_validate.py --all --json  # same, machine-readable
+```bash
+make check          # the gate: bib conventions + document checks
+make bib            # normalize the .bib, then test it
+make validate       # document checks only
+make render         # quarto render stylized-facts.qmd
 ```
 
-Run both before finalizing any edit to the paper or the bibliography.
+Run `make check` before finalizing any edit to the paper or the bibliography.
+A pre-commit hook runs the same thing:
 
-## Planned work (agent-maintainability)
+```bash
+ln -sf ../../tools/pre-commit .git/hooks/pre-commit
+```
 
-Ported from the patterns in `~/tecunningham.github.io` (`tools/fetch_papers.py`,
-`tools/ai.bib.tests.py`, `tools/qmd_validate/`).
+CI runs it too (`.github/workflows/check.yml`), with no network and no PDFs.
 
-- [ ] **Phase 0 — hygiene.** Restore a real `.gitignore` (the repo currently has a
-      `.gitignore.html` containing `*.html`, apparently a rename accident, and so
-      tracks 79 `tikz*.log` files plus caches and `.DS_Store`). Resolve the
-      committed merge conflict in `stylized-facts.html`. Delete stale copies.
-      Write this file. ← in progress
-- [ ] **Phase 1 — `references/`.** Port `fetch_papers.py`; resolve and archive all
-      115 cited papers. Run locally, not in the cloud (see below).
-- [ ] **Phase 2 — bib tests.** Port `ai.bib.tests.py`.
-- [ ] **Phase 3 — document validator.** Port `qmd_validate/`; write a plugin for
-      `stylized-facts.qmd` covering quote verification against the local archive,
-      image provenance, and a claims registry.
-- [ ] **Phase 4 — wire up.** `make check`, pre-commit hook, CI.
+### What the checks cover
 
-### Where to run what
+`tools/qmd_validate.py` runs per-document plugins from
+`tools/qmd_validate/docs/<document>.qmd.py`. The plugin for the paper checks:
 
-Phase 1 (fetching papers) should be run **locally**. Publisher sites rate-limit
-and captcha datacenter IP ranges much more aggressively than residential ones,
-roughly a quarter of the bibliography will need hand-downloading through a
-browser, and `pdftotext` and Quarto are already installed on the local machine.
+| Check | Catches |
+|---|---|
+| Citekeys resolve | A citation with no bibliography entry |
+| Bibliography tests | Duplicate keys, malformed fields, missing years, arXiv URL form |
+| **Quotes appear in the cited source** | A quote that has drifted from what the paper actually says |
+| Numeric claims traced to source | A figure edited in the prose but not in the source, or vice versa |
+| Images exist / attributions resolve | A missing figure, or a figure credited to a citekey that does not exist |
+| No merge-conflict markers | Build residue committed into the source |
+| No TODO in rendered prose | A working note escaping its `<!-- -->` into the circulated PDF |
+| Archive coverage | Informational: how much of the bibliography is checkable at all |
 
-Phases 2–4 are pure code with no network dependency and can be written anywhere.
+### Two tiers of failure
+
+Not every red result should block a commit, and a check that is always red
+stops being read. So:
+
+- **Correctness** failures block: a broken citekey, a quote absent from its
+  source, a missing image.
+- **Coverage** gaps report but do not block, shown as `INFO`: how many entries
+  carry a locator, how many are still cited by some document. These close by
+  doing research, not by fixing a bug.
+
+### Adding a check
+
+Add a function taking a `ValidationContext` and returning a `TestResult` to
+`tools/qmd_validate/docs/stylized-facts.qmd.py`, and list it in `doc_checks()`.
+To validate a new document, create
+`tools/qmd_validate/docs/<name>.qmd.py` — the runner discovers it.
+
+## Known gaps
+
+Current, and reported by the tooling rather than hidden:
+
+- **Two quotes do not match their source.** `make validate` names them with
+  line numbers. Both look like version drift (a working paper revised after
+  being quoted) rather than transcription error, but both need a human to
+  decide the fix. This is why `make check` currently exits non-zero.
+- **18 bibliography entries have no locator** and 19 are cited by no document.
+  Advisory; see the `INFO` lines from `make bib`.
+- **37 of 115 works could not be fetched automatically** — mostly paywalled
+  economics journals and vendor pricing pages. Listed in
+  `references/manifest.csv` with `status = manual_needed`.
+
+## Where to run what
+
+Fetching papers (`make fetch`) belongs on a **local machine**. Publishers
+rate-limit and captcha datacenter IP ranges far more aggressively than
+residential ones, a good fraction of the bibliography needs hand-downloading
+through a logged-in browser, and `pdftotext` and Quarto are already installed
+locally. Everything else is pure Python with no network and runs anywhere.
 
 ## Open questions
 
-These are undocumented and should be resolved by whoever knows:
+Undocumented; resolve with whoever knows:
 
-- What is `frontier.md`? Is it live input to the paper, or an archive?
-- Are `stylized-facts.pdf` / `stylized-facts-slides.pdf` meant to stay committed?
-  They are the bulk of the 42 MB `.git`.
+- What is `frontier.md`? Live input to the paper, or an archive?
+- Should `references/pdf/` be committed via git-lfs rather than ignored?
+  It is ~200 MB, which fits GitHub's 1 GiB free LFS tier but consumes
+  bandwidth quota on every clone.
 - `stylized-facts-slides-BATES.qmd` — which talk, and is it still needed?

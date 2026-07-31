@@ -1,0 +1,116 @@
+key,doi,resolver,pdf_url,oa_status,pdf,pdf_bytes,txt,txt_chars,status,note
+acemoglu2021ai,,,,,,0,,0,manual_needed,host= url=
+anthropic_pricing_2025,,,,,,0,,0,manual_needed,host= url=
+baily2023machines,,,,,,0,,0,manual_needed,host=brookings.edu url=https://www.brookings.edu/articles/machines-of-mind-the-case-for-an-ai-powered-productivity-boom/; jina text rejected (title bigram overlap only 40%)
+choi2023legal,10.2139/ssrn.4626276,,,,,0,,0,manual_needed,host=dx.doi.org url=http://dx.doi.org/10.2139/ssrn.4626276
+chui2023economic,,,,,,0,,0,manual_needed,host=mckinsey.com url=https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier
+collis2025wta,,,,,,0,,0,manual_needed,host=wsj.com url=https://www.wsj.com/opinion/ais-overlooked-97-billion-contribution-to-the-economy-users-service-da6e8f55
+cui2024software,10.2139/ssrn.4945566,,,,,0,,0,manual_needed,host=papers.ssrn.com url=https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4945566
+dreyfuss2025human,,,,,,0,,0,manual_needed,host=arxiv.org url=https://arxiv.org/abs/2406.05408; jina text rejected (title bigram overlap only 20%); arxiv:arxiv.org rejected (title bigram overlap only 40%)
+ghosh2022mysteryblocksworld,,,,,,0,,0,manual_needed,"host=arxiv.org url=https://arxiv.org/abs/2206.10498; jina text rejected (title bigram overlap 0%, no author surname found); arxiv:arxiv.org rejected (title bigram overlap only 20%)"
+haupt2025position,,,,,,0,,0,manual_needed,host=openreview.net url=https://openreview.net/forum?id=LkdH35003E
+heitmann2025trajectories,,,,,,0,,0,manual_needed,host=cdn.prod.website-files.com url=https://cdn.prod.website-files.com/663bd486c5e4c81588db7a1d/68fb86aa2c3b1b7ea6251cc1_Understanding%20AI%20Trajectories%20(24_10%20update).pdf; jina text rejected (unusable (captcha/block/search page)); direct:cdn.prod.website-files.com rejected (unusable (captcha/block/search page))
+huber2025llmsblooms,,,,,,0,,0,manual_needed,host=aclanthology.org url=https://aclanthology.org/2025.coling-main.350/; jina text rejected (unusable (captcha/block/search page))
+humlum2025large,,,,,,0,,0,manual_needed,host= url=
+ilic2024positive,10.1016/j.intell.2024.101858,,,,,0,,0,manual_needed,host=dx.doi.org url=http://dx.doi.org/10.1016/j.intell.2024.101858; jina text rejected (unusable (captcha/block/search page))
+jahani2024earning,,,,,,0,,0,manual_needed,"host=arxiv.org url=https://arxiv.org/abs/2401.7339; jina text rejected (title bigram overlap 33%, no author surname found); arxiv:arxiv.org rejected (title bigram overlap 33%, no author surname found)"
+kimi2025openagentic,,,,,,0,,0,manual_needed,host=arxiv.org url=https://arxiv.org/abs/2507.20534; jina text rejected (title bigram overlap only 33%); arxiv:arxiv.org rejected (title bigram overlap only 33%)
+kipnis2025metabench,,,,,,0,,0,manual_needed,host=openreview.net url=https://openreview.net/forum?id=4T33izzFpK
+lambdalabs_gpu_pricing,,,,,,0,,0,manual_needed,host= url=
+liu2024mathvista,,,,,,0,,0,manual_needed,"host=arxiv.org url=https://arxiv.org/abs/2402.00957; jina text rejected (title bigram overlap 0%, no author surname found); arxiv:arxiv.org rejected (title bigram overlap only 0%)"
+maimon2025iq,,,,,,0,,0,manual_needed,host= url=
+maslej2025aiindex,,,,,,0,,0,manual_needed,host= url=
+metr2024capability,,,,,,0,,0,manual_needed,host= url=
+metr2025gpt5evaluation,,,,,,0,,0,manual_needed,host= url=
+moll224agged,,,,,,0,,0,manual_needed,host= url=
+noy2023writing,10.1126/science.adh2586,,,,,0,,0,manual_needed,host= url=
+openai2025apipricing,,,,,,0,,0,manual_needed,host= url=
+ord2025halflife,,,,,,0,,0,manual_needed,host=tobyord.com url=https://www.tobyord.com/writing/half-life; jina text rejected (title bigram overlap only 20%)
+otis2024entrepreneurs,10.2139/ssrn.4671369,,,,,0,,0,manual_needed,host=ssrn.com url=https://ssrn.com/abstract=4671369
+phan2025textquests,,,,,,0,,0,manual_needed,host=arxiv.org url=https://arxiv.org/abs/2507.23701; jina text rejected (title bigram overlap only 14%); arxiv:arxiv.org rejected (title bigram overlap only 14%)
+qiu2023videomme,,,,,,0,,0,manual_needed,"host=arxiv.org url=https://arxiv.org/abs/2307.09671; jina text rejected (title bigram overlap 0%, no author surname found); arxiv:arxiv.org rejected (title bigram overlap only 0%)"
+ren2023expertqa,,,,,,0,,0,manual_needed,host=arxiv.org url=https://arxiv.org/abs/2309.07852; jina text rejected (title bigram overlap only 25%); arxiv:arxiv.org rejected (title bigram overlap only 38%)
+sun2023gpqa,,,,,,0,,0,manual_needed,"host=arxiv.org url=https://arxiv.org/abs/2311.12022; jina text rejected (title bigram overlap 20%, no author surname found); arxiv:arxiv.org rejected (title bigram overlap only 40%)"
+svanberg2024beyond,,,,,,0,,0,manual_needed,host= url=
+toner2025takingjaggedness,,,,,,0,,0,manual_needed,host= url=
+vonwerra2025jaggeddata,,,,,,0,,0,manual_needed,host=huggingface.co url=https://huggingface.co/spaces/lvwerra/jagged-data-frontier
+wang2024simpleqa,,,,,,0,,0,manual_needed,"host=arxiv.org url=https://arxiv.org/abs/2411.04368; jina text rejected (title bigram overlap 0%, no author surname found); arxiv:arxiv.org rejected (title bigram overlap only 0%)"
+zhou224arger,,,,,,0,,0,manual_needed,host= url=
+acemoglu2024simple,,,,,acemoglu2024simple.pdf,819848,acemoglu2024simple.txt,147750,ok,host= url=
+agarwal2024radiology,,cached,,,agarwal2024radiology.pdf,6286741,agarwal2024radiology.txt,225067,ok,skip-existing
+aghion2024aigrowth,,direct,,oa,aghion2024aigrowth.pdf,1873871,aghion2024aigrowth.txt,29387,ok,
+artificialanalysis_trends,,openalex-title,,oa,artificialanalysis_trends.pdf,1303760,artificialanalysis_trends.txt,32690,ok,
+backlund2025vending,,arxiv,,oa,backlund2025vending.pdf,7449988,backlund2025vending.txt,47492,ok,
+bai2024longbench,,arxiv,,oa,bai2024longbench.pdf,9951437,bai2024longbench.txt,87621,ok,
+bai2025longbenchv2deeperunderstanding,,arxiv,,oa,bai2025longbenchv2deeperunderstanding.pdf,9951437,bai2025longbenchv2deeperunderstanding.txt,87621,ok,
+balachandran2025inference,,,,,balachandran2025inference.pdf,4277586,balachandran2025inference.txt,105459,ok,host= url=
+becker2025developerproductivity,,arxiv,,oa,becker2025developerproductivity.pdf,5668559,becker2025developerproductivity.txt,146208,ok,
+beeching2024scalingtesttimecompute,,openalex-title,,oa,beeching2024scalingtesttimecompute.pdf,1313938,beeching2024scalingtesttimecompute.txt,46951,ok,
+bick2024rapid,,,,,bick2024rapid.pdf,576317,bick2024rapid.txt,83617,ok,host= url=
+brynjolfsson2023callcenter,,arxiv,,oa,brynjolfsson2023callcenter.pdf,3374702,brynjolfsson2023callcenter.txt,203370,ok,
+brynjolfsson2023turing,,,,,brynjolfsson2023turing.pdf,447016,brynjolfsson2023turing.txt,42734,ok,host= url=
+burnell2023reveal,,arxiv,,oa,burnell2023reveal.pdf,546383,burnell2023reveal.txt,47625,ok,
+chen2022chartqa,,arxiv,,oa,chen2022chartqa.pdf,2938574,chen2022chartqa.txt,61732,ok,
+chollet2019measureintelligence,,arxiv,,oa,chollet2019measureintelligence.pdf,1280262,chollet2019measureintelligence.txt,179375,ok,
+choshen2024hitchhiker,,,,,choshen2024hitchhiker.pdf,1105140,choshen2024hitchhiker.txt,69545,ok,host= url=
+cui2023agieval,,arxiv,,oa,cui2023agieval.pdf,561329,cui2023agieval.txt,83667,ok,
+eloundou2023gpts,,,,,eloundou2023gpts.pdf,2119311,eloundou2023gpts.txt,101292,ok,host= url=
+hendrycks2025agidefinition,,direct,,oa,hendrycks2025agidefinition.pdf,17114562,hendrycks2025agidefinition.txt,144177,ok,
+hoffmann2022computeoptimal,,arxiv,,oa,hoffmann2022computeoptimal.pdf,6004349,hoffmann2022computeoptimal.txt,99738,ok,
+hoffmann2025generative,,,,,hoffmann2025generative.pdf,1357002,hoffmann2025generative.txt,120491,ok,host= url=
+hu2025lmgamebench,,arxiv,,oa,hu2025lmgamebench.pdf,8014675,hu2025lmgamebench.txt,122770,ok,
+ide2024artificialintelligenceknowledgeeconomy,,arxiv,,oa,ide2024artificialintelligenceknowledgeeconomy.pdf,742748,ide2024artificialintelligenceknowledgeeconomy.txt,106265,ok,
+jones2025aiinrnd,10.3386/w34312,nber,,oa,jones2025aiinrnd.pdf,821174,jones2025aiinrnd.txt,75269,ok,
+kadavath2022know,,arxiv,,oa,kadavath2022know.pdf,2616253,kadavath2022know.txt,116938,ok,
+kaplan2020scalinglaws,,arxiv,,oa,kaplan2020scalinglaws.pdf,2493004,kaplan2020scalinglaws.txt,90835,ok,
+korinek2024scenarios,,arxiv,,oa,korinek2024scenarios.pdf,2561335,korinek2024scenarios.txt,101162,ok,
+kwa2025longtasks,,arxiv,,oa,kwa2025longtasks.pdf,6195770,kwa2025longtasks.txt,127517,ok,
+kwa2025measuring,,arxiv,,oa,kwa2025measuring.pdf,6195770,kwa2025measuring.txt,127517,ok,
+legg2007definitions,,arxiv,,oa,legg2007definitions.pdf,128127,legg2007definitions.txt,24802,ok,
+legg2007universal,10.1007/s11023-007-9079-x,openalex-title,,oa,legg2007universal.pdf,504123,legg2007universal.txt,159629,ok,
+li2023mmmu,,arxiv,,oa,li2023mmmu.pdf,16874947,li2023mmmu.txt,273887,ok,
+li2025perturbation,,arxiv,,oa,li2025perturbation.pdf,998010,li2025perturbation.txt,86996,ok,
+merali2024scaling,,arxiv,,oa,merali2024scaling.pdf,153864,merali2024scaling.txt,38268,ok,
+min2023factscore,,arxiv,,oa,min2023factscore.pdf,2511276,min2023factscore.txt,97367,ok,
+mirzadeh2024gsm,,arxiv,,oa,mirzadeh2024gsm.pdf,1691998,mirzadeh2024gsm.txt,89619,ok,
+miserendino2025swelancer,,arxiv,,oa,miserendino2025swelancer.pdf,3265247,miserendino2025swelancer.txt,104314,ok,
+morris2023levels,,,,,morris2023levels.pdf,295341,morris2023levels.txt,70249,ok,host= url=
+openai2025o3o4systemcard,,direct,,oa,openai2025o3o4systemcard.pdf,6747125,openai2025o3o4systemcard.txt,66883,ok,
+owen2024predictable,,arxiv,,oa,owen2024predictable.pdf,950351,owen2024predictable.txt,50602,ok,
+payne2025strategic,,arxiv,,oa,payne2025strategic.pdf,4349036,payne2025strategic.txt,101352,ok,
+peng2023developerproductivity,,arxiv,,oa,peng2023developerproductivity.pdf,1988587,peng2023developerproductivity.txt,20625,ok,
+polo2025sloth,,arxiv,,oa,polo2025sloth.pdf,4231266,polo2025sloth.txt,137209,ok,
+renze2024effect,,arxiv,,oa,renze2024effect.pdf,479315,renze2024effect.txt,40228,ok,
+ruan2024observational,,arxiv,,oa,ruan2024observational.pdf,4369337,ruan2024observational.txt,195606,ok,
+song2024good,,arxiv,,oa,song2024good.pdf,408890,song2024good.txt,39156,ok,
+spangher2024generalized,,arxiv,,oa,spangher2024generalized.pdf,1651376,spangher2024generalized.txt,31168,ok,
+trammell2025workflows,,direct,,oa,trammell2025workflows.pdf,539910,trammell2025workflows.txt,45511,ok,
+vaccaro2024humanai,10.1038/s41562-024-02024-1,unpaywall,,oa,vaccaro2024humanai.pdf,3103035,vaccaro2024humanai.txt,67664,ok,
+vafa2024humangeneralization,,arxiv,,oa,vafa2024humangeneralization.pdf,869083,vafa2024humangeneralization.txt,76332,ok,
+vafa2024worldmodel,,direct,,oa,vafa2024worldmodel.pdf,11260313,vafa2024worldmodel.txt,106575,ok,
+wang2023selfconsistency,,arxiv,,oa,wang2023selfconsistency.pdf,10505941,wang2023selfconsistency.txt,91812,ok,
+wei2024longformfactuality,,arxiv,,oa,wei2024longformfactuality.pdf,983383,wei2024longformfactuality.txt,223907,ok,
+wu2025inferencescaling,,arxiv,,oa,wu2025inferencescaling.pdf,1648328,wu2025inferencescaling.txt,67687,ok,
+xin2024deepseekprover,,arxiv,,oa,xin2024deepseekprover.pdf,601408,xin2024deepseekprover.txt,49865,ok,
+zhang2025trainbeforetest,10.48550/arXiv.2507.05195,arxiv,,oa,zhang2025trainbeforetest.pdf,927797,zhang2025trainbeforetest.txt,90683,ok,
+zhou2024reliable,10.1038/s41586-024-07930-y,unpaywall,,oa,zhou2024reliable.pdf,8450815,zhou2024reliable.txt,80659,ok,
+zhou2025generalscales,,arxiv,,oa,zhou2025generalscales.pdf,4052874,zhou2025generalscales.txt,367628,ok,
+anthropic2025devday,,jina,,,,0,anthropic2025devday.txt,22426,text_only,host=wired.com
+aschenbrenner2024situational,,,,,,0,aschenbrenner2024situational.txt,312500,text_only,host= url=
+brynjolfsson2025gdpb,10.1257/mac.20210319,jina,,,,0,brynjolfsson2025gdpb.txt,1481,text_only,host=aeaweb.org
+coupe2025impact,None,jina,,,,0,coupe2025impact.txt,2617,text_only,host=ideas.repec.org
+dellacqua2023consultants,,jina,,,,0,dellacqua2023consultants.txt,2687,text_only,host=hbs.edu
+dorn2025temporal,,jina,,,,0,dorn2025temporal.txt,10579,text_only,host=apartresearch.com
+epoch2024optimallyallocating,,jina,,,,0,epoch2024optimallyallocating.txt,12252,text_only,host=epoch.ai
+epoch2025howfarcanreasoningmodelsscale,,jina,,,,0,epoch2025howfarcanreasoningmodelsscale.txt,19648,text_only,host=epoch.ai
+epoch2025llminferencepricetrends,,jina,,,,0,epoch2025llminferencepricetrends.txt,20051,text_only,host=epoch.ai
+gao2024github,,jina,,,,0,gao2024github.txt,12254,text_only,host=github.blog
+google2024codeai,,jina,,,,0,google2024codeai.txt,19925,text_only,host=fortune.com
+google2025alphaevolve,,jina,,,,0,google2025alphaevolve.txt,12964,text_only,host=deepmind.google
+hendrycks2021mmlu,,jina,,,,0,hendrycks2021mmlu.txt,8984,text_only,host=arxiv.org
+oecd2025aicapabilityindicatorsfullreport,10.1787/be745f04-en,jina,,,,0,oecd2025aicapabilityindicatorsfullreport.txt,7604,text_only,host=doi.org
+openai2024simpleqa,,jina,,,,0,openai2024simpleqa.txt,15095,text_only,host=openai.com
+smith2024,,jina,,,,0,smith2024.txt,8703,text_only,host=noahpinion.blog
+sutton2019bitter,,jina,,,,0,sutton2019bitter.txt,6843,text_only,host=incompleteideas.net
+trammell2023economic,,,,,,0,trammell2023economic.txt,79432,text_only,host= url=
+valmeekam2024llms,,jina,,,,0,valmeekam2024llms.txt,7816,text_only,host=arxiv.org

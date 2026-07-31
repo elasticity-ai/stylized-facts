@@ -1,0 +1,137 @@
+[Sprints](https://apartresearch.com/sprints)
+
+[Fellowships](https://apartresearch.com/fellowships)
+
+[Research](https://apartresearch.com/research)
+
+[Impact](https://apartresearch.com/impact)
+
+[Donate](https://apartresearch.com/donate)
+
+[Get Started](https://apartresearch.com/#get-started)
+
+Apr 28, 2025
+
+Read Project
+
+# The Early Economic Impacts of Transformative AI: A Focus on Temporal Coherence
+
+Félix Dorn, Xavier Ferrés, Elsie Jang, Valmik Nahata
+
+🏆 1st place by peer review
+
+We investigate the economic potential of Transformative AI, focusing on "temporal coherence"—the ability to maintain goal-directed behavior over time—as a critical, yet underexplored, factor in task automation. We argue that temporal coherence represents a significant bottleneck distinct from computational complexity. Using a Large Language Model to estimate the 'effective time' (a proxy for temporal coherence) needed for humans to complete remote O*NET tasks, the study reveals a non-linear link between AI coherence and automation potential. A key finding is that an 8-hour coherence capability could potentially automate around 80-84\% of the analyzed remote tasks.
+
+[Download](https://framerusercontent.com/assets/MCJFAJet0ox5tFt8TZq6AqZJI.pdf "Download File")
+
+[Download](https://apartresearch.com/project/the-early-economic-impacts-of-transformative-ai-a-focus-on-temporal-coherence-ipql)
+
+[Review Project](https://apartresearch.com/project/the-early-economic-impacts-of-transformative-ai-a-focus-on-temporal-coherence-ipql)
+
+[View Related Sprint](https://apartresearch.com/sprints/economics-of-transformative-ai-research-sprint-2025-04-25-to-2025-04-27)
+
+## Reviewer's Comments
+
+
+* Generally well written and well formatted
+
+* Good use of citations and references but would have benefited from conventional journal
+
+* While I might disagree with the fundamental premise, it was generally well-founded and sufficiently supported .
+
+* The greater problem was the logic of the approach:
+
+- Temporal coherence may certainly be a key factor , but little evidence was provided to support the claim that it is the most important factor for the economic impact of TAI. For example, Temporal coherence alone is of little value without the ability to act on it and leverage tools, and operate in novel environments (as well as appropriately delegate subtasks and coordinate with other agents).
+
+- Further the paper failed to recognize the multiple dimensions of temporal coherence, and moreover the safety risks that arise with long-term planning and coherence.
+
+* Lastly , the paper would have benefited significantly from discussing specific measurements of temporal coherance
+
+* Best paper ive reviewed so far by a significant margin. Well done.
+
+The idea of temporal coherence as a distinct axis of task difficulty is timely and well-framed. The authors do an excellent job grounding their work in current task-based economic models and recent literature on transformative AI. This creates a strong conceptual bridge to the new bottleneck they highlight. However, temporal coherence is a nuanced and novel concept, and it should be introduced more clearly and earlier in the abstract or introduction.
+
+To strengthen the foundation further, the paper would benefit from engagement with cognitive science or psychology literature that explores the types of cognitive capacities required to perform long-horizon tasks. This could help clarify how temporal coherence maps onto real-world human capabilities and limitations.
+
+The reliance on a single model and a relatively small validation set (45 tasks) raises some concerns about robustness. More detail is needed to establish why the manually annotated golden values are reliable enough to validate the model’s outputs. Perhaps the most critical shortcoming is that the system prompt asks the model to estimate only the “effective time” required for a human to complete the task, using that time as a proxy for coherence. This implicitly reduces temporal coherence to task duration, which appears to oversimplify the concept.
+
+One final suggestion is to include some modeling of the cost of labor versus the cost of automation. A task being technically automatable does not necessarily make it economically viable to automate. Factoring in cost dynamics would make the projections more grounded.
+
+I do like the idea behind the paper, it for sure worths more future work.
+
+I would say this project identifies a relevant problem and provides a good first-pass attempt at investigating it.
+
+While I agree that temporal coherence is a current bottleneck to task completion, it doesn't seem to me like the time to complete tasks is getting at the key restriction. Tasks of the same length can require very different levels of coherence to complete, so I would encourage thinking further about the specifics of what the bottleneck is. Memory? Adaptability?
+
+Validating the LLM estimates is important, but only 45 examples seems very low. Even with the time constraints of a hack-a-thon, additional examples would be very helpful for establishing that the LLM estimates can be trusted. The randomly drawn examples should also be chosen to be representative (e.g. randomly draw a couple tasks that the LLM says will take 10 years), to address concerns that LLMs may be systematically wrong about longer horizon tasks, tasks in particular industries, etc.
+
+It would be helpful to measure the consistency of the LLM against itself, if it's asked to label the same task multiple times how frequently does the label change?
+
+This project takes the progress of what time frame is coherent as a given, but it would be helpful to introduce uncertainty there and plot the relevant curves under different scenarios.
+
+**Cite this work**
+
+@misc {
+
+title={
+
+**(HckPrj) The Early Economic Impacts of Transformative AI: A Focus on Temporal Coherence**
+
+},
+
+author={
+
+Félix Dorn, Xavier Ferrés, Elsie Jang, Valmik Nahata
+
+},
+
+date={
+
+4/28/25
+
+},
+
+organization={Apart Research},
+
+note={Research submission to the research sprint hosted by Apart.},
+
+howpublished={https://apartresearch.com}
+
+}
+
+## Recent Projects
+
+[Apr 27, 2026 #### OliGraph: graph-based screening of large oligopools Existing synthesis screening tools cannot evaluate short oligonucleotide pools, whose overlapping fragments can be reassembled into regulated sequences via polymerase cycling assembly (PCA) yet fall below gene-length detection thresholds. We present OliGraph, an open-source tool that constructs a bi-directed overlap graph from an oligonucleotide pool and extracts contigs for downstream gene-length screening. An optional PCA mode retains only cross-strand overlaps consistent with PCA chemistry. We validated OliGraph in a blinded study across ten simulated pools (70–9,184 oligonucleotides, 30–300 bp) spanning four risk categories. BLAST screening of individual oligonucleotides failed to identify sequences of concern in most pools: three returned zero hits, and vector noise obscured true positives in the remainder. After OliGraph assembly, contig-level BLAST matched the longest assembled sequences (up to 1,905 bp) to sequences of concern at 97–100% identity. In one pool, assembly collapsed 1,634 individual BLAST results into 10 hits from a single contig, all assigned to the same source organism. PCA mode correctly distinguished assemblable from non-assemblable fragments within the same pool. Two pools with no assemblable structure yielded no contigs. OliGraph processed all pools in under 0.2 seconds, fast enough for real-time order screening and consistent with proposals to bring oligonucleotide orders within the scope of synthesis screening regulation. Read More](https://apartresearch.com/project/oligraph-graphbased-screening-of-large-oligopools-nkwt)[Apr 27, 2026 #### BioRT-Bench: A Multi-Attack Red-Teaming Benchmark for Bio-Misuse Safeguards in Frontier LLMs Frontier AI laboratories are expected to maintain safeguards against biological misuse, but whether deployed models actually refuse bio-misuse queries under adversarial pressure is largely unmeasured in the public literature. We introduce BioRT-Bench, a benchmark that runs four attack methods (direct request, PAIR, Crescendo, and base64 encoding) against four frontier models (Claude Sonnet 4.6, GPT-5.4, DeepSeek V4-flash, Kimi K2.5) across 40 prompts spanning five biosecurity-relevant categories. Responses are scored by a calibrated judge extending StrongREJECT with two bio-specific dimensions: specificity and actionability. We measure Attack Success Rate (ASR), where 0 means the model fully refused and 1 means it provided specific, actionable bio-misuse content. Our results reveal a sharp robustness divide: Chinese frontier models (DeepSeek, Kimi) have under 5% refusal rates even under direct request (ASR 0.88 and 0.79), while Western models (Claude, GPT) maintain substantially stronger safeguards (ASR 0.15 and 0.16). Crescendo is the most effective attack across all models, both in bypassing refusal and in eliciting actionable content. Claude Sonnet 4.6 is the most robust model tested, achieving 100% refusal against base64-encoded prompts. Read More](https://apartresearch.com/project/biortbench-a-multiattack-redteaming-benchmark-for-biomisuse-safeguards-in-frontier-llms-hgw0)
+
+This work was done during one weekend by research workshop participants and does not represent the work of Apart Research.
+
+![Image 3: Apart Research logo
+](https://framerusercontent.com/images/UHxUj0LmVxOq70NyvUz698P5IY.png?width=174&height=164)
+
+Sign up to stay updated on the
+
+latest news, research, and events
+
+[Careers](https://apartresearch.com/careers)
+
+[AI Safety Ideas](https://aisafetyideas.com/)
+
+[Code of Conduct](https://apartresearch.com/info/code-of-conduct)
+
+[Responsible disclosure policy](https://apartresearch.com/info/responsible-disclosure-policy)
+
+[hello@apartresearch.com](mailto:hello@apartresearch.com)
+
+[Home](https://apartresearch.com/)
+
+[Sprints](https://apartresearch.com/sprints)
+
+[Fellowships](https://apartresearch.com/fellowships)
+
+[Impact](https://apartresearch.com/impact)
+
+[Research](https://apartresearch.com/research)
+
+[](https://github.com/apartresearch)[![Image 4: Google Scholar icon](https://framerusercontent.com/images/BGd9pffEbjdmU0bLzTaTqpEsGGI.svg?width=512&height=512)](https://scholar.google.com/citations?hl=en&user=f2-xhQkAAAAJ)[](https://x.com/apartresearch)[](https://www.youtube.com/channel/UCnfBOJnTkE9sgjMOOsQbi2w)[](https://www.linkedin.com/company/apartresearch/)
+
+[Design by Boyne Creative](https://boyne.co/)

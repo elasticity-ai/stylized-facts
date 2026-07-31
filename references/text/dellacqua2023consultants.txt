@@ -1,0 +1,14 @@
+By: Fabrizio Dell'Acqua, [Edward McFowland III](https://www.hbs.edu/faculty/Pages/profile.aspx?facId=772797&click=byline), Ethan Mollick, Hila Lifshitz-Assaf, Katherine C. Kellogg, Saran Rajendran, Lisa Krayer, François Candelon and [Karim R. Lakhani](https://www.hbs.edu/faculty/Pages/profile.aspx?facId=240491&click=byline)
+
+## Abstract
+
+We introduce and study the concept of a “jagged technology frontier” to describe the uneven impact of artificial intelligence (AI) capabilities, where AI assistance improves performance for some tasks but worsens it for others, even within the same knowledge workflow and with a seemingly similar level of difficulty. In collaboration with the global management consulting firm Boston Consulting Group, we have developed realistic management consulting tasks and examined the human performance implications of using AI to perform complex and knowledge-intensive work. The preregistered experiment involved 758 knowledge workers. After establishing a performance baseline on similar tasks, subjects were randomly assigned to one of three conditions: no AI access, GPT-4 AI access, or GPT-4 AI access with a prompt engineering overview. For each one of a set of 18 realistic knowledge tasks within the frontier of AI capabilities ranging from creative to analytical tasks, subjects using AI outperformed those not using AI, completing 12.2% more tasks and completing them 25.1% more quickly on average while also delivering solutions of significantly improved quality. However, for a complex managerial task selected to be outside the frontier, subjects using AI were 19% less likely to produce correct solutions compared with those without AI, pointing to potential limitations of AI supporting knowledge workers. We discuss the positive and negative implications of AI-aided human performance in knowledge-intensive tasks.
+
+## Keywords
+
+## Citation
+
+Dell'Acqua, Fabrizio, Edward McFowland III, Ethan Mollick, Hila Lifshitz-Assaf, Katherine C. Kellogg, Saran Rajendran, Lisa Krayer, François Candelon, and Karim R. Lakhani. ["Navigating the Jagged Technological Frontier: Field Experimental Evidence of the Effects of Artificial Intelligence on Knowledge Worker Productivity and Quality." (pdf)](https://www.hbs.edu/faculty/Pages/download.aspx?name=dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier.pdf) Harvard Business School Working Paper, No. 24-013, September 2023. (Forthcoming in _Organization Science_.)
+
+*   [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4573321)
+*   [Read Now](https://www.hbs.edu/faculty/Pages/download.aspx?name=dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier.pdf)

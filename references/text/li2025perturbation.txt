@@ -1,0 +1,2902 @@
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for
+Mathematical Reasoning
+
+Xinyuan Li 1 Murong Xu 1 Wenbiao Tao 1 Hanlun Zhu 1 Yike Zhao 1 Jipeng Zhang 2 Yunshi Lan 1
+
+Abstract
+
+ematical reasoning. Nevertheless, strong performance in
+mathematical reasoning may not directly reflect the model’s
+reasoning ability (Wu et al., 2025). It may instead result from data contamination during pretraining (Golchin
+& Surdeanu, 2024) that leads to memorization-based answers (Zhang et al., 2024; Li et al., 2025), or from the model
+relying primarily on superficial pattern matching without
+understanding mathematical knowledge (Li et al., 2024;
+Mirzadeh et al., 2025). This phenomenon undermines the
+reliability of LLMs as genuine mathematical reasoners.
+
+arXiv:2511.04120v2 [cs.CL] 31 Jan 2026
+
+Large language models (LLMs) achieve high performance on mathematical reasoning, but these
+can be inflated by training data leakage or superficial pattern matching rather than genuine
+reasoning. To this end, an adversarial perturbation–based evaluation is needed to measure
+true mathematical reasoning ability. Current rulebased perturbation methods often generate illposed questions and impede the systematic evaluation of question difficulty and the evolution
+of benchmarks. To bridge this gap, we propose RIDE, a novel adversarial question-rewriting
+framework that leverages Item Response Theory (IRT) to rigorously measure question difficulty and to generate intrinsically more challenging, well-posed variations of mathematical
+questions. We employ 35 LLMs to simulate
+students and build a difficulty ranker from their
+responses. This ranker provides a reward signal during reinforcement learning and guides a
+question-rewriting model to reformulate existing
+questions across difficulty levels. Applying RIDE
+to competition-level mathematical benchmarks
+yields perturbed versions that degrade advanced
+LLM performance, with experiments showing an
+average 21.73% drop across 26 models, thereby
+exposing limited robustness in mathematical reasoning and confirming the validity of our evaluation approach.
+
+To address this issue, there is an urgent need for a more
+adversarial evaluation benchmark that can faithfully characterize the robustness of mathematical reasoning. For example, a rule-based rewriting method is proposed (Li et al.,
+2024; Zhou et al., 2024), which applies operations such as
+numerical substitution and symbol modification to reformulate questions. This method has been shown to reduce
+model performance. However, rule-based approaches may
+render the rewritten questions ill-posed and unsolvable (Xue
+et al., 2025), thereby undermining their validity as reliable
+benchmarks. Moreover, previous work has focused mainly
+on low-difficulty datasets (Cobbe et al., 2021), with limited attempts at more challenging data. Based on this, we
+identify the following challenges: (1) Robust Adversarial Perturbation. Robust perturbations to the data need to
+both degrade the model performance and remain credible
+and reasonable, which requires shifting from injecting noise
+to reformulating questions into formats that are inherently
+more challenging for the model to resolve correctly. Moreover, the perturbation should be unpredictable for changing,
+and simple rules cannot capture the evolution. (2) More
+Challenging Data. The perturbation of data should not
+be limited to the same difficulty level of mathematical reasoning. It is also necessary to explore its effectiveness on
+difficulty evolution, ensuring reasonable perturbations can
+be applied to mathematical competition questions. These
+challenges require us to perturb existing benchmarks in ways
+that substantively increase the intrinsic difficulty of the questions (Huang et al., 2025). A question’s difficulty is often
+defined by whether a model answers correctly (Lan et al.,
+2024), but this definition depends heavily on the selected
+models, and majority voting across these models ignores
+the individual differences in capabilities. Besides, defin-
+
+1. Introduction
+Mathematical reasoning is regarded as a crucial testament
+for evaluating the reasoning capabilities of large language
+models (LLMs). Recent works like DeepSeek-Math (Shao
+et al., 2024) and Qwen2.5-Math (Yang et al., 2024) clearly
+demonstrate the benefits of reinforcement learning for math1
+
+East China Normal University 2 The Hong Kong University
+of Science and Technology. Correspondence to: Yunshi Lan <yslan@dase.ecnu.edu.cn>, Xinyuan Li <xyli@stu.ecnu.edu.cn>.
+Preprint. February 3, 2026.
+
+1
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+ing difficulty by the steps of the reasoning chain (Yu et al.,
+2025) is easily misled by shortcut reasoning and does not
+account for the numerical computation complexity specific
+to mathematical reasoning.
+Original Ques�on
+
+Rewri�en Ques�on
+
+How many nonempty subsets B of {0, 1,
+2, 3, … , 12} have the property that
+the number of elements in B is equal to
+the least element of B? For example, B
+= {4, 6, 8, 11} satisfies the condition.
+
+Let S = {0, 1, 2, 3, … , 12}. How many
+nonempty subsets B of S have the property
+that the number of elements in B equals the
+least element of B and, in addition, the
+largest element of B is divisible by 3?
+
+contributions are as follows:
+• We propose a benchmark perturbation framework with
+IRT to evaluate robustness in mathematical reasoning.
+We measure robustness via performance degradation
+and observe that most LLMs are sensitive to perturbations, indicating poor robustness.
+• We propose an IRT-based difficulty ranker and introduce a reinforcement learning scheme for training a
+question-rewriting model. We also release our question
+rewriting model (RIDE-8B), two rewritten competitionlevel benchmarks (RIDE-AIME and RIDE-AMC), and
+a training dataset of over 10K rewritten questions
+(RIDE-DeepMath).
+
+Diﬃculty Evolu�on
+Correct Answer
+
+Wrong Answer
+
+Step 1: Let m = min(B) and |B| = m. m
+∈ {1, 2, ..., 12}.
+Step 2: B must include m, and the
+remaining m − 1 elements are chosen
+from {m+1, ..., 12}, which has 12 − m
+elements.
+Step 3: Feasible m satisfy 12 − m ≥ m
+− 1 ⇒ m ≤ 6. Sum: 1 + 10 + 36 + 56 + 35
++ 6 = 144.
+Final Answer: 144
+
+Step 1: Let size(B) = k, min(B) = m, max(B)
+= M. Require k equals m and M is a multiple
+of 3.
+Step 2: For each k from 1 to 12, take M in
+{3, 6, 9, 12} with M at least k. With min
+fixed as k, count subsets of size k by
+choosing the other k−1 elements from {k,
+k+1, ..., M−1}.
+Step 3: Total = 22 + 55 + 66 + 36 + 6 = 185.
+Final Answer: 185
+
+2. Related Work
+
+Figure 1. Difficulty evolution via RIDE. The original question
+(left) is successfully answered, whereas the rewritten question
+(right) with added constraints triggers a reasoning error of the
+Qwen3-30B-A3B model.
+
+Robustness Evaluation. Existing LLM robustness evaluations (Ul Abedin et al., 2025) often use controlled perturbations to test whether models truly understand tasks rather
+than memorize surface patterns (Li et al., 2024; Yang et al.,
+2025a). A common practice is to construct original items
+and perturbed counterparts around the same semantics and
+compare the resulting performance drop (Goel et al., 2021;
+Chang et al., 2023; Hou et al., 2025; Yang et al., 2025b;
+Sun et al., 2025). For example, GSM-PLUS (Li et al., 2024)
+applies rule-based perturbations such as numerical substitution (Shrestha et al., 2025) and operation modification, revealing substantial degradation in many LLMs. Unlike rulebased methods, we adapt a reinforcement learning-based
+rewriting approach to generate perturbations, producing
+better-formed data, avoiding unsolvable or multiple-solution
+cases, and increasing unpredictability.
+
+To this end, we propose RIDE, a benchmark perturbation
+rewriting framework that incorporates Item Response Theory (IRT) to measure question difficulty (Vania et al., 2021;
+Scarlatos et al., 2025). Specifically, 35 cutting-edge LLMs
+are treated as students to answer 2, 000 questions sampled
+from the high-difficulty mathematical dataset DeepMath (He
+et al., 2025). A statistical model jointly characterizes the
+latent abilities of the student models and the difficulty parameters of the questions. This difficulty is not human
+cognitive complexity but a model-centric metric representing the inherent challenge a specific question format poses
+to the model’s ability to respond correctly. Based on the
+IRT-estimated difficulty, a pairwise ranker is trained: given
+question embedding vectors, it outputs the probability that
+one question is more difficult than another. The ranker’s
+output further serves as a difficulty reward signal for reinforcement learning on Qwen3-8B, resulting in the question
+rewriting model RIDE-8B. Applying reinforcement learning to difficulty-evolving question rewriting encourages the
+model to adaptively generate questions with higher difficulty, thus avoiding superficial modifications, while further
+enhancing consistency between the rewritten questions and
+their answers by setting a correctness reward. RIDE-8B
+is then applied to rewrite competition-level mathematical
+benchmarks such as AIME-24 and AMC-23, achieving difficulty evolution for these datasets. Experiments demonstrate
+that the perturbed benchmarks induce performance drops
+in frontier reasoning models, including GPT-5, DeepSeekV3.1, and others, thereby enabling robust evaluation and
+comparison of advanced models’ mathematical reasoning
+abilities (as shown in Figure 1). In addition, RIDE can be
+used as a data augmentation method to enhance training
+data and improve mathematical reasoning performance. Our
+
+Item Response Theory (IRT). Originating from educational measurement, IRT is widely applied in AI for automated item difficulty estimation (Feng et al., 2025; Chen
+& Shiu, 2025) and efficient evaluation (Polo et al., 2024;
+Martı́nez-Plumed et al., 2022; Xu et al., 2025b). IRT depends on real student responses, which are often difficult to
+obtain due to privacy constraints. Prior work addresses this
+by simulating response matrices (Lalor et al., 2019; Truong
+et al., 2025) or predicting difficulty from text (Martı́nezPlumed et al., 2022), which leads to high computational
+costs (Truong et al., 2025). We mitigate these issues via
+data augmentation to reduce the number of required student
+models and reframing difficulty estimation as a pairwise
+ranking task to reduce numerical prediction errors.
+
+3. Preliminary
+We briefly introduce the IRT-based difficulty in our method.
+Consider a test taker with fixed ability θ and a math reasoning question q with a difficulty score d. The response
+2
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+y is modeled as a Bernoulli random variable that indicates
+correctness, where y = 1 denotes a correct answer and
+y = 0 denotes an incorrect answer. We introduce the Rasch
+model (Rasch, 1993), a foundational one-parameter (1-PL)
+IRT model in which the probability of a correct response
+is the logistic function of the difference between the test
+taker’s ability θ and the item’s difficulty d:
+1
+Pr(y = 1 | θ, d) = σ(θ − d) =
+−(θ−d)
+1+e
+Given a binary response matrix Y ∈ {0, 1}M ×N , where
+M and N denote the number of test takers and questions,
+respectively. Each entry Yij indicates the i-th test taker’s
+answer to the j-th question. Based on this response matrix,
+one can estimate the ability parameters θ and the difficulty
+parameters d using a variety of statistical inference methods,
+such as the Bayesian inference via Markov chain Monte
+Carlo (MCMC) sampling (Chen et al., 2021) and variational
+inference (VI) (Blei et al., 2017). In this paper, we apply the
+VI method provided by py-irt (Lalor & Rodriguez, 2023).
+Concretely, we fit the Rasch model via stochastic variational
+inference on the response matrix with a mean-field Normal
+guide for θ and d, maximizing the evidence lower bound L:
+N
+M
+X
+ X
+
+KL(g∥p) =
+KL g(θi ) ∥ p(θi ) +
+KL g(dj ) ∥ p(dj )
+
+edge LLMs with different parameter scales and architectures
+as students to solve these questions, thereby constructing a
+response matrix Y ∈ {0, 1}M ×N . Specifically, for a math
+question j, the response vector can be described as
+vj = [I[g j = y1 ], I[g j = y2 ]..., I[g j = yM ]]⊺
+Here, I denotes the 0–1 indicator function, g j denotes the
+ground-truth answer to the j-th question, yi represents the
+response of the i-th student model. After obtaining the
+response vectors for all N questions, we combine them to
+form the response matrix Y :
+
+
+Y = v1 , v2 , . . . , vN
+We perform IRT estimation based on the response matrix
+Y. Following the parameter estimation method described in
+Section 3, we obtain an IRT-estimated difficulty d for each
+question and construct N question-difficulty pairs (q, d) for
+training the difficulty ranker, where q denotes the question.
+4.1.2. PAIRWISE D IFFICULTY R ANKER
+
+4.1.1. IRT PARAMETER E STIMATION
+
+In traditional IRT, estimating the difficulty of a new question
+requires collecting fresh student response data. To endow
+IRT difficulty estimation with generalization to unseen questions, we adopt an amortized approach (Truong et al., 2025),
+which extracts content features via an embedding model and
+learn a mapping from question content to difficulty value.
+However, due to the domain-specific symbolic semantics of
+math questions (Mirzadeh et al., 2025), directly regressing
+from embeddings to a scalar difficulty may result in unreliable performance. Therefore, instead of regressing the difficulty value, we frame the task as a pairwise ranking question, training a ranker to identify the more difficult question
+from a pair of question embeddings. We use OpenAI’s textembedding-3-large 1 model to obtain embedding vectors
+for each question-difficulty pair (q, d), creating N questionembedding-difficulty triplets as (q, e, d). We then group
+these pairs by fine-grained topics (Gao et al., 2025) like algebra, geometry, and so on. Within each subcategory, ranking data are generated by forming pairwise combinations of
+questions. Specifically, for any two questions (qi , qj ) within
+the same subcategory, we create the ordered pair (ei , ej , rij )
+and its symmetric counterpart (ej , ei , 1−rij ) to reduce positional bias, where rij denotes to the ranking label: it equals
+to 1 if the question i’s difficulty di exceeds the question j’s
+difficulty dj , and 0 otherwise. To account for the influence
+of the magnitude gap between difficulty scores d, we assign
+a weight
+pto each ranking pair. For (ei , ej , rij ), the weight is
+wij = |di − dj |. We use these pairwise samples to train
+a multilayer perceptron (MLP) as the difficulty ranker. The
+input x of MLP is a fusion of absolute and relative features,
+
+We draw N = 2, 000 math questions from the DeepMath
+dataset to construct a quiz. We then employ M = 35 cutting-
+
+1
+https://platform.openai.com/docs/models/
+text-embedding-3-large
+
+i=1
+
+max L =
+g
+
+M X
+N
+X
+
+j=1
+
+
+
+Eg Yij (θi − dj ) − log 1 + eθi −dj
+
+i=1 j=1
+
+− KL g ∥ p
+
+
+
+Here, g denotes the variational joint distribution over the latent parameters and p denotes the prior joint distribution over
+(θ, d). KL(g∥p) denotes the Kullback-Leibler divergence
+from g to p. We take posterior means as point estimates
+from g to obtain IRT-based difficulty d for each question.
+
+4. Method
+In this section, we elaborate on the details of RIDE-Math.
+Inspired by the IRT-based difficulty estimation method with
+LLMs acting as students (Truong et al., 2025), we construct
+a difficulty ranker for math questions by performing parameter estimation described in Section 3. This ranker serves as a
+reward model by providing difficulty reward signals, which
+are used to guide reinforcement learning on the existing
+high-difficulty dataset DeepMath (He et al., 2025). Through
+this rewriting process, we are able to generate difficulty in
+evolving math reasoning data. The overall architecture of
+our method is shown in Figure 2.
+4.1. IRT-guided Difficulty Ranker
+
+3
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Original Dataset
+Question Answer
+q1
+a1
+q2
+a2
+
+...
+
+...
+
+qn
+
+an
+
+Rewritten Dataset
+Question Solution Answer
+q'1
+s'1
+a'1
+q'2
+s'2
+a'2
+
+RIDE-8B
+
+...
+
+...
+
+...
+
+q'n
+
+s'n
+
+a'n
+
+IRT-Guided Difficulty Ranker
+Item
+Response
+Theory
+
+q1
+
+...
+
+Response
+Matrix
+
+LLM Response
+
+VI
+
+qn
+
+Proprietary
+Models
+
+Perturbation-based
+Evaluation
+
+Open-source
+Models
+
+Reinforcement Learning for Difficulty Evolution
+Question Difficulty
+q1
+1.21
+q2
+-2.33
+q3
+0.88
+
+...
+
+...
+
+qn
+
+0.5
+
+𝑹𝒅𝒊𝒇𝒇: 0.9
+𝑹𝒄𝒐𝒓: 1.0
+
+Questions
+Qwen3-8B
+
+Difficulty
+𝑅𝑑𝑖𝑓𝑓
+
+Pairwise Ranking
+
+Difficulty
+Ranker
+
+P=σ(θ - d)
+θ: Ability
+d: Difficulty
+
+LLMs
+
+Correctness
+𝑅𝑐𝑜𝑟
+
+MLP Ranker
+
+𝑹𝒅𝒊𝒇𝒇: -0.6
+𝑹𝒄𝒐𝒓: 0.0
+
+RIDE-8B
+
+GSPO
+
+Reinforcement Learning
+
+Figure 2. The overall architecture of RIDE. RIDE trains a difficulty ranker based on IRT estimations to provide reward signals, guiding
+reinforcement learning to drive the LLM to rewrite original math questions into variations that expose model’s reasoning vulnerabilities.
+
+θ and θSF T denote to the original parameter of the base
+model and the new parameter after full-parameter finetuning, respectively.
+
+which is concatenated as:
+xij = ei || ej || ei − ej || |ei − ej |
+
+
+
+Weighted binary cross-entropy loss is used as the optimization target to train an MLP with hyperparameter ϕ. The
+MLP ranker outputs the logit and then calculated p(i, j),
+which measures the probability that question i is more difficult than question j:
+
+In the RL stage, we use the Group Sequence Policy Optimization (GSPO) algorithm (Zheng et al., 2025) for optimization. Starting from SFT model with parameter θSFT ,
+for each q we sample a group G(q) = {qk′ }K
+k=1 ∼ Pθ (·|q)
+with group size K, compute rewards R(q, qk′ ) and groupnormalized advantages, and update model parameter θ with
+GSPO. Our rewards consist of:
+
+p(i, j) = σ(MLPϕ (xij ))
+
+1 X
+LBCE =
+wij − rij log p(i, j)
+|B|
+(i,j)∈B
+
+− (1 − rij ) log 1 − p(i, j)
+
+• Difficulty Reward. The difficulty reward measures
+whether the rewritten question is more difficult than
+the original. We obtain embedding vectors e and e′
+for the original question q and its rewrite q ′ , respectively, and concatenate them as the input to the difficulty ranker. The ranker returns p(q ′ , q) and its reverse
+p(q, q ′ ), which respectively describe the probabilities
+that q ′ is harder than q and vice versa. The difficulty
+reward is defined as:
+
+pij will be used to form the difficulty reward for rewriting
+questions in reinforcement learning.
+4.2. Reinforcement Learning for Difficulty Evolution
+We use Qwen3-8B (Team, 2025) as the base model and
+train a math question rewriting model via Supervised FineTuning (SFT) and Reinforcement Learning (RL). The SFT
+stage primarily serves as a cold start, which equips the
+base model with an initial ability to rewrite original math
+questions q into more difficult ones q ′ and standardizes
+the output format. We curate 2, 000 high-quality rewritten
+questions D by distilling and filtering GPT-5-mini 2 outputs,
+and used this corpus to perform full-parameter fine-tuning
+of Qwen3-8B:
+
+
+θSFT ←
+− argmin E(q,q′ )∈D − log(Pθ (q ′ | q))
+
+Rdiff = p(q ′ , q) − p(q, q ′ )
+• Correctness Reward. Due to the base model’s limited
+reasoning ability, the rewritten questions may contain
+errors. We use a teacher model GPT-5-mini to verify
+each rewrite and output a correctness reward Rcor ∈
+{−1, 1}, with −1 for incorrect and 1 for correct.
+
+θ
+2
+
+Given reward weights α and β, the final reward R is defined
+as their weighted sum. For each q with samples G(q) =
+
+https://openai.com/
+
+4
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+′
+{qk′ }K
+k=1 , let Rk ≡ R(q, qk ) and compute advantage Ak :
+PK
+1
+Rk − K
+k=1 Rk
+R = αRdiff + βRcor , Ak =
+,
+std(R1:K )
+
+5. Experiment
+5.1. Experiment Setup
+We use our rewriting model RIDE-8B to perform
+multi-round difficulty evolution on the competition-level
+mathematical-reasoning benchmarks AMC-23 and AIME24, which contain 40 and 30 questions, respectively. Using
+GPT-5, we filter out questions that are unsolvable or have incorrect answers to construct the final perturbed benchmarks
+RIDE-AMC and RIDE-AIME, which are further manually
+checked to ensure answer accuracy, with annotators holding at least a bachelor’s degree. We evaluate the pass@1
+performance of cutting-edge open-source and proprietary
+models in the zero-shot setting. In addition, we extract data
+from the DeepMath dataset for rewriting, and after filtering
+with DeepSeek-V3.1 (DeepSeek-AI, 2024), we obtain 10K
+high-quality mathematical reasoning samples, referred to as
+RIDE-DeepMath, which serve as training data to improve
+the models’ ability for mathematical reasoning.
+
+where std(R1:K ) denotes the standard deviation over the
+group {Ri }K
+i=1 . Let θold be the policy for sampling G(q),
+initialized as θSFT and updated online to θ. The sequencelevel importance ratio:
+
+1/|qk′ |
+Pθ (qk′ | q)
+ρk (θ) =
+Pθold (qk′ | q)
+
+′
+ 
+|qk
+|
+′
+′
+X
+π
+q
+|
+q,
+q
+1
+θ k,t
+k,<t 
+
+= exp ′
+log
+′ | q, q ′
+|qk | t=1
+πθold qk,t
+k,<t
+′
+Here, t indexes positions in the generated response qk′ ; qk,t
+′
+denotes the t-th response token and qk,<t is its prefix. The
+normalization length |qk′ | counts response tokens only, and
+accordingly log Pθ (qk′ | q) is computed as the sum of tokenlevel log probabilities over those response positions. We
+maximize the clipped surrogate:
+"
+K
+
+1 X
+LGSPO (θ) =Eq∈D
+min ρk (θ)Ak ,
+K
+k=1
+#
+ 
+clip ρk (θ), 1 − ε, 1 + ε Ak
+
+5.2. Main Results
+We evaluate 23 LLMs comprising 8 proprietary models
+(including GPT-5 and Grok-4) and 15 open-source models (including DeepSeek-V3.1 and Kimi-K2-Instruct (Team
+et al., 2025)), spanning parameter counts from 0.6B to 1TB
+and covering multiple model series. We report pass@1
+performance on the original AMC-23 and AIME-24 benchmarks, and then apply the same prompts to our perturbed
+benchmarks, RIDE-AMC and RIDE-AIME, again recording
+pass@1 performance. To quantify robustness, we compute
+the performance drop rate (PDR) (Li et al., 2024):
+P
+1
+(x,y)∈Da I[LM(x) = y]
+|Da |
+PDR = 1 − 1 P
+,
+(x,y)∈D I [LM(x) = y]
+|D|
+
+At iteration i, we set θold = θ(i) ; for each source question
+q, we sample a group G(q) and compute the component
+rewards Rdiff , Rcor , Rkey and their mixture R, form the
+group-normalized advantages Ak , and then update the parameters by maximizing the GSPO surrogate:
+θ(i+1) = arg max LGSPO (θ)
+θ
+
+Once the reward converges, we obtain difficulty-aware math
+rewriting model RIDE-8B. Considering that existing mathematical datasets may not provide complete solutions, we
+only take the original question qoriginal and its answer aoriginal
+from benchmarks or training data as input. The corresponding prompt is shown in Appendix A.3. Instead of prescribing
+specific rules, the prompt provides high-level guidance for
+increasing difficulty, allowing the model to freely rewrite
+questions, thereby creating unpredictable paths of difficulty
+progression. Subsequently, we take the prompt context as
+input into RIDE-8B, which infers the rewritten question
+qrewrite , solution srewrite , and answer arewrite :
+
+where x and y denote the question and the corresponding
+answer, respectively, D is the original benchmark (AMC-23
+or AIME-24), Da is the corresponding perturbed benchmark
+(RIDE-AMC or RIDE-AIME), LM(·) is the model’s prediction, and I[·] is the indicator function. Lower PDR indicates
+greater robustness. Results are presented in Table 1.
+For AMC-23 and RIDE-AMC we use Qwen3’s non-thinking
+mode, whereas for AIME-24 and RIDE-AIME we use
+Qwen3’s thinking mode. Results show that our difficulty
+evolution perturbation method leads to performance drops
+in the vast majority of both proprietary and open-source
+models, even state-of-the-art models including GPT-5 and
+DeepSeek-V3.1-Thinking exhibit declines, which shows the
+validation of our method. On the more challenging benchmark AIME-24, the average PDR is higher than on AMC-23.
+Across all models, the mean PDR reached 21.73%. From
+the model perspective, proprietary models generally have
+lower PDRs, indicating better robustness. Open-source mod-
+
+RIDE-8B
+
+(qoriginal , aoriginal ) −−−−−−→ (qrewrite , srewrite , arewrite ).
+Including the solution srewrite as a part of rewriting output
+not only strengthens the consistency between the rewritten
+question and its answer but also serves as a chain-of-thought
+signal, which can facilitate further training of models to
+improve their mathematical reasoning ability.
+5
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Model
+
+Params
+
+AIME-24
+
+RIDE-AIME PDR (↓%) AMC-23 RIDE-AMC PDR (↓%)
+Proprietary Models
+40.00
+36.67
+8.32
+85.00
+82.50
+2.94
+Claude-4-Sonnet
+Claude-4.1-Opus
+53.33
+36.67
+31.24
+87.50
+82.50
+5.71
+Gemini-2.0-Flash
+30.00
+30.00
+0.00
+85.00
+80.00
+5.88
+Gemini-2.5-Pro
+90.00
+90.00
+0.00
+100.00
+100.00
+0.00
+GPT-3.5-turbo
+10.00
+3.33
+66.70
+55.00
+50.00
+9.09
+GPT-o3-mini
+76.67
+76.67
+0.00
+100.00
+97.50
+2.50
+GPT-5
+93.33
+86.67
+7.14
+100.00
+100.00
+0.00
+Grok-4
+100.00
+96.67
+3.33
+100.00
+95.00
+5.00
+Open-source Models
+DeepSeek-V3.1
+671B
+60.00
+56.67
+5.55
+87.50
+85.00
+2.86
+DeepSeek-V3.1-Thinking
+671B
+93.33
+83.33
+10.71
+100.00
+100.00
+0.00
+93.33
+80.00
+14.28
+100.00
+92.50
+7.50
+GLM-4.5
+355B
+Kimi-K2-Instruct
+1TB
+73.33
+56.67
+22.72
+90.00
+85.00
+5.56
+Llama2-70B
+70B
+26.67
+3.33
+87.51
+40.00
+30.00
+25.00
+Llama3.1-70B
+70B
+20.00
+6.67
+66.65
+47.50
+30.00
+36.84
+Llama3.1-405B
+405B
+23.33
+6.67
+71.41
+47.50
+35.00
+26.32
+Llama4-Scout
+109B
+30.00
+3.33
+88.90
+57.50
+45.00
+21.74
+Mistral-large
+123B
+30.00
+20.00
+33.33
+70.00
+60.00
+14.29
+Qwen2.5-7B
+7B
+10.00
+10.00
+0.00
+50.00
+30.00
+40.00
+Qwen2.5-Math-7B
+7B
+16.67
+3.33
+80.02
+60.00
+32.50
+45.83
+Qwen2.5-Math-72B
+72B
+26.67
+10.00
+62.50
+70.00
+60.00
+14.29
+16.67
+10.00
+40.01
+70.00
+52.50
+25.00
+Qwen2.5-72B
+72B
+Qwen3-0.6B
+0.6B
+10.00
+3.33
+66.70
+37.50
+20.00
+46.67
+83.33
+80.00
+4.00
+80.00
+72.50
+9.38
+Qwen3-30B-A3B
+30B
+Table 1. Comparison of the model’s pass@1 performance before and after benchmark perturbation. After benchmark perturbation, most
+models show a significant performance drop. The top-3 models with the largest average performance decline are highlighted in blue.
+
+els showed substantial variation, and several LLaMA and
+Qwen series models suffered large declines, with the highest
+PDR reaching 88.90%.
+
+100
+
+Llama4-Scout
+AIME-24
+
+AMC-23
+
+RIDE-AIME
+
+RIDE-AMC
+
+pass@n (%)
+
+80
+
+6. Analysis
+
+60
+40
+20
+
+In this subsection, we conduct more experiments to explore
+and analyze the effectiveness and impact of our method.
+
+0
+
+100
+
+Pass@n Performance. To verify the stability of our
+method against model performance perturbations, we evaluate Qwen2.5-Math-72B and Llama-4-Scout on AIME-24,
+AMC-23, and their perturbed RIDE-AIME and RIDE-AMC
+using pass@n (n = 1, 2, 4, 8). Results (Figure 3) show
+that accuracy improves as n increases, but performance on
+perturbed benchmarks remains notably lower, confirming
+the stability of our method in testing robustness. Moreover,
+Qwen2.5-Math-72B exhibits greater stability, with a relatively small gap between its pass@1 and pass@8 scores.
+
+n=1
+
+n=2
+
+n=4
+
+n=8
+
+Qwen2.5-Math-72B
+AIME-24
+
+AMC-23
+
+RIDE-AIME
+
+RIDE-AMC
+
+pass@n (%)
+
+80
+60
+40
+20
+0
+
+n=1
+
+n=2
+
+n=4
+
+n=8
+
+Figure 3. Comparison of pass@n performance before and after
+benchmark perturbation. Despite scaling improvements with n,
+the persistent performance gap confirms RIDE’s stability.
+
+Win Rate Comparison of RIDE and Other methods. To
+evaluate rewrite quality, we design prompts assessing completeness, clarity, conceptual consistency, structural perturbations, and avoidance of shortcuts (Appendix A.3). GPT-5
+acts as an evaluator to compare the outputs from different
+methods. Each pair is judged twice with swapped order to
+mitigate position bias. We compute two win rate metrics: (1)
+Average win rate—the proportion of times a method is se-
+
+lected across both evaluations; (2) Consistent win rate—the
+proportion of questions where a method is selected in both
+evaluations. Ties are allowed in the evaluator’s output. We
+run three rounds and report average results. We compare our
+method with the following method: (1) Rule-based method.
+Following GSM-Plus (Li et al., 2024), we use Qwen3-8B
+to generate perturbed AMC-23 and AIME-24 data with the
+6
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+same prompting strategy as rule-based baseline. (2) Contrastive prompting. Following the contrastive prompting
+method (Yao, 2025), we instruct Qwen3-8B to generate an
+easier and a more difficult rewrite at the same time and
+choose the difficult one as the final rewrite question. (3)
+SFT-only model and RL model without difficulty reward.
+We generate rewritten questions using the SFT-only model
+(without RL) and an RL model trained without the difficulty
+reward Rdiff as part of our ablation study. As shown in Table 2, our method significantly outperforms the rule-based
+and contrastive prompting on both metrics, demonstrating
+that RIDE rewrites achieve higher quality. Ablation study
+also shows the effect of our RL stage and difficulty reward.
+Compared Method
+
+Dataset
+
+Average
+
+Original Question: A bag contains 100 unique marbles. With
+replacement, you pick 10 marbles at a time, at random. How
+many times must you pick the marbles to have a 95% probability
+of having seen every unique marble at least once ?
+Original Answer: 76
+Rewritten Question: A bag contains 100 unique marbles. You
+repeatedly draw 10 marbles uniformly at random from the bag,
+record the set of distinct marbles seen in that draw, and then
+return those 10 marbles to the bag. You do this many independent
+times. Approximate the smallest number of such draws required so
+that the probability of having seen every unique marble at least
+once is at least 0.99. Use the Poisson approximation for the
+coupon collector problem (i.e., approximate the probability that a
+particular marble has not been seen after n draws by e^{ -n·p}
+where p = 10/100 is the probability of seeing that marble in a
+single draw), and then apply the union bound to obtain a
+conservative estimate. Give a numerical answer .
+
+Consistent
+
+Baseline
+
+RIDE
+
+Baseline
+
+RIDE
+
+Rule-based
+
+AMC-23
+AIME-24
+
+40.83
+36.67
+
+58.75
+63.33
+
+28.33
+28.89
+
+48.33
+55.56
+
+Contrastive Prompting
+
+AMC-23
+AIME-24
+
+49.17
+32.78
+
+50.83
+67.22
+
+40.00
+26.67
+
+40.83
+61.11
+
+SFT-only
+
+AMC-23
+AIME-24
+
+38.75
+36.67
+
+60.00
+62.22
+
+33.33
+26.67
+
+53.33
+52.22
+
+w/o Rdiff
+
+AMC-23
+AIME-24
+
+43.75
+27.78
+
+54.17
+72.22
+
+35.83
+21.11
+
+47.50
+65.56
+
+Rewritten Answer: 93
+
+(a) Case study for our method. The original question is sampled
+from DeepMath dataset, and rewritten question is the corresponding rewritten version in RIDE-DeepMath.
+Distribution
+of RewriteDistracting
+Strategies
+Numerical
+Substitution
+17.1%
+
+Info
+11.4%
+
+Add
+Extra Steps
+32.9%
+
+Table 2. Win rate comparison of RIDE and other methods.
+
+Case Study and Rewrite Strategy Analysis. Figure 4a
+illustrates the rewritten question. The original question is
+a classic coupon collector question with replacement. The
+rewritten question (1) clarifies the “pick 10 marbles at a
+time with replacement” procedure without changing the
+core idea; (2) raises the target success probability, increasing the required trials; and (3) requires using the Poisson
+approximation and the union bound, increasing restrictions.
+To systematically analyze these rewrites, we distill six core
+rewrite strategies from the questions in the RIDE-AIME
+and RIDE-AMC datasets: (1) Wording and Paraphrasing
+Modification, (2) Distracting Info, (3) Numerical Substitution, (4) Add Extra Steps, (5) Change Constraints, and
+(6) Change Target. (Detailed descriptions are provided in
+the Appendix A.4). Our analysis (Figure 4b) reveals that
+these strategies are frequently combined. Over 60% of the
+rewritten questions are composed of two or more strategies.
+To further investigate the impact on reasoning depth, we
+categorize strategies 1-3 as Surface Strategies, which have
+a minor impact on reasoning depth, and strategies 4-6 as
+Deep Strategies, which significantly affect the required reasoning. Statistics show that rewrites using a mix of both
+Surface and Deep strategies are the most common (44.3%).
+The accuracy of Qwen2.5-Math-72B and Llama4-Scout on
+questions corresponding to each strategy shows that performance varies across different strategies. In summary, our
+method can generate combinations of one or more rewrite
+strategies without explicitly defining specific rules. These
+combinations effectively provide a difficulty perturbation
+
+Number distribution of strategies per rewrite
+2 Strategies
+35.7%
+
+1 Strategy
+35.7%
+
+3 Strategies
+21.4%
+
+4 Strategies
+7.1%
+
+Wording &
+Paraphrasing
+65.7%
+
+Change
+Constraints
+44.3%
+
+Change
+Target
+28.6%
+
+Distribution
+of Rewrite Depth
+Mixed
+Strategies
+44.3%
+
+Model Accuracy (%) by Strategy
+Numerical
+Substitution
+
+Distracting
+Info
+
+Qwen2.5-Math-72B
+Llama4-Scout
+
+Surface-only
+Strategies ExtraAdd
+Steps
+31.4%
+
+Deep-only
+Strategies
+24.3%
+
+Wording &
+Paraphrasing
+
+Change
+Constraints
+
+Change
+Target
+
+(b) Rewrite strategy analysis.
+Figure 4. Case study and analysis. (a) The original and rewritten
+questions from DeepMath and RIDE-DeepMath. (b) The analysis
+of rewrite strategies.
+
+for the original question.
+The Relation Between Difficulty and Robustness. To validate whether the performance drop stems from an increase
+in human-perceived difficulty or from the model’s inherent vulnerability, we conduct an analysis using the surfacelevel rewriting dataset mentioned above, which is assumed
+to keep human cognitive difficulty invariant. We record
+the transitions between “Correct on Original, Incorrect on
+Rewritten” and the inverse for each paired sample and apply
+McNemar’s test. The resulting p-value of 2.3847 × 10−11 ,
+being lower than 0.05, reveals a significant asymmetry. This
+demonstrates that the performance drop is driven by the
+7
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+model’s non-robustness rather than shifts in difficulty. Additionally, as detailed in the Appendix B.1, we categorize
+questions into three difficulty levels and the consistent degradation across all difficulty levels (e.g., 11.43% on ”Easy”
+questions and 12.86% on ”Medium” questions) suggests
+this drop is independent of reasoning depth. From a theoretical perspective, the IRT-based difficulty is statistically estimated from the model’s response patterns, which is highly
+correlated with empirical accuracy. This difficulty focuses
+on the probability of a correct response rather than directly
+reflecting human cognitive complexity. Consequently, our
+“difficulty evolution” essentially transforms questions into
+formats that are challenging for the model to solve, thereby
+serving as a robustness test.
+
+of our RL strategy. We also conduct ablation studies on
+the RIDE-4B model. We introduce two variations: (1) replacing the verifier for the correctness reward Rcor with
+DeepSeek-V3.2 (RIDE-4B-DeepSeek), and (2) removing
+Rcor . We employ GPT-5 to evaluate the correctness of the
+rewritten questions generated by these models. The results
+indicate that RIDE-4B (GPT-5-mini verifier) achieves the
+highest correctness. RIDE-4B-DeepSeek model follows, as
+DeepSeek-V3.2 tends to output more false negatives (see
+Appendix B.4), whereas removing the correctness reward
+leads to decline in correctness. The DeepSeek verifier also
+improves correctness shows that our method is not heavily
+dependent on closed-source models, as open-source models
+are also effective. This confirms the validity and necessity
+of our correctness reward.
+
+Data Augmentation For Training Data. Our method
+also serves as an effective data augmentation strategy
+for mathematical reasoning. Using RIDE-8B, we applied difficulty-evolution rewriting to the DeepMath dataset
+and filtered incorrect samples with DeepSeek-V3.1, yielding RIDE-DeepMath with over 10K examples. Without
+SFT, we trained Qwen3-0.6B, Qwen3-1.7B and Gemma34B-It via reinforcement learning with GSPO, producing RIDE-Qwen-0.6B-Thinking, RIDE-Qwen-1.7B and
+RIDE-Gemma-4B. Results (Table 3) show that models
+trained with reinforcement learning on our data achieve improvements over their base models. In particular, RIDEQwen-0.6B-Thinking and RIDE-Gemma3-4B have surpassed GPT-4o and Qwen2.5-Math-72B, and are close to
+Qwen3-4B in the non-thinking mode.
+Model
+
+Params
+
+AIME-25
+
+GPT-4o
+Qwen3-0.6B
+Qwen3-0.6B-Thinking
+RIDE-Qwen-0.6B-Thinking
+Qwen3-1.7B
+RIDE-Qwen-1.7B
+Qwen3-4B
+Gemma3-4B-It
+RIDE-Gemma3-4B
+Qwen2.5-Math-7B
+Qwen2.5-Math-72B
+Qwen3-30B-A3B
+
+0.6B
+0.6B
+0.6B
+1.7B
+1.7B
+4B
+4B
+4B
+7B
+72B
+30B
+
+13.33
+3.33
+10.00
+20.00
+6.67
+13.33
+23.33
+13.33
+20.00
+6.67
+13.33
+23.33
+
+Besides, We compare different IRT models for question
+difficulty estimation. The 2-PL model adds a discrimination
+parameter to the 1-PL, while the 3-PL further introduces
+a guessing parameter. We randomly mask 20% of the response matrix for model fitting, and evaluate performance
+using AUC-ROC. We ultimately adapt the 1-PL model with
+VI for parameter estimation.
+Part A: Effect analysis of RL and correctness reward
+Model
+Qwen3-8B
+RIDE-8B-SFT
+RIDE-8B
+RIDE-4B
+RIDE-4B-DeepSeek
+RIDE-4B w/o Rcor
+
+Difficulty
+
+Correctness
+
+74.61
+78.78
+80.18
+
+40.00
+40.00
+42.50
+
+-
+
+45.00
+37.50
+32.50
+
+Part B: Comparison of different IRT models
+Model
+
+Method
+
+AUC-ROC
+
+1-PL
+1-PL
+2-PL
+3-PL
+
+VI
+MCMC
+VI
+VI
+
+91.29
+89.81
+86.56
+91.01
+
+Table 4. Effect analysis. Part A shows the ablation study on RL
+and correctness reward Rcor , while Part B compares different IRT
+models and parameter estimation methods.
+
+7. Conclusion
+
+Table 3. Pass@1 performance comparison on AIME-25 benchmark. Models trained with reinforcement learning on our augmented rewritten data achieve higher performance than the corresponding base models.
+
+In this paper, we propose a question rewriting framework
+based on difficulty evolution. The method estimates question difficulty using IRT, then trains a difficulty ranker to
+provide a difficulty reward, guiding reinforcement learning
+for the rewriting model. Experiments show that our method
+causes performance drops in 26 LLMs, validating its effectiveness and robustness in adversarial perturbation. Our
+method outperforms traditional rule-based perturbations and
+can be applied for training data augmentation. Further analyses confirm its effectiveness, offering a new perspective on
+robust evaluation from the view of “question difficulty”.
+
+Effect Analysis. We additionally train RIDE-4B based
+on Qwen3-4B and keep SFT checkpoints (RIDE-4B-SFT,
+RIDE-8B-SFT) to disentangle SFT from RL effects. As
+shown in Table 4, Difficulty score is defined as the predicted
+probability from our difficulty ranker that the rewritten question is more difficult than the original. The experiments
+demonstrate that the RL-tuned RIDE-8B achieves the highest average Difficulty score, thereby validating the effect
+8
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Impact Statements
+
+Chen, Y., Li, X., Liu, J., and Ying, Z. Item response theory
+– a statistical framework for educational and psychological measurement, 2021. URL https://arxiv.org/
+abs/2108.08604.
+
+This paper presents work whose goal is to advance the field
+of machine learning. There are many potential societal
+consequences of our work, none of which we feel must be
+specifically highlighted here.
+
+Cobbe, K., Kosaraju, V., Bavarian, M., Chen, M., Jun, H.,
+Kaiser, L., Plappert, M., Tworek, J., Hilton, J., Nakano,
+R., Hesse, C., and Schulman, J. Training verifiers to solve
+math word problems, 2021. URL https://arxiv.
+org/abs/2110.14168.
+
+Ethics Statement
+All data used in this work are from publicly available open
+source datasets under their respective licenses. For IRT
+modeling, we rely exclusively on responses generated by
+LLMs, and no real student data or personally identifiable
+information is used. Our method is designed only to rewrite
+mathematical questions and does not attempt to infer or
+profile individuals.
+
+DeepSeek-AI. Deepseek-v3 technical report, 2024. URL
+https://arxiv.org/abs/2412.19437.
+Feng, W., Tran, P., Sireci, S., and Lan, A. Reasoning
+and Sampling-Augmented MCQ Difficulty Prediction via
+LLMs, pp. 31–45. 07 2025. ISBN 978-3-031-98458-7.
+doi: 10.1007/978-3-031-98459-4 3.
+
+Reproducibility Statement
+All our source code will be submitted in the Supplementary
+Materials, along with an explanation to facilitate reviewers
+in reproducing our work. The hyperparameter setup is introduced in Appendix A.2. We will also open source our mathematical question rewriting models RIDE-4B and RIDE-8B,
+our perturbation benchmarks RIDE-AMC and RIDE-AIME,
+and our augmented training data RIDE-DeepMath.
+
+Gao, B., Song, F., Yang, Z., Cai, Z., Miao, Y., Dong, Q., Li,
+L., Ma, C., Chen, L., Xu, R., Tang, Z., Wang, B., Zan,
+D., Quan, S., Zhang, G., Sha, L., Zhang, Y., Ren, X., Liu,
+T., and Chang, B. Omni-MATH: A universal olympiad
+level mathematic benchmark for large language models.
+In The Thirteenth International Conference on Learning
+Representations, 2025. URL https://openreview.
+net/forum?id=yaqPf0KAlN.
+
+References
+
+Goel, K., Rajani, N., Vig, J., Tan, S., Wu, J., Zheng, S.,
+Xiong, C., Bansal, M., and Ré, C. Robustness gym:
+Unifying the nlp evaluation landscape, 2021. URL
+https://arxiv.org/abs/2101.04840.
+
+Beltagy, I., Peters, M. E., and Cohan, A. Longformer:
+The long-document transformer, 2020. URL https:
+//arxiv.org/abs/2004.05150.
+
+Golchin, S. and Surdeanu, M. Time travel in llms: Tracing
+data contamination in large language models, 2024. URL
+https://arxiv.org/abs/2308.08493.
+
+Blei, D. M., Kucukelbir, A., and McAuliffe, J. D. Variational inference: A review for statisticians. Journal of the
+American Statistical Association, 112, 2017.
+Chang, S., Wang, J., Dong, M., Pan, L., Zhu, H., Li,
+A. H., Lan, W., Zhang, S., Jiang, J., Lilien, J., Ash,
+S., Wang, W. Y., Wang, Z., Castelli, V., Ng, P., and
+Xiang, B. Dr.spider: A diagnostic evaluation benchmark towards text-to-sql robustness, 2023. URL https:
+//arxiv.org/abs/2301.08881.
+
+He, Z., Liang, T., Xu, J., Liu, Q., Chen, X., Wang, Y., Song,
+L., Yu, D., Liang, Z., Wang, W., Zhang, Z., Wang, R., Tu,
+Z., Mi, H., and Yu, D. Deepmath-103k: A large-scale,
+challenging, decontaminated, and verifiable mathematical
+dataset for advancing reasoning. CoRR, abs/2504.11456,
+April 2025. URL https://doi.org/10.48550/
+arXiv.2504.11456.
+
+Chen, C. H. and Shiu, M. F. Kaqg: A knowledge-graphenhanced rag for difficulty-controlled question generation. May 2025. doi: 10.36227/techrxiv.174681425.
+54614303/v1.
+URL http://dx.doi.org/10.
+36227/techrxiv.174681425.54614303/v1.
+
+Hou, Y., Xiao, Z., Yu, F., Jiang, Y., Wei, X., Huang, H.,
+Chen, Y., and Chen, G. Automatic robustness stress
+testing of llms as mathematical problem solvers, 2025.
+URL https://arxiv.org/abs/2506.05038.
+Huang, K., Guo, J., Li, Z., Ji, X., Ge, J., Li, W., Guo,
+Y., Cai, T., Yuan, H., Wang, R., Wu, Y., Yin, M., Tang,
+S., Huang, Y., Jin, C., Chen, X., Zhang, C., and Wang,
+M. Math-perturb: Benchmarking llms’ math reasoning
+abilities against hard perturbations, 2025. URL https:
+//arxiv.org/abs/2502.06453.
+
+Chen, J., Xiao, S., Zhang, P., Luo, K., Lian, D., and
+Liu, Z. Bge m3-embedding: Multi-lingual, multifunctionality, multi-granularity text embeddings through
+self-knowledge distillation, 2024. URL https://
+arxiv.org/abs/2402.03216.
+9
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Kingma, D. P. and Welling, M. Auto-encoding variational bayes, 2022. URL https://arxiv.org/
+abs/1312.6114.
+
+Rasch, G. Probabilistic models for some intelligence and
+attainment tests. ERIC, 1993.
+Rasley, J., Rajbhandari, S., Ruwase, O., and He, Y. Deepspeed: System optimizations enable training deep learning models with over 100 billion parameters. In KDD,
+pp. 3505–3506, 2020. URL https://doi.org/10.
+1145/3394486.3406703.
+
+Lalor, J. P. and Rodriguez, P. py-irt: A scalable item
+response theory library for python. INFORMS Journal on Computing, 35(1):5–13, January 2023. ISSN
+1526-5528. URL http://dx.doi.org/10.1287/
+ijoc.2022.1250.
+
+Scarlatos, A., Fernandez, N., Ormerod, C., Lottridge, S.,
+and Lan, A. Smart: Simulated students aligned with item
+response theory for question difficulty prediction, 2025.
+URL https://arxiv.org/abs/2507.05129.
+
+Lalor, J. P., Wu, H., and Yu, H. Learning latent parameters without human response patterns: Item response
+theory with artificial crowds. In Proceedings of the 2019
+Conference on Empirical Methods in Natural Language
+Processing and the 9th International Joint Conference
+on Natural Language Processing (EMNLP-IJCNLP), pp.
+4249–4259, Hong Kong, China, November 2019. Association for Computational Linguistics. URL https:
+//aclanthology.org/D19-1434/.
+
+Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X.,
+Zhang, H., Zhang, M., Li, Y. K., Wu, Y., and Guo,
+D. Deepseekmath: Pushing the limits of mathematical reasoning in open language models, 2024. URL
+https://arxiv.org/abs/2402.03300.
+
+Lan, Y., Li, X., Du, H., Lu, X., Gao, M., Qian, W., and Zhou,
+A. Survey of natural language processing for education:
+Taxonomy, systematic review, and future trends, 2024.
+URL https://arxiv.org/abs/2401.07518.
+
+Shrestha, S., Kim, M., and Ross, K. Mathematical reasoning
+in large language models: Assessing logical and arithmetic errors across wide numerical ranges, 2025. URL
+https://arxiv.org/abs/2502.08680.
+
+Li, H., Chen, Y., Wang, S., He, Y., Mehrabi, N., Gupta,
+R., and Ren, X. Diagnosing memorization in chainof-thought reasoning, one token at a time, 2025. URL
+https://arxiv.org/abs/2508.02037.
+
+Sun, Z., Dai, G., and Ye, H. Mscr: Exploring the vulnerability of llms’ mathematical reasoning abilities using multi-source candidate replacement, 2025. URL
+https://arxiv.org/abs/2511.08055.
+
+Li, Q., Cui, L., Zhao, X., Kong, L., and Bi, W. GSM-plus: A
+comprehensive benchmark for evaluating the robustness
+of LLMs as mathematical problem solvers. In Proceedings of the 62nd Annual Meeting of the Association for
+Computational Linguistics (Volume 1: Long Papers), pp.
+2961–2984. Association for Computational Linguistics,
+August 2024. URL https://aclanthology.org/
+2024.acl-long.163/.
+
+Team, K., Bai, Y., Bao, Y., Chen, G., Chen, J., Chen, N.,
+Chen, R., Chen, Y., Chen, Y., Chen, Y., Chen, Z., Cui, J.,
+Ding, H., Dong, M., Du, A., Du, C., Du, D., Du, Y., Fan,
+Y., Feng, Y., Fu, K., Gao, B., Gao, H., Gao, P., Gao, T.,
+Gu, X., Guan, L., Guo, H., Guo, J., Hu, H., Hao, X., He,
+T., He, W., He, W., Hong, C., Hu, Y., Hu, Z., Huang, W.,
+Huang, Z., Huang, Z., Jiang, T., Jiang, Z., Jin, X., Kang,
+Y., Lai, G., Li, C., Li, F., Li, H., Li, M., Li, W., Li, Y., Li,
+Y., Li, Z., Li, Z., Lin, H., Lin, X., Lin, Z., Liu, C., Liu, C.,
+Liu, H., Liu, J., Liu, J., Liu, L., Liu, S., Liu, T. Y., Liu, T.,
+Liu, W., Liu, Y., Liu, Y., Liu, Y., Liu, Y., Liu, Z., Lu, E.,
+Lu, L., Ma, S., Ma, X., Ma, Y., Mao, S., Mei, J., Men, X.,
+Miao, Y., Pan, S., Peng, Y., Qin, R., Qu, B., Shang, Z.,
+Shi, L., Shi, S., Song, F., Su, J., Su, Z., Sun, X., Sung, F.,
+Tang, H., Tao, J., Teng, Q., Wang, C., Wang, D., Wang,
+F., Wang, H., Wang, J., Wang, J., Wang, J., Wang, S.,
+Wang, S., Wang, Y., Wang, Y., Wang, Y., Wang, Y., Wang,
+Y., Wang, Z., Wang, Z., Wang, Z., Wei, C., Wei, Q., Wu,
+W., Wu, X., Wu, Y., Xiao, C., Xie, X., Xiong, W., Xu,
+B., Xu, J., Xu, J., Xu, L. H., Xu, L., Xu, S., Xu, W., Xu,
+X., Xu, Y., Xu, Z., Yan, J., Yan, Y., Yang, X., Yang, Y.,
+Yang, Z., Yang, Z., Yang, Z., Yao, H., Yao, X., Ye, W., Ye,
+Z., Yin, B., Yu, L., Yuan, E., Yuan, H., Yuan, M., Zhan,
+H., Zhang, D., Zhang, H., Zhang, W., Zhang, X., Zhang,
+Y., Zhang, Y., Zhang, Y., Zhang, Y., Zhang, Y., Zhang,
+Y., Zhang, Z., Zhao, H., Zhao, Y., Zheng, H., Zheng, S.,
+
+Martı́nez-Plumed, F., Castellano, D., Monserrat-Aranda,
+C., and Hernández-Orallo, J. When ai difficulty is
+easy: The explanatory power of predicting irt difficulty.
+Proceedings of the AAAI Conference on Artificial Intelligence, 36(7):7719–7727, Jun. 2022. doi: 10.1609/
+aaai.v36i7.20739. URL https://ojs.aaai.org/
+index.php/AAAI/article/view/20739.
+Mirzadeh, S. I., Alizadeh, K., Shahrokhi, H., Tuzel, O., Bengio, S., and Farajtabar, M. GSM-symbolic: Understanding the limitations of mathematical reasoning in large
+language models. In The Thirteenth International Conference on Learning Representations, 2025. URL https:
+//openreview.net/forum?id=AjXkRZIvjB.
+Polo, F. M., Weber, L., Choshen, L., Sun, Y., Xu, G.,
+and Yurochkin, M. tinybenchmarks: evaluating llms
+with fewer examples. In ICML, 2024. URL https:
+//openreview.net/forum?id=qAml3FpfhG.
+10
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Zhou, J., Zhou, X., Zhou, Z., Zhu, Z., Zhuang, W., and
+Zu, X. Kimi k2: Open agentic intelligence, 2025. URL
+https://arxiv.org/abs/2507.20534.
+
+Liu, T., Ren, X., and Zhang, Z. Qwen2.5-math technical report: Toward mathematical expert model via selfimprovement, 2024. URL https://arxiv.org/
+abs/2409.12122.
+
+Team, Q. Qwen3 technical report, 2025. URL https:
+//arxiv.org/abs/2505.09388.
+
+Yang, B., Yang, Q., Ma, Y., and Liu, R. Utmath:
+Math evaluation with unit test via reasoning-to-coding
+thoughts, 2025a. URL https://arxiv.org/abs/
+2411.07240.
+
+Truong, S. T., Tu, Y., Liang, P., Li, B., and Koyejo, S.
+Reliable and efficient amortized model-based evaluation.
+In Forty-second International Conference on Machine
+Learning, 2025. URL https://openreview.net/
+forum?id=HDbWrsgkB9.
+Ul Abedin, Z., Qamar, S., Flek, L., and Karimi, A. ArithmAttack: Evaluating robustness of LLMs to noisy context in math problem solving. In Proceedings of the The
+First Workshop on LLM Security (LLMSEC), pp. 48–53,
+Vienna, Austria, August 2025. Association for Computational Linguistics. URL https://aclanthology.
+org/2025.llmsec-1.5/.
+Vania, C., Htut, P. M., Huang, W., Mungra, D., Pang, R. Y.,
+Phang, J., Liu, H., Cho, K., and Bowman, S. R. Comparing test sets with item response theory, 2021. URL
+https://arxiv.org/abs/2106.00840.
+
+Yang, Y., Yamada, H., and Tokunaga, T. Evaluating robustness of LLMs to numerical variations in mathematical reasoning. In The Sixth Workshop on Insights from Negative
+Results in NLP, pp. 171–180, Albuquerque, New Mexico,
+May 2025b. Association for Computational Linguistics.
+doi: 10.18653/v1/2025.insights-1.16. URL https://
+aclanthology.org/2025.insights-1.16/.
+Yao, L. Large language models are contrastive reasoners, 2025. URL https://arxiv.org/abs/2403.
+08211.
+Yu, J., Wang, S., Lai, H., Chen, W., Rao, Y., Su,
+Q., and Yin, J. Generating commonsense reasoning questions with controllable complexity through
+multi-step structural composition. In Proceedings of
+the 31st International Conference on Computational
+Linguistics, pp. 2261–2276, Abu Dhabi, UAE, January 2025. Association for Computational Linguistics. URL https://aclanthology.org/2025.
+coling-main.155/.
+
+von Werra, L., Belkada, Y., Tunstall, L., Beeching, E.,
+Thrush, T., Lambert, N., Huang, S., Rasul, K., and
+Gallouédec, Q. Trl: Transformer reinforcement learning. https://github.com/huggingface/trl,
+2020.
+
+Zhang, H., Da, J., Lee, D., Robinson, V., Wu, C., Song,
+W., Zhao, T., Raja, P., Zhuang, C., Slack, D., Lyu,
+Q., Hendryx, S., Kaplan, R., Lunati, M., and Yue, S.
+A careful examination of large language model performance on grade school arithmetic, 2024. URL https:
+//arxiv.org/abs/2405.00332.
+
+Wu, M., Zhang, Z., Dong, Q., Xi, Z., Zhao, J., Jin, S.,
+Fan, X., Zhou, Y., Lv, H., Zhang, M., Fu, Y., Liu, Q.,
+Zhang, S., and Zhang, Q. Reasoning or memorization?
+unreliable results of reinforcement learning due to data
+contamination, 2025. URL https://arxiv.org/
+abs/2507.10532.
+
+Zheng, C., Liu, S., Li, M., Chen, X.-H., Yu, B., Gao, C.,
+Dang, K., Liu, Y., Men, R., Yang, A., Zhou, J., and
+Lin, J. Group sequence policy optimization, 2025. URL
+https://arxiv.org/abs/2507.18071.
+
+Xu, Z., Li, Y., Jiang, F., Ramasubramanian, B., Niu, L., Lin,
+B. Y., and Poovendran, R. Tinyv: Reducing false negatives in verification improves rl for llm reasoning, 2025a.
+URL https://arxiv.org/abs/2505.14625.
+
+Zheng, Y., Zhang, R., Zhang, J., Ye, Y., and Luo, Z. LlamaFactory: Unified efficient fine-tuning of 100+ language
+models. In Proceedings of the 62nd Annual Meeting
+of the Association for Computational Linguistics (Volume 3: System Demonstrations), pp. 400–410, Bangkok,
+Thailand, August 2024. Association for Computational
+Linguistics. URL https://aclanthology.org/
+2024.acl-demos.38/.
+
+Xu, Z., Liu, J., Wang, Y., and Gu, Y. Latency-response
+theory model: Evaluating large language models via
+response accuracy and chain-of-thought length, 2025b.
+URL https://arxiv.org/abs/2512.07019.
+Xue, B., Zhu, Q., Wang, R., Wang, S., Wang, H., Mi, F.,
+Wang, Y., Shang, L., Liu, Q., and Wong, K.-F. Reliablemath: Benchmark of reliable mathematical reasoning on large language models, 2025. URL https:
+//arxiv.org/abs/2507.03133.
+
+Zhou, Z., Liu, S., Ning, M., Liu, W., Wang, J., Wong, D. F.,
+Huang, X., Wang, Q., and Huang, K. Is your model
+really a good math reasoner? evaluating mathematical
+reasoning with checklist, 2024. URL https://arxiv.
+org/abs/2407.08733.
+
+Yang, A., Zhang, B., Hui, B., Gao, B., Yu, B., Li, C., Liu,
+D., Tu, J., Zhou, J., Lin, J., Lu, K., Xue, M., Lin, R.,
+11
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+A. Experimental Setup
+
+tion completeness, clarity, conceptual consistency, structural
+perturbations, and the avoidance of reasoning shortcuts.
+
+A.1. Implementation Details
+
+A.4. Rewrite Strategy
+
+We use the API interface provided by OpenAI to call models
+and obtain the response matrix of LLMs (for the GLM series, we use the ZHIPU interface). The size of the response
+matrix is 35×2000. We perform IRT parameter estimation
+through py-irt (Lalor & Rodriguez, 2023). The statistics
+of each student model’s performance is shown in Figure 5,
+along with the accuracy and estimated ability θ are shown
+in Table 5. The results indicate that within the same model
+series (e.g., Qwen2.5 or Qwen3), model parameter size is
+positively correlated with capability. However, this relationship is not numerically linear. Additionally, frontier
+reasoning models generally exhibit higher capability scores.
+
+We distill six core rewrite strategies from the rewritten questions: (1) Wording and Paraphrasing Modification, (2) Distracting Info, (3) Numerical Substitution, (4) Add Extra
+Steps, (5) Change Constraints, and (6) Change Target. The
+detailed descriptions are shown in Table 7. To determine
+the strategies involved in each question, we employed a
+model-based annotation process. We fed each question to
+both GPT-5 and DeepSeek-V3.2 three times each, for a total
+of six annotations. A specific strategy was only recorded
+as being present for a given question if it was selected by a
+majority (i.e., at least three out of six) of the model runs.
+
+In the SFT stage, we use the LLaMA-Factory (Zheng et al.,
+2024) framework for training, with a dataset of 2, 000 rewritten mathematical questions distilled from GPT-5-mini. In
+the reinforcement learning stage, we use the TRL (von Werra
+et al., 2020) framework for training, with 3, 000 questions
+extracted from the DeepMath dataset (He et al., 2025).
+
+B. Effect Analysis
+B.1. Orthogonality between question difficulty and
+robustness verification
+The verification of model robustness and the evolution of
+question difficulty can coexist in our method. We define
+the robustness of LLMs in mathematical reasoning as follows: for a question x and the model’s response correctness
+y ∈ {0, 1}, given a semantic-preserving transformation
+family T , if f (x) = y, then for the vast majority of t ∈ T ,
+f (t(x)) = y holds. Figure 8 shows that the semantic similarity between our rewritten and original questions consistently exceeds 80%, confirming that performance degradation does not stem from semantic disparity. Building
+on this, we decouple question difficulty from robustness
+verification. We identify ”surface-level modifications” that
+preserve reasoning depth. An example is shown in Figure 7.
+In this example, the evolution of the question is manifested
+in the formalized mathematical conditions and changes in
+phrasing, which do not impact the depth of reasoning required, making this a case for verifying model robustness.
+For example, Qwen2.5-72B answered the original question
+correctly but failed on the rewritten question. We collected
+similar surface-only rewrites and categorized them into three
+difficulty levels—easy, medium, and hard—based on the
+accuracy rates of 10 LLMs on the original questions. The
+questions rewritten using the surface-only strategy maintain a reasoning depth consistent with the original questions, leaving the surface form as the sole variable. If the
+model’s performance degradation were solely dependent
+on difficulty, the magnitude of the performance drop on
+the rewritten questions should vary significantly across the
+three difficulty levels. Conversely, if question difficulty and
+robustness verification can be decoupled, the variations in
+performance decline across the three difficulty levels should
+be insignificant. We evaluated the performance degradation
+between the original and rewritten questions across different
+
+A.2. Hyperparameter Setup
+The hyperparameters used in our work are summarized in
+Table 6. For the IRT parameter estimation and the training of the difficulty ranker, we perform a greedy search
+to select the optimal group of hyperparameters based on
+evaluation metrics. For the SFT and reinforcement learning
+stages, the hyperparameters are chosen by balancing model
+performance with the available computational resources.
+A.3. Prompt Strategy
+For constructing the response matrix and evaluating model
+performance on both the original benchmark and the perturbed benchmark, we use the same zero-shot prompt to instruct models to answer mathematical questions (Figure 6a),
+requiring only that answers follow a specific format for
+verification. In practice, we find that even without explicitly telling the model to “think step by step”, all evaluated
+models still produce chain-of-thought outputs.
+Figure 6b shows the prompt we use to guide the model
+in rewriting mathematical questions during the SFT and
+reinforcement learning stages. We do not impose a single,
+detailed rule. Instead, we briefly outline several ways to
+increase difficulty and allow the model to improvise, making
+the trajectory of difficulty evolution unpredictable.
+Figure 6c presents the prompt we use to instruct GPT-5 to
+choose the one that better meets the requirements from two
+rewritten questions, enabling us to compute the win rate of
+our method against the rule-based approach. We specify in
+detail that the rewritten question must address covering ques12
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+Model
+
+Parameter
+
+Pass@1 (%)
+
+θ
+
+8B
+1.5B
+14B
+671B
+12B
+4B
+9B
+1TB
+70B
+8B
+109B
+7B
+24B
+72B
+7B
+0.5B
+14B
+72B
+7B
+0.6B
+14B
+32B
+235B
+32B
+
+46.75
+76.85
+74.65
+71.65
+88.75
+85.85
+82.65
+93.15
+64.80
+49.80
+30.50
+60.25
+93.10
+91.80
+29.85
+64.15
+62.35
+81.25
+93.05
+53.10
+28.20
+70.90
+13.20
+50.05
+75.05
+63.60
+19.25
+64.90
+71.90
+56.20
+26.95
+77.05
+79.00
+83.95
+95.00
+
+-1.132
+0.710
+0.552
+0.324
+1.822
+1.534
+1.203
+2.406
+-0.115
+-0.970
+-2.038
+-0.347
+2.417
+2.222
+-2.079
+-0.135
+-0.213
+1.064
+2.462
+-0.770
+-2.168
+0.284
+-3.427
+-0.947
+0.555
+-0.143
+-2.799
+-0.106
+0.332
+-0.541
+-2.263
+0.735
+0.883
+1.262
+2.813
+
+Claude-3.5-haku
+Claude-3.7-sonnet
+Deepseek-R1-Distill-Llama-8B
+Deepseek-R1-Distill-Qwen-1.5B
+Deepseek-R1-distill-Qwen-14B
+Deepseek-v3-0328
+Gemini-2.0-flash
+Gemini-2.5-flash
+Gemma3-12B-it
+Gemma3-4B-it
+GLM-4-9B-chat
+GLM-4-plus
+GLM-Z1-airx
+GLM-Z1-flash
+GPT-3.5-turbo
+GPT-4o
+Grok-2
+Grok-3
+Kimi-K2-Instruct
+Llama-3.1-70B
+Llama-3.1-8B
+Llama-4-scout
+Mistral-7B-Instruct-V0.2
+Mistral-Small-3.1-24B-Instruct
+Qwen-math-72B
+Qwen-math-7B
+Qwen2.5-0.5B
+Qwen2.5-14B
+Qwen2.5-72B
+Qwen2.5-7B
+Qwen3-0.6B
+Qwen3-14B
+Qwen3-32B
+Qwen3-235B-A22B
+QwQ-32B
+
+Table 5. Statistics of each student model’s performance and estimated ability.
+
+B.2. Effect of IRT models and difficulty ranker.
+
+difficulty levels (Table 8). The results indicate that surfacelevel rewriting induces performance degradation even on
+easy questions, thereby highlighting the necessity of robustness verification. Moreover, the performance drop across
+difficulty levels is not significant, with a particularly negligible variation in the magnitude of change between easy
+and medium questions. We additionally recorded the counts
+of ”Correct on Original, Incorrect on Rewritten” and ”Incorrect on Original, Correct on Rewritten” for each paired
+sample in the surface-level rewriting dataset and calculated
+the p-value using McNemar’s test. The resulting p-value of
+2.3847 × 10−11 is substantially lower than 0.05, revealing
+a significant asymmetry. This demonstrates that the performance decline originates from the model’s non-robustness
+rather than changes in difficulty. In summary, through case
+study and statistical analysis, we decoupled question difficulty from robustness verification and found that the two
+are orthogonal, allowing them to coexist within our method.
+
+As a limited number of student models is not enough to
+estimate IRT parameters accurately, while employing a large
+number of LLMs as students is computationally costly, we
+augment the student–response data to simulate additional
+student behaviors. We adopt two augmentation strategies:
+• Variational Autoencoder (VAE) method. We mitigate the scarcity of student responses by training
+a VAE (Kingma & Welling, 2022) on the observed
+response matrix Y to learn a low-dimensional manifold of student behavior. During generation, we
+draw a latent code z from the Gaussian prior and
+decode it into per-question correctness probabilities
+π(z), from which Bernoulli draws yield a synthetic
+student-question response vector with conditional independence across items given z:
+
+rVAE,j | z ∼ Bernoulli πj (z) ,
+13
+
+j = 1, . . . , N
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Hyperparameter
+M
+N
+S
+T
+β-VAE
+Latent dimension
+Priors
+Random Seed
+Batch size
+Embedding dimension
+Hidden dimension
+Dropout rate
+Activation
+Epochs (CV)
+Device
+Finetuning type
+Template
+Cutoff length
+Per-device train batch size
+Gradient accumulation steps
+Learning rate
+Epochs
+Warmup ratio
+Bf16
+Deepspeed (Rasley et al., 2020)
+Device
+Finetuning type
+Method
+Per-device batch size
+Gradient accumulation steps
+Group size K
+Max prompt length
+Max new tokens
+Temperature
+Top-p
+Max steps
+KL coef
+LoRA rank
+LoRA α
+LoRA dropout
+Deepspeed
+α
+β
+γ
+
+Description
+
+Value
+
+IRT & Difficulty Ranker
+The number of student models
+The number of mathematical questions
+The number of virtual students by VAE
+The number of virtual students by Sampling
+Weight of KLD loss for VAE
+Dimension of latent space
+Prior distribution of IRT parameters
+Random seed for partitioning missing values in the response matrix
+Number of samples per batch
+Dimension of input embeddings
+Hidden layer size of MLP
+Dropout probability for hidden layers
+Non-linear activation function
+Training epochs for cross-validation
+Supervised Fine-Tuning
+Device used for SFT
+Finetuning strategy
+Prompt/format template of LLaMA-Factory
+Max sequence length (tokens)
+Batch size per device
+Grad accumulation steps
+Initial learning rate
+Number of training epochs
+Warmup ratio
+bfloat16 training
+Deepspeed Stage
+Reinforcement Learning
+Device used for RL
+Finetuning strategy
+RL algorithm
+Prompts per device per step
+Steps to accumulate gradients
+Generations per prompt
+Max tokens of prompt
+Max tokens to generate per sample
+Sampling temperature
+Nucleus sampling p
+Maximum training steps
+KL penalty coefficient
+Rank
+Scaling factor
+Dropout probability
+Deepspeed Stage
+Weight of difficulty reward
+Weight of correctness reward
+Weight of keyword and length reward
+
+Table 6. Main hyperparameter setup.
+
+14
+
+35
+2,000
+200
+200
+0.5
+32
+vague
+42
+64
+3,072
+(512,256)
+0.3
+ReLU
+8 (5-CV)
+1 * NVIDIA A800 80GB PCIe
+full
+qwen3
+8192
+2
+4
+1e-5
+3.0
+0.1
+true
+3
+4 * NVIDIA A800 80GB PCIe
+LoRA
+GSPO
+1
+4
+4
+512
+4096
+0.7
+0.95
+500
+0.0
+64
+64
+0.05
+2
+0.5
+0.5
+0.3
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+1.0
+
+100
+
+2.0
+
+3.0
+
+4.0
+
+Difficulty
+Level
+5.0
+
+6.0
+
+7.0
+
+8.0
+
+9.0
+
+Accuracy (%)
+
+80
+
+60
+
+40
+
+20
+
+Clau
+Dee
+de
+Dee pseek Claude -3.5-h
+pse -R1- -3.7 aku
+Dee ek-R1 Distil -sonn
+pse -Dis l-Lla et
+ek-R till- ma
+1-d Qwe -8B
+is
+n
+Dee till-Qw -1.5B
+pse en-1
+Gem ek-v3- 4B
+03
+i
+Gem ni-2.0- 28
+in fla
+Gem i-2.5-f sh
+m las
+Gem a3-12B h
+GLM ma3-4 it
+-4-9 B-it
+B
+GLM -chat
+GLM 4-plus
+GLM -Z1-air
+x
+GPT -Z1-fla
+-3.5 sh
+-tur
+b
+GPT o
+-4o
+Gro
+k
+Kim Gr -2
+i-K2 ok-3
+Llam -Instr
+a- uct
+Llam 3.1-70
+B
+Mis Mistra Llam a-3.1-8
+tral
+a
+l
+7
+-Sm B-In 4-sc B
+all-3 stru out
+.1-2 ct-V
+Qwe 4B-Ins 0.2
+n- tru
+Qwe math-7 ct
+2B
+nQwe mathn2 7B
+Qwe .5-0.5B
+Qwe n2.5-7
+B
+n
+Qwe 2.5-14
+n2.5 B
+Qwe -72B
+n
+Qwe 3-0.6B
+n3
+Qwe Qwe -14B
+n3- n3-3
+235 2B
+B-a
+QwQ 22B
+-32
+B
+
+0
+
+Figure 5. Statistics of each student model’s performance. Difficulty Level is given by DeepMath Dataset.
+
+Strategy
+
+Definition
+
+Wording
+
+Rephrases the question using different vocabulary or structures without altering math
+logic.
+
+Level
+Easy
+Medium
+Hard
+
+Replaces key numerical values in the question with new values.
+
+∆
+11.43
+12.86
+18.75
+
+rSampling with the originals to form an augmented matrix
+Ỹ ∈ {0, 1}M +S+T,N :
+
+
+Y
+Ỹ =  RVAE  ,
+RSampling
+(1)
+
+Extra Steps Introduces new events or steps that must be
+incorporated into the calculation.
+Constraints Adds stricter limitations or alters core rules
+to change the solution’s domain.
+Target
+
+Rewritten Accuracy
+68.57
+55.71
+43.75
+
+Table 8. Performance drop comparison across different difficulty
+levels.
+
+Distracting Adds irrelevant information, definitions, or
+values to the question description.
+Numerical
+
+Original Accuracy
+80.00
+68.57
+62.50
+
+Changes the final expression to a more complex or generalized version.
+
+RVAE = [r1VAE , . . . , rSVAE ]⊺ ,
+
+Table 7. Definitions of the Rewrite Strategies.
+
+RSampling = [r1Sampling , . . . , rTSampling ]⊺
+S and T denote the number of synthetic students by VAE
+and sampling, respectively. Then the modeling ability of
+IRT calibration for question difficulties can be improved.
+We perform IRT parameter estimation based on the response
+matrix Ỹ.
+
+• Sampling method. We simulate the responses of students by drawing from the empirical distribution observed in Y. For each question j, we compute the empirical correctness rate C over the observed responses
+and use it as the Bernoulli success probability:
+ 
+rSampling,j ∼ Bernoulli Cj ,
+j = 1, . . . , N
+
+As described in Section 6, we conducted additional experiments to verify the effectiveness of the choice of the IRT
+model and data augmentation methods. The results are
+shown in Table 9. We consider two priors provided by
+py-irt: a vague prior that exerts minimal influence so the
+likelihood largely drives estimation, and a hierarchical prior
+that treats parameters as draws from a shared group-level
+distribution with hyperpriors, enabling partial pooling to stabilize estimates and shrink extremes, especially with sparse
+
+Each sampled rVAE and rSampling is then appended as a
+new student row to Y.
+These methods let us synthesize student–item response vectors that respect observed item statistics and student tendencies. We concatenate the synthetic responses rVAE and
+15
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+B.3. Statistics of RIDE rewritten model.
+
+data. For evaluation, in addition to AUC-ROC for discrimination, we also report the Brier Score, the mean squared
+difference between predicted probabilities and observed outcomes (lower is better), which captures overall probabilistic
+accuracy and calibration and thus complements AUC-ROC’s
+ranking focus.
+
+Model
+1-PL
+1-PL
+1-PL
+1-PL
+1-PL
+1-PL
+1-PL
+1-PL
+1-PL
+1-PL
+2-PL
+2-PL
+2-PL
+2-PL
+2-PL
+2-PL
+2-PL
+2-PL
+2-PL
+2-PL
+3-PL
+3-PL
+3-PL
+3-PL
+3-PL
+3-PL
+3-PL
+3-PL
+
+Method
+VI
+VI
+VI
+VI
+VI
+VI
+VI
+VI
+MCMC
+MCMC
+VI
+VI
+VI
+VI
+VI
+VI
+VI
+VI
+MCMC
+MCMC
+VI
+VI
+VI
+VI
+VI
+VI
+VI
+VI
+
+Data Augmentation
+VAE
+
+Sampling
+
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+✓
+
+Prior
+
+AUC-ROC
+
+Brier Score↓
+
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+vague
+hierarchical
+
+89.81
+90.03
+91.01
+90.95
+91.06
+91.03
+91.29
+91.27
+89.81
+90.08
+85.18
+90.41
+86.19
+90.89
+86.24
+89.62
+86.56
+89.81
+84.56
+88.06
+89.52
+89.52
+90.76
+90.76
+90.05
+90.05
+91.01
+91.01
+
+11.97
+11.89
+11.54
+11.61
+11.25
+11.29
+11.29
+11.32
+11.95
+11.85
+15.87
+11.72
+15.50
+11.64
+15.73
+12.53
+15.52
+12.27
+15.72
+13.34
+12.21
+12.21
+11.73
+11.73
+12.50
+12.50
+12.13
+12.13
+
+Starting from Qwen3-1.7B and Qwen3-4B, we trained
+RIDE-1.7B and RIDE-4B, and preserved SFT checkpoints
+(RIDE-1.7B-SFT, RIDE-4B-SFT, RIDE-8B-SFT) to separate SFT from RL effects. The questions rewritten by each
+model are evaluated in terms of average generation time,
+average token count, correctness, and semantic similarity.
+Generation time and token count use the minimum of three
+runs, correctness is judged by GPT-5 and similarity is measured via text-embedding-3-large. The results are shown in
+Figure 8. Compared to Qwen3-8B, our SFT and reinforcement learning models produce longer outputs and slower
+inference, showing that rewrites expand questions, solutions,
+and answers. Semantic similarity drops slightly, indicating
+greater diversity while preserving affinity with the original
+questions. Reinforcement learning improves correctness
+over both the original and SFT-only models. RIDE-8B
+and RIDE-4B demonstrate much higher correctness than
+RIDE-1.7B, indicating that parameter size influences the
+correctness of generated questions. However, this difference
+is not significant between the 4B and 8B models, suggesting
+a limited effect of scale within this range.
+Correctness
+50
+
+Qwen3-8B
+RIDE-8B-SFT
+RIDE-8B
+RIDE-4B-SFT
+RIDE-4B
+RIDE-1.7B-SFT
+RIDE-1.7B
+
+40
+30
+
+Table 9. Comparison of IRT models, data augmentation and prior
+method.
+
+20
+10
+
+Token 1500 1200 900
+Count
+
+Besides, we explore regression, classification, and ranking
+methods to fit IRT-estimated question difficulties from textual features. Regression task is evaluated by RMSE, consistently yields values above 1 across models and embeddings,
+indicating large bias. Classification treats questions with
+difficulty below 0 as “easy” and above 0 as “hard,” but F1
+scores remain below 60% due to class imbalance. Finally,
+we adopt a pairwise ranking approach with AUC-ROC as the
+metric, achieving around 72%, with little variation across
+embedding models.
+Method
+LR
+LR
+SVR
+MLP
+Longformer (Beltagy et al., 2020)
+SVM
+MLP
+MLP
+MLP
+
+Task
+Regression
+Regression
+Regression
+Regression
+Regression
+Classification
+Classification
+Ranking
+Ranking
+
+Embedding
+Qwen3-8B
+BGE-M3 (Chen et al., 2024)
+Qwen3-8B
+Qwen3-8B
+Qwen3-8B
+Qwen3-8B
+Qwen3-8B
+Qwen3-8B
+text-embedding-3-large
+
+600
+
+300
+
+14
+
+28
+
+42
+
+56
+
+70 Generation
+
+Time
+
+20
+40
+60
+80
+100
+
+Semantic
+Similarity (%)
+
+Figure 8. Statistics of average token count, average generation
+time, correctness and semantic similarity across different models.
+
+Metrics
+1.0375
+1.1380
+1.0108
+1.0931
+1.0746
+58.34
+53.60
+71.95
+71.98
+
+B.4. Effect of LLM verifier
+We use the proprietary GPT-5 series models to provide correctness rewards and as filtering models. To verify that our
+method can also use low-cost, open-source models, we employ GPT-5-mini and Deepseek-V3.2 (non-thinking mode)
+as verifiers. We provide 2, 000 math questions (without answers), along with the solutions and answers generated by
+two test models (Qwen2.5-Math-7B and Gemma3-12B), as
+input to these verifiers to judge the correctness of the test
+models’ responses. The results, shown in Table 11, indicate
+
+Table 10. Comparison of regression, classification and ranking
+tasks on different models.
+
+16
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+that the verification accuracy of the closed-source model
+GPT-5-mini reach over 85%. In contrast, the accuracy of
+DeepSeek-V3.2 was relatively lower, but still over 65%.
+However, both verifiers achieve a precision of around 90%.
+This indicates that both models can precisely assign low
+reward signals to incorrect solutions and are effective for
+filtering erroneous data. The relatively low recall, however,
+implies that the verifiers tend to be conservative, flagging
+an otherwise correct solution and answer as incorrect. This
+may be because the model’s solution contains minor errors
+even when the final answer is correct. This situation is
+acceptable, given that rule-based or model-based rewards
+in Reinforcement Learning with Verified Rewards (RLVR)
+also exhibit a high number of false negatives (Xu et al.,
+2025a). While this situation affects training efficiency, it
+does not directly lead to training failure, as our verifier assigns low reward signals to incorrect rewrites. Therefore,
+our method can also use open-source models as verifiers
+and is not merely a distillation from proprietary models.
+Response Source
+
+Verifier
+
+Precision
+
+Recall
+
+F1
+
+Accuracy
+
+Qwen2.5-Math-7B
+
+GPT-5-mini
+Deepseek-V3.2
+
+97.96
+89.48
+
+79.17
+62.19
+
+87.57
+73.38
+
+85.70
+71.30
+
+Gemma3-12B
+
+GPT-5-mini
+Deepseek-V3.2
+
+98.38
+93.84
+
+79.71
+54.09
+
+88.06
+68.62
+
+86.00
+67.95
+
+culty defined by the AoPS standard and the empirical error
+rate demonstrated by LLMs. Furthermore, treating lower
+empirical accuracy directly as higher ”LLM difficulty” introduces a fundamental flaw: empirical accuracy assigns equal
+weight to the responses of all tested LLMs. We therefore
+introduce IRT to define difficulty, which allows us to derive
+a statistically robust difficulty value by incorporating the
+ability of all participating LLMs into the calculation.
+Additionally, we compare the correlation of both the empirical error rate (ungrouped) and IRT difficulty against
+the human-perceived difficulty, again using Spearman and
+Kendall coefficients, as shown in Table 12. The results
+show that both empirical error rate and our IRT difficulty
+(fitted on 35 model responses) have a similar correlation
+with the given human difficulty. Our work is primarily focused on this ”LLM difficulty” rather than human-perceived
+difficulty.
+
+Table 11. Verification performance of GPT-5-mini and DeepseekV3.2 verifiers on solutions generated by different response models.
+
+vs Human-Rated Difficulty
+
+Spearman
+
+Kendall
+
+Empirical Error Rate
+IRT Difficulty
+IRT Difficulty w/o augmentation
+IRT Difficulty (Qwen-only)
+
+0.3362
+0.3418
+0.3364
+0.2839
+
+0.2470
+0.2468
+0.2429
+0.2031
+
+Table 12. Correlation analysis of empirical error rate, IRT difficulty
+and human-rated difficulty. Spearman & Kendall measure the
+strength and direction of the monotonic relationship (or rank-order
+correlation) between two variables.
+
+C. Item Response Theory Analysis
+
+We also conduct ablation studies by fitting IRT models on
+the original response matrix without augmentation, and on
+a matrix using only the Qwen-series models. The results
+show that the difficulty values derived solely from the Qwen
+series (11 test-takers) correlate poorly with both empirical
+accuracy and human difficulty, as the limited number of
+subjects introduces significant bias into the IRT fit. Besides,
+the original response matrix without augmentation is also
+less correlated due to data sparsity. This finding validates
+the effectiveness of our VAE and Sampling data augmentation methods. By learning from the original response
+matrix and empirical accuracy to generate a large number
+of distributionally-consistent virtual responses to expand
+the matrix, our approach enhances the robustness of the
+IRT fitting process. This prevents parameter estimation bias
+caused by an insufficient number of subjects.
+
+C.1. Human Difficulty & LLM Difficulty
+In human cognition, the difficulty of a math question is often
+determined by its required reasoning depth. Consequently,
+researchers have established the AoPS (Art of Problem Solving) standard to measure the difficulty of math competition
+questions from a human perspective, and methods have
+emerged that use LLMs in conjunction with the AoPS standard to automatically assign difficulty ratings to math questions (Gao et al., 2025). The DeepMath dataset, which we
+utilize in the IRT modeling phase, also applies this standard
+to provide difficulty levels for its questions. However, we
+discover a discrepancy between this human-centric standard
+and actual LLM performance. After grouping the responses
+of our 35 models on 2, 000 questions by their given AoPS
+difficulty levels, we calculate the mean empirical accuracy
+for each level. The Spearman and Kendall correlation coefficients between the AoPS difficulty and the mean empirical
+accuracy are found to be -0.5152 and -0.5111, respectively,
+indicating that while the expected negative correlation exists (i.e., higher human-perceived difficulty corresponds to
+lower model accuracy), the relationship is not sufficiently
+strong to consider them equivalent. Therefore, we conclude
+that a deviation exists between the human cognitive diffi-
+
+C.2. Case for IRT Difficulty
+As previously discussed, although both empirical error rate
+and IRT difficulty can be regarded as values for LLM Difficulty, empirical error rate’s drawback is its assumption
+of equal weighting for all LLMs, leading to a lack of item
+discrimination. In Figure 9, we present a case study of two
+questions. Although both questions have the identical empir17
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+ical accuracy (37.14%), their IRT difficulties differ significantly: Question 1 has an IRT difficulty of 0.599, whereas
+Question 2 has an IRT difficulty of 0.778. This discrepancy arises because the profile of models that answer each
+question correctly is different. Specifically, four high-ability
+models including Deepseek-R1-Distill-Qwen-1.5B, Gemini2.5-Flash, GLM-Z1-AIRX, and Qwen3-235B-A22B (see
+ability values in Table 5) answer Question 1 correctly but
+fail to answer Question 2. Therefore, even with the same
+empirical accuracy, Question 1 is more likely to be solved
+by high-ability LLMs, thus receiving a lower IRT difficulty
+score. This case validates the advantage of using IRT difficulty over simple empirical error rate, as it successfully distinguishes item difficulty based on the ability of the solvers,
+not just the raw pass count.
+C.3. Distribution Shift
+To validate the stability of our IRT parameter estimations,
+we collect additional responses for the same 2, 000 items
+using five extra models: Qwen2-72B, Mistral-large, GPToss-20B, Qwen3-1.7B, and GPT-4.1-nano. Among these,
+Qwen2-72B and Qwen3-1.7B are classified as ”lowerperforming LLMs” as their accuracies fell below the 67.98%
+average accuracy of our initial 35 LLMs. We then conduct
+two experiments: first, we added only these weaker LLMs
+to the original 35-LLM response matrix; second, we added
+all 5 new models to the original 35-LLM matrix. We then fit
+IRT parameters for both augmented matrices and calculate
+the Spearman and Kendall correlation coefficients against
+the original IRT difficulty parameters derived from the initial 35 LLMs. The results (shown in Table 13) indicate
+that in both scenarios—whether adding only the weaker
+models or all five additional models—the changes in the
+Spearman and Kendall correlation coefficients are minimal.
+This demonstrates the stability of our method, confirming
+that our IRT parameter estimations are robust and not significantly perturbed by the inclusion of a certain amount of
+new response data.
+vs 35-LLMs IRT Difficulty
+35-LLMs + lower-performing 2-LLMs
+35-LLMs + 5-LLMs
+
+Spearman
+
+Kendall
+
+1.00
+1.00
+
+0.9968
+0.9954
+
+Table 13. Correlation analysis between the original 35-LLM fitted
+IRT difficulty and those fitted with 2 additional lower-performing
+LLMs or all 5 additional LLMs.
+
+18
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Instructions: You are a mathematical reasoning assistant. Now solve the following question. The final answer should be
+marked with \\boxed{}.
+{QUESTION}
+
+(a) Prompt for mathematical question answering.
+Instructions: Please rewrite the following math problem into a significantly more difficult version, such that the likelihood
+of a model answering it correctly decreases.
+When rewriting:
+1. Question difficulty can be increased by adding more calculations, implicit conditions, higher-level math concepts, or
+distracting/unnecessary information.
+2. You must not increase difficulty by adding multiple sub-questions or turning the problem into a proof question. The
+rewritten problem must remain a single well-defined question.
+3. Solution steps must be complete and logically sound, but kept concise and relatively short (avoid excessively long
+derivations).
+4. Answer must be unique and consistent with the solution steps.
+5. Output must strictly follow this format:
+<question>Rewritten question text</question>
+<solution>Rewritten solution steps</solution>
+<answer>Rewritten final answer</answer>
+6. Do not omit any part, DO NOT output any other content except rewritten question, solution and answer.
+Original Question
+{QUESTION}
+Original Answer
+{ANSWER}
+
+(b) Prompt for rewriting mathematical questions.
+Instructions: You are a rigorous math-problem rewrite judge. Your job is to compare two rewrites (A: model-generated, B: rule-generated) of the
+same original math problem and decide which rewrite is better for robustness testing. Do not solve any problem. Think silently and return the final
+preference.
+# Goal
+Select the rewrite that best preserves the core skill being tested while introducing meaningful structural perturbations (for robustness), with a
+problem that is clear, consistent, and fully solvable (preferably single -solution), and with difficulty ≥ the original (no shortcut reasoning).
+# Required Criteria (all must be considered)
+1) Completeness & Solvability: The rewritten problem must be fully specified, mathematically consistent, and solvable, preferably with a single
+correct solution.
+2) Core-Concept Consistency: The rewrite must keep the core concept/skill of the original unchanged; numbers/labels/secondary conditions may
+change as long as the core assessment target is equivalent.
+3) Clarity & No Leakage: Language must be clear, unambiguous, error -free, with no leaked conclusions, intermediate results, or hints that reduce
+the intended reasoning burden.
+4) Structural Perturbation: Pure surface-level paraphrase without structural disturbance (e.g., only a few synonyms) is not a go od rewrite for
+robustness; prefer changes in structure/order/representation that do not alter the core skill or answer.
+5) Difficulty Constraint: The new problem’s difficulty must be ≥ the original; it must not introduce shortcuts or reduce the required reasoning depth.
+# Forbidden (strongly penalize; may make a candidate lose)
+- Changing the problem type, core concept/skill, or final answer relative to the original.
+- Inconsistent or conflicting data/units/constraints, or introducing multi-solution/unsolvable setups unless the original had that intent.
+- Any answer leakage or revealing key intermediate results.
+- Only superficial paraphrasing with no structural perturbation.
+- Introducing reasoning shortcuts that lower difficulty.
+# Tie-breaking priorities
+When deciding between A and B:
+1) Prioritize Completeness & Solvability and Core-Concept Consistency above all.
+2) Next, prefer the one with meaningful structural perturbation and no leakage.
+3) Next, prefer difficulty ≥ original without shortcuts.
+4) If both are comparable across all criteria, output a tie.
+# Process (follow strictly)
+- Do not solve the problem or output any computation, steps, or answers.
+- Analyze A and B against the criteria and forbidden list.
+- Decide the winner using the tie-breaking priorities.
+# Inputs
+- Original question:
+{ORIGINAL_QUESTION}
+- Rewrite A:
+{REWRITE_A}
+- Rewrite B:
+{REWRITE_B}
+
+(c) Prompt for judging which rewritten question is better.
+Figure 6. Overview of prompts.
+
+19
+
+RIDE: Difficulty Evolving Perturbation with Item Response Theory for Mathematical Reasoning
+
+Original Question: In a table tennis tournament every
+participant played every other participant exactly once.
+Although there were twice as many right -handed players as
+left-handed players, the number of games won by left -handed
+players was 40% more than the number of games won by
+right-handed players. (There were no ties and no ambidextrous
+players.) What is the total number of games played?
+Original Answer: 36
+
+Rewritten Question: In a round-robin table tennis tournament,
+every participant plays every other participant exactly once (no
+ties, no ambidextrous players). Let R be the number of right handed players and L be the number of left -handed players, with
+R = 2L. Over the whole tournament, the total number of games
+won by left-handed players is 40% more than the total number of
+games won by right-handed players. Find the total number of
+games played.
+Rewritten Answer: 36
+
+Figure 7. A case study of the rewritten questions with surface-only strategies.
+
+Question 1: Given a $4\\times 4$ real matrix $T$ such that
+$T^4=0$, determine which of the following sequences $k_1, \\
+k_2,\\ k_3,\\ k_4$ is NOT a possible combination for the nullity of
+$T^i$:\n\n1. $k_1 = 3,\\ k_2 = 4,\\ k_3 = 4,\\ k_4 = 4$\n2. $k_1
+= 1,\\ k_2 = 3,\\ k_3 = 4,\\ k_4 = 4$\n3. $k_1 = 2,\\ k_2 = 4,\\
+k_3 = 4,\\ k_4 = 4$\n4. $k_1 = 2,\\ k_2 = 3,\\ k_3 = 4,\\ k_4 =
+4$\n\nNote: Since $T^4=0$, $T$ is nilpotent and its eigenvalues
+are all $0$. Consider the properties of nilpotent matrices to
+determine the answer.
+Answer: 2
+
+Question 2: In the right triangle \\(ABC\\), the altitude \\(BH\\)
+is drawn to the hypotenuse \\(AC\\). Points \\(X\\) and \\(Y\\) are
+the centers of the circles inscribed in triangles \\(ABH\\) and
+\\(CBH\\) respectively. The line \\(XY\\) intersects the legs \\(AB\\)
+and \\(BC\\) at points \\(P\\) and \\(Q\\). Given that \\(BH = h\\),
+find the area of triangle \\(BPQ\\).
+Answer: \\dfrac{h^2}{2}
+Empirical Accuracy: 37.14%
+IRT Difficulty: 0.778
+
+Empirical Accuracy: 37.14%
+IRT Difficulty: 0.599
+
+Figure 9. A case study of two questions with identical empirical accuracy and different IRT difficulties.
+
+20

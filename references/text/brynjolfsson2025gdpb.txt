@@ -1,0 +1,18 @@
+#### Abstract
+
+ The welfare contributions of new goods and free goods are not well-measured in standard statistical agency metrics like GDP or productivity. We derive explicit terms for the contributions of these goods and introduce a new framework and metric, GDP-B, which quantifies their benefits. We apply this framework to several empirical examples, including Facebook and smartphone cameras, and estimate their valuations through incentive-compatible choice experiments. Our new approach can help measure welfare changes over time and reveal which goods and innovations contribute the most to economic growth and well-being. 
+#### Citation
+
+ Brynjolfsson, Erik, Avinash Collis, W. Erwin Diewert, Felix Eggers, and Kevin J. Fox. 2025."GDP-B: Accounting for the Value of New and Free Goods."American Economic Journal: Macroeconomics 17 (4): 312–44.DOI: 10.1257/mac.20210319
+#### Additional Materials
+
+*   [Replication Package](https://doi.org/10.3886/E209901V1)
+*   [Supplemental Appendix](https://www.aeaweb.org/articles/materials/23925)
+*   [Author Disclosure Statement(s)](https://www.aeaweb.org/articles/materials/23926)
+
+#### JEL Classification
+
+*   **D13** Household Production and Intrahousehold Allocation 
+*   **E01** Measurement and Data on National Income and Product Accounts and Wealth; Environmental Accounts 
+*   **E23** Macroeconomics: Production 
+*   **O30** Innovation; Research and Development; Technological Change; Intellectual Property Rights: General

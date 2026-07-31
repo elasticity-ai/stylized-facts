@@ -1,0 +1,1341 @@
+NBER WORKING PAPER SERIES
+
+ECONOMIC GROWTH UNDER TRANSFORMATIVE AI
+Philip Trammell
+Anton Korinek
+Working Paper 31815
+http://www.nber.org/papers/w31815
+
+NATIONAL BUREAU OF ECONOMIC RESEARCH
+1050 Massachusetts Avenue
+Cambridge, MA 02138
+October 2023, Revised April 2026
+
+We thank Tim Blomfield, Nicholas Emery-Xu, and Don Suh for research assistance. Korinek
+performed part of this work while he was a Visiting Fellow at the Brookings Institution. The views
+expressed in this work do not necessarily reflect the views of the Brookings Institution or the
+National Bureau of Economic Research. Korinek also acknowledges support from the Darden
+School of Business at the University of Virginia.
+NBER working papers are circulated for discussion and comment purposes. They have not been
+peer-reviewed or been subject to the review by the NBER Board of Directors that accompanies
+official NBER publications.
+© 2023 by Philip Trammell and Anton Korinek. All rights reserved. Short sections of text, not to
+exceed two paragraphs, may be quoted without explicit permission provided that full credit,
+including © notice, is given to the source.
+
+Economic Growth under Transformative AI
+Philip Trammell and Anton Korinek
+NBER Working Paper No. 31815
+October 2023, Revised April 2026
+JEL No. E2, O3, O4
+ABSTRACT
+Recent advances in AI may herald the near arrival of systems that can automate essentially all work.
+We review the macroeconomic implications of this scenario, in a framework synthesizing several
+strands of the relevant literature. Robustly, fully automating production alone (so that machines can
+self-replicate) would dramatically raise the growth rate and lower the labor share, breaking the
+Kaldor Facts that have long characterized frontier growth. Automating R&D (so that machines can
+self-improve) would accelerate the transformation, but may not produce it in isolation. Wages—the
+product of exploding output and a plummeting labor share—may rise or fall, depending on the
+returns to scale, the importance of natural resources, and the direction of technical change.
+
+Philip Trammell
+Stanford University
+trammell@stanford.edu
+Anton Korinek
+University of Virginia
+Department of Economics and EconTAI
+and NBER
+akorinek@virginia.edu
+
+1
+
+1
+
+Introduction
+
+Recent advances in artificial intelligence have raised the possibility of an economic
+transformation as profound as the Industrial Revolution. AI models have demonstrated rapidly expanding capabilities in cognitive tasks, from natural language processing to scientific discovery, with slower but ongoing progress in robotics extending
+these capabilities to physical labor. The 2024 Nobel Prize in Chemistry awarded to AI
+pioneer Demis Hassabis for an AI system that can predict protein folding exemplifies
+how AI is already accelerating scientific research. Future models may reach the level
+of Artificial General Intelligence (AGI)—the ability to perform all cognitive tasks at
+least as well as skilled humans—and in the process, unlike any technology yet developed, could fully automate the process of research and development itself, including
+the creation of better AI systems.
+If AI capabilities approach this threshold, the resulting economic transformation
+could break the stylized facts that have characterized industrial growth for more than
+two centuries. Since Kaldor (1957) first identified them, two empirical regularities have
+served as cornerstones of growth theory: an approximately constant long-run growth
+rate in output per capita, and an approximately constant labor share of output. These
+“Kaldor Facts” have proven remarkably robust across industrialized countries and subsequent decades, shaping much of modern growth theory: see e.g. Acemoglu (2009)
+for an overview. Yet when viewed over longer time horizons, the phenomenon of constant exponential growth appears as a recent historical anomaly. The global economic
+growth rate unambiguously accelerated with the onset of the Industrial Revolution;
+we have no reason to insist that it cannot accelerate again.
+This paper evaluates the channels through which sufficient advances in AI may affect economic growth by synthesizing several strands of the literature within a common framework. We examine two fundamental questions: Under what conditions
+would AI break the regime of constant exponential growth that has characterized the
+industrial era? And what would be the implications for factor shares and wages? We
+distinguish between the automation of production and the automation of research and
+development and explore their individual and combined effects.
+Our analysis reveals several robust findings. First, if AI enables capital to become
+a gross substitute for labor in production alone, allowing machines to self-replicate,
+the growth rate would dramatically accelerate and the labor share would plummet
+
+2
+toward zero, decisively breaking both Kaldor Facts. The magnitude of this acceleration depends critically on the degree of substitutability and the role of fixed factors
+like natural resources. Second, automating R&D in isolation has more ambiguous effects: it may accelerate growth if automated research proves highly parallelizable, but
+it could also leave growth rates bounded if fundamental constraints on the research
+process persist. Third, the impact on wages is deeply uncertain, depending on the returns to scale, the importance of natural resources, and most critically, the direction
+of technical change.
+In recent years, economists have begun to engage earnestly in theoretical explorations of these transformative possibilities.1 We aim to synthesize the findings of
+the most influential papers on the topic, covering both the insights of different categories of models and the underlying mathematical intuition. We have simplified some
+models and adopted common notation to crystallize the mechanisms at work within a
+unified framework. While we do not offer assessments of the probability of particular
+scenarios, our analysis clarifies the economic conditions under which AI could trigger
+a transformation as great as the Industrial Revolution or greater.
+The remainder of this paper is organized as follows. Section 2 examines the implications of automating production, showing how increased substitutability between
+capital and labor could drive explosive growth and a vanishing labor share. Section
+3 analyzes the automation of R&D, exploring conditions under which it could sustain
+or accelerate growth. Section 4 considers the combined effects of automating both
+sectors. Section 5 summarizes. Section 6 concludes with discussions of the transition from current AI capabilities to transformative automation, policy implications
+for managing radical inequality, and the existential risks that may accompany economically transformative AI.
+
+2
+
+Automating production
+
+Consider the standard constant returns to scale (CRS), two-factor production function
+in capital 𝐾 and labor 𝐿, with factor-augmenting technology terms 𝐴 and 𝐵. Fixing
+1 Sandberg (2013) presented an “overview of models of technological singularity” over a decade ago,
+
+before mainstream economists started to analyze the transformative potential of AI. Most of the models
+he summarizes therefore do not attempt to spell out how AI or other transformative technologies would
+fit into standard economic models to produce the results in question. Our review fills this gap.
+
+3
+̄
+labor supply at 𝐿,
+𝑌𝑡 = 𝑌 (𝐴𝑡 𝐾𝑡 , 𝐵𝑡 ̄𝐿).
+Today, labor and capital are at least weakly gross complements: their elasticity of
+substitution 𝜀 is not greater than one, or equivalently, their substitution parameter
+𝜌 ≡ 𝜀−1
+𝜀 ≤ 0 (Gechert et al., 2022). While this remains, sustained growth requires
+not only accumulating (effective) capital but developing labor-augmenting technology, as the developed world has done since the Industrial Revolution at a rate of ∼2%
+per year.2 Because capital accumulates with output whereas labor does not, and output is bottlenecked by the scarcer factor, labor-augmenting technology tends to be
+the more profitable kind to develop (Acemoglu, 2003). If all technology growth is
+labor-augmenting and the saving rate is constant, the effective capital stock grows
+with output. CRS ensures that 𝑌 , 𝐴𝐾 , and 𝐵𝐿̄ all grow at the same rate, and that the
+[competitive] labor share does not change (Uzawa, 1961).
+Regardless of the microfoundation, therefore, the central question is whether and
+when AI will allow capital to become a close enough substitute for labor to drive
+growth on its own. We call such AI transformative AI, or TAI. Under almost any standard assumptions, what follows is a radical acceleration to growth and decline in the
+labor share.
+
+2.1
+
+Growth and labor share
+
+The implications of gross substitution for output and factor shares are most straightforwardly illustrated by the extreme case of perfect substitution:
+𝑌𝑡 = 𝐴𝑡 𝐾𝑡 + 𝐵𝑡 ̄𝐿.
+𝐴 now has a simple interpretation: how many machines a machine can build per year.
+Even fixing 𝐴, capital accumulation drives exponential output growth. Unless the
+saving rate is negligible or 𝐴 is very low, so that capital replicates slowly, output grows
+2 In broad strokes. Jones (2022) attributes 1.3% of the US’s long-run 2% growth in output per person
+
+to labor-augmenting technology growth, and most of the rest to growth in human capital.
+
+4
+rapidly with 𝐴𝐾 and the labor share
+𝐵𝐿̄
+𝐴𝐾 + 𝐵𝐿̄
+falls to zero.3
+Furthermore, there are now strong incentives to develop capital-augmenting technology. Indeed, because capital is ultimately more plentiful and is no longer bottlenecked by labor, it is typically efficient only to develop capital-augmenting technology,
+if both kinds are equally costly (again, see Acemoglu (2003)). If 𝐴 grows, output grows
+superexponentially: the robots double their numbers in year one, triple their numbers
+in year two, and so on. The labor share falls to zero even more rapidly.
+Saving. By no-arbitrage, the interest rate has to equal the return on capital, 𝐴. As
+the interest rate rises, the saving rate may rise or fall. The rise of automation may also
+move the saving rate by shifting income from low to high savers or vice-versa: Berg et
+al. (2018) emphasize that those who make most of their incomes from wages currently
+empirically exhibit lower saving rates than those who make most of their incomes
+from capital. Sachs and Kotlikoff (2012), Sachs et al. (2015), and Benzell and Ye (2024)
+focus on the case in which retirees with high discount rates hold most capital.
+Given any constant (or bounded) inverse elasticity of intertemporal substitution
+𝜂, however, the saving rate cannot fall quickly enough to defuse superexponential
+growth. This follows from an investor’s Euler equation. Letting 𝛿 denote the discount
+rate, 𝑐𝑡 denote consumption per person at 𝑡, and 𝑅𝑡 denote the cumulative interest
+factor earned by investing from 0 to 𝑡,
+−𝜂
+
+−𝛿 𝑡
+
+−𝜂
+
+𝑐0 = 𝑒 −𝛿𝑡 𝑅𝑡 𝑐𝑡
+
+⟹
+
+1
+
+𝑐𝑡 /𝑐0 = 𝑒 𝜂 𝑅𝑡𝜂 .
+
+Observe that, with constant 𝑔𝐴 > 0,
+𝑡
+
+𝐴0 𝑔 𝑡
+(𝑒 𝐴 −1)
+
+𝑅𝑡 = 𝑒 ∫0 𝐴𝜏 𝑑𝜏 = 𝑒 𝑔𝐴
+
+.
+
+Since 𝑅𝑡 grows double-exponentially, so does 𝑐𝑡 /𝑐0 . This is defused only if the elastic3 This pair of points has been made in many contexts. See Prettner (2019) for an especially straight-
+
+forward treatment.
+
+5
+ity of intertemporal substitution ultimately falls as consumption rises, with 𝜂(𝑐) → ∞
+sufficiently quickly.
+Gross substitution in capital goods, Cobb-Douglas in consumption. We have
+implicitly assumed that the production functions for capital and consumption are the
+same: i.e. that there is no “investment-specific technical change”. In this case, capitaldriven growth requires gross substitution in production across the board, and any
+acceleration to growth is coupled with a decline in the labor share, as we have seen.
+This coupling is quite robust, for reasons Berg et al. (2018) elaborate, but it is not
+strictly necessary. This is because rapid growth can be driven by self-replicating capital, as Mookherjee and Ray (2022) emphasize, even if the capital is not quite a gross
+substitute for labor in the consumption goods sector.
+Suppose that capital comes to be a gross substitute for labor in the production of
+capital goods: e.g., for simplicity, that
+𝐾̇ = 𝑠𝐴𝐾 − 𝑑𝐾 ,
+where 𝑠 and 𝑑 are the saving and depreciation rates and 𝐴 is high enough to sustain
+rapid growth (𝑠𝐴 − 𝑑 ≫ 0). If capital and labor are also gross substitutes in the production of consumption goods, the labor share falls as capital accumulates, as noted
+above; if they are gross complements, consumption growth remains bottlenecked by
+labor-augmenting technology. However, in the edge-case in which the production of
+consumption goods takes the Cobb-Douglas form
+𝐶 = ((1 − 𝑠)𝐾 )𝛼 𝐿̄ 1−𝛼 ,
+the labor share (in the consumption sector) is constant at 1 − 𝛼, even as consumption
+grows at rate 𝛼𝑔𝐾 = 𝛼(𝑠𝐴−𝑑): so, exponentially if 𝐴 is fixed and superexponentially if
+𝐴 rises. Because capital here does not face diminishing returns to its own replication,
+the proportional capital depreciation process does not force the capital stock to a finite
+steady state in the absence of technological development.
+Rapid, capital-driven growth alongside a positive-bounded labor share is thus a
+technical possibility. This scenario might even be considered a limiting case of the
+tendency over recent decades for manufacturing to grow more capital-intensive while
+demand for labor in consumption services remains high (Autor and Dorn, 2013). Nev-
+
+6
+ertheless, because it relies heavily on the Cobb-Douglas edge case, we will put it aside
+going forward, focusing on the case that machines capable of driving rapid growth are
+gross substitutes for labor in general, and thus drive the labor share to zero.
+
+2.2
+
+Wages
+
+The impact of TAI on the wage bill is more deeply ambiguous.
+Rising wages given capital-augmenting technology.
+function
+
+Under a CES production
+
+𝑌𝑡 = (𝑎(𝐴𝐾 )𝜌 + (1 − 𝑎)(𝐵𝐿)𝜌 )
+
+1/𝜌
+
+1−𝜌 𝜌
+𝐵𝑡 (1 − 𝑎)𝐿̄ 𝜌−1 ,
+
+⟹ 𝑑𝑌𝑡 /𝑑𝐿𝑡 = 𝑌𝑡
+
+wages stagnate, or grow at their original slow rate 𝑔𝐵 , only under perfect substitution
+(𝜌 = 1). Under gross but imperfect substitution (𝜌 ∈ (0, 1)), as Nordhaus (2021) notes,
+wages rise rapidly with output even fixing 𝐵. Capital grows immensely plentiful and
+complements labor, however slightly.
+More generally, in any 2 CRS production function 𝑌 (𝐴𝐾 , 𝐵𝐿) with (weakly) diminishing returns to capital, increasing the quantity or augmentation of capital increases (does not affect) the marginal product of labor. Letting 𝐾̂ ≡ 𝐴𝐾 , 𝐿̂ ≡ 𝐵𝐿 and
+differentiating 𝐾̂ 𝑌𝐾̂ + ̂𝐿𝑌𝐿̂ = 𝑌 with respect to 𝐾̂ ,
+̂ ̂̂ =𝑌̂
+𝑌𝐾̂ + 𝐾̂ 𝑌𝐾̂ 𝐾̂ + 𝐿𝑌
+𝐿𝐾
+𝐾
+𝐾̂
+⟹ 𝑌𝐿̂ 𝐾̂ = − 𝑌𝐾̂ 𝐾̂ ≥ 0.
+𝐿̂
+The introduction of humanoid robots is analogous to an increase in population, due
+e.g. to immigration. If immigrants have the same distribution of skills as the native
+population (𝜌 = 1), under constant returns to scale wages do not change, once the
+capital needed to complement the larger population has accumulated. If immigrants
+have a different distribution of skills (𝜌 < 1), comparative advantage allows gains from
+trade. Wages may fall for native workers in the occupations at which the immigrants
+are most relatively skilled, but the aggregate wage bill for natives must rise.
+
+7
+Labor-depleting technology. The observation above might suggest that falling
+wages due to technological progress are only ever a partial equilibrium phenomenon.
+However, automation can also be labor-depleting.
+For illustration, suppose that goods can be produced in two sectors: (i) an 𝐴𝐾
+robot-only sector and (ii) a Cobb-Douglas sector employing labor and equipment. Letting 𝑧 denote the equipment share of capital,
+̄ 1−𝛼 .
+𝑌 = 𝐴(1 − 𝑧)𝐾 + (𝑧𝐾 )𝛼 (𝐵𝐿)
+
+(1)
+
+The marginal product of capital in sector (i) equals 𝐴, and in sector (ii) it equals
+̄ 1−𝛼 .
+𝛼(𝑧𝐾 )𝛼−1 (𝐵𝐿)
+
+(2)
+
+Let 𝑧 ∗ denote the efficient equipment share of capital. If 𝐴 ≤ (2) even at 𝑧 = 1, then
+𝑧 ∗ = 1. On a balanced growth path, with 𝐵 growing and 𝐴 fixed, the marginal product
+of capital in each sector does not change, and 𝑧 ∗ = 1 is maintained. Following a
+sufficient increase in robot productivity 𝐴, however, 𝑧 ∗ equalizes the marginal product
+of capital across sectors:
+∗
+
+𝐴 = 𝛼(𝑧 𝐾 )
+
+𝛼−1
+
+̄ 1−𝛼
+(𝐵𝐿)
+
+⟹
+
+1
+𝐴 − 1−𝛼
+𝐵𝐿̄
+𝑧 =( )
+.
+𝛼
+𝐾
+
+∗
+
+Substituting 𝑧 ∗ for 𝑧 into (1) and simplifying,
+𝑌 = 𝐴𝐾 + ̃
+𝐵𝐿,
+𝛼
+
+where 𝐵̃ ∝ 𝐴− 1−𝛼 𝐵.
+Further increasing robot productivity thus expands the production possibilities
+frontier in a way that amounts not only to capital augmentation but to labor depletion,
+since capital is reallocated in equilibrium away from labor-augmenting uses. Wages
+rise (𝑔𝐵̃ > 0) only if productivity improvements in sector (ii) proceed quickly enough
+𝛼 𝑔 .4
+to offset any such reallocation: that is, only if 𝑔𝐵 > 1−𝛼
+𝐴
+4 Caselli and Manning (2019) identify conditions under which automation is guaranteed not to lower
+
+aggregate wages. A central condition is that the interest rate does not rise: if the marginal product
+of capital does not rise despite an advance in what capital can do, this must be because of a labor
+bottleneck. In the example of this subsection, decreases in wages are driven precisely by increases in
+the interest rate 𝐴, which indexes the productivity of a robot without human assistance.
+
+8
+Analogy to an expanding varieties model. For another angle on why the impact
+on the wage bill is ambiguous, consider an expanding-varieties growth model such as
+Romer (1990). The share of any particular variety falls to zero as variety expands, but
+expenditures on it are constant, even though the new varieties are modeled as gross
+substitutes for the old.
+The precise constancy is of course not a logical necessity, but it reveals that the
+development of new gross substitutes does not necessarily raise or lower real expenditures on pre-existent goods and services. Horses were used for a larger share of
+tasks in the past, before being eclipsed by motor vehicles, and sailboats were used for
+a larger share of tasks before being eclipsed by motorboats; but total real expenditures
+on horses and sailboats have since fluctuated with technology and taste without approaching zero (see e.g. American Horse Council, 2023). Korinek (2026) conjectures
+that humans may remain in demand after full automation in services where consumers
+value authentic human connection (e.g., childcare); competitive or performative activities in which the human identity of the performer matters (sports and the arts); religious services; and human oversight as the ultimate arbiter of values for AI alignment.
+In a world of TAI we will doubtless be old-fashioned, but economic theory cannot tell
+us the future relative prices of the old-fashioned services provided by humans.
+Finally, it must be emphasized that even if the aggregate wage bill stagnates or
+rises, wage inequality may grow such that many people cannot earn enough labor
+income to live on. Sustained demand for the world’s best athletes, for example, could
+keep the aggregate wage bill positive or rising while the majority, competing with
+robots as in the model of labor-depleting technology above, find their wages driven to
+zero.
+
+2.3
+
+Endogenous automation
+
+So far we have treated TAI as an exogenous technological advance. The example above
+illustrates that this advance may consist of a decline in the cost of robots, but it may
+also follow endogenously from rising wages.
+Suppose
+1−𝛼
+
+𝑌 = 𝐴(𝑧𝐾 )𝛼 (𝐿 + 𝜃(1 − 𝑧)𝐾 )
+
+,
+
+𝜃 > 0,
+
+(3)
+
+where 𝑧 again denotes the equipment share of capital. On a balanced growth path,
+
+9
+fixing 𝑧 = 1, the marginal product of equipment is constant, whereas the marginal
+product of “labor”—human or robotic—grows exponentially. Since the cost of a robot
+is fixed at 1/𝜃 units of output, they are built (𝑧 ∗ < 1) only once the marginal value of
+converting equipment to robots is positive. In particular, once
+1 𝛼
+𝐾
+>
+,
+𝐿
+𝜃1−𝛼
+
+(4)
+
+capital and labor become perfect substitutes at the margin. Maintaining an efficient
+allocation of capital, the production function reduces to
+𝑌 = 𝐴(𝜃1−𝛼 𝐾 + 𝜃−𝛼 𝐿) 𝛼 𝛼 (1 − 𝛼)1−𝛼 .
+As usual, fixing robot productivity 𝜃, output grows superexponentially—due to a combination of rising 𝐴 and exponential capital accumulation at fixed 𝐴—and the labor
+share falls to zero. Capital accumulation no longer raises wages, as capital and labor
+are now fungible on the margin. Technological progress does raise wages, fixing 𝜃,
+but more generally wages depend on the direction of development; they fall if robot
+productivity increases so much faster than TFP 𝐴 that 𝑔𝐴 − 𝛼𝑔𝜃 < 0.
+The point that rising wages incentivize automation dates at least to Habakkuk
+(1962). Hémous and Olsen (2022) offer a recent task-based treatment of the effect
+along with a review of the relevant evidence. Hanson (2001) and Sasaki (2023) observe
+that this logic applies no less to hypothetical machines that can automate all tasks,
+inspiring the model above.
+In short, though anticipations of full automation in the near term are driven by the
+possibility of rapid increases in machine capabilities per unit cost (roughly 𝜃), these are
+not necessary for full automation to occur eventually. As long as it is possible at some
+cost to build machines that can do all work, rising wages will eventually render them
+profitable, and then ever more so. This suggests that a regime of rapid growth and a
+plummeting labor share will likely prevail at some point in the future, whether or not
+economic data suggest that it is imminent. It will be difficult to permanently fulfill the
+hope (Korinek and Stiglitz, 2020; Acemoglu and Restrepo, 2020; Brynjolfsson, 2022;
+Acemoglu et al., 2026) of steering technological progress so that both the growth rate
+and the labor share stay bounded above zero, let alone with the labor share remaining
+close to its current level.
+
+10
+
+2.4
+
+A fixed factor
+
+A common objection to the feasibility of rapid, automation-driven growth is that natural resource constraints will halt growth in general. As Korinek and Stiglitz (2019)
+discuss, a third factor in fixed supply which is a gross complement in production eventually bottlenecks output growth even under TAI; and as the effective quantity of machinery grows, the share of the fixed factor rises to one.
+Such a hard resource constraint is unlikely to bind in the foreseeable future. The
+natural resource share is below 5% and not appreciably rising (Eden and Kuruc, 2024).
+We continue to consume energy less than one five-thousandth as quickly as sunlight
+reaches the earth’s surface (World Energy Council, 2013),5 and the “rare-earth metals”
+used in electronic and other industrial equipment are prevalent in low concentrations
+throughout the Earth’s crust, so should not permanently bottleneck growth as long as
+there is the energy to mine and refine them (Gosen et al., 2017). Nevertheless, the natural resource share is positive, and it is optimistic to suppose that resource constraints
+will place no drag on long-run growth at all, as in the case of gross substitution. Following Hanson (2001), we therefore focus on the Cobb-Douglas case.
+Growth and labor share. Let 𝑊̄ denote the fixed factor, and call it land for brevity.
+Then output equals
+𝑌 = 𝐴 𝐹 (𝐾 , ̄𝐿)𝛼̄ 𝑊̄ 1−𝛼̄ ,
+
+(5)
+
+where 𝐹 (⋅) is CRS, and its substitution parameter between 𝐾 and 𝐿 is non-positive
+before the introduction of TAI and positive (perhaps one) after.
+This case is equivalent to the Solow model given fixed population, with extended
+̄ taking the place of capital and land taking the place of labor. Given
+capital 𝐹 (𝐾 , 𝐿)
+constant 𝑔𝐴 > 0, output grows exponentially (fixing saving and depreciation rates):
+technology growth no longer replaces an exponential capital accumulation process
+with a superexponential one, but a bounded process with an exponential one. The
+land and extended capital shares are fixed at 1 − 𝛼̄ and 𝛼̄ respectively, and because
+labor constitutes an ever smaller share of extended capital, its share falls to zero.
+Though the land constraint prevents transformative AI from growing output superexponentially, if 𝛼̄ is near one this is a technicality. Because capital accumulates in
+5 See also Our World in Data (2025) for updated energy consumption figures.
+
+11
+line with past output, the steady-state growth rate satisfies
+𝑔𝑌 = 𝑔𝐴 + ̄𝛼𝑔𝑌
+
+⟹
+
+𝑔𝑌 =
+
+1
+𝑔𝐴 ,
+1 − 𝛼̄
+
+which rises without bound as 𝛼̄ → 1. Under a land share of 5%, automation raises the
+capital share from 33% to 95% and the steady-state growth rate by more than an order
+of magnitude.
+Wages. The implications for wages are less sanguine. Without a land constraint,
+Section 2.2 noted that:
+• If any technological progress is labor-augmenting, wages grow even under perfect substitution.
+• Even if all technological progress is capital-augmenting, the exploding capital
+stock drives rapid wage growth if capital and labor are gross but imperfect substitutes.
+With a land constraint, any complementarity between labor and capital is largely offset
+by the fact that a rising capital stock lowers the marginal product of extended capital:
+• Even if technological progress augments both labor and capital equally, as in (5),
+the marginal product of (extended) capital—and thus the wage—is stagnant in
+steady state, governed by savers’ discount rates and elasticities of intertemporal
+substitution.
+̄ = (𝑎(𝐴𝐾 )𝜌 + (1 − 𝑎)(𝐵𝐿)
+̄ 𝜌 )1/𝜌 and all technological progress is
+• If 𝐹 (𝐴𝐾 , 𝐵𝐿)
+capital-augmenting, wages
+𝑌 1−𝜌/𝛼̄ (1 − 𝑎)𝐵̄ 𝜌 𝐿̄ 𝜌−1
+rise only if
+𝛼̄ > 𝜌.
+Perfect substitution (𝜌 = 1) guarantees that, as the marginal product of capital is
+asymptotically constant, the marginal products of effective capital and of labor
+fall.
+Skilled labor as a fixed factor. The logic above applies equally if we interpret
+certain worker skills as the fixed factor 𝑊̄ (with unskilled labor as ̄𝐿). Using a similar
+
+12
+model but with this reinterpretation, Hémous and Olsen (2022) attribute rising wage
+inequality to automation. As discussed in Section 2.2, an increase in effective capital
+must raise the aggregate wage bill when labor and capital are the only factors, but can
+lower wages in jobs for which capital is more substitutable than average. If workers
+can shift away from these occupations, their wages rise in the long run, but this is not
+possible if the occupations with rising wages demand skills they cannot acquire.
+Many have attributed growing wage inequality throughout the developed world
+in recent decades to automation. It is worth emphasizing that differences in capital’s
+substitutability for different kinds of work can just as easily make wages more equal.
+Indeed, AI to date appears have to widened the productivity distribution in some domains (including debate (Roldán-Monés, 2024) and developing-world entrepreneurship Otis et al. (2024)) but narrowed it in others (including coding (Peng et al., 2023),
+customer service (Brynjolfsson et al., 2025), writing (Noy and Zhang, 2023), product
+design (Dell’Acqua et al., 2023), advertising (Chen and Chan, 2025), and legal analysis
+(Choi and Schwarcz, 2025)).
+
+2.5
+
+A task-based framework
+
+Task-based models provide a more granular framework for understanding how automation reshapes production by decomposing production into distinct activities that
+can be performed by either labor or capital. Building on pioneering work by Zeira
+(1998) and Acemoglu and Restrepo (2018), this literature examines how the progressive automation of tasks affects factor demand, income distribution, and economic
+growth. The long-run implications of automation for growth, factor shares, and wages
+in a task-based model are most clearly illustrated by Aghion et al. (2019).
+Suppose output requires a (unit) continuum of symmetric tasks:
+1
+𝜌
+
+𝑌 = (∫
+
+𝑌𝑖 𝑑𝑖)
+
+1/𝜌
+
+,
+
+𝜌 < 0.
+
+(6)
+
+0
+
+Tasks 𝑖 ≤ 𝑏 ∈ [0, 1] are automatable, in that they can be performed by capital or labor,
+and tasks (𝑏, 1] are not, in that they can only be performed by labor:
+⎧
+⎪
+⎪𝐾𝑖 + 𝐿𝑖 , 𝑖 ≤ 𝑏;
+𝑌𝑖 = ⎨
+⎪
+𝐿,
+𝑖 > 𝑏.
+⎪
+⎩ 𝑖
+
+13
+̄ so long as there is at least as much capital per automatable
+Given factor stocks 𝐾 and 𝐿,
+task as labor per non-automatable task—i.e. as long as
+𝐿̄
+𝐾
+≥
+𝑏
+1−𝑏
+
+(7)
+
+—it is inefficient to use labor on an automatable task. Then, by symmetry, capital is
+spread equally across automatable tasks so 𝐾 /𝑏 units of capital are used on each, and
+̄
+by the same token, 𝐿/(1
+− 𝑏) units of labor on each non-automated task. Substituting
+for 𝑌𝑖 in (6) yields
+𝜌 1/𝜌
+𝐾 𝜌
+𝐿
+𝑌 = [𝑏 ( ) + (1 − 𝑏)(
+= [(𝐴𝐾 )𝜌 + (𝐵𝐿)𝜌 ]1/𝜌 ,
+)
+]
+𝑏
+1−𝑏
+1−𝜌
+
+(8)
+
+1−𝜌
+
+where 𝐴 = 𝑏 𝜌 and 𝐵 = (1 − 𝑏) 𝜌 .
+Since automatability allows capital to perform more tasks, one might imagine that
+it is equivalent to capital-augmenting technology. Here, however, it is actually equivalent to labor-augmenting—and capital-depleting!—technology.6 As 𝑏 rises from 0 to 1,
+1−𝜌
+𝐴 falls from ∞ to 1 and 𝐵 rises from 1 to ∞. In particular, 𝑔𝐵 = 𝜌 𝑔1−𝑏 , so that 𝐵 and
+output grow exponentially if a constant fraction of the remaining non-automatable
+tasks are automated each year.
+For intuition, observe that each time 1 − 𝑏 halves, capital can be spread more
+thinly across the widened range of automatable tasks, but labor is concentrated twice
+as heavily in each non-automatable task. Automation therefore allows capital to serve
+as a better complement to labor. A marginal unit of labor is spread across fewer nonautomatable tasks, producing a larger increase to the supply of each. Given abundant
+capital, this produces a larger increase to output.
+Transformative automation. Automating all tasks is plainly transformative, rendering capital and labor perfect substitutes. More subtly, Korinek and Suh (2024) show
+that if automation outpaces capital accumulation, it renders the two factors perfect
+substitutes on the margin so that (7) fails (or holds with equality). If it does so permanently, growth proceeds as in Section 2.1. Once automation is complete, or advancing
+rapidly enough that accelerating it would no longer allow resources to be allocated
+6 Jones and Liu (2024) offer a similar model in which explicit capital-augmenting technology renders
+
+the reduced-form capital-augmenting technology term constant at all times, not just asymptotically.
+
+14
+more efficiently, it will be valuable to turn instead to increasing the replication rate of
+capital.
+Wages after transformative automation.
+Korinek and Suh (2024) calibrate a
+production function similar to (8) to macroeconomic data and study the implications
+of 𝑏 rising to 1 in finite time. They find that wages rise and then fall, stagnating at a
+low level once the factors are substitutes.
+The conclusion that wages rise initially is robust, since on the current margin, an
+increase to 𝑏 is an increase to labor-augmenting technology. The point that wages
+may ultimately fall—simply by accelerating the process that has driven centuries of
+wage growth—is also important to recognize, but here depends on precisely how the
+transition to full automation unfolds. Because we do not observe factor-augmenting
+technology terms directly, any calibration of 𝐵𝜌 and 𝜌 in the reduced-form production
+function (8)—suggesting that the wage will equal 𝐵 once 𝜌 = 1—can also be interpreted
+as a calibration of 𝑎1 (𝑎2 𝐵)𝜌 and 𝜌 in a production function of the form
+𝑌 = [(𝐴𝐾 )𝜌 + 𝑎1 (𝑎2 𝐵𝐿)𝜌 ]1/𝜌
+for arbitrary 𝑎1 > 0 and 𝑎2 = 𝑎1 . The second calibration, however, would suggest
+that the full-automation wage will equal 𝑎1 𝑎2 𝐵.
+−1/𝜌
+
+New tasks and the limits of task creation. While the framework above treats the
+task space as fixed, Acemoglu and Restrepo (2018) and subsequent work emphasize
+that technological progress has historically created new tasks alongside automating
+existing ones. Autor et al. (2024) documents how the emergence of new work has offset
+automation’s displacement effects. We perform myriad tasks today that would have
+been inconceivable a century ago—from web development to data science—though on
+some level this may represent specialization within broader categories: most contemporary white-collar professions could be viewed as specialized descendants of what
+might once have been termed “scribe” or “philosopher”. Naive extrapolation from current automation rates of O*NET-catalogued tasks may substantially underestimate the
+distance to transformative AI, by failing to account for the continuous emergence of
+new, often more complex tasks.
+Yet there exists a fundamental constraint: humans possess some finite set of cog-
+
+15
+nitive and physical capabilities, and once machines can replicate these underlying capabilities, they will necessarily be able to perform all feasible human tasks, including
+any newly created ones. The task-based framework above clarifies that once this capability threshold is crossed and condition (7) binds or fails, the economy transitions
+to a regime of rapid growth and declining labor share, regardless of whether new tasks
+continue to emerge.
+
+3
+
+Automating R&D
+
+So far we have taken technological development to be constant and exogenous (beyond noting that once labor is no longer a bottleneck, it will be efficient to invest in
+developing capital-augmenting technology). Even so, we have seen that AI that allows
+capital to sufficiently automate production would probably greatly accelerate growth.
+The growth impact of automating technological development but not production is
+more ambiguous. Through this channel in isolation, AI is more likely to have only
+a moderate impact on long-run growth, but also more likely to have an impact more
+explosive than any considered in Section 2.
+Many model-based analyses of the growth impacts of AI have tended to focus on
+impacts on production rather than R&D (see e.g. Acemoglu, 2025; Aghion and Bunel,
+2024). This is in part because production is better understood, but also in part because
+R&D tends to be high-skilled, and historically, low-skilled work has been more exposed to automation. In the case of AI, this historical regularity may soon no longer
+apply. High-skilled occupations are disproportionately LLM-exposed, and research
+occupations in particular: Eloundou et al. (2024) find that out of 11 job groupings,
+“scientists and researchers” are most exposed and “technologists” are next. At the
+firm level, AI contributes to growth primarily by speeding product innovation (Babina
+et al., 2024). Many of AI’s most important achievements to date have been scientific,
+such as the protein folding breakthrough that won AI pioneer Demis Hassabis a Nobel
+Prize in chemistry. Nor should this be surprising: the output of an AI model query is
+a non-rival packet of information, not a widget.
+
+16
+
+3.1
+
+Automating R&D in a semi-endogenous model
+
+Assume that capital and labor remain gross complements in production, so that approximately
+𝑌 ∝ 𝐴𝐿.
+In a standard semi-endogenous growth model (Jones, 1995),
+𝑔𝐴 ∝ 𝐴−𝛽 𝐿𝜆 ∶
+
+(9)
+
+𝛽 > 0 captures the extent to which ideas are harder to find when the frontier is further
+advanced, and 𝜆 < 1 captures the returns to scale of research work, i.e. the extent to
+which research is imperfectly parallelizable. Because 𝛽 > 0, long-run technology
+growth requires population growth. In steady state, 𝑔𝐴 = 𝑔𝐿 𝜆/𝛽.
+If AI allows capital to serve as a gross substitute for labor in R&D, we have roughly
+𝑔𝐴 ∝ 𝐴−𝛽 𝐾 𝜆
+∝ 𝐴−𝛽 (𝐴𝐿)𝜆 = 𝐴𝜆−𝛽 𝐿𝜆 ,
+
+(10)
+
+since the capital stock grows with output. Capital now drives sustained growth as
+long as 𝛽 ≤ 𝜆—and hyperbolic growth if the inequality is strict.
+Bloom et al. (2020) estimate 𝜆/𝛽 ≈ 1/3. This parameter estimate suggests that
+automating R&D alone would not sustain exponential growth, let alone explosive
+growth, given a constant population.
+Acceleration despite the need for population growth. Given population growth,
+however, automating R&D raises the steady-state growth rate from 𝑔𝐿 𝜆/𝛽 to 𝑔𝐿 𝜆/(𝛽−
+𝜆): i.e., if 𝜆/𝛽 = 1/3, from 𝑔𝐿 /3 to 𝑔𝐿 /2.
+Furthermore, unless the capital requirement for an automated researcher is very
+high, automating R&D permits a transitory period of rapid growth as capital pours
+into the research sector. Carlsmith (2020) estimates that the human brain performs
+approximately 1015 computations per second. AI software as capable and efficient as
+the brain would let the stock of Nvidia GPUs in early 2026 support about 10 million
+virtual researchers, based on estimates by Emberson and Owen (2025). This capac-
+
+17
+ity is about equal to the current global researcher population (UNESCO Institute for
+Statistics, 2024) and has doubled around every ten months for the last six years (Emberson and Owen, 2025). Going forward, therefore, even if only a small fraction of
+computing capacity is used for research purposes, total research effort could rapidly
+expand. Given 𝛽 > 𝜆, a growing supply of hands to build these chips will be necessary
+to sustain growth in the very long run; but as spending on information processing
+equipment constitutes only 2% of US GDP,7 automating R&D could permit a large
+increase in research effort before this constraint binds.
+Given that machines capable of fully substituting for human labor in all production
+tasks are feasible in principle, R&D acceleration shortens the development horizon for
+such systems. It may be, therefore, that the large acceleration to technological development induced by automating R&D would be temporary if R&D remained automated
+in isolation, but will be permanent in practice by hastening the arrival of full automation more generally.
+
+3.2
+
+Explosive growth in a semi-endogenous model?
+
+It is also possible that, if research is automated, 𝛽 < 𝜆 will obtain, so that technologydriven explosive growth will follow even if production always requires labor. This is
+for at least three reasons.
+Larger vs. more numerous systems. While labor remains the primary input to
+R&D, each additional unit of resources must take the form of a discrete brain, able
+only very slowly to communicate with the world outside its skull. The returns to
+increasing R&D investment may diminish more slowly, or even increase, when larger
+investments may take the form of larger (not just more numerous) well-integrated
+systems (Sotala, 2012). That is, “𝜆” may prove higher in (10) than in (9).8 By analogy,
+we would underestimate the scale effect of increasing population size if we imagined
+that people required their own farmsteads and could not agglomerate in labs or cities.
+Similarly, Agrawal et al. (2019) observe that, in a Weitzman (1998)-style model in
+which technological progress is made by discovering fruitful combinations of existing
+7 In 2025, $0.63T out of $31T according to U.S. Bureau of Economic Analysis (2026a,b).
+
+8 Indeed, AI progress to date has benefited greatly not only from increases in the raw computation
+
+used to train models, but from the Raina et al. (2009) discovery that GPUs allow more of the relevant
+computation to be done in parallel, and from the ongoing development of ever larger chips that permit
+even more parallel computations with low latency (see e.g. Kundu et al. (2025)).
+
+18
+ideas, ideas may get harder to find due partly to the human brain’s inability to consider
+large combinations of ideas at once. If so, as the authors show, automated R&D carried
+out by large and growing AI models may structurally face a lower value of “𝛽”.
+Copies of Einstein. Ekerdt and Wu (2024) argue that, as the share of the population
+in research has grown, average researcher ability has declined. In the AI context, this
+selection effect can be avoided by running multiple copies of the most capable models.
+Absent selection, Ekerdt and Wu estimate 𝜆/𝛽 ≈ 3/5.
+Returns to R&D diminish slowly in hardware and software. Bloom et al. find
+wide variation in the returns to R&D across industries. Moore’s Law—the doubling of
+semiconductor efficiency roughly every 18 months—has been supported by a growing workforce in semiconductor R&D, but this workforce has grown only one fifth as
+quickly. If semiconductor R&D has not benefited from spillovers from other industries,
+this implies that the industry has exhibited 𝜆/𝛽 ≈ 5. Thus if R&D were automated and
+semiconductors were its sole input, growth could easily be explosive.9
+Furthermore, the number of effective artificial researchers increases not only in
+the quantity and efficiency of our hardware but also in the efficiency of our software.
+Eth and Davidson (2025), reviewing the literature across language models, computer
+vision models, and other domains, estimate that the raw computational requirements
+of many AI capabilities have tended to roughly halve each year. As the number of
+AI researchers has not grown quite as quickly, this implies an estimate of 𝜆/𝛽 > 1
+in the domain of software efficiency as well. At least before accounting for spillovers
+and other inputs, this suggests that the number of effective virtual researchers could
+explode, and drive explosive growth more generally, even absent hardware improvements.
+Productivity improvements, however, may require not only explicit R&D effort but
+also a process of “learning by doing”. That is, the information generated by real-world
+economic activity may be a gross complement to R&D labor and capital, so that the
+useful research outputs of even a large number of virtual Einsteins would eventually be
+bottlenecked without growth in the information generated by the economy at large.10
+9 For an analysis of how spillovers can inflate an industry-level estimate of the returns to R&D, see
+
+Davidson et al. (2026).
+10 The “scaling laws” describing performance of AI models across a very wide range of domains (see
+Villalobos (2023) for a review) imply that compute and data are gross complements in AI training.
+
+19
+Arguably, the capabilities of generative AI models have advanced rapidly in recent
+years due to the discovery of ways to harness the vast pool of data that constitutes
+the Internet, and further significant advances will require gathering, codifying, and
+continuously updating training data capturing much of what people learn in the course
+their work. In this case, the bottlenecking input to technological progress, once R&D is
+automated, may ultimately be proportional to output (as in (10)) rather than effective
+computation.
+
+3.3
+
+Automating R&D in fully endogenous models
+
+The rate of technological development has remained roughly constant in frontier
+economies for more than a century though the number of researchers has greatly
+grown. On a semi-endogenous account, this is because the number of researchers required to sustain a given growth rate rises as the technological frontier advances. That
+is, the primary bottleneck to faster technological development is a lack of research labor. As detailed above, it follows straightforwardly that if this bottleneck is relieved,
+with capital effectively increasing the supply of researchers, growth accelerates.
+On an endogenous growth account, by contrast, a fixed population can sustain a
+constant growth rate. As a result, the endogenous growth literature since Young (1998)
+and Aghion and Howitt (1998, ch. 12.2) has proposed forces that constrain the growth
+rate despite a growing population. If these forces are strong enough, they prevent
+automating research from delivering explosive growth.
+Extreme non-parallelizability. If technology growth takes roughly the form (9),
+constant 𝑔𝐴 is incompatible with positive 𝑔𝐿 if 𝛽 = 0 and 𝜆 > 0. On the semiendogenous interpretation, 𝛽 > 0. The alternative endorsed by some endogenous
+accounts is effectively that 𝛽 = 0 and 𝜆 = 0. It is difficult to disentangle the variables empirically: Bloom et al. (2020) estimate 𝜆/𝛽, for example, but cannot identify
+whether both variables are very low or very high.
+Concretely, suppose that
+𝑔𝐴 ∝ 𝑓 (𝐿),
+
+(11)
+
+where 𝑓 (⋅) is increasing but lim𝐿→∞ 𝑓 (𝐿) = 𝑓̄ < ∞. Then the growth rate is constant
+
+20
+with a constant population but can rise only to 𝑓̄ if the population grows,11 perhaps
+due to the need for serial experiments. Automating R&D allows the growth rate to
+approach 𝑓̄ more quickly, or allows the growth rate to rise somewhat when a fixed
+population would otherwise have rendered it constant, as 𝐾 ∝ 𝐴𝐿 replaces 𝐿 in (11).
+Nevertheless, the long-run growth rate is constant.
+As discussed in the previous section, automated research systems may face a lower
+penalty to parallelizing R&D than populations of human researchers, and the penalty
+may fall over time with advances in hardware. That is, in the present context, we
+might imagine that automating research will deliver roughly
+𝑔𝐴 ∝ ℎ(𝐴)𝑓 (𝐾 ),
+so that the maximum growth rate achievable by scaling research investment at a given
+time equals ℎ(𝐴)𝑓̄ and rises with 𝐴. If so, whether automating R&D will deliver explosive growth depends on the shape of ℎ(⋅), a question about which today we can only
+speculate.
+Creative destruction. In other endogenous growth models, explosive growth is
+technologically feasible with a growing population,12 but R&D efforts of the kind that
+could deliver it are limited by “Schumpeterian” dynamics. An innovator earns profits
+from developing a more efficient way to produce a given product for only as long as
+this process remains on the technological frontier. An accelerating stream of investments in productivity improvements cannot be sustained in equilibrium, as it would
+shrink the expected duration of each innovator’s monopoly to zero.
+Automating R&D may therefore fail to raise the growth rate. Aghion et al. (2019,
+Appendix) discuss this point via a model in which partially automating R&D actually
+causes the growth rate to fall,13 but the point can also be seen directly from the fact
+that many Schumpeterian endogeneous growth models are in fact “lab equipment”
+models already14 : capital is modeled as the only input to R&D. This unrealistic assumption can be made for simplicity, without predicting explosive growth, because
+11 This is, very roughly, proposed by Young (1998) and Lashkari (2023): see Trammell (2025).
+12 Or even a fixed population: see Trammell (2025).
+
+13 In their model, technological development proceeds in two stages.
+
+AI accelerates only one but
+thereby shortens the monopoly earned by successfully investing in the other. The resulting disincentive
+yields slower growth on balance.
+14 Including seminally Aghion and Howitt (1998, ch. 12.2); see Trammell (2025) for a review.
+
+21
+the central bottleneck to growth is not a lack of resources available to devote to research but an arbitrage equation ensuring that innovations arrive slowly enough to
+justify developing them.
+
+4
+
+Full automation
+
+Naturally, AI will have the most radical effects on growth if it renders capital a gross
+substitute for labor in both production and R&D.
+If the long-run rate of technological development is constrained to be constant,
+e.g. for the reasons discussed in Section 3.3, we are in the world of Section 2 with
+constant 𝑔𝐴 > 0. With capital serving as a gross substitute for labor in production, so
+that 𝑌 ≈ 𝐴𝐾 , growth is double-exponential: the growth rate itself grows at rate 𝑔𝐴 .
+We will assume the semi-endogenous model for the remainder of this section.
+The Cobb-Douglas edge case. In a semi-endogenous model, as we have seen, the
+growth rate is constrained primarily by R&D inputs, so under full automation it can
+rise arbitrarily rapidly alongside the capital stock. In fact, the feedback loop from technology to output to capital to technology is strong enough that even a Cobb-Douglas
+production function, in combination with a Cobb-Douglas R&D function, yields hyperbolic growth if the exponents on capital are sufficiently high (Aghion et al., 2019).
+Fixing population, we have
+𝑌 ∝ 𝐴𝐾 𝛼 ,
+(12)
+
+𝑔𝐴 ∝ 𝐴−𝛽 𝐾 𝜉 .
+
+To intuit the parameter condition necessary to trigger hyperbolic growth, observe that
+if the capital stock is proportional to output,
+𝐾 ∝ 𝐴𝐾 𝛼
+
+1
+
+⟹
+
+𝐾 ∝ 𝐴 1−𝛼 .
+
+(13)
+
+Substituting (13) into (12) yields
+𝜉
+
+𝑔𝐴 ∝ 𝐴 1−𝛼 −𝛽 .
+
+(14)
+
+22
+Technology, capital, and output thus grow hyperbolically if
+𝜉
+>𝛽
+1−𝛼
+
+(15)
+
+and exponentially only if the terms are equal. If the inequality is reversed, the feedback loop at hand delivers only power-functional growth, so that exponential growth
+requires growth in population.15
+Gross substitution. Gross substitution in R&D is equivalent to the case of 𝜉 = 𝜆
+(or more, as discussed in Section 3.1). Whether it delivers hyperbolic growth remains
+𝜆 > 𝛽—is of course a weakening of
+ambiguous, but condition (15) with 𝜉 = 𝜆—i.e. 1−𝛼
+the 𝜆 > 𝛽 required given gross complementarity in production.
+Gross substitution in production is equivalent here to the case of 𝛼 = 1. It delivers
+hyperbolic growth for any value of 𝜉 or 𝛽.
+A fixed factor. Under a Cobb-Douglas natural resource constraint, as discussed in
+Section 2.4, the capital share can rise only to 𝛼̄ < 1, where 1 − 𝛼̄ is the natural resource
+share. Because, again, the natural resource share is not even 5%, this constraint will
+not prevent hyperbolic growth in the event of fully automated production given any
+non-negligible capital share in R&D.
+With “𝐿” in place of “𝐾 ”, this model also describes a world in which labor remains
+necessary for production and R&D but population grows proportionally to output.
+Kremer (1993) uses just such a model to explain the superexponential—indeed, arguably roughly hyperbolic (Roodman, 2020)—population growth that obtained across
+one million years of the Malthusian past.
+Growth with fixed resources and fixed technology presumably cannot continue
+forever, even under full automation. Natural resources may thus eventually come to
+bottleneck output more strongly. That is, fixing resources, sustained growth may require the development of resource-augmenting technology “𝑍”. Suppose that, absent
+automation,
+𝑌 = 𝑌 (𝐾 , 𝐴𝐿, 𝑍 𝑊̄ ),
+15 Davidson et al. (2026) offer a generalization of condition (15) in a model in which both hardware
+
+and software improvements can increase the number of effective “virtual researchers”, as motivated by
+the discussion in Section 3.2.
+
+23
+where 𝑌 (⋅) is CRS and 𝐾 , 𝐴𝐿, and 𝑍 𝑊̄ are gross complements.16 In this case, automating production yields approximately
+𝑌 = 𝑌 (𝐴𝐾 , 𝐴𝐾 , 𝑍 𝑊̄ ) ≈ 𝑍 𝑊̄
+in the long run, so that output grows with technology as in Section 3. Here, if 𝜆 < 𝛽,
+growth eventually slows—even, in this case, with both production and research fully
+automated.17
+Because growth does not begin to decelerate until the resource share has risen to
+the point of reversing inequality (15), however, automating both sectors in the near
+future would still yield a substantial period of accelerating growth.
+
+5
+
+Summary
+
+Once production is sufficiently automated, output growth is likely to accelerate, and
+this acceleration will likely continue for the foreseeable future. Automating R&D may
+not deliver explosive growth on its own (except by speeding the development of ways
+to automate production); whether it does so depends largely on whether automated
+research proves highly parallelizable and on whether it requires inputs that scale with
+economic activity rather than with effective computation. Even if fully automating
+R&D in isolation would not dramatically speed up growth, however, more R&D automation could greatly enhance the acceleration to growth induced by automating
+production.
+Automating R&D in isolation would probably preserve a positive labor share, as
+would developing machines that could self-replicate but could not well substitute for
+labor in producing consumption goods. Otherwise, the burst in output made feasible
+by a qualitative advance in automation will almost all accrue to capital, driving the
+labor share toward zero. It will probably be very inefficient (and so very difficult) to
+steer technology in a labor-augmenting direction permanently.
+16 We must also suppose that historically 𝑔
+𝑍
+
+= 𝑔𝐴 + 𝑔𝐿 , maintaining constant factor shares. The
+elasticity of substitution between energy (or natural resources in general) and other resources is often
+estimated to be much less than one over short time horizons but to rise significantly with the horizon
+(Koetse et al., 2008; van der Werf, 2008), suggesting that the resource share has indeed remained low
+only due to the ongoing development of resource-augmenting technology.
+17 If there is a finite pool of technologies as well, 𝛽 must eventually rise without bound, so that 𝑔 = 0
+𝐴
+at high 𝐴.
+
+24
+Whether the wage bill will rise or fall in the limit of automation depends on subtleties about the long-run direction of technology and tastes, and the degree of returns
+to scale, about which little can be said today.
+The long-run scenarios may be summarized as follows. In each case we assume
+that capital grows more quickly than population and that, given gross complementarity between labor and capital in production, technological development shifts from
+being labor- to capital-augmenting.
+
+25
+
+Growth
+
+Labor
+share
+
+Wages
+
+2 factors; GS
+
+D
+
+→0
+
+D
+
+2 factors; PS
+
+D
+
+→0
+
+S or → 0
+
+CD for consump., GS/PS for capital
+
+D
+
+∼
+
+D
+
+3 factors (CD resource constr.); GS
+
++
+
+→0
+
+∼
+
+3 factors (CD resource constr.); PS
+
++
+
+→0
+
+→0
+
+Scenario18
+Production automated
+
+R&D automated, or both automated given a GC resource constraint 19
+Semi-endog., weak feedback
+
++
+
+Semi-endog., intermed. feedback
+
+D
+
+Semi-endog., strong feedback
+
+H
+
+Hard parallelizability constraint
+
++
+
+Schumpeterian
+
+∼
+
+Both automated
+Semi-endog., very weak feedback
+and CD resource constr.
+Semi-endog., otherwise
+
++ or D
+H
+
+Table 1: Summary of TAI scenarios
+
+18 “CD”, “GS”, and “PS” stand for Cobb-Douglas, gross but not perfect substitution, and perfect substi-
+
+tution. “+”, “D”, and “H” refer to cases in which AI produces increases to a variable’s long-run growth
+rate, double-exponential growth, and hyperbolic growth. “S” refers to cases in which AI causes the
+variable to stagnate above zero. “∼” refers to cases in which AI has an ambiguous effect on the variable.
+19 “Weak”, “intermediate”, and “strong” research feedback refer to the 𝜆/𝛽 < 1, = 1, and > 1 cases.
+We here focus only on growth, on the view that wages and the labor share will still mainly be governed
+by production.
+
+26
+
+6
+
+Conclusion
+
+From AI to automation. Interest in the question of what will follow from nearcomplete automation has grown recently because the rapid pace of recent AI progress
+suggests that the automation of production and/or R&D may be on the horizon.
+AI to date has not had the consequences that might be expected to precede such
+a drastic economic transformation. As Nordhaus (2021) documents, capital and labor
+remain (at least weakly) gross complements, the growth rate is not rising, the IT share
+of capital is not skyrocketing, and any increases in the capital share are modest and
+easily attributable to other forces.20 Humlum and Vestergaard (2026) find that LLMs
+have been adopted rapidly—over a billion users within 2.5 years of their introduction—
+but so far seem to have delivered only modest productivity improvements.
+Nevertheless, the capabilities of AI systems have advanced at extraordinary rates.
+As first documented by Kwa et al. (2025), the maximum software engineering task
+length AI systems can handle has been doubling approximately every seven months.
+Amodei (2025) projects that coding could be fully automated in 2026. Should capabilities continue advancing at comparable rates, the comprehensive automation of
+computer-based work may follow shortly thereafter—potentially providing sufficient
+technological foundation to devise methods for automating remaining economic activities.
+An alternative analytical lens for understanding the trajectory toward full automation focuses on improvements in sample efficiency. Deep learning has enabled AI systems to match or exceed human performance in domains such as coding, language
+processing, and strategic gaming, where either substantial public data exists or synthetic data generation is feasible. Nevertheless, the human brain remains orders of
+magnitude more sample-efficient than current machine learning algorithms, requiring far less data to acquire comparable non-trivial skills. Eth and Davidson (2025)
+review algorithmic progress across language models, computer vision, and related domains and finds that data requirements for training AI capabilities have approximately
+halved annually in recent years. If the current human-machine sample efficiency gap
+spans roughly four orders of magnitude, these rates suggest AI systems could achieve
+20 Work in progress by one of the authors confirms that updating Nordhaus’s analysis to 2025 does
+
+not change these conclusions, and that, on examining the supply chains for robotics and computer
+equipment, there is similarly little evidence for a capital-goods-driven growth explosion of the kind
+described at the end of Section 2.1.
+
+27
+human-level learning efficiency within one to two decades.
+AI is starting to contribute to R&D, and the high capital share in AI R&D specifically (Besiroglu et al., 2024) suggests that capital is, in some sense, contributing significantly to its own improvement. As AI R&D is automated ever more fully, AI capabilities could advance ever more rapidly. Erdil et al. (2025) and Lifland et al. (2025)
+calibrate models of this feedback mechanism—albeit with speculative elements—and
+predict near-complete R&D automation within several years, precipitating rapid economic growth thereafter. Jones and Tonetti (2026) offer a model in a similar spirit,
+but whose bottlenecks bind more tightly, yielding explosive growth only after 2050
+or 2100. Informed partly by these models, the median forecast on the prediction platform Metaculus places AGI in 2039 (Metaculus, 2026). A central characteristic of the
+R&D-initiated “singularity” hypothesis is its prediction of rapid, nearly discontinuous
+transformation in economic conditions. Consequently, the absence of observable effects in current economic data cannot definitively refute the possibility of imminent
+dramatic change: the theory itself predicts minimal advance warning in conventional
+economic indicators.
+Preparing for economic transformation. While Piketty and Zucman (2014)’s
+controversial claim that capital and labor are already gross substitutes conflicts with
+the consensus view—supported by direct evidence including Gechert et al.’s (2022)
+comprehensive review and theoretical arguments that gross substitutability should
+yield accelerating growth and a declining labor share—AI may render the claim true
+in the future, and vindicate Piketty (2014)’s concern about twenty-first century capital
+concentration. It may be valuable to consider policy responses that could mitigate
+extreme distributional consequences (Korinek and Lockwood, 2025).
+Preparing for dangerous AI. Concerns about existential risk from advanced AI
+systems, articulated in early theoretical work (Bostrom, 2014) and recently amplified
+through public statements like Center for AI Safety (2023), represent perhaps the most
+extreme form of economic transformation: complete cessation of economic activity
+through catastrophic failure. Both proponents and skeptics of such risks employ AI’s
+capacity for generating radical economic growth as a proxy measure for its potential to inflict systemic damage (see Davidson (2021) and Narayanan and Kapoor (2025)
+for contrasting perspectives). The scenarios analyzed throughout this paper carry
+
+28
+differential risk profiles: a “software-only singularity” driven purely by R&D automation presents unique challenges through its potential for rapid, unobservable acceleration beneath conventional economic indicators, while scenarios involving automated
+physical production imply AI systems capable of tangibly affecting the material world
+without requiring human intermediation, raising distinct safety concerns about autonomous physical systems.
+The economic valuation of existential risk mitigation—quantifying optimal consumption sacrifices to reduce catastrophic probabilities—has generated substantial recent analysis (Jones, 2024, 2025; Shulman and Thornley, 2025), though excessive precaution may paradoxically increase long-term risks through delayed beneficial development (Trammell and Aschenbrenner, 2026). Policy responses center on established
+approaches: advancing technical AI safety research to ensure system alignment and
+robustness, and developing governance frameworks capable of managing rapid capability transitions while maintaining incentives for innovation.
+The imperative of preparation. The economic transformation analyzed throughout this paper may represent humanity’s most consequential transition since the Industrial Revolution, or perhaps since the Neolithic. While considerable uncertainty remains regarding both the timing and precise mechanisms, the potential magnitude of
+change demands serious preparatory efforts commensurate with the stakes involved.
+The scenarios we have examined, from explosive growth driven by self-replicating or
+self-improving capital to radical redistributions of economic returns, are not merely
+theoretical curiosities but plausible trajectories that could materialize within decades
+or even years. The computational and algorithmic progress documented here suggests
+we may have limited time to design institutions capable of managing unprecedented
+growth rates, distributional upheaval, and the accompanying risks.
+Yet this moment also presents extraordinary opportunity: if navigated successfully,
+the automation of cognitive and physical labor could usher in an era of prosperity
+that liberates humanity from millennia of drudgery (Korinek and Juelfs, 2024). The
+frameworks we have reviewed provide tools for reasoning about these transitions.
+Whether the coming transformation proves to be humanity’s greatest triumph or its
+final chapter may depend critically on the decisions made in the narrow window before
+these technologies reach their transformative thresholds. Given both the promise and
+peril inherent in transformative AI, even modest investments in understanding and
+
+29
+shaping this transition represent perhaps the highest-return activities our profession
+can engage in.
+
+30
+
+References
+Acemoglu, Daron, “Labor- and Capital-Augmenting Technical Change,” Journal of the European Economic Association, 2003, 1 (1), 1–37.
+, Introduction to Modern Economic Growth, Princeton University Press, 2009.
+, “The Simple Macroeconomics of AI,” Economic Policy, 2025, 40 (121), 13–58.
+and Pascual Restrepo, “The Race Between Man and Machine: Implications of Technology for Growth, Factor Shares, and Employment,” American Economic Review, 2018, 108 (6),
+1488–1542.
+and , “The Wrong Kind of AI? Artificial Intelligence and the Future of Labour Demand,”
+Cambridge Journal of Regions, Economy and Society, 2020, 13 (1), 25–35.
+, David Autor, and Simon Johnson, “Building Pro-Worker Artificial Intelligence,” 2026.
+NBER working paper 34854.
+Aghion, Philippe and Peter Howitt, Endogenous Growth Theory, Cambridge, MA: MIT
+Press, 1998.
+and Simon Bunel, “AI and Growth: Where Do We Stand?,” 2024. Working paper.
+, Benjamin F. Jones, and Charles I. Jones, “Artificial Intelligence and Economic Growth,”
+in Ajay Agrawal, Joshua Gans, and Avi Goldfarb, eds., The Economics of Artificial Intelligence:
+An Agenda, National Bureau of Economic Research, 2019, pp. 237–282.
+Agrawal, Ajay, John McHale, and Alex Oettl, “Finding Needles in Haystacks: Artificial Intelligence and Recombinant Growth,” in Ajay Agrawal, Joshua Gans, and Avi Goldfarb, eds.,
+The Economics of Artificial Intelligence: An Agenda, National Bureau of Economic Research,
+2019, pp. 149–174.
+American Horse Council, “2023 Economic Impact of the Horse Industry in the USA,” 2023.
+Accessed Aug. 15, 2025.
+Amodei, Dario, “CEO Speaker Series with Dario Amodei of Anthropic,” Council on Foreign
+Relations, CEO Speaker Series 2025.
+Autor, David, Caroline Chin, Anna Maria Salomons, and Bryan Seegmiller, “New Frontiers: The Origins and Content of New Work, 1940–2018,” Quarterly Journal of Economics,
+2024, 139 (3), 1399–1455. NBER Working Paper 30389.
+
+31
+Autor, David H. and David Dorn, “The Growth of Low-Skill Service Jobs and the Polarization
+of the US Labor Market,” American Economic Review, 2013, 103 (5), 1553–97.
+Babina, Tania, Anastassia Fedyk, Alex He, and James Hodson, “Artificial Intelligence,
+Firm Growth, and Product Innovation,” Journal of Financial Economics, 2024, 151 (103745).
+Benzell, Seth G. and Victor Yifan Ye, “Simulating the Global Effect of Transformative AI:
+Growth, Welfare, Economic Power, and Policy Responses,” 2024. Working paper.
+Berg, Andrew, Edward F Buffie, and Luis-Felipe Zanna, “Should We Fear the Robot Revolution? (The Correct Answer Is Yes),” Journal of Monetary Economics, 2018, 97, 117–148.
+Besiroglu, Tamay, Nicholas Emery-Xu, and Neil Thompson, “Economic impacts of AIaugmented R&D,” Research Policy, 2024, 53 (7).
+Bloom, Nicholas, Charles I. Jones, John Van Reenen, and Michael Webb, “Are Ideas
+Getting Harder to Find?,” American Economic Review, 2020, 110 (4), 1104–1144.
+Bostrom, Nick, Superintelligence, Oxford University Press, 2014.
+Brynjolfsson, Erik, “The Turing Trap: The Promise and Peril of Human-Like Artificial Intelligence,” Dædalus, 2022, 151 (2), 267–84.
+, Danielle Li, and Lindsey Raymond, “Generative AI at Work,” The Quarterly Journal of
+Economics, 2025, 140 (2), 889–942.
+Carlsmith, Joseph, “How Much Computational Power Does It Take to Match the Human
+Brain?,” Open Philanthropy Report, 2020.
+Caselli, Francesco and Alan Manning, “Robot Arithmetic: New Technology and Wages,”
+American Economic Review: Insights, 2019, 1 (1), 1–12.
+Center for AI Safety, “Statement on AI Risk,” 2023.
+Chen, Zenan and Jason Chan, “Large Language Model in Creative Work: The Role of Collaboration Modality and User Expertise,” 2025. Working paper.
+Choi, Johnathan H. and Daniel Schwarcz, “AI Assistance in Legal Analysis: an Empirical
+Study,” Journal of Legal Education, 2025, 73 (2).
+Davidson, Tom, “Could Advanced AI Drive Explosive Economic Growth?,” Technical Report,
+Open Philanthropy 2021.
+
+32
+, Basil Halperin, Tom Houlden, and Anton Korinek, “When Does Automating AI Research Produce Explosive Growth? Feedback Loops in Innovation Networks,” 2026.
+Dell’Acqua, Fabrizio, Edward McFowland III, Ethan R. Mollick, Hila Lifshitz-Assaf,
+Katherine Kellogg, Saran Rajendran, Lisa Krayer, François Candelon, and Karim R.
+Lakhani, “Navigating the Jagged Technological Frontier: Field Experimental Evidence of
+the Effects of AI on Knowledge Worker Productivity and Quality,” 2023. Working paper.
+Eden, Maya and Kevin Kuruc, “The Long-run Relationship Between Per Capita Incomes
+and Population Size,” 2024. GPI Working Paper Series No. 29-2024.
+Ekerdt, Lorenz K.F. and Kai-Jie Wu, “Self-Selection and the Diminishing Returns of Research,” 2024. Working paper.
+Eloundou, Tyna, Sam Manning, Pamela Mishkin, and Daniel Rock, “GPTs are GPTs:
+Labor market impact potential of LLMs,” Science, 2024, 384 (6702), 1306–8.
+Emberson, Luke and David Owen, “The stock of computing power from NVIDIA chips is
+doubling every 10 months,” Technical Report, Epoch 2025.
+Erdil, Ege, Tamay Besiroglu Andrei Potlogea, Edu Roldan, Anson Ho, Jaime Sevilla,
+Matthew Barnett, Matej Vrzla, and Robert Sandler, “GATE: An Integrated Assessment
+Model for AI Automation,” Technical Report, Epoch AI 2025.
+Eth, Daniel and Tom Davidson, “Will AI R&D Automation Cause a Software Intelligence
+Explosion?,” Technical Report, Forethought 2025.
+Gechert, Sebastian, Tomas Havranek, Zuzana Irsova, and Dominika Kolcunová, “Measuring Capital-Labor Substitution: The Importance of Method Choices and Publication Bias,”
+Review of Economic Dynamics, 2022, 45, 55–82.
+Gosen, Bradley S. Van, Philip L. Verplanck, Robert R. Seal II, Keith R. Long, and Joseph
+Gambogi, “Rare-earth elements,” in Klaus J. Schulz, John DeYoung Jr., Robert R. Seal II, and
+Dwight Bradley, eds., Critical mineral resources of the United States—Economic and environmental geology and prospects for future supply, United States Geological Survey, 2017.
+Habakkuk, H. John, American and British Technology in the Nineteenth Century, Cambridge,
+UK: Cambridge University Press, 1962.
+Hanson, Robin, “Economic Growth Given Machine Intelligence,” 2001. Working paper.
+
+33
+Hémous, David and Morten Olsen, “The Rise of the Machines: Automation, Horizontal
+Innovation, and Income Inequality,” American Economic Journal: Macroeconomics, 2022, 14
+(1), 179–223.
+Humlum, Anders and Emilie Vestergaard, “Still Waters, Rapid Currents: Early Labor Market Transformation under Generative AI,” 2026. NBER working paper 33777.
+Jones, Benjamin F. and Xiaojie Liu, “A Framework for Economic Growth with CapitalEmbodied Technical Change,” American Economic Review, 2024, 114 (5), 1448–87.
+Jones, Charles I., “R&D-based Models of Economic Growth,” Journal of Political Economy,
+1995, 103 (4), 759–784.
+, “The Past and Future of Economic Growth: A Semi-Endogenous Perspective,” Annual Review of Economics, 2022, 14, 125–52.
+, “The A.I. Dilemma: Growth versus Existential Risk,” American Economic Review: Insights,
+December 2024, 6 (4), 575–590.
+, “How Much Should We Spend to Reduce A.I.’s Existential Risk?,” in Ajay K. Agrawal, Erik
+Brynjolfsson, and Anton Korinek, eds., The Economics of Transformative AI, University of
+Chicago Press, 2025.
+and Christopher Tonetti, “Past Automation and Future A.I.: How Weak Links Tame the
+Growth Explosion,” 2026. Working paper.
+Kaldor, Nicholas, “A Model of Economic Growth,” The Economic Journal, 1957, 67 (268), 591–
+624.
+Koetse, Mark J., Henri L.F. de Groot, and Raymond J.G.M. Florax, “Capital-energy Substitution and Shifts in Factor Demand: A Meta-analysis,” Energy Economics, 2008, 30, 2236–
+51.
+Korinek, Anton, “Economic Policy Challenges for the Age of AI,” in Pierre-Olivier Gourinchas, Maurice Obstfeld, and Petia Topalova, eds., Rethinking Economic Policy: Steering
+Structural Change, MIT Press, 2026, chapter 18. Forthcoming.
+and Donghyun Suh, “Scenarios for the Transition to AGI,” 2024. NBER working paper
+32255.
+and Joseph E Stiglitz, “Artificial Intelligence and Its Implications for Income Distribution
+and Unemployment,” in Ajay Agrawal, Joshua Gans, and Avi Goldfarb, eds., The Economics of
+Artificial Intelligence: An Agenda, National Bureau of Economic Research, 2019, pp. 349–390.
+
+34
+and Joseph E. Stiglitz, “Steering Technological Progress,” Conference paper, NBER Economics of AI Conference, 2020.
+and Lee Lockwood, “Public Finance in the Age of AI,” in Ajay K. Agrawal, Erik Brynjolfsson, and Anton Korinek, eds., The Economics of Transformative AI, University of Chicago
+Press, 2025.
+and Megan Juelfs, “Preparing for the (Non-Existent?) Future of Work,” in Justin Bullock
+et al., ed., Oxford Handbook of AI Governance, Oxford University Press, 2024.
+Kremer, Michael, “Population Growth and Technological Change: One Million BC to 1990,”
+The Quarterly Journal of Economics, 1993, 108 (3), 681–716.
+Kundu, Yudhishthira, Manroop Kaur, Tripty Wig, Kriti Kumar, Pushpanjali Kumari,
+and Vivek Puri, “A Comparison of the Cerebras Wafer-Scale Integration Technology with
+Nvidia GPU-based Systems for Artificial Intelligence,” Technical Report 2025.
+Kwa, Thomas, Ben West, Joel Becker, Amy Deng, Katharyn Garcia, Max Hasin, Sami
+Jawhar, Megan Kinniment, Nate Rush, Sydney von Arx, Ryan Bloom, Thomas
+Broadley, Haoxing Du, Brian Goodrich, Nikola Jurkovic, Luke Harold Miles,
+Seraphina Nix, Tao Lin, Neev Parikh, David Rein, Lucas Jun Koba Sato, Hjalmar
+Wijk, Daniel M. Ziegler, Elizabeth Barnes, and Lawrence Chan, “Measuring AI Ability to Complete Long Tasks,” arXiv:2503.14499, March 2025.
+Lashkari, Danial, “Innovation Policy in Theories of Knowledge Diffusion and Selection,”
+2023. Working paper.
+Lifland, Eli, Brendan Halstead, Alex Kastner, and Daniel Kokotajlo, “AI Futures Model,”
+Technical Report, AI Futures Project 2025.
+Metaculus, “When will we have transformative AI?,” 2026. [Link]; Accessed March 30, 2026.
+Mookherjee, Dilip and Debraj Ray, “Growth, Automation, and the Long-run Share of Labor,” Review of Economic Dynamics, 2022, 46, 1–22.
+Narayanan, Arvind and Sayash Kapoor, “AI as Normal Technology,” Technical Report,
+Knight First Amendment Institute 2025.
+Nordhaus, William D, “Are We Approaching an Economic Singularity? Information Technology and the Future of Economic Growth,” American Economic Journal: Macroeconomics,
+2021, 13 (1), 299–332.
+
+35
+Noy, Shakked and Whitney Zhang, “Experimental Evidence on the Productivity Effects of
+Generative Artificial Intelligence,” Science, 2023, 381 (6654).
+Otis, Nicholas G., Rowan Clarke, Solene Delecourt, David Holtz, and Rem Koning,
+“The Uneven Impact of Generative AI on Entrepreneurial Performance,” 2024. Working
+paper.
+Our World in Data, “Global primary energy consumption by source,” 2025.
+Peng, Sida, Eirini Kalliamvakou, Peter Cihon, and Mert Demirer, “The Impact of AI on
+Developer Productivity: Evidence from GitHub Copilot,” 2023. Technical report.
+Piketty, Thomas, Capital in the Twenty-First Century, Cambridge, MA: Harvard University
+Press, 2014.
+and Gabriel Zucman, “Capital is Back: Wealth-Income Ratios in Rich Countries
+1700–2010,” Quarterly Journal of Economics, 2014, 129 (3), 1255–310.
+Prettner, Klaus, “A Note on the Implications of Automation for Economic Growth and the
+Labor Share,” Macroeconomic Dynamics, 2019, 23 (3), 1294–1301.
+Raina, Rajat, Anand Madhavan, and Andrew Y. Ng, “Large-scale Deep Unsupervised
+Learning using Graphics Processors,” in “Proceedings of the 26th Annual International Conference on Machine Learning” ICML ’09 Association for Computing Machinery New York,
+NY, USA 2009, pp. 873–80.
+Roldán-Monés, Antonio, “When GenAI increases inequality: evidence from a university
+debating competition,” 2024. Working paper.
+Romer, Paul, “Endogenous Technological Change,” Journal of Political Economy, 1990, 98 (5),
+S71–S102.
+Roodman, David, “On the Probability Distribution of Long-term Changes in the Growth Rate
+of the Global Economy: An Outside View,” 2020. Open Philanthropy.
+Sachs, Jeffrey D and Laurence J Kotlikoff, “Smart Machines and Long-term Misery,” Technical Report 2012. National Bureau of Economic Research, Working Paper No. 18629.
+Sachs, Jeffrey D., Seth G. Benzell, and Guillermo LaGarda, “Robots: Curse or Blessing?
+A Basic Framework,” 2015. NBER working paper 21091.
+
+36
+Sandberg, Anders, “An Overview of Models of Technological Singularity,” in Max More and
+Natasha Vita-More, eds., The Transhumanist Reader: Classical and Contemporary Essays on
+the Science, Technology, and Philosophy of the Human Future, Wiley Online Library, 2013,
+pp. 376–394.
+Sasaki, Hiroaki, “Growth with Automation Capital and Declining Population,” Economics
+Letters, 2023, 222 (110958).
+Shulman, Carl and Elliott Thornley, “How Much Should Governments Pay to Prevent
+Catastrophes? Longtermism’s Limited Role,” in Hilary Greaves, Jacob Barrett, and David
+Thorstad, eds., Essays on Longtermism: Present Action for the Distant Future, Oxford: Oxford
+University Press, 2025.
+Sotala, Kaj, “Advantages of Artificial Intelligences, Uploads, and Digital Minds,” International
+Journal of Machine Consciousness, 2012, 4 (1), 275–91.
+Trammell, Philip, “The Extreme Inefficiency of Expanding Variety in Endogenous Growth
+Theory,” 2025. Working paper.
+and Leopold Aschenbrenner, “Existential Risk and Growth,” 2026. Working paper.
+UNESCO Institute for Statistics, “The Sustainable Development Goals Extended Report
+2024, 9: Industry, Innovation and Infrastructure,” Technical Report 2024.
+U.S. Bureau of Economic Analysis, “Gross Domestic Product,” 2026. Retrieved from FRED,
+Federal Reserve Bank of St. Louis, March 30, 2026.
+, “Gross Private Domestic Investment: Fixed Investment: Nonresidential: Equipment: Information Processing Equipment (Y034RC1Q027SBEA),” 2026. Retrieved from FRED, Federal
+Reserve Bank of St. Louis, March 30, 2026.
+Uzawa, Hirofumi, “Neutral Inventions and the Stability of Growth Equilibrium,” The Review
+of Economic Studies, 1961, 28 (2), 117–124.
+van der Werf, Edwin, “Production Functions for Climate Policy Modeling: An Empirical
+Analysis,” Energy Economics, 2008, 30, 2964–79.
+Villalobos, Pablo, “Scaling Laws Literature Review,” 2023. Epoch AI blog post.
+Weitzman, Martin L, “Recombinant Growth,” The Quarterly Journal of Economics, 1998, 113
+(2), 331–360.
+
+37
+World Energy Council, “World Energy Resources: 2013 Survey,” 2013. Chapter 8: Solar
+Energy.
+Young, Alwyn, “Growth without Scale Effects,” Journal of Political Economy, 1998, 106 (1),
+41–63.
+Zeira, Joseph, “Workers, Machines, and Economic Growth,” Quarterly Journal of Economics,
+1998, 113 (4), 1091–1117.

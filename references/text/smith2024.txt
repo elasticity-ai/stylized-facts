@@ -1,0 +1,52 @@
+I hang out with a lot of people in the AI world, and if there’s one thing they’re certain of, it’s that the technology they’re making is going to put a lot of people out of a job. Maybe not all people — they argue back and forth about that — but certainly a _lot_ of people.
+
+It’s understandable that they think this way; after all, this is pretty much how they go about inventing stuff. They think “OK, what sort of things would people pay to have done for them?”, and then they try to figure out how to get AI to do that. And since those tasks are almost always things that humans currently do, it means that AI engineers, founders, and VCs are pretty much always working on automating human labor. So it’s not too much of a stretch to think that if we keep doing that, over and over, eventually a lot of humans just won’t have anything to do.
+
+It’s also natural to think that this kind of activity would push down wages. Intuitively, if there’s a set of things that humans get paid to do, and some of those things keep getting automated away, human labor will get squeezed into a shrinking set of tasks. Basically, the idea is that it looks like this:
+
+
+And this seems to fit with the history of which kind of jobs humans do. In the olden days, everyone was a farmer; in the early 20th century, a lot of people worked in factories; today, most people work in services:
+
+
+And it’s easy to think that in a simple supply-and-demand world, this shrinking of the human domain will reduce wages. As humans get squeezed into an ever-shrinking set of tasks, the supply of labor in those remaining human tasks will go up. A glut of supply drives down wages. Thus, the more we automate, the less humans get paid to do the smaller and smaller set of things they can still do.
+
+Of course, if you think this way, you also have to reckon with the fact that wages have gone _way way up_ over this period, rather than down and down. The median American individual earned about 50% more in 2022 than in 1974:
+
+
+(That number is adjusted for inflation. It’s also a median, so it’s not very much affected by the small number of people at the top of the distribution who make their money from owning capital and land.)
+
+How can this be true? Well, maybe it’s because we invent new tasks for humans to do over time. In fact, so far, economic history has seen a continuous _diversification_ in the number of tasks humans do. Back in the agricultural age, nearly everyone did the same small set of tasks: farming and maintaining a farm household. Now, even after centuries of automation, our species as a whole performs a much wider variety of different tasks. “Digital media marketing” was not a job in 1950, nor was “dance therapist”.
+
+So that really calls into question the notion that humanity is getting continuously squeezed into a smaller and smaller set of useful tasks. The fact that we call most of the new tasks “services” doesn’t change the fact that the set of new human tasks seems to have expanded faster than machines have replaced old ones.
+
+But many people believe that this time really is different. They believe that AI is a general-purpose technology that can — with a little help from robotics — learn to do _everything_ a human can possibly do, including programming better AI.
+
+At that point, it seems like it’ll be game over — the blue bar in the graph above will shrink to nothing, and humans will have nothing left to do, and we will become obsolete like horses. Human wages will drop below subsistence level, and the only way they’ll survive is on welfare, paid by the rich people who own all the AIs that do all the valuable work. But even long before we get to that final dystopia, this line of thinking predicts that human wages will drop quite a lot, since AI will squeeze human workers into a rapidly shrinking set of useful tasks.
+
+This, in a nutshell, is how I think that the engineers, entrepreneurs, and VCs that I hang out with are thinking about the impact of AI on the labor market.
+
+Most of the technologists I know take an attitude towards this future that’s equal parts melancholy, fatalism, and pride — sort of an Oppenheimer-esque “Now I am become death, destroyer of jobs” kind of thing. They all think the immiseration of labor is inevitable, but they think that being the ones to invent and own the AI is the only way to avoid being on the receiving end of that immiseration. And in the meantime, it’s something cool to have worked on.
+
+So when I cheerfully tell them that it’s very possible that **regular humans will have plentiful, high-paying jobs in the age of AI dominance** — often doing **much the same kind of work that they’re doing right now** — technologists typically become flabbergasted, flustered, and even frustrated. I must simply not understand just _how many things_ AI will be able to do, or just _how good it will be_ at doing them, or just _how cheap_ it’ll get. I must be thinking to myself “Surely, there are some things humans will always be better at machines at!”, or some other such pitiful coping mechanism.
+
+But no. That is _not_ what I am thinking. Instead, I accept that AI may someday get better than humans at _every conceivable task_. That’s the future I’m imagining. And in that future, I think it’s possible — perhaps even likely — that the vast majority of humans will have good-paying jobs, and that many of those jobs will look pretty similar to the jobs of 2024.
+
+At which point you may be asking: “What the heck is this guy smoking?”
+
+Well, I’ll tell you.
+
+When most people hear the term “comparative advantage” for the first time, they immediately think of the wrong thing. They think the term means something along the lines of “who can do a thing better”. After all, if an AI is better than you at storytelling, or reading an MRI, it’s better _compared_ to you, right? Except that’s not actually what comparative advantage means. The term for “who can do a thing better” is “_competitive_ advantage”, or “absolute advantage”.
+
+**Comparative advantage** actually means “who can do a thing better relative to the other things they can do”. So for example, suppose I’m worse than everyone at everything, but I’m a little _less_ bad at drawing portraits than I am at anything else. I don’t have any _competitive_ advantages at all, but drawing portraits is my _comparative_ advantage.
+
+The key difference here is that everyone — every single person, every single AI, _everyone_ — always has a comparative advantage at _something!_
+
+To help illustrate this fact, let’s look at a simple example. A couple of years ago, just as generative AI was getting big, I [co-authored a blog post](https://www.noahpinion.blog/p/generative-ai-autocomplete-for-everything) about the future of work with an OpenAI engineer named Roon. In that post, we gave an example illustrating how someone can get paid — and paid _well_ — to do a job that the person hiring them would actually be _better at doing_:
+
+> Imagine a venture capitalist (let’s call him “Marc”) who is an almost inhumanly fast typist. He’ll still hire a secretary to draft letters for him, though, because even if that secretary is a slower typist than him, Marc can generate more value using his time to do something other than drafting letters. So he ends up paying someone else to do something that _he’s actually better at_.
+
+(In fact, we lifted this example from an econ textbook by Greg Mankiw, who in turn lifted it from Paul Samuelson.)
+
+Note that in our example, Marc is better than his secretary at _every single task_ that the company requires. He’s better at doing VC deals. And he’s also better at typing. But even though Marc is better at everything, he doesn’t end up doing everything himself! He ends up doing the thing that’s his comparative advantage — doing VC deals. And the secretary ends up doing the thing that’s _his_ comparative advantage — typing. Each worker ends up doing the thing they’re best at _relative to the other things they could be doing_, rather than the thing they’re best at _relative to other people_.
+
+This might sound like a contrived example, but in fact there are probably a lot of cases where it’s a good approximation of reality. Somewhere in the developed world, there is probably some worker who is worse than you are at _every single possible job skill_. And yet that worker still has a job. And since they’re in the developed world, that worker more than likely earns a decent living doing that job, even though _you could do their job better than they could_.

@@ -1,0 +1,25 @@
+#!/bin/sh
+# Pre-commit hook for stylized-facts. Install with:
+#
+#     ln -sf ../../tools/pre-commit .git/hooks/pre-commit
+#
+# Runs the same checks as `make check`. Bibliography coverage gaps are
+# advisory and will not block a commit; a broken citekey or a quote that is
+# not in its cited source will. Bypass a known-failing check with
+# `git commit --no-verify`.
+set -e
+
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root"
+
+# Only run when something the checks actually read has changed.
+if git diff --cached --name-only | grep -qE '\.(qmd|bib)$|^tools/|^references/'; then
+    echo "running repo checks (skip with --no-verify)..."
+    python3 tools/bib_normalize.py --check || {
+        echo
+        echo "stylized-facts.bib is not normalized. Fix with: python3 tools/bib_normalize.py"
+        exit 1
+    }
+    python3 "tools/stylized-facts.bib.tests.py" --check
+    python3 tools/qmd_validate.py --all
+fi

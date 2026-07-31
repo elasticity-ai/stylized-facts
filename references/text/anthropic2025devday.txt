@@ -1,0 +1,360 @@
+Privacy Center
+
+Currently, only residents from GDPR countries and certain US states can opt out of Tracking Technologies through our Consent Management Platform. Additional options regarding these technologies may be available on your device, browser, or through industry options like AdChoices. Please see our Privacy Policy for more information.
+
+Social Media
+
+- [x] On
+
+These cookies are set by a range of social media services that we have added to the site to enable you to share our content with your friends and networks. They are capable of tracking your browser across other sites and building up a profile of your interests. This may impact the content and messages you see on other websites you visit. If you do not allow these cookies you may not be able to use or see these sharing tools.
+
+* * *
+
+Essential
+
+- [x] On
+
+This website uses essential cookies and services to enable core website features and provide a seamless user experience. These cookies and services are used to facilitate features such as navigation, remember user preferences, and ensure the security of the website.
+
+* * *
+
+Targeted
+
+- [x] On
+
+These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+
+* * *
+
+Performance
+
+- [x] On
+
+These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous. If you do not allow these cookies we will not know when you have visited our site, and will not be able to monitor its performance.
+
+* * *
+
+Functional
+
+- [x] On
+
+This website uses functional cookies and services to remember your preferences and choices, such as language preferences, font sizes, region selections, and customized layouts. They enable this website to offer enhanced and personalized functionalities.
+
+* * *
+
+Audience Measurement
+
+- [x] On
+
+We use audience measurement cookies in order to carry out aggregated traffic measurement and generate performance statistics essential for the proper functioning of the site and the provision of its content (for example to measure performance, to detect navigation problems, to optimization technical performance or ergonomics, to estimate server power needed and to analyse content performance). The use of these cookies is strictly limited to measuring the site's audience. These cookies do not allow the tracking of navigation on other websites and the data collected is not combined or shared with third parties. You can refuse the use of this cookie by switching off the slider to the right.
+
+OK
+
+English Deutsch Español Français Italiano 日本語 繁體中文
+
+en
+
+[Privacy Policy](https://www.condenast.com/privacy-policy)
+
+[Consent powered by Ethyca](https://www.ethyca.com/janus?utm_source=fides_consent&utm_medium=referral&utm_campaign=cmp_backlinks&utm_term=janus)
+
+[Skip to main content](https://www.wired.com/story/anthropic-first-developer-conference/#main-content)
+
+[](https://www.wired.com/)
+
+[SECURITY](https://www.wired.com/category/security/)
+
+[POLITICS](https://www.wired.com/category/politics/)
+
+[THE BIG STORY](https://www.wired.com/category/big-story/)
+
+[BUSINESS](https://www.wired.com/category/business/)
+
+[SCIENCE](https://www.wired.com/category/science/)
+
+[CULTURE](https://www.wired.com/category/culture/)
+
+[REVIEWS](https://www.wired.com/category/gear/)
+
+[](https://www.wired.com/)
+
+[Newsletters](https://www.wired.com/newsletter?sourceCode=hamburgernav)
+
+[Security](https://www.wired.com/category/security/)
+
+[Politics](https://www.wired.com/category/politics/)
+
+[The Big Story](https://www.wired.com/category/big-story/)
+
+[Business](https://www.wired.com/category/business/)
+
+[Science](https://www.wired.com/category/science/)
+
+[Culture](https://www.wired.com/category/culture/)
+
+[Reviews](https://www.wired.com/category/gear/)
+
+More
+
+[The Big Interview](https://www.wired.com/the-big-interview/)[Magazine](https://www.wired.com/magazine/)[Events](https://www.wired.com/tag/wired-events/)[WIRED Insider](https://www.wired.com/collection/wiredinsider/)[WIRED Consulting](https://www.wired.com/tag/wired-consulting/)
+
+[Newsletters](https://www.wired.com/newsletter?sourceCode=hamburgernav)
+
+[Podcasts](https://www.wired.com/podcasts/)
+
+[Video](https://www.wired.com/video/)
+
+[Livestreams](https://www.wired.com/livestreams)
+
+[Merch](https://shop.wired.com/)
+
+[Search](https://www.wired.com/search/)
+
+[Sign In](https://www.wired.com/auth/initiate?redirectURL=%2Fstory%2Fanthropic-first-developer-conference%2F&source=VERSO_NAVIGATION)
+
+[Sign In](https://www.wired.com/auth/initiate?redirectURL=%2Fstory%2Fanthropic-first-developer-conference%2F&source=VERSO_NAVIGATION)
+
+[Kylie Robison](https://www.wired.com/author/kylie-robison/)
+
+[Business](https://www.wired.com/category/business)
+
+May 23, 2025 1:16 PM
+
+# Inside Anthropic’s First Developer Day, Where AI Agents Took Center Stage
+
+Anthropic CEO Dario Amodei said everything human workers do now will eventually be done by AI systems.
+
+
+Anthropic CEO Dario Amodei.Photo-Illustration: WIRED Staff; PHotograph: FABRICE COFFRINI/Getty Images
+
+Save this story
+
+Save this story
+
+Anthropic’s first [developer conference](https://www.wired.com/story/anthropic-new-model-launch-claude-4/) kicked off in San Francisco on Thursday, and while the rest of the industry races toward artificial general intelligence, at Anthropic the goal of the year is deploying a “virtual collaborator” in the form of an autonomous AI agent.
+
+“We're all going to have to contend with the idea that everything you do is eventually going to be done by AI systems,” Anthropic CEO [Dario Amodei](https://www.wired.com/tag/dario-amodei/) said in a press briefing. “This will happen.”
+
+Don't just keep up. Get ahead—with our biggest stories, handpicked for you each day.
+
+Sign up
+
+By signing up, you agree to our [user agreement](https://www.condenast.com/user-agreement) (including [class action waiver and arbitration provisions](https://www.condenast.com/user-agreement#introduction-arbitration-notice)), and acknowledge our [privacy policy](https://www.condenast.com/privacy-policy).
+
+As roughly 500 attendees munched breakfast sandwiches with an abnormal amount of arugula, and Anthropic staffers milled about in company-issued baseball caps, Amodei took the stage with his chief product officer, Mike Krieger.
+
+Featured Video
+
+[Google I/O Was a Really Glitzy Advert For AI [EMBED]](https://www.wired.com/video/watch/google-i-slash-o-was-a-really-glitzy-advert-for-ai-embed)
+
+“When do you think there will be the first billion-dollar company with one human employee?” Krieger asked. Amodei, wearing a light-gray jacket and a pair of Brooks running shoes, replied without skipping a beat: “2026.” (Later in the press lounge, a spokesperson said they dub this version of Amodei “professor panda” due to his casual-professional attire and his love for pandas—his Slack profile picture is him with a stuffed panda.
+
+
+Photograph: Don Feria/AP Images
+
+There’s a common company line you’ll hear about agents, and Krieger got to it quickly: They won’t replace employees, just help human workers with tasks. “They're moving from just being engineers to being managers of several autonomous agents, tackling everything from a simple coding task to complex, full-stack development projects across multiple code bases,” Krieger said. “It took our technical onboarding time to get engineers up to speed from two to three weeks to two to three days.”
+
+It’s a belief echoed by Anthropic’s top brass. Cofounder Jack Clark [has said](https://www.businessinsider.com/anthropic-cofounder-jack-clark-ai-manager-nerds-2025-5) he expects people to “manage fleets of AI agents,” while Amodei says he [believes](https://www.businessinsider.com/anthropic-ceo-ai-90-percent-code-3-to-6-months-2025-3?utm_source=chatgpt.com) software engineers are necessary (for now) to guide models. Still, as the models get more capable in areas from coding to creative writing, it certainly seems like redundancies are imminent.
+
+“I think we're just at the beginning of what we can do with the new generation of model in terms of tasks,” Amodei said, noting that he’s particularly excited about Opus’ ability to aid in cybersecurity and biomedical research.
+
+Anthropic is making a big push into biomedical research, [offering up to $20,000 in API credits](https://www.anthropic.com/news/ai-for-science-program) to researchers in biology and genetics. “We have found that the [new] model’s abilities in biology are substantially better,” Amodei said in a press briefing. This has contributed to Claude Opus 4’s Chemical, Biological, Radiological, and Nuclear risk level, making it the highest risk model Anthropic has released to date [based on its Responsible Scaling Policy](https://www.anthropic.com/news/activating-asl3-protections).
+
+
+Anthropic CPO Mike Krieger
+
+Photograph: Don Feria/AP Images
+
+
+Anthropic CEO Dario Amodei
+
+Photograph: Don Feria/AP Images
+
+After the morning keynote, journalists were ushered from the dark auditorium to a sunny deck upstairs, and I went to scavenge for snacks and doodads—I got a handful of Anthropic magnets and a tote bag that says “Code w/ Claude.” After an hour of media gossip and diet cokes, we headed back down for a press briefing with Amodei (who skipped into his chair) and Krieger.
+
+In March, Amodei had [said](https://www.businessinsider.com/anthropic-ceo-ai-90-percent-code-3-to-6-months-2025-3) that “90 percent of code” will be written by AI within the next six months. So I was curious to ask both executives how much of Anthropic's code is currently written by Claude.
+
+“Something like over 70 percent of [Anthropic’s] pull requests are now Claude code written,” Krieger told me. As for what those engineers are doing with the extra time, Krieger said they’re orchestrating the Claude codebase and, of course, attending meetings. “It really becomes apparent how much else is in the software engineering role,” he noted.
+
+The pair fiddled with Voss water bottles and answered an array of questions from the press about an upcoming [compute cluster with Amazon](https://www.semafor.com/article/12/03/2024/amazon-announces-new-rainier-ai-compute-cluster-with-anthropic) (Amodei says “parts of that cluster are already being used for research,”) and the displacement of workers due to AI (“I don't think you can offload your company strategy to something like that,” Krieger said).
+
+We’d been told by spokespeople that we weren’t allowed to ask questions about policy and regulation, but Amodei offered some unprompted insight into his views on a controversial provision in President Trump’s megabill that would ban state-level AI regulation for 10 years: “If you're driving the car, it's one thing to say ‘we don't have to drive with the steering wheel now.’ It's another thing to say ‘we're going to rip out the steering wheel, and we can't put it back in for 10 years,’” Amodei said.
+
+What does Amodei think about the most? He says the race to the bottom, where safety measures are cut in order to compete in the AI race.
+
+“The absolute puzzle of running Anthropic is that we somehow have to find a way to do both,” Amodei said, meaning the company has to compete and deploy AI safely. “You might have heard this stereotype that, ‘Oh, the companies that are the safest, they take the longest to do the safety testing. They're the slowest.’ That is not what we found at all.”
+
+
+Photograph: Don Feria/AP Images
+
+
+Photograph: Don Feria/AP Images
+
+
+Photograph: Don Feria/AP Images
+
+After an array of journalist-exclusive fireside chats with Anthropic’s top researchers, including researcher and philosopher Amanda Askell, cofounder Chris Olah, and researcher Jan Leike, attendees poured out of the event center into Waymos and Ubers or waited around for the after-party.
+
+What I heard from [Krieger on Wednesday](https://www.wired.com/story/anthropic-new-model-launch-claude-4/), and from a spokesperson at the conference, is that the company decided to throw this conference now because it’s finally a big enough company to host one.
+
+The company has doubled in size in the past year to 1,300 employees and is valued at a whopping $61.5 billion. For a company that once positioned itself as the careful cousin in a reckless industry, Anthropic seems ready to step into the spotlight—and eager to host the party.
+
+## You Might Also Like
+
+*   **In your inbox:** This is [not your average politics newsletter](https://www.wired.com/newsletter/exclusive/inner-loop?sourceCode=BottomStories) 
+*   WiFi-8 is coming—here’s [everything you need to know](https://www.wired.com/story/what-is-wi-fi-8/) 
+*   **Big Story:** Young runners are becoming [freakishly fast](https://www.wired.com/story/teenagers-running-trackflation/) 
+*   The new reality of [urban surveillance](https://www.wired.com/story/sfpd-drone-video-leak-surveillance/) 
+*   **Take our survey:** Do you work in tech? We want to [hear from you](https://se1.decipherinc.com/survey/selfserve/604/260703?list=1#?) 
+
+[Kylie Robison](https://www.wired.com/author/kylie-robison/) was a senior correspondent at WIRED covering the business of artificial intelligence. She was previously a reporter at The Verge, Fortune, and Business Insider. ... [Read More](https://www.wired.com/author/kylie-robison)
+
+Topics[artificial intelligence](https://www.wired.com/tag/artificial-intelligence/)[Anthropic](https://www.wired.com/tag/anthropic/)[chatbots](https://www.wired.com/tag/chatbots/)[research](https://www.wired.com/tag/research/)[Dario Amodei](https://www.wired.com/tag/dario-amodei/)
+
+### Don't Just Keep Up. Get Ahead
+
+Sign up for the _Daily_ newsletter to get our biggest stories, handpicked for you each day.
+
+Sign up
+
+By signing up, you agree to our [user agreement](https://www.condenast.com/user-agreement) (including [class action waiver and arbitration provisions](https://www.condenast.com/user-agreement#introduction-arbitration-notice)), and acknowledge our [privacy policy](https://www.condenast.com/privacy-policy).
+
+Read More
+
+
+[Private Claude Chats Exposed in Google and Bing Search Results](https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+The screwup shows how tricky it can be to stop web crawlers from making ostensibly private conversations with AI chatbots entirely too public.
+
+Maddy Varner
+
+
+[More Typos, Fewer Em Dashes: Writers Are Creating an Anti-AI ‘Literary Counterculture’](https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+Novelists, journalists, and power LinkedIn posters are embracing first-person narratives and idiosyncrasies to avoid being mistaken for chat bots.
+
+Emma Madden
+
+
+[Can the New York Times Save Journalism From Our AI Overlords?](https://www.wired.com/story/the-big-interview-podcast-a-g-sulzberger-new-york-times/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+In 2023, the Times sued OpenAI and Microsoft for copyright infringement. They’ve since spent more than $20 million on the case, and publisher A.G. Sulzberger has no plans to stop fighting it.
+
+Katie Drummond
+
+
+[Here’s Why Anthropic Is Pushing States to Regulate AI Faster](https://www.wired.com/story/why-anthropic-is-pushing-states-to-regulate-ai-faster/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+The company endorsed landmark AI transparency laws in California and New York last year, but its head of US state and local policy says they may already be outdated.
+
+Maxwell Zeff
+
+
+[OpenAI Staffers Are Funding a Rival Super PAC to Take on Their Boss](https://www.wired.com/story/openai-employees-donations-guardrails-alliance-leading-the-future/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+OpenAI employees have donated more than $215,000 to a political effort opposing Leading the Future, a group backed by the company’s president, Greg Brockman.
+
+Maxwell Zeff
+
+
+[It’s Frighteningly Easy to Jailbreak Some Frontier AI Models](https://www.wired.com/story/jailbreaking-ai-models-google-anthropic-openai-spacexai/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+I watched a new tool try to get around the model safeguards of four major frontier companies. You might be surprised by how they performed.
+
+Will Knight
+
+
+[This Former Intel CEO Wants to Jumpstart Moore’s Law With Light](https://www.wired.com/story/pat-gelsinger-moores-law-light-chips/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+Pat Gelsinger wants to pave the way to ever more powerful artificial intelligence using tiny beams of light.
+
+Joel Khalili
+
+
+[Why Apple Sued OpenAI, New York Takes on Data Centers, and What to Know about Cyclosporiasis](https://www.wired.com/story/uncanny-valley-podcase-apple-sued-openai-new-york-data-center-moratorium-cyclosporiasis-outbreak/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+On today’s _Uncanny Valley_, we unpack OpenAI’s ongoing drama, both legal and reputational, and whether these developments could further hurt the company—particularly in its fight against Anthropic.
+
+Brian Barrett
+
+
+[The Army Is Burning Through Its AI Tokens](https://www.wired.com/story/the-army-is-burning-through-its-ai-tokens/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+Members of the Army received an email informing them that they were rapidly depleting their AI tokens, and needed to limit use.
+
+Vittoria Elliott
+
+
+[The White House Is Trying to Figure Out What to Do About Chinese AI](https://www.wired.com/story/the-white-house-is-trying-to-figure-out-what-to-do-about-chinese-ai/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+There’s a debate going on in the Trump administration over how to handle increasingly powerful Chinese AI models.
+
+Hugo Lowell
+
+
+[This Is Donald Trump’s AI Brain Trust](https://www.wired.com/story/this-is-donald-trumps-ai-brain-trust/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+“It’s not an argument with two sides, it’s an argument with 10 sides,” one senior administration official tells WIRED about how US AI policy is being shaped.
+
+Hugo Lowell
+
+
+[Remember Jibo? Its Successor Is a Wearable That Turns Your Life Into AI Slop](https://www.wired.com/story/the-beloved-jibo-robot-is-being-resurrected-as-an-ai-wearable/#intcid=_wired-article-bottom-recirc-bkt-a_914f34c9-0a7f-456a-b094-20d94dbcdfbb_closr)
+
+With “blessings” from the original Jibo founders, iKairos is a wearable or desk-mounted “AI journal” that turns your family moments into AI images and video.
+
+Boone Ashworth
+
+
+WIRED is obsessed with what comes next. Through rigorous investigations and game-changing reporting, we tell stories that don’t just reflect the moment—they help create it. When you look back in 10, 20, even 50 years, WIRED will be the publication that led the story of the present, mapped the people, products, and ideas defining it, and explained how those forces forged the future. WIRED: For Future Reference.
+
+More From WIRED
+
+*   [Subscribe](https://www.wired.com/subscribe/)
+*   [Newsletters](https://www.wired.com/newsletter?sourceCode=HeaderAndFooter)
+*   [Livestreams](https://www.wired.com/livestreams)
+*   [Travel](https://www.wired.com/tag/travel/)
+*   [FAQ](https://www.wired.com/about/faq/)
+*   [Contact Us](https://www.wired.com/about/feedback/)
+*   [WIRED Staff](https://www.wired.com/about/wired-staff/)
+*   [WIRED Education](https://www.wirededucation.com/)
+*   [Editorial Standards](https://www.wired.com/about/wired-on-background-policy/)
+*   [Archive](https://archive.wired.com/t/storefront/storefront)
+*   [RSS](https://www.wired.com/about/rss-feeds/)
+*   [Site Map](https://www.wired.com/sitemap/)
+*   [Accessibility Help](https://www.wired.com/about/accessibility-help/)
+
+Reviews and Guides
+
+*   [Reviews](https://www.wired.com/category/gear/)
+*   [Buying Guides](https://www.wired.com/category/gear/buying-guides/)
+*   [Streaming Guides](https://www.wired.com/tag/culture-guides/)
+*   [Wearables](https://www.wired.com/tag/wearables/)
+*   [Coupons](https://www.wired.com/tag/coupons/)
+
+*   [Advertise](https://www.condenast.com/brands/wired)
+*   [Manage Account](https://www.wired.com/account/profile)
+*   [Jobs](https://www.wired.com/about/wired-jobs/)
+*   [Press Center](https://www.wired.com/about/press/)
+*   [Condé Nast Store](https://condenaststore.com/)
+*   [User Agreement](https://www.condenast.com/user-agreement/)
+*   [Privacy Policy](http://www.condenast.com/privacy-policy#privacypolicy)
+*   [Your California Privacy Rights](http://www.condenast.com/privacy-policy#privacypolicy-california)
+
+© 2026 Condé Nast. All rights reserved. _WIRED_ may earn a portion of sales from products that are purchased through our site as part of our Affiliate Partnerships with retailers. The material on this site may not be reproduced, distributed, transmitted, cached or otherwise used, except with the prior written permission of Condé Nast.[Ad Choices](http://www.aboutads.info/)
+
+###### Select international site
+
+United States
+*   [Italia](https://www.wired.it/)
+*   [Japón](https://wired.jp/)
+*   [Czech Republic & Slovakia](https://www.wired.cz/)
+
+*   [](https://www.facebook.com/wired/)
+*   [](https://twitter.com/wired/)
+*   [](https://pinterest.com/wired/)
+*   [](https://www.youtube.com/user/wired/)
+*   [](https://instagram.com/wired/)
+*   [](https://www.tiktok.com/@wired?lang=en)
+
+Privacy Information

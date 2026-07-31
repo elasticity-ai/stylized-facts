@@ -1,0 +1,34 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # bibclean is optional: the bib tests skip the lint when it is absent.
+      # Everything else here is stdlib.
+      - name: Install bibclean
+        run: sudo apt-get update && sudo apt-get install -y bibclean
+        continue-on-error: true
+
+      # No network and no PDFs: every check reads references/text/, which is
+      # committed. references/pdf/ is git-ignored and absent here by design.
+      - name: Bibliography conventions
+        run: python3 "tools/stylized-facts.bib.tests.py" --check
+
+      - name: Bibliography formatting is normalized
+        run: python3 tools/bib_normalize.py --check
+
+      - name: Document checks
+        run: python3 tools/qmd_validate.py --all

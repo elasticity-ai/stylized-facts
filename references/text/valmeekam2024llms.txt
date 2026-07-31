@@ -1,0 +1,179 @@
+[Skip to main content](https://arxiv.org/abs/2409.13373#content)
+
+
+[](https://arxiv.org/IgnoreMe)[![Image 2: archive](https://arxiv.org/static/base/1.0.1/images/arxiv-logo-primary-light.svg)](https://arxiv.org/)[Search](https://arxiv.org/search)[Submit](https://arxiv.org/user/create)[Donate](https://info.arxiv.org/about/donate.html)[Log in](https://arxiv.org/login)
+
+Search arXiv 
+
+ Press Enter to search · [Advanced search](https://arxiv.org/search/advanced)
+
+# Computer Science > Artificial Intelligence
+
+**arXiv:2409.13373** (cs) 
+
+ [Submitted on 20 Sep 2024]
+
+# Title:LLMs Still Can't Plan; Can LRMs? A Preliminary Evaluation of OpenAI's o1 on PlanBench
+
+Authors:[Karthik Valmeekam](https://arxiv.org/search/cs?searchtype=author&query=Valmeekam,+K), [Kaya Stechly](https://arxiv.org/search/cs?searchtype=author&query=Stechly,+K), [Subbarao Kambhampati](https://arxiv.org/search/cs?searchtype=author&query=Kambhampati,+S)
+
+View a PDF of the paper titled LLMs Still Can't Plan; Can LRMs? A Preliminary Evaluation of OpenAI's o1 on PlanBench, by Karthik Valmeekam and 2 other authors
+
+[View PDF](https://arxiv.org/pdf/2409.13373)[HTML (experimental)](https://arxiv.org/html/2409.13373v1)
+> Abstract:The ability to plan a course of action that achieves a desired state of affairs has long been considered a core competence of intelligent agents and has been an integral part of AI research since its inception. With the advent of large language models (LLMs), there has been considerable interest in the question of whether or not they possess such planning abilities. PlanBench, an extensible benchmark we developed in 2022, soon after the release of GPT3, has remained an important tool for evaluating the planning abilities of LLMs. Despite the slew of new private and open source LLMs since GPT3, progress on this benchmark has been surprisingly slow. OpenAI claims that their recent o1 (Strawberry) model has been specifically constructed and trained to escape the normal limitations of autoregressive LLMs--making it a new kind of model: a Large Reasoning Model (LRM). Using this development as a catalyst, this paper takes a comprehensive look at how well current LLMs and new LRMs do on PlanBench. As we shall see, while o1's performance is a quantum improvement on the benchmark, outpacing the competition, it is still far from saturating it. This improvement also brings to the fore questions about accuracy, efficiency, and guarantees which must be considered before deploying such systems.
+
+Subjects:Artificial Intelligence (cs.AI); Computation and Language (cs.CL)
+Cite as:[arXiv:2409.13373](https://arxiv.org/abs/2409.13373) [cs.AI]
+(or [arXiv:2409.13373v1](https://arxiv.org/abs/2409.13373v1) [cs.AI] for this version)
+[https://doi.org/10.48550/arXiv.2409.13373](https://doi.org/10.48550/arXiv.2409.13373)
+
+Focus to learn more
+
+ arXiv-issued DOI via DataCite
+
+## Submission history
+
+ From: Karthik Valmeekam [[view email](https://arxiv.org/show-email/724a90e8/2409.13373)] 
+
+**[v1]** Fri, 20 Sep 2024 10:20:46 UTC (3,153 KB)
+
+[](https://arxiv.org/abs/2409.13373)Full-text links:
+## Access Paper:
+
+ View a PDF of the paper titled LLMs Still Can't Plan; Can LRMs? A Preliminary Evaluation of OpenAI's o1 on PlanBench, by Karthik Valmeekam and 2 other authors
+
+*   [View PDF](https://arxiv.org/pdf/2409.13373)
+*   [HTML (experimental)](https://arxiv.org/html/2409.13373v1)
+*   [TeX Source](https://arxiv.org/src/2409.13373)
+
+[view license](http://arxiv.org/licenses/nonexclusive-distrib/1.0/ "Rights to this article")
+
+### Current browse context:
+
+cs.AI
+
+[<prev](https://arxiv.org/prevnext?id=2409.13373&function=prev&context=cs.AI "previous in cs.AI (accesskey p)") | [next>](https://arxiv.org/prevnext?id=2409.13373&function=next&context=cs.AI "next in cs.AI (accesskey n)")
+
+[new](https://arxiv.org/list/cs.AI/new) | [recent](https://arxiv.org/list/cs.AI/recent) | [2024-09](https://arxiv.org/list/cs.AI/2024-09)
+
+ Change to browse by: 
+
+[cs](https://arxiv.org/abs/2409.13373?context=cs)
+
+[cs.CL](https://arxiv.org/abs/2409.13373?context=cs.CL)
+
+### References & Citations
+
+*   [NASA ADS](https://ui.adsabs.harvard.edu/abs/arXiv:2409.13373)
+*   [Google Scholar](https://scholar.google.com/scholar_lookup?arxiv_id=2409.13373)
+*   [Semantic Scholar](https://api.semanticscholar.org/arXiv:2409.13373)
+
+export BibTeX citation Loading...
+
+## BibTeX formatted citation
+
+×
+
+Data provided by: [](https://arxiv.org/abs/2409.13373)
+
+### Bookmark
+
+
+Bibliographic Tools 
+
+# Bibliographic and Citation Tools
+
+- [x] Bibliographic Explorer Toggle 
+
+Bibliographic Explorer _([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))_
+
+- [x] Connected Papers Toggle 
+
+Connected Papers _([What is Connected Papers?](https://www.connectedpapers.com/about))_
+
+- [x] Litmaps Toggle 
+
+Litmaps _([What is Litmaps?](https://www.litmaps.co/))_
+
+- [x] scite.ai Toggle 
+
+scite Smart Citations _([What are Smart Citations?](https://www.scite.ai/))_
+
+Code, Data, Media 
+
+# Code, Data and Media Associated with this Article
+
+- [x] alphaXiv Toggle 
+
+alphaXiv _([What is alphaXiv?](https://alphaxiv.org/))_
+
+- [x] Links to Code Toggle 
+
+CatalyzeX Code Finder for Papers _([What is CatalyzeX?](https://www.catalyzex.com/))_
+
+- [x] DagsHub Toggle 
+
+DagsHub _([What is DagsHub?](https://dagshub.com/))_
+
+- [x] GotitPub Toggle 
+
+Gotit.pub _([What is GotitPub?](http://gotit.pub/faq))_
+
+- [x] Huggingface Toggle 
+
+Hugging Face _([What is Huggingface?](https://huggingface.co/huggingface))_
+
+- [x] ScienceCast Toggle 
+
+ScienceCast _([What is ScienceCast?](https://sciencecast.org/welcome))_
+
+Demos 
+
+# Demos
+
+- [x] Replicate Toggle 
+
+Replicate _([What is Replicate?](https://replicate.com/docs/arxiv/about))_
+
+- [x] Spaces Toggle 
+
+Hugging Face Spaces _([What is Spaces?](https://huggingface.co/docs/hub/spaces))_
+
+- [x] Spaces Toggle 
+
+TXYZ.AI _([What is TXYZ.AI?](https://txyz.ai/))_
+
+Related Papers 
+
+# Recommenders and Search Tools
+
+- [x] Link to Influence Flower 
+
+Influence Flower _([What are Influence Flowers?](https://influencemap.cmlab.dev/))_
+
+- [x] Core recommender toggle 
+
+CORE Recommender _([What is CORE?](https://core.ac.uk/services/recommender))_
+
+*   [Author](https://arxiv.org/abs/2409.13373)
+*   [Venue](https://arxiv.org/abs/2409.13373)
+*   [Institution](https://arxiv.org/abs/2409.13373)
+*   [Topic](https://arxiv.org/abs/2409.13373)
+
+ About arXivLabs  
+
+# arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).
+
+[Which authors of this paper are endorsers?](https://arxiv.org/auth/show-endorsers/2409.13373) | [Disable MathJax](javascript:setMathjaxCookie()) ([What is MathJax?](https://info.arxiv.org/help/mathjax.html)) 
+
+ We gratefully acknowledge support from our **major funders**, [**member institutions**](https://info.arxiv.org/about/ourmembers.html), , and all contributors. 
+
+[About](https://info.arxiv.org/about)·[Help](https://info.arxiv.org/help)·[Contact](https://info.arxiv.org/help/contact.html)·[Subscribe](https://info.arxiv.org/help/subscribe)·[Copyright](https://info.arxiv.org/help/license/index.html)·[Privacy](https://info.arxiv.org/help/policies/privacy_policy.html)·[Accessibility](https://info.arxiv.org/help/web_accessibility.html)·[Operational Status (opens in new tab)](https://status.arxiv.org/)
+
+Major funding support from

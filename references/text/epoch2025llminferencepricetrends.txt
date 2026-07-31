@@ -1,0 +1,321 @@
+- [x] 
+
+[Latest](https://epoch.ai/latest)
+
+Our work
+
+#### Featured
+
+
+[](https://epoch.ai/trends)AI Trends & Statistics
+
+
+[](https://epoch.ai/data)Data Explorers
+
+
+[](https://epoch.ai/benchmarks)Capabilities & Benchmarking
+
+#### Publications
+
+*   [Papers & Reports](https://epoch.ai/publications)
+*   [Data Insights](https://epoch.ai/data-insights)
+*   [Newsletter](https://epoch.ai/gradient-updates)
+*   [Podcast](https://epoch.ai/epoch-after-hours)
+
+[See all publications](https://epoch.ai/latest)
+
+#### Data explorers
+
+*   [Capabilities](https://epoch.ai/benchmarks)
+*   [Models](https://epoch.ai/data/ai-models)
+*   [Data Centers](https://epoch.ai/data/ai-data-centers)
+*   [Chip Owners](https://epoch.ai/data/ai-chip-owners)
+*   [Companies](https://epoch.ai/data/ai-companies)
+*   [Polling on AI Use](https://epoch.ai/data/polling)
+
+[See all data explorers](https://epoch.ai/data)
+
+#### Benchmarks by Epoch AI
+
+*   [MirrorCode](https://epoch.ai/MirrorCode)
+*   [Epoch Capabilities Index](https://epoch.ai/eci)
+*   [FrontierMath: Open Problems](https://epoch.ai/frontiermath/open-problems)
+*   [FrontierMath: Tiers 1-4](https://epoch.ai/frontiermath/tiers-1-4)
+
+Navigate by topic
+
+#### AI Progress
+
+*   [Scaling](https://epoch.ai/topics/scaling)
+*   [Software progress](https://epoch.ai/topics/software-progress)
+*   [Open models](https://epoch.ai/topics/open-models)
+*   [Capabilities](https://epoch.ai/topics/capabilities)
+*   [Math](https://epoch.ai/topics/math)
+
+#### Industry
+
+*   [Leading companies](https://epoch.ai/topics/leading-companies)
+*   [Finances](https://epoch.ai/topics/finances)
+*   [Geopolitics](https://epoch.ai/topics/geopolitics)
+
+#### Infrastructure
+
+*   [Chips](https://epoch.ai/topics/chips)
+*   [Data centers](https://epoch.ai/topics/data-centers)
+*   [Energy](https://epoch.ai/topics/energy)
+
+#### Impacts
+
+*   [Adoption and use](https://epoch.ai/topics/adoption-and-use)
+*   [Economic impact](https://epoch.ai/topics/economic-impact)
+*   [Future of AI](https://epoch.ai/topics/future-of-ai)
+
+[See all topics](https://epoch.ai/topics)
+
+About
+
+*   [About Epoch AI](https://epoch.ai/about)
+*   [Donate](https://epoch.ai/about/donate)
+
+*   [Team](https://epoch.ai/about/team)
+*   [Careers](https://epoch.ai/about/careers)
+
+*   [Consultations](https://epoch.ai/about/consultations)
+*   [For press](https://epoch.ai/about/press)
+
+*   [Transparency](https://epoch.ai/about/transparency)
+
+[Contact](https://epoch.ai/contact)
+
+
+*   [Latest](https://epoch.ai/latest)
+*   [Our work](https://epoch.ai/data-insights/llm-inference-price-trends)#### Featured
+
+
+##### [Papers & Reports](https://epoch.ai/publications)##### [Data Insights](https://epoch.ai/data-insights)##### [Newsletter](https://epoch.ai/gradient-updates)##### [Podcast](https://epoch.ai/epoch-after-hours) [See all publications](https://epoch.ai/latest) #### Data explorers
+
+##### [Capabilities](https://epoch.ai/benchmarks)##### [Models](https://epoch.ai/data/ai-models)##### [Data Centers](https://epoch.ai/data/ai-data-centers)##### [Chip Owners](https://epoch.ai/data/ai-chip-owners)##### [Companies](https://epoch.ai/data/ai-companies)##### [Polling on AI Use](https://epoch.ai/data/polling) [See all data explorers](https://epoch.ai/data) #### Benchmarks by Epoch AI
+
+##### [MirrorCode](https://epoch.ai/MirrorCode)##### [Epoch Capabilities Index](https://epoch.ai/eci)##### [FrontierMath: Open Problems](https://epoch.ai/frontiermath/open-problems)##### [FrontierMath: Tiers 1-4](https://epoch.ai/frontiermath/tiers-1-4)       
+*   [Navigate by topic](https://epoch.ai/topics)#### AI Progress
+
+##### [Scaling](https://epoch.ai/topics/scaling)##### [Software progress](https://epoch.ai/topics/software-progress)##### [Open models](https://epoch.ai/topics/open-models)##### [Capabilities](https://epoch.ai/topics/capabilities)##### [Math](https://epoch.ai/topics/math)  #### Industry
+
+##### [Leading companies](https://epoch.ai/topics/leading-companies)##### [Finances](https://epoch.ai/topics/finances)##### [Geopolitics](https://epoch.ai/topics/geopolitics)  #### Infrastructure
+
+##### [Chips](https://epoch.ai/topics/chips)##### [Data centers](https://epoch.ai/topics/data-centers)##### [Energy](https://epoch.ai/topics/energy)  #### Impacts
+
+##### [Adoption and use](https://epoch.ai/topics/adoption-and-use)##### [Economic impact](https://epoch.ai/topics/economic-impact)##### [Future of AI](https://epoch.ai/topics/future-of-ai)  [See all topics](https://epoch.ai/topics)    
+*   [About](https://epoch.ai/about)##### [About Epoch AI](https://epoch.ai/about)##### [Donate](https://epoch.ai/about/donate)  ##### [Team](https://epoch.ai/about/team)##### [Careers](https://epoch.ai/about/careers)  ##### [Consultations](https://epoch.ai/about/consultations)##### [For press](https://epoch.ai/about/press)  ##### [Transparency](https://epoch.ai/about/transparency)     
+*   [Contact](https://epoch.ai/contact)
+
+1.   [Data Insights](https://epoch.ai/data-insights) 
+2.   LLM inference prices have fallen rapidly but unequally across tasks
+
+Data Insight
+
+Mar. 12, 2025
+
+# LLM inference prices have fallen rapidly but unequally across tasks
+
+Cite
+
+
+ By [Ben Cottier](https://epoch.ai/about/team/ben-cottier), Ben Snodin, [David Owen](https://epoch.ai/about/team/david-owen), and [Tom Adamczewski](https://epoch.ai/about/team/tom-adamczewski)
+
+The inference price of LLMs has fallen dramatically in recent years. We looked at the results of state-of-the-art models on six benchmarks over the past three years, and then measured how quickly the price to achieve those milestones has fallen. For instance, the price to achieve GPT-4’s performance on a set of PhD-level science questions fell by 40x per year. The rate of decline varies dramatically depending on the performance milestone, ranging from 9x to 900x per year. The fastest price drops in that range have occurred in the past year, so it’s less clear that those will persist.
+
+View
+
+All benchmarks MMLU (General knowledge)GPQA Diamond (Ph.D. level science questions)MATH-500 (Math)MATH 5 (Advanced math)HumanEval (Coding)LMSys Chatbot Arena ELO (Chatbot competition)
+
+LLM inference prices have fallen 9x to 900x/year, depending on the task
+
+Data source: Epoch AI, [Artificial Analysis](https://artificialanalysis.ai/)
+
+
+LLM prices have fallen 9x to 40x/year for general knowledge
+
+Inference price of models that achieve a given score on MMLU
+
+Data source: Epoch AI, [Artificial Analysis](https://artificialanalysis.ai/)
+
+
+LLM prices have fallen 40x to 900x/year for Ph.D. level science questions
+
+Inference price of models that achieve a given score on GPQA Diamond
+
+Data source: Epoch AI, [Artificial Analysis](https://artificialanalysis.ai/)
+
+
+LLM prices have fallen 20x to 700x/year for math
+
+Inference price of models that achieve a given score on MATH-500
+
+Data source: Epoch AI, [Artificial Analysis](https://artificialanalysis.ai/)
+
+
+LLM prices have fallen 70x to 700x/year for advanced math
+
+Inference price of models that achieve a given score on MATH 5
+
+Data source: Epoch AI, [Artificial Analysis](https://artificialanalysis.ai/)
+
+
+LLM prices have fallen 9x to 40x/year for coding
+
+Inference price of models that achieve a given score on HumanEval
+
+Data source: Epoch AI, [Artificial Analysis](https://artificialanalysis.ai/)
+
+
+LLM prices have fallen 10x to 200x/year for chatbot competition
+
+Inference price of models that achieve a given score on LMSys Chatbot Arena ELO
+
+Data source: Epoch AI, [Artificial Analysis](https://artificialanalysis.ai/)
+
+
+There are many potential reasons for these price drops. Some are well-known, such as models becoming [smaller](https://epoch.ai/gradient-updates/frontier-language-models-have-become-much-smaller) and [hardware](https://epoch.ai/blog/chips-topic-overview) becoming [more cost-effective](https://epoch.ai/data-insights/price-performance-hardware), while other important factors might be difficult to determine from public information.
+
+Epoch's work is free to use, distribute, and reproduce provided the source and authors are credited under the Creative Commons BY license.
+
+## Learn more about this graph
+
+The dataset for this insight combines data on large language model (LLM) API prices and benchmark scores from [Artificial Analysis](https://artificialanalysis.ai/) and Epoch AI. We used this dataset to identify the lowest-priced LLMs that match or exceed a given score on a benchmark. We then fit a log-linear regression model to the prices of these LLMs over time, to measure the rate of decrease in price. We applied the same method to several benchmarks (e.g. MMLU, HumanEval) and performance thresholds (e.g. GPT-3.5 level, GPT-4o level) to determine the variation across performance metrics.
+
+Note that while the data insight provides some commentary on what factors drive these price drops, we did not explicitly model these factors. Reduced profit margins may explain some of the drops in price, but we didn’t find clear evidence for this.
+
+Code to reproduce our analysis can be found [here](https://github.com/epoch-research/llm-benchmark-efficiency).
+
+### Data
+
+The data on LLM API pricing comes from both [Artificial Analysis](https://artificialanalysis.ai/) and our own database of API prices. Our data contributed prices for GPT-3, GPT-3.5 and Llama 2 models, because prices for those models were not publicly available from Artificial Analysis. These prices made up 9 of the 36 unique observations shown in this data insight. If the price of an LLM changed after its initial release, then we recorded that as a unique observation with the same model name, but a new price and “release” date. Where prices differed by their maximum allowed context length, we only included the prices for the shortest context.
+
+We aggregated prices over different LLM API providers and token types according to Artificial Analysis’ methodology, which is as follows. All prices were a 3:1 weighted average of input and output token prices. If the LLM had a first-party API, (e.g. OpenAI for o1), then we used the prices from that API. If a first-party API was not available (e.g. Meta’s Llama models), then we used the median of prices across providers.
+
+We excluded reasoning models from our analysis of per-token prices. Reasoning models tend to generate a much larger number of tokens than other models, making these models cost more in total to evaluate on a benchmark. This makes it misleading to compare reasoning models to other models on price per token, at a given performance level.
+
+The benchmark data covers 6 benchmarks: [GPQA Diamond](https://arxiv.org/abs/2311.12022) (PhD-level science questions), [MMLU](https://arxiv.org/abs/2009.03300) (general knowledge), [MATH-500](https://huggingface.co/datasets/HuggingFaceH4/MATH-500) (math problems), [MATH](https://arxiv.org/pdf/2103.03874) level 5 (advanced math problems), [HumanEval](https://arxiv.org/abs/2107.03374v2) (coding), and [Chatbot Arena Elo](https://lmarena.ai/) (head-to-head comparisons of chatbots, with human judges). Like the price data, the benchmark data is sourced from both Artificial Analysis and our [benchmark database](https://epoch.ai/benchmarks?view=table). In the combined dataset, most of the benchmark scores are as reported by Artificial Analysis. The methodology to obtain those scores is described by [Artificial Analysis](https://artificialanalysis.ai/methodology/intelligence-benchmarking) (except we use MMLU rather than MMLU-Pro).
+
+We used data from our own evaluations for MATH level 5 (a benchmark not reported by Artificial Analysis), and for cases where Artificial Analysis did not have scores for GPQA Diamond. For other benchmarks where Artificial Analysis had missing scores, we used scores from [Papers with Code](https://paperswithcode.com/) or scores reported by the developer of the model. Our methodology for MATH level 5 and GPQA Diamond evaluations is described [here](https://epoch.ai/benchmarks#Methodology). For the GPT-4-0314 model, direct evaluation on GPQA Diamond was unavailable. However, we know that GPT-4-0613 performed similarly to GPT-4-0314 across many other benchmarks (see [here](https://arxiv.org/abs/2309.16583), p.5). Based on that, we assumed that GPT-4-0314 had the same GPQA Diamond score as GPT-4-0613.
+
+### Analysis
+
+To analyze the decline in LLM prices over time, we focused on the most cost-effective LLMs above a certain performance threshold at each point in time. To identify these models, we iterated through models sorted by release date. In each iteration, we added a model to the set of cheapest models if it had a lower price than all previous models that scored at or above the threshold.
+
+After identifying the cheapest models, we fit a log-linear regression to price vs. release date. We used a log-linear model because it had a much lower Bayesian Information Criterion than a linear model. The slope of the log-linear model corresponds to a price reduction over time, e.g. 40x per year. We set a threshold of at least 4 data points to include a regression result.
+
+We applied the above method to all of the benchmarks and performance thresholds. For each benchmark, we identified instances where a new model achieved a better performance than all previous models, and used these instances as our performance thresholds. Across all of these benchmarks and performance thresholds, we found prices declining between 9x per year and 900x per year, with a median of 50x per year. Note that the “mid-range” value in the figure is close to the median of the trends that are shown, but is not always the exact median, for the sake of visual clarity.
+
+In addition to measuring the rates that prices have fallen, we analyzed how the rate relates to the time period it occurred in. We found that the fastest trends (e.g. 900x per year) start after January 2024. When we removed all model data before January 2024 (after selecting the lowest-price models), the rates also increased overall—even at performance levels that were achieved before 2024. In particular, the median rate increased from 50x per year to 200x per year. This suggests that the fastest trends are caused by a recent acceleration in price drops across performance levels and benchmarks.
+
+### Assumptions
+
+There is the potential for significant variation in the number of tokens that models generate to achieve their benchmark score, which could mean that trends in price per token differ from trends in evaluation cost. However, our investigations found that evaluation costs have declined similarly to prices per token. We used Epoch AI benchmark evaluation results for this analysis, as these report the number of tokens processed for each evaluation. For the six cost trends we estimated, the largest difference was 200x per year for evaluation cost vs. 400x per year for price per token, for Claude-3.5-Sonnet-2024-06 level performance on GPQA Diamond.
+
+We relied on benchmarks to measure an AI model’s performance, which leads to several limitations. Firstly, benchmarks do not comprehensively measure a model’s usefulness: there are important capabilities besides knowledge and reasoning, and other important features like output speed.
+
+Another limitation of benchmark scores is that AI models can be overfit to these benchmarks. AI developers may accidentally train models on benchmark data, or use knowledge about the benchmark to inform training (which seems to have [become more common](https://arxiv.org/abs/2407.07890) since 2024). These practices may drive up benchmark scores without generalizing.
+
+Benchmark evaluations can also differ due to randomness in model outputs and variations in prompting. There were 33 evaluations on GPQA Diamond that overlapped between Artificial Analysis and our benchmark database. The mean absolute difference between scores from the two evaluations was 2.9 percentage points, with a standard deviation of 1.7 and an average signed difference of 0.1. This is within expectations, since the standard error on our GPQA Diamond scores is generally around 3 percentage points, and variance is further increased by subtle differences in prompting and scoring.
+
+We also relied on our dataset having good enough model coverage to accurately measure trends in prices. There may be models not in our dataset that were more cost-effective than the “cheapest models” we selected. However, it’s unlikely that such models would greatly alter the observed trends, since the cheapest models at a given performance level are more likely to be well-known, and therefore captured in our dataset.
+
+## Explore this data
+
+
+[](https://epoch.ai/benchmarks)AI Capabilities
+
+Benchmark results featuring the performance of leading AI models on challenging tasks.
+
+## Related topics
+
+[Finances](https://epoch.ai/topics/finances)[Scaling](https://epoch.ai/topics/scaling)
+
+Cite
+
+Epoch AI’s work is free to use, distribute, and reproduce provided the source and authors are credited under the[Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/).
+
+### Citation
+
+Ben Cottier et al. (2025), "LLM inference prices have fallen rapidly but unequally across tasks". Published online at epoch.ai. Retrieved from 'https://epoch.ai/data-insights/llm-inference-price-trends' [online resource]. Accessed 31 Jul 2026.
+
+### BibTeX Citation
+
+@misc{epoch2025llminferencepricetrends, title={LLM inference prices have fallen rapidly but unequally across tasks}, author={Ben Cottier and Ben Snodin and David Owen and Tom Adamczewski}, year={2025}, url={https://epoch.ai/data-insights/llm-inference-price-trends}, note={Accessed: 2026-07-31}}
+
+## Investigating the trajectory of AI for the benefit of society
+
+Get the latest from Epoch AI in your inbox
+
+[Subscribe](https://epochai.substack.com/subscribe)
+
+[](https://x.com/EpochAIResearch)[](https://substack.com/@epochai)[](https://bsky.app/profile/epochai.bsky.social)[](https://github.com/epoch-research)[](https://www.linkedin.com/company/epochai)
+
+### Our Work
+
+*   [Latest](https://epoch.ai/latest)
+*   [AI Trends & Statistics](https://epoch.ai/trends)
+*   [Papers & Reports](https://epoch.ai/publications)
+*   [Data Insights](https://epoch.ai/data-insights)
+*   [Newsletter: Gradient Updates](https://epoch.ai/gradient-updates)
+*   [Podcast](https://epoch.ai/epoch-after-hours)
+
+### Data on AI
+
+*   [Models](https://epoch.ai/data/ai-models)
+*   [AI Data Centers](https://epoch.ai/data/ai-data-centers)
+*   [Hardware](https://epoch.ai/data/machine-learning-hardware)
+*   [Companies](https://epoch.ai/data/ai-companies)
+*   [Chip Sales](https://epoch.ai/data/ai-chip-sales)
+*   [Polling](https://epoch.ai/data/polling)
+
+### Benchmarking
+
+*   [AI Capabilities](https://epoch.ai/benchmarks)
+*   [FrontierMath](https://epoch.ai/frontiermath)
+
+### Company
+
+*   [About](https://epoch.ai/about)
+*   [Team](https://epoch.ai/about/team)
+*   [Consultations](https://epoch.ai/about/consultations)
+*   [Transparency](https://epoch.ai/about/transparency)
+*   [Donate](https://epoch.ai/about/donate)
+*   [Careers](https://epoch.ai/about/careers)
+
+© 2026 Epoch AI
+
+[Privacy Policy](https://epoch.ai/privacy)[Cookie Policy](https://epoch.ai/cookies)[Designed by And—Now](https://and-now.co.uk/)
+
+Feedback
+
+## Feedback
+
+Have a question? Noticed something wrong? Let us know.
+
+Message
+
+ 
+If you would like a reply, please include your name and email address.
+
+Name
+
+ 
+
+Email address
+
+ 
+
+Cancel Submit
+
+We value your privacy
+
+Our website uses cookies to enhance your browsing experience and analyze site traffic. By clicking “Accept All,” you consent to our use of cookies as described in our [Privacy Policy](https://epoch.ai/privacy) and [Cookie Policy.](https://epoch.ai/cookies) If you wish to withdraw your consent, you can contact us at [ops@epoch.ai](mailto:ops@epoch.ai).
+
+Accept All Reject All
+
+# LLM inference prices have fallen rapidly but unequally across tasks
+
+Epoch AI is a research institute investigating key trends and questions that will shape the trajectory and governance of Artificial Intelligence.

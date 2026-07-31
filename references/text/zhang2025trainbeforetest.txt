@@ -1,0 +1,2662 @@
+Train-before-Test Harmonizes Language Model Rankings
+Guanhua Zhang*, Ricardo Dominguez-Olmedo, Moritz Hardt
+
+arXiv:2507.05195v2 [cs.LG] 13 Oct 2025
+
+Max Planck Institute for Intelligent Systems, Tübingen and Tübingen AI Center
+Abstract
+Existing language model benchmarks provide contradictory model rankings, even for
+benchmarks that aim to capture similar skills. This dilemma of conflicting rankings hampers
+model selection, clouds model comparisons, and adds confusion to a growing ecosystem of
+competing models. In this paper, we take a different perspective on model comparison: instead
+of relying on out-of-the-box performance via direct evaluation, we compare model potential by
+providing each model with identical benchmark-specific fine-tuning before evaluation. We
+call this approach train-before-test. Our primary contribution is a comprehensive empirical
+evaluation of model potential across 24 benchmarks and 61 models. First, we demonstrate that
+model potential rankings obtained through train-before-test exhibit remarkable consistency
+across all benchmarks. Whereas traditional rankings demonstrate little external validity under
+direct evaluation, they enjoy a significant degree of external validity when applying train-beforetest: model potential rankings transfer gracefully from one benchmark to another. Second,
+train-before-test restores the connection between perplexity and downstream task performance,
+lost under direct evaluation. Remarkably, even pre-finetuning perplexity of a base model
+predicts post-finetuning downstream performance, suggesting that ranking consistency reflects
+inherent model potential rather than fine-tuning artifacts. Finally, train-before-test reduces the
+model-score matrix to essentially rank one, indicating that model potential is dominated by
+one latent factor, uncovered by train-before-test. Our work supports the recommendation to
+make train-before-test a default component of LLM benchmarking† .
+
+1
+
+Introduction
+
+Existing language model benchmarks provide contradictory model rankings, even for benchmarks
+that aim to capture similar skills [47, 6, 22]. This inconsistency poses a serious challenge: how
+can we reliably compare, rank, and select models when different benchmarks yield conflicting
+information? While this ranking disagreement is often attributed to the diverse capabilities of
+large language models [68], it creates a conundrum in practice that muddles model development
+decisions [93].
+Current evaluation methodology works from direct evaluation, probing models via black-box
+function calls. However, large language models are trained on diverse, often proprietary data
+mixes that vary significantly across models [31, 28, 32]. Recent work showed that this leads to the
+problem of training on the test task [20]: the extent to which a model has encountered data similar
+* Corresponding author: guanhua.zhang@tuebingen.mpg.de
+† Code is available at https://github.com/socialfoundations/lm-harmony.
+
+1
+
+to the test task during training confounds model comparisons, rankings, and scaling laws [40].
+Put simply, an otherwise inferior model may have simply prepared better for a specific task.
+In this paper, we take a fresh perspective on evaluation methodology: in contrast with direct
+evaluation, we compare model potential by giving each model the same task-specific fine-tuning.
+We call this approach train-before-test. Its goal is to achieve valid model comparisons by ensuring
+that all models receive equal preparation for the test.
+We envision train-before-test as a tool for regret-free model selection for downstream applications.
+Increasingly, practitioners select one from many available models with the goal of adapting for
+a specific task. Under direct evaluation the best model to begin with may no longer be the best
+model after task-specific preparation. In contrast, we show that train-before-task yields model
+comparisons and rankings that enjoy broad external validity.
+
+1.1
+
+Our Contributions
+
+Direct evaluation leads to ranking disagreement even between related tasks. We demonstrate
+that the prevalent direct evaluation scheme results in strong disagreement between model ranking
+across various benchmarks. We show that this strong ranking disagreement persists even when
+restricting to benchmarks that aim to capture similar tasks. Moreover, rankings still strongly
+disagree when evaluating models from the same family. The situation presents a serious conundrum for model selection: Under direct evaluation, benchmarks fail to give reliable and actionable
+insights for model choosing among multiple alternatives.
+Train-before-test leads to consistent model potential rankings. We comprehensively evaluate
+train-before-test across 24 benchmark datasets and 61 large language models. By fine-tuning
+each model on identical task-relevant data before evaluation, we uncover remarkably consistent
+model potential rankings. Ranking agreement between benchmarks, measured by Kendall’s tau,
+improves for 274 out of 276 benchmark pairs, with the average Kendall’s τ increasing from 0.52 to
+0.76. Figure 1 illustrates the result for one typical pair of benchmarks. This consistency suggests
+that model potential, unlike out-of-the-box performance, has external validity [70] and transfers
+gracefully across different tasks.
+Model potential aligns perplexity rankings with downstream tasks. Perplexity benchmarks
+used to be popular, but fell out of fashion because of the apparent disconnect between perplexity
+and downstream task performance [82, 25, 51, 54, 52]. We indeed validate this disconnect
+when comparing model families under direct evaluation. However, train-before-test restores this
+fundamental relationship in two ways. First, we show that post-fine-tuning perplexity rankings
+align well with post-fine-tuning downstream task rankings, creating consistency between training
+objectives and task performance. Second, and more remarkably, for base (non-instruction-tuned)
+models, even pre-fine-tuning perplexity predicts post-fine-tuning downstream performance. This
+suggests that the ranking consistency we observe reflects inherent model potential rather than
+artifacts of fine-tuning.
+Train-before-test sheds light on the latent factors of benchmark scores. Consider the large
+benchmark-model score matrix, where each entry (i, j) corresponds to the performance of model j
+
+2
+
+Direct evaluation
+Gemma­2­9B
+Qwen2.5­14B
+Llama­3­8B
+Gemma­7B
+Qwen2.5­7B
+Llama­3.1­8B
+Yi­9B
+Yi­6B
+Llama­3.1­8B­IT
+Yi­1.5­6B
+Gemma­2­2B
+Qwen2.5­3B
+Llama­3.2­3B
+Llama­3.2­3B­IT
+Llama­3­8B­IT
+Yi­1.5­9B
+Gemma­2­9B­IT
+Gemma­2­2B­IT
+Gemma­2B
+Gemma­7B­IT
+Qwen2.5­1.5B
+Llama­3.2­1B
+Pythia­12B
+Qwen2.5­14B­IT
+Qwen2.5­7B­IT
+Qwen2.5­1.5B­IT
+Llama­3.2­1B­IT
+Pythia­6.9B
+Qwen2.5­0.5B
+Gemma­2B­IT
+Pythia­2.8B
+Yi­1.5­6B­IT
+Pythia­1.4B
+Qwen2.5­0.5B­IT
+Qwen2­0.5B­IT
+GPT2­1.5B
+Pythia­1B
+Yi­1.5­9B­IT
+Qwen2­7B­IT
+Qwen2­7B
+Yi­6B­IT
+Qwen1.5­4B­IT
+Qwen2.5­3B­IT
+Qwen2­1.5B­IT
+GPT2­774M
+Qwen1.5­1.8B­IT
+Qwen2­0.5B
+Pythia­410M
+GPT2­335M
+Qwen1.5­14B
+Qwen1.5­7B
+Qwen1.5­4B
+Qwen1.5­0.5B­IT
+Qwen1.5­14B­IT
+Qwen1.5­1.8B
+Qwen2­1.5B
+Qwen1.5­0.5B
+Pythia­160M
+GPT2­124M
+Qwen1.5­7B­IT
+Pythia­70M
+
+NQ­Open
+
+Train­before­test
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+
+Gemma­2­9B
+Gemma­2­9B­IT
+Qwen2.5­14B
+Qwen2.5­14B­IT
+Llama­3­8B
+Llama­3.1­8B
+Llama­3.1­8B­IT
+Gemma­7B
+Llama­3­8B­IT
+Qwen2­7B
+Qwen2­7B­IT
+Llama­3.2­3B­IT
+Qwen2.5­7B
+Qwen1.5­14B
+Qwen1.5­14B­IT
+Qwen1.5­7B
+Yi­1.5­6B
+Yi­1.5­9B
+Yi­6B
+Llama­3.2­3B
+Yi­6B­IT
+Qwen2.5­7B­IT
+Yi­9B
+Gemma­7B­IT
+Yi­1.5­9B­IT
+Gemma­2­2B
+Yi­1.5­6B­IT
+Gemma­2­2B­IT
+Qwen1.5­7B­IT
+Qwen2.5­3B
+Qwen1.5­4B
+Qwen1.5­4B­IT
+Pythia­12B
+Llama­3.2­1B­IT
+Qwen2.5­3B­IT
+Gemma­2B
+Qwen2­1.5B
+Pythia­6.9B
+Llama­3.2­1B
+Qwen2.5­1.5B
+Qwen2­1.5B­IT
+Qwen2.5­1.5B­IT
+Qwen1.5­1.8B
+Gemma­2B­IT
+Qwen1.5­1.8B­IT
+Pythia­2.8B
+Qwen2.5­0.5B
+Pythia­1.4B
+GPT2­1.5B
+Qwen2.5­0.5B­IT
+Qwen2­0.5B
+Qwen2­0.5B­IT
+Qwen1.5­0.5B
+Pythia­1B
+GPT2­774M
+Qwen1.5­0.5B­IT
+GPT2­335M
+Pythia­410M
+GPT2­124M
+Pythia­160M
+Pythia­70M
+
+ARC­Challenge
+
+NQ­Open
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+
+ARC­Challenge
+
+Figure 1: Rankings of 61 language models on two question-answering benchmarks: Natural Questions Open
+and ARC Challenge. Left: Direct evaluation leads to inconsistent rankings. Although both benchmarks
+test for question-answering ability, the resulting model rankings show substantial disagreement. Right:
+Train-before-test aligns model rankings. Note: For each of the two plots, we greedily align model rankings
+as much as possible without violating confidence intervals, thus revealing only those ranking changes that
+are statistically significant. See Appendix C.1 for more details.
+
+3
+
+on a benchmark i. Several works have considered this matrix for different reasons and found
+that it is approximately low rank [68, 61, 12], but not quite. The first singular value is dominant
+and correlates with pre-training compute. However, the other components aren’t negligible,
+and their interpretation remains unclear. We show that train-before-test clarifies this state of
+affairs. After train-before-test, the benchmark-model matrix is essentially rank one. The first
+principal component accounts for 86% of the explained variance across all models, and for 93%
+of the variance for a single model family. This suggests that model potential is dominated by a
+single latent factor, while the additional components observed in direct evaluation may reflect
+task-specific training exposure.
+
+2
+
+Related Work
+
+Benchmarking has played a central role in the advancement of machine learning [49, 35]. While
+absolute model performance is often fragile to even seemingly minor changes in evaluation
+data [13, 78, 1, 77, 79], relative model performance—that is, model rankings—tends to transfer
+surprisingly well across classical benchmarks [87, 67, 58]. For instance, prior work [43, 5] has
+shown that model rankings on ImageNet [18] also transfer to other image classification and
+object recognition benchmarks. Moreover, Salaudeen and Hardt (2024, [69]) demonstrated that
+ImageNet rankings remain robust even under major dataset variations. This transferability of
+model rankings is highly desirable, as it indicates that progress on specific benchmarks reliably
+reflects broader scientific advancements [48, 34].
+However, the emergence of foundation models has dramatically transformed the benchmarking
+landscape compared to the ImageNet era [47, 74, 83]. With huge training costs and much improved
+capabilities [88, 31, 66, 27, 60], practitioners now lean towards directly evaluating LLMs across a
+wide range of different benchmarks, in the hope of obtaining a more comprehensive assessment of
+their capabilities [47, 75, 36, 6, 22]. This shift introduces new challenges, as model rankings across
+different tasks may vary significantly [39, 53]. Zhang and Hardt (2024, [93]) draw an analogy
+between multi-task benchmarks and voting systems [4], revealing that a multi-task benchmarking
+approach with diverse rankings inherently lacks robustness to minor changes and thus cannot
+provide a stable unified ranking.
+This lack of unified ranking is sometimes seen as a desirable feature within the community [47].
+Some argue that variability reflects the multifaceted strengths and weaknesses of LLMs, suggesting
+that users should select the best model tailored to their specific needs [29, 94, 72]. For example,
+a user who focuses on mathematical tasks could prioritize the math benchmark to choose the
+optimum model. However, there are two significant concerns regarding this approach: First, the
+user-driven selection strategy poses challenges for model developers. Given the resource-intensive
+nature of LLM development [33], it is impractical to release a different model for every potential
+use case. Moreover, developers typically aim to create a general-purpose model [88, 31]; however,
+such a desideratum is often difficult to reliably measure due to the inconsistent rankings observed
+across benchmarks. Second, we demonstrate in this paper that benchmarks within the same task
+category can still exhibit substantial discrepancies in model rankings.
+One potential reason for the observed inconsistencies in model rankings is that models vary
+substantially in their training data [23, 2]. In particular, Dominguez et al. (2024, [20]) show that
+models vary in their degree of preparedness for popular benchmarks. Building on this idea, we
+4
+
+introduce the notion of train-before-test, wherein we fine-tune each model on the corresponding
+training set so every model arrives well prepared. While extensive literature exists on investigating
+different fine-tuning strategies for LLMs [50, 91, 45], this lies outside the scope of our investigation.
+Instead, we apply standardized fine-tuning [55] as an evaluation tool to give all models equivalent
+preparation before testing. Rather than studying models from the same family with varying
+pre-training compute [92, 40], our experiments cover 61 models from six families and 24 tasks
+from different categories. We study how train-before-test improves ranking consistency across
+benchmarks and its implications for benchmarking practices.
+
+3
+
+Experiments
+
+In this section, we examine the cross-benchmark ranking agreement of 61 language models across
+24 benchmarks. We find that ranking agreement tends to be low, with an average Kendall’s τ
+of 0.52. We then examine benchmark agreement under a different benchmarking methodology,
+which we refer to as train-before-test. Specifically, we fine-tune on a benchmark’s train set prior to
+evaluating on said benchmark. Compared to direct evaluation, train-before-test improves crossbenchmark ranking agreement on almost all benchmark pairs considered. The improvements in
+ranking agreement are typically large, with the average Kendall’s τ increasing to 0.76.
+We additionally find that train-before-test greatly improves the agreement between perplexity
+rankings and downstream benchmarks. This result holds consistently across three general domain
+corpus, newly collected from Wiki, arXiv, and StackExchange. We retrained content only from
+2025 to ensure models had not seen those texts during pretraining. The average Kendall’s
+τ between perplexity ranking and 24 downstream task rankings improves from 0.48 to 0.74
+with train-before-test, leading to much better consistency between the training objective and
+downstream benchmark performance. Moreover, for base models, pre-fine-tuning perplexity
+ranking remains consistent with post-fine-tuning downstream rankings (average Kendall’s τ =
+0.78). This consistency does not hold for instruction-tuned models.
+Finally, we discuss the implications of increased cross-benchmark agreement. In doing so,
+we perform Principal Component Analysis (PCA) over the model score matrix comprising all
+benchmark scores. We then analyze its principal components both under direct model evaluation
+and train-before-test. We find that train-before-test greatly increases the share of variance explained
+by the first principal component (PC1), from 70% for direct evaluation to 86% for train-before-test.
+In both cases, PC1 aligns well with model pre-training compute. By further controlling for model
+family and only considering Qwen models, we show that the explained variance ratio of PC1
+further increases to 93%, making the model-score matrix essentially rank one.
+
+3.1
+
+Experiment Setting
+
+Benchmark selection. We begin our study with the lm-eval-harness package [26], which offers
+a comprehensive suite of language model benchmarks. To accommodate the train-before-test
+methodology which requires a dedicated training set for fine-tuning, we first identify benchmarks
+that provide at least 1,000 training examples. This yields a total of 37 benchmarks, which we
+broadly categorize into 28 likelihood-based and 9 generation-based benchmarks.
+Generation-based benchmarks are often computationally intensive to evaluate, as base models
+5
+
+Table 1: We categorize benchmarks into language understanding (LU), commonsense reasoning (CR),
+question answering (QA), physics/biology/chemistry (PBC), math (Math), and medicine (Med).
+
+Category
+
+Benchmarks
+
+LU
+
+MNLI [85], QNLI [65], RTE [17, 30, 7], CoLA [81], SST-2 [73], MRPC [19], QQP, WiC [63], ANLI [59]
+
+CR
+
+Winogrande [46], CommonsenseQA [76], Hellaswag [90], Social-IQA [71]
+
+QA
+
+OpenBookQA [57], NQ-Open [44], BoolQ [14], ARC-Easy, ARC-Challenge [15]
+
+PBC
+
+SciQ [84], PIQA [9]
+
+Math
+
+MathQA [3], GSM8K [16]
+
+Med
+
+MedMCQA [62], HeadQA [80]
+
+Table 2: Models considered, categorized by model family.
+Family
+
+Model Name Suffix
+
+Llama-
+
+3-8B, 3.1-8B, 3.2-1B, 3.2-3B, 3-8B-IT, 3.1-8B-IT, 3.2-1B-IT, 3.2-3B-IT
+
+Gemma-
+
+1.5-0.5B, 1.5-1.8B, 1.5-4B, 1.5-7B, 1.5-14B, 2-0.5B, 2-1.5B, 2-7B, 2.5-0.5B, 2.5-1.5B, 2.5-3B, 2.5-7B,
+2.5-14B, 1.5-0.5B-IT, 1.5-1.8B-IT, 1.5-4B-IT, 1.5-7B-IT, 1.5-14B-IT, 2-0.5B-IT, 2-1.5B-IT, 2-7B-IT,
+2.5-0.5B-IT, 2.5-1.5B-IT, 2.5-3B-IT, 2.5-7B-IT, 2.5-14B-IT
+2B, 7B, 2-2B, 2-9B, 2B-IT, 7B-IT, 2-2B-IT, 2-9B-IT
+
+GPT2-
+
+124M, 335M, 774M, 1.5B
+
+Pythia-
+
+70M, 160M, 410M, 1B, 1.4B, 2.8B, 6.9B, 12B
+
+Qwen-
+
+Yi-
+
+6B, 9B, 6B-IT, 1.5-6B, 1.5-9B, 1.5-6B-IT, 1.5-9B-IT
+
+typically generate text until reaching their maximum sequence length. These benchmarks are also
+over-challenging for smaller models with limited parameters, such as GPT-2 [64]. Therefore, we
+select only NQ-Open and GSM8K from the generation-based benchmarks. Among the likelihoodbased benchmarks, we further exclude six due to observed anomalies during fine-tuning, such as
+a lack of performance improvement in over 20% of models. See Appendix A.1 for details.
+Our final selection consists of 24 benchmarks covering diverse domains and task types. These
+benchmarks are primarily multiple-choice question answering benchmarks, with accuracy as the
+task metric. We categorize all benchmarks by their descriptions, see Table 1. If a benchmark does
+not come with a validation split, we randomly allocate 20% of the training data as the validation
+set. To save computational resources, we cap the number of training data at 50,000, validation
+data at 1,000, and testing data at 10,000.
+Model selection. We consider 61 language models across six model families: Llama [31],
+Qwen [88], Gemma [28], Pythia [8], GPT-2 [64] and Yi [89]. Due to computational constraints, we
+select models with no more than 14B parameters. See Table 2 for the full list. We include both
+base and instruction-tuned models, and use the suffix -IT to denote instruction-tuned models.
+Evaluation setup. We evaluate the 61 models across all 24 benchmarks using both direct evaluation and train-before-test evaluation. We use the lm-eval-harness library for evaluation. We
+6
+
+Mean Kendall
+
+Direct evaluation
+Train­before­test
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+en PC iC LI P LA iQ ­2 8K LI A TE A sy LI A de A A ge ag A A lQ
+­Op MR W QN QQ Co Sc SSTGSM AeNdMCQ RHeadRQC­Ea MN PIoQgrasnenseoQcial­IhQalleenllaSwMathBQookQ Boo
+Q
+N
+A
+M
+Winmon S RC­C H Open
+A
+Com
+
+Figure 2: Mean ranking agreement between each benchmark and all others. We calculate Kendall’s τ
+between each benchmark and every other benchmark, and then average the results. Compared to direct
+evaluation, train-before-test consistently improves ranking agreement, often by a large margin. A detailed
+comparison of Kendall’s τ values for every benchmark pair is provided in Appendix B.1. On average, the
+overall average Kendall’s τ is 0.52 for direct evaluation and 0.76 for train-before-test.
+
+evaluate models zero-shot [11]. For direct evaluation, we simply evaluate the model as it is. For
+train-before-test, we fine-tune models for five epochs using learning rates in {1e − 5, 2e − 5, 5e − 5},
+separately. The best performing checkpoint is then selected based on performance on a separate
+validation set, yielding 61 × 24 = 1, 464 fine-tuned models in total. We use parameter-efficient
+fine-tuning (PEFT) [38, 55]. See more details in Appendix A.2. Each fine-tuned model is then evaluated on the corresponding benchmark’s test set. For each benchmark, we rank models according
+to their performance. We then measure the ranking correlation across pairs of benchmarks using
+Kendall’s τ [41].
+
+3.2
+
+Downstream Ranking Agreement
+
+As depicted in Figure 2, direct evaluation shows only modest ranking agreement between the 24
+benchmarks, with an average Kendall’s τ of 0.52. This lack of agreement across benchmarks complicates model assessment and makes it challenging to aggregate results into a meaningful overall
+ranking [93]. In contrast, the train-before-test methodology leads to a substantial improvement in
+ranking agreement. Under this approach, 274 out of 276 benchmark pairs show higher Kendall’s τ
+scores, with the average τ rising from 0.52 to 0.76. This stronger consistency suggests that model
+potential ranking on one benchmark is likely to generalize to others, including practitioners’ own
+cases, which simplifies model comparison and selection. Notably, benchmarks that appeared to
+be outliers under direct evaluation, such as NQ-Open and MRPC, demonstrate much greater ranking
+consistency under train-before-test. For example, the average Kendall’s τ between NQ-Open and
+all other benchmarks improves from 0.23 to 0.74.
+We further split all benchmarks into six categories (e.g., language understanding, math),
+see Table 1. For each category pair, we report in Figure 3 the intra-category average ranking
+correlations and inter-category average ranking correlations across all relevant benchmark pairs.
+Consistent with our previous findings, we observe reasonably poor ranking agreements across
+
+7
+
+0.37
+
+0.33
+
+0.52
+
+0.41
+
+1.0
+
+LU 0.75
+
+0.75
+
+0.76
+
+0.71
+
+0.72
+
+0.72
+
+1.0
+
+CR 0.51
+
+0.68
+
+0.63
+
+0.64
+
+0.64
+
+0.65
+
+0.8
+
+CR 0.75
+
+0.76
+
+0.81
+
+0.78
+
+0.72
+
+0.76
+
+0.8
+
+QA 0.37
+
+0.63
+
+0.61
+
+0.66
+
+0.55
+
+0.64
+
+0.6
+
+QA 0.76
+
+0.81
+
+0.83
+
+0.81
+
+0.73
+
+0.81
+
+0.6
+
+PBC 0.33
+
+0.64
+
+0.66
+
+0.66
+
+0.54
+
+0.67
+
+0.4
+
+PBC 0.71
+
+0.78
+
+0.81
+
+0.77
+
+0.66
+
+0.76
+
+0.4
+
+Math 0.52
+
+0.64
+
+0.55
+
+0.54
+
+0.55
+
+0.59
+
+0.2
+
+Math 0.72
+
+0.72
+
+0.73
+
+0.66
+
+0.84
+
+0.77
+
+0.2
+
+Med 0.41
+
+0.65
+
+0.64
+
+0.67
+
+0.59
+
+0.62
+
+0.0
+
+Med 0.72
+
+0.76
+
+0.81
+
+0.76
+
+0.77
+
+0.8
+
+0.0
+
+CR
+
+QA
+
+PBC
+
+h
+
+Med
+
+CR
+
+QA
+
+PBC
+
+h
+
+Med
+
+LU
+
+Mat
+
+LU
+
+(a) Direct evaluation.
+
+Mat
+
+Kendall
+
+0.51
+
+Kendall
+
+LU 0.54
+
+(b) Train-before-test.
+
+Figure 3: Cross-category ranking agreement for direct evaluation (left) and train-before-test (right). We
+categorize benchmarks into language understanding (LU), commonsense reasoning (CR), question answering (QA), physics/biology/chemistry (PBC), math (Math), and medicine (Med), see Table 1. Kendall’s τ is
+averaged across all pairs of benchmarks that belong to two given categories. The diagonal entries represent
+intra-category agreement and the others represent inter-category agreement. Train-before-test improves
+both intra- and inter-category ranking agreement in all instances.
+
+categories under direct evaluation. While one might expect high intra-category agreement—after
+all, tasks within the same category tend to be relatively similar—direct evaluation results in low
+intra-category agreement in many cases. For example, the intra-category mean Kendall’s τ is 0.54
+for language understanding and 0.55 for math. This further underscores the difficulty of selecting
+models based on direct evaluation. Even if the goal is to choose a model that excels within a
+specific domain, the low intra-category agreement makes this decision challenging.
+In contrast, train-before-test boosts both intra- and inter-category consistency. For example, the
+intra-category mean Kendall’s τ for language understanding raises from 0.52 to 0.75, as well as
+from 0.55 to 0.84 for the math category. Moreover, agreement between categories is often nearly
+as high as agreement within categories. This suggests that models with higher potential in one
+domain tend to also perform well across other domains after adaptation.
+
+3.3
+
+Perplexity Agreement
+
+We now study the agreement between downstream benchmark rankings and perplexity rankings
+on general domain corpora. To do so, we collect three corpora from Wikipedia, StackExchange,
+and arXiv, retaining only contents from 2025. Because all models used were released before 2025,
+they could not have seen these texts during pretraining. Specifically, we collect 3,366 documents
+for Wiki, 6,001 for StackExchange and 44,384 for arXiv. These datasets are split into training,
+validation, and testing sets, in an 8:1:1 ratio.
+We measure perplexity in bits per byte, using the lm-eval-harness library. We then compute
+models rankings based on the perplexity evaluations, and compare the rankings with those of
+the downstream benchmarks considered in earlier sections. We exclude the four Gemma models
+from these results, as lm-eval-harness provides unreliable perplexity measurements for Gemma
+
+8
+
+Direct evaluation.
+
+Kendall
+
+Wiki 1 0.76 0.75 0.35 0.26 0.59 0.22 0.48 0.35 0.73 0.68 0.52 0.58 0.4 0.78 0.59 0.45 0.54 0.27 0.32 0.2 0.6 0.21 0.72 0.35 0.69 0.66
+Stack 0.76 1 0.78 0.41 0.38 0.6 0.29 0.42 0.34 0.61 0.62 0.55 0.57 0.37 0.69 0.6 0.5 0.51 0.29 0.31 0.25 0.6 0.2 0.66 0.43 0.63 0.61
+Arxiv 0.75 0.78 1 0.41 0.38 0.56 0.3 0.35 0.36 0.59 0.65 0.56 0.55 0.38 0.69 0.5 0.52 0.53 0.34 0.32 0.29 0.59 0.26 0.66 0.42 0.59 0.58
+i
+I
+I
+I
+Wik Stack Arxiv MNL QQPMCQA QNL ­Open SST­2grandeaSwagial­IQA athQA ANL PIQA SciQnseQA BoolQ CoLA SM8K WiCookQAMRPCeadQA RTE ­Easyallenge
+C
+l
+G
+l
+d
+c
+Q
+M
+o
+H
+e
+e
+o
+N
+nB
+AR C­Ch
+nse
+M
+Win H S
+mo
+Ope
+R
+m
+A
+o
+C
+
+Train­before­test.
+
+1.0
+0.5
+0.0
+
+Kendall
+
+Wiki 1 0.79 0.75 0.76 0.74 0.75 0.74 0.85 0.67 0.86 0.89 0.79 0.71 0.73 0.88 0.79 0.67 0.81 0.72 0.66 0.71 0.81 0.66 0.87 0.69 0.84 0.84
+Stack 0.79 1 0.8 0.76 0.72 0.79 0.67 0.7 0.61 0.78 0.8 0.67 0.8 0.75 0.75 0.72 0.72 0.79 0.7 0.74 0.71 0.81 0.68 0.82 0.7 0.85 0.83
+Arxiv 0.75 0.8 1 0.74 0.71 0.67 0.65 0.67 0.61 0.74 0.78 0.63 0.75 0.72 0.74 0.69 0.71 0.75 0.7 0.67 0.69 0.81 0.66 0.77 0.67 0.76 0.75
+i
+I
+I
+I
+Wik Stack Arxiv MNL QQPMCQA QNL ­Open SST­2grandeaSwagial­IQA athQA ANL PIQA SciQnseQA BoolQ CoLA SM8K WiCookQAMRPCeadQA RTE ­Easyallenge
+C
+l oc M
+G
+l
+d
+Q
+o
+B
+H
+e
+e
+n
+N
+i
+AR C­Ch
+nse
+H S
+M
+W
+pen
+mo
+O
+R
+m
+A
+Co
+
+1.0
+0.5
+0.0
+
+Figure 4: Ranking agreement between perplexity rankings and downstream benchmark rankings under
+direct evaluation (top) and train-before-test (bottom). Perplexity rankings are consistent with each other
+under both evaluation schemes, with an average Kendall’s τ of 0.76 and 0.78, respectively. However, for
+direct evaluation, agreement between perplexity rankings and downstream rankings is low, with an average
+Kendall’s τ of just 0.48. Fortunately, train-before-test results in much higher agreement between perplexity
+and downstream evaluations, increasing average Kendall’s τ to 0.74.
+
+models due to its rolling window implementation. See Appendix B.2 for details.
+The results are presented in Figure 4. In contrast to downstream tasks, perplexity rankings
+demonstrate strong agreement both under direct evaluation and train-before-test. Specifically,
+the average Kendall’s τ between the perplexity rankings is 0.76 for direct evaluation and 0.78 for
+train-before-test. We hypothesize that this reasonably strong agreement arises due to the smooth
+relationship between perplexity evaluations [10, 56].
+When comparing ranking agreement between perplexity evaluations and downstream benchmarks, we find that agreement is low under direct evaluation, with a mean Kendall’s τ of 0.48.
+This lack of agreement is concerning, as it signals a disconnect between the language modelling
+pre-training objective and downstream benchmark performance. Fortunately, we find that our
+train-before-test methodology improves ranking agreement substantially, with the mean Kendall’s
+τ ranking correlation between perplexity rankings and benchmark rankings rising to 0.74. This
+finding is reassuring: a light amount of fine-tuning on task data is sufficient to align the language
+modeling training objective with downstream performance. Moreover, we find that ranking
+agreement between perplexity and downstream evaluations is roughly similar to agreement across
+downstream evaluations. This suggests that, despite perplexity typically not being used for
+benchmarking purposes, it can be as effective a ranking metric as benchmark evaluations.
+Drawing inspiration from prior work [51, 86, 24, 21, 92], we further examine the correlation
+between model rankings according to average perplexity across the three text corpora and average
+downstream performance across the 24 benchmarks. Zhang and Hardt (2024, [24]) show that,
+when models are trained on the same pretraining data, perplexity is well-correlated with aggregate
+benchmark performance. Our setup differs in that we consider a diverse set of model families,
+each trained on different pretraining data. Under direct evaluation, we find that the ranking
+correlation is modest, with a Kendall’s τ of only 0.55. We hypothesize that this relatively weak
+
+9
+
+Base model ranking agreement.
+Wiki 0.8 0.78 0.78 0.82 0.88 0.74 0.89 0.91 0.89 0.74 0.77 0.93 0.86 0.67 0.85 0.73 0.66 0.78 0.85 0.7 0.89 0.69 0.87 0.85
+Stack 0.83 0.76 0.87 0.72 0.78 0.67 0.84 0.83 0.76 0.86 0.82 0.77 0.77 0.74 0.84 0.75 0.82 0.79 0.85 0.73 0.87 0.74 0.9 0.85
+Arxiv 0.76 0.73 0.72 0.67 0.71 0.63 0.77 0.78 0.69 0.76 0.74 0.71 0.74 0.67 0.78 0.71 0.68 0.72 0.8 0.71 0.82 0.68 0.8 0.77
+n ­2
+g
+e
+e
+A
+P
+A
+K iC
+A iQ
+A
+A
+A
+A lQ
+A
+E sy
+C
+LI
+LI
+LI
+MN QQ dMCQ QN Q­Ope SST ogrand llaSwa cial­IQ MathQ AN PIQ Sc enseQ Boo CoL GSM8 W BookQ MRP eadQ RT C­Ea alleng
+H
+R
+e
+e
+o
+s
+n
+N
+n
+i
+A C­Ch
+n
+H
+S
+e
+M
+o
+W
+p
+m
+O
+AR
+Com
+
+Instruction­tuned model ranking agreement.
+Wiki 0.57 0.52 0.7 0.57 0.58 0.45 0.7 0.62 0.52 0.5 0.52 0.62 0.5 0.44 0.53 0.61 0.59 0.46 0.55 0.41 0.68 0.54 0.68 0.63
+Stack 0.39 0.36 0.55 0.38 0.38 0.26 0.46 0.42 0.29 0.4 0.36 0.4 0.33 0.37 0.37 0.45 0.49 0.34 0.37 0.3 0.51 0.44 0.51 0.43
+Arxiv 0.57 0.52 0.66 0.6 0.47 0.34 0.62 0.58 0.45 0.6 0.52 0.57 0.46 0.57 0.53 0.61 0.65 0.5 0.55 0.46 0.66 0.63 0.66 0.57
+n ­2
+g
+e
+e
+A
+P
+A
+K iC
+A iQ
+A
+A
+A
+A lQ
+A
+E sy
+C
+LI
+LI
+LI
+MN QQ dMCQ QN Q­Ope SST ogrand llaSwa cial­IQ MathQ AN PIQ Sc enseQ Boo CoL GSM8 W BookQ MRP eadQ RT C­Ea alleng
+h
+H
+R
+e
+o
+s
+n
+N
+n
+i
+C
+A
+n
+H
+S
+e
+Me
+W
+C
+mo
+Op
+AR
+Com
+
+Kendall
+1.0
+0.5
+0.0
+
+Kendall
+1.0
+0.5
+0.0
+
+Figure 5: Ranking agreement between perplexity rankings before fine-tuning (direct evaluation) and downstream benchmark rankings after fine-tuning (train-before-test) for base models (top) and instruction-tuned
+models (bottom). Unlike Figure 4 where both rankings in each comparison use the same evaluation scheme,
+here we test whether pre-fine-tuning perplexity can predict post-fine-tuning downstream performance.
+Base models show strong correlation (average Kendall’s τ = 0.78), suggesting perplexity is a good predictor
+of model potential. Instruction-tuned models show much weaker correlation (average Kendall’s τ = 0.51).
+
+agreement is due to differences in pretraining data and instruction tuning, resulting in varying
+levels of exposure to benchmark tasks during training [20]. Fortunately, when applying our
+train-before-test methodology, the ranking correlation between average perplexity and average
+downstream performance improves substantially, with Kendall’s τ increasing from 0.55 to 0.84.
+We additionally examine the agreement between perplexity prior to fine-tuning and downstream task performance after fine-tuning. That is, between direct evaluation perplexity rankings
+and train-before-test downstream performance rankings. We plot such ranking agreement in
+Figure 5, dividing models into base models and instruction-tuned models. For base models,
+perplexity prior to fine-tuning is a strong indicator of model potential on downstream tasks,
+with an average Kendall’s τ of 0.78. This indicates that, for base models, direct evaluation of
+perplexity is already a reasonably reliable metric for ranking models. Moreover, it indicates
+that the ranking consistency we observe reflects inherent model potential rather than artifacts
+introduced by fine-tuning.
+However, the same does not hold for instruction-tuned models (average Kendall’s τ = 0.51).
+Instruction-tuning renders perplexity rankings unreliable, as ranking agreement is low across
+the board. This is to be expected: instruction fine-tuning tends to increase both benchmark
+performance (↑) and perplexity (↓) on general text corpora, thus clouding the relationship between
+perplexity and downstream evaluations. Fortunately, as shown earlier, train-before-test restores
+high ranking agreement between perplexity evaluations and downstream performance.
+
+3.4
+
+Low-Ranked Model Score Matrix
+
+So far, we have shown that comparing model potential using the train-before-test yields consistent
+rankings across benchmarks. We now examine the implications of this finding by analyzing
+the resulting matrix of model scores, where each entry (i, j) corresponds to the performance of
+
+10
+
+Direct evaluation.
+70%
+
+Variance Explained
+
+Variance Explained Ratio
+
+1.0
+0.9
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+
+13%
+PC1
+
+4%
+3%
+PC2
+PC3
+PC4
+Principal Components
+
+2%
+PC5
+
+1.0
+0.9
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+
+Train­before­test.
+86%
+
+7%
+
+2%
+1%
+1%
+PC1
+PC2
+PC3
+PC4
+PC5
+Principal Components Ratio
+
+Figure 6: Explained variance ratios of the top five principal components of the benchmark score matrix,
+under direct evaluation (left) and train-before-test (right). Train-before-test substantially increases the
+amount of variance explained by the first principal component, from 70% to 86%
+
+model j on a benchmark i. We use Principal Component Analysis (PCA) to examine the structure
+of the model score matrix.
+Pythia
+Llama
+
+Qwen
+Gemma
+
+Yi
+
+5.0
+2.5
+0.0
+
+PC1 score
+
+Figure 6 shows the explained variance ratios of
+the first five principal components. These results support previous findings that the score matrix is of low
+rank [68]. Under direct evaluation, the first five components account for 91% of the total variance. A
+similar trend is observed for train-before-test scores,
+where the first five components explain 97% of the
+variance. Notably, under train-before-test, the first
+principal component (PC1) captures a much larger
+share of the variance: 86%, compared to 70% for direct evaluation.
+
+2.5
+5.0
+7.5
+10.0
+12.5
+
+Prior works interpret PC1 scores under direct eval1020
+1021
+1022
+1023
+1024
+uation as an indication of general capability, with later
+Pre­training compute (FLOPs)
+principal components denoting domain-specific capabilities not captured by PC1 (e.g., reasoning ability, Figure 7: PC1 scores under train-before-test
+coding ability) [68, 12]. Unlike out-of-the-box perfor- align with the pre-training compute.
+mance, which is controlled by multiple factors [68, 12],
+model potential is dominated by one single principal axis. It is of no surprise that PC1 also
+positively correlates with pre-training compute, as shown in Figure 71 , which have been identified
+as crucial to model performances [40, 37]. See detailed PC1 scores in Figure 11.
+Case study for Qwen models. We repeat our PCA analysis on the score matrix containing
+only Qwen models, depicted in Figure 8. Remarkably, we find that PC1 for train-before-test
+1We only plot models whose number of training tokens is publicly available. See Table 4 for details.
+
+11
+
+Direct evaluation.
+Variance Explained Ratio
+
+Variance Explained Ratio
+
+1.0
+0.9
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+
+74%
+
+9%
+
+PC1
+
+5%
+3%
+PC2
+PC3
+PC4
+Principal Components
+
+3%
+PC5
+
+1.0
+0.9
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+
+93%
+
+PC1
+
+Train­before­test.
+
+2%
+1%
+1%
+PC2
+PC3
+PC4
+Principal Components
+
+1%
+PC5
+
+Figure 8: Explained variance ratios of the top five principal components of the Qwen score matrix. For
+train-before-test, the explained variance ratio of PC1 increases to 93%, making the Qwen score matrix
+essentially rank one.
+
+explains 93% of the variance, roughly as much as the variance explained by the top five principal
+components under direct evaluation. That is, whereas for direct evaluation the score matrix is
+low-rank; train-before-test renders the score matrix essentially rank one.
+
+4
+
+Discussion, limitations, and conclusion
+
+Train-before-test fundamentally reframes how we interpret model evaluation. Whereas direct
+evaluation yields benchmark-specific rankings that often contradict one another, train-before-test
+harmonizes rankings across a wide array of tasks and datasets. This shift from measuring out-ofthe-box performance to comparing achievable potential equips the community with a more stable
+and externally valid evaluation methodology.
+This emphasis on model potential is particularly valuable for scenarios involving model
+development and adaptation. Practitioners frequently need to make decisions during model
+development—selecting checkpoints mid–pre-training or choosing a base model for further
+instruction tuning or domain-specific adaptation. In these scenarios, direct evaluation, while
+useful for assessing deployment readiness, is of limited relevance and utility. A model that
+performs poorly on direct evaluation might excel when adapted to new tasks. Train-before-test, by
+contrast, shows that rankings on any task will also generalize to others, offering more promising
+guidance for model selection.
+One might argue that ranking consistency is unnecessary if we can simply choose benchmarks
+close to a given downstream application. However, our findings highlight three challenges with
+that view. First, even benchmarks that purport to measure the same skill (e.g., question answering)
+produce contradictory rankings under direct evaluation. Second, no benchmark perfectly captures
+the specifics of an application, making some degree of generalization unavoidable. Third, in real
+deployments, models are often adapted to varying degrees, making the potential the relevant
+signal for comparison.
+
+12
+
+Limitations. Train-before-test requires fine-tuning models on task-specific data before evaluation, which certainly increases the evaluation cost. However, this investment yields dividends
+through improved reliability. Our findings suggest that fewer benchmarks suffice under trainbefore-test, as rankings from one benchmark reliably transfer to others. This reduction in required
+evaluations can offset the per-benchmark cost increase. A second problem is that, unfortunately,
+many benchmarks no longer come with training data, making it more difficult to apply trainbefore-test. In light of our findings, we recommend that future benchmarks provide fine-tuning
+data for the benchmark. A third limitation is that some commercial model providers do not easily
+allow fine-tuning of their models. We contend that in this case the problem is with the model
+provider. There is clearly scientific value in creating an ecosystem of models that can be fine-tuned.
+Train-before-test evaluation creates additional incentives for making models easy to fine-tune.
+Conclusion. Overall, train-before-test complements existing evaluation practices by distinguishing between performance and potential. cImportantly, potential comparison is not intended
+to replace direct evaluation—both serve distinct purposes. Direct evaluation remains useful for
+understanding immediate deployment readiness, while potential comparison provides insights
+into adaptability and development prospects. Together, they offer a more complete picture of
+model capabilities. We believe that adopting train-before-test as a standard alongside direct
+evaluation can significantly improve the reliability, interpretability, and practical utility of the
+model evaluation ecosystem.
+
+Acknowledgement
+We thank Yatong Chen, Florian Dorner, Mina Remeli and Jiduan Wu for helpful discussions and
+feedback on draft versions of this work.
+
+References
+[1] Ehab A AlBadawy, Ashirbani Saha, and Maciej A Mazurowski. Deep learning for segmentation of brain tumors: Impact of cross-institutional training and testing. Medical physics,
+45(3):1150–1158, 2018.
+[2] Alon Albalak, Yanai Elazar, Sang Michael Xie, Shayne Longpre, Nathan Lambert, Xinyi Wang,
+Niklas Muennighoff, Bairu Hou, Liangming Pan, Haewon Jeong, et al. A survey on data
+selection for language models. Transactions on Machine Learning Research, 2025.
+[3] Aida Amini, Saadia Gabriel, Peter Lin, Rik Koncel-Kedziorski, Yejin Choi, and Hannaneh
+Hajishirzi. Mathqa: Towards interpretable math word problem solving with operation-based
+formalisms, 2019.
+[4] Kenneth J. Arrow. Social Choice and Individual Values. Wiley, 1951.
+[5] Andrei Barbu, David Mayo, Julian Alverio, William Luo, Christopher Wang, Dan Gutfreund,
+Josh Tenenbaum, and Boris Katz. Objectnet: A large-scale bias-controlled dataset for pushing
+the limits of object recognition models. Advances in neural information processing systems, 32,
+2019.
+
+13
+
+[6] Edward Beeching, Clémentine Fourrier, Nathan Habib, Sheon Han, Nathan Lambert, Nazneen
+Rajani, Omar Sanseviero, Lewis Tunstall, and Thomas Wolf. Open llm leaderboard. https:
+//huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard, 2023.
+[7] Luisa Bentivogli, Ido Dagan, Hoa Trang Dang, Danilo Giampiccolo, and Bernardo Magnini.
+The fifth PASCAL recognizing textual entailment challenge. In Text Analysis Conference (TAC),
+2009.
+[8] Stella Biderman, Hailey Schoelkopf, Quentin G. Anthony, Herbie Bradley, Kyle O’Brien, Eric
+Hallahan, Mohammad Aflah Khan, Shivanshu Purohit, USVSN Sai Prashanth, Edward Raff,
+Aviya Skowron, Lintang Sutawika, and Oskar van der Wal. Pythia: A suite for analyzing
+large language models across training and scaling. ArXiv, abs/2304.01373, 2023.
+[9] Yonatan Bisk, Rowan Zellers, Ronan Le Bras, Jianfeng Gao, and Yejin Choi. Piqa: Reasoning
+about physical commonsense in natural language, 2019.
+[10] David Brandfonbrener, Nikhil Anand, Nikhil Vyas, Eran Malach, and Sham Kakade. Loss-toloss prediction: Scaling laws for all datasets. arXiv preprint arXiv:2411.12925, 2024.
+[11] Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh,
+Daniel M. Ziegler, Jeff Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler,
+Ma teusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. Language models are few-shot
+learners. ArXiv, abs/2005.14165, 2020.
+[12] Ryan Burnell, Hank Hao, Andrew R. A. Conway, and José Hernández Orallo. Revealing the
+structure of language model capabilities. ArXiv, abs/2306.10062, 2023.
+[13] J Quiñonero Candela, Masashi Sugiyama, Anton Schwaighofer, and Neil D Lawrence. Dataset
+shift in machine learning. The MIT Press, 1:5, 2009.
+[14] Christopher Clark, Kenton Lee, Ming-Wei Chang, Tom Kwiatkowski, Michael Collins, and
+Kristina Toutanova. Boolq: Exploring the surprising difficulty of natural yes/no questions,
+2019.
+[15] Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick,
+and Oyvind Tafjord. Think you have solved question answering? try arc, the ai2 reasoning
+challenge. arXiv:1803.05457v1, 2018.
+[16] Karl Cobbe, Vineet Kosaraju, Mo Bavarian, Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias
+Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano, Christopher Hesse, and John Schulman. Training verifiers to solve math word problems. ArXiv, abs/2110.14168, 2021.
+[17] Ido Dagan, Oren Glickman, and Bernardo Magnini. The PASCAL recognising textual
+entailment challenge. In Machine learning challenges. evaluating predictive uncertainty, visual
+object classification, and recognising tectual entailment, pages 177–190. Springer, 2006.
+
+14
+
+[18] Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale
+hierarchical image database. In 2009 IEEE conference on computer vision and pattern recognition,
+pages 248–255. Ieee, 2009.
+[19] William B Dolan and Chris Brockett. Automatically constructing a corpus of sentential
+paraphrases. In Proceedings of the International Workshop on Paraphrasing, 2005.
+[20] Ricardo Dominguez-Olmedo, Florian E Dorner, and Moritz Hardt. Training on the test task
+confounds evaluation and emergence. arXiv preprint arXiv:2407.07890, 2024.
+[21] Zhengxiao Du, Aohan Zeng, Yuxiao Dong, and Jie Tang. Understanding emergent abilities of
+language models from the loss perspective. In The Thirty-eighth Annual Conference on Neural
+Information Processing Systems, 2024.
+[22] Clémentine Fourrier, Nathan Habib, Alina Lozovskaya, Konrad Szafer, and Thomas Wolf.
+Open llm leaderboard v2. https://huggingface.co/spaces/open-llm-leaderboard/open_
+llm_leaderboard, 2024.
+[23] Samir Yitzhak Gadre, Gabriel Ilharco, Alex Fang, Jonathan Hayase, Georgios Smyrnis,
+Thao Nguyen, Ryan Marten, Mitchell Wortsman, Dhruba Ghosh, Jieyu Zhang, Eyal Orgad,
+Rahim Entezari, Giannis Daras, Sarah Pratt, Vivek Ramanujan, Yonatan Bitton, Kalyani
+Marathe, Stephen Mussmann, Richard Vencu, Mehdi Cherti, Ranjay Krishna, Pang Wei Koh,
+Olga Saukh, Alexander J. Ratner, Shuran Song, Hannaneh Hajishirzi, Ali Farhadi, Romain
+Beaumont, Sewoong Oh, Alexandros G. Dimakis, Jenia Jitsev, Yair Carmon, Vaishaal Shankar,
+and Ludwig Schmidt. Datacomp: In search of the next generation of multimodal datasets.
+ArXiv, abs/2304.14108, 2023.
+[24] Samir Yitzhak Gadre, Georgios Smyrnis, Vaishaal Shankar, Suchin Gururangan, Mitchell
+Wortsman, Rulin Shao, Jean-Pierre Mercat, Alex Fang, Jeffrey Li, Sedrick Scott Keh, Rui
+Xin, Marianna Nezhurina, Igor Vasiljevic, Jenia Jitsev, Alexandros G. Dimakis, Gabriel
+Ilharco, Shuran Song, Thomas Kollar, Yair Carmon, Achal Dave, Reinhard Heckel, Niklas
+Muennighoff, and Ludwig Schmidt. Language models scale reliably with over-training and
+on downstream tasks. ArXiv, abs/2403.08540, 2024.
+[25] Deep Ganguli, Danny Hernandez, Liane Lovitt, Amanda Askell, Yuntao Bai, Anna Chen, Tom
+Conerly, Nova Dassarma, Dawn Drain, Nelson Elhage, et al. Predictability and surprise in
+large generative models. In Proceedings of the 2022 ACM Conference on Fairness, Accountability,
+and Transparency, pages 1747–1764, 2022.
+[26] Leo Gao, Jonathan Tow, Baber Abbasi, Stella Biderman, Sid Black, Anthony DiPofi, Charles
+Foster, Laurence Golding, Jeffrey Hsu, Alain Le Noac’h, Haonan Li, Kyle McDonell, Niklas
+Muennighoff, Chris Ociepa, Jason Phang, Laria Reynolds, Hailey Schoelkopf, Aviya Skowron,
+Lintang Sutawika, Eric Tang, Anish Thite, Ben Wang, Kevin Wang, and Andy Zou. A
+framework for few-shot language model evaluation, 12 2023.
+[27] Gemini. Gemini: A family of highly capable multimodal models. arXiv, 2023.
+[28] Gemma, Morgane Riviere, Shreya Pathak, Pier Giuseppe Sessa, Cassidy Hardin, Surya
+Bhupatiraju, Léonard Hussenot, Thomas Mesnard, Bobak Shahriari, Alexandre Ramé, et al.
+15
+
+Gemma 2: Improving open language models at a practical size. arXiv preprint arXiv:2408.00118,
+2024.
+[29] Adhiraj Ghosh, Sebastian Dziadzio, Ameya Prabhu, Vishaal Udandarao, Samuel Albanie, and
+Matthias Bethge. Onebench to test them all: Sample-level benchmarking over open-ended
+capabilities. arXiv preprint arXiv:2412.06745, 2024.
+[30] Danilo Giampiccolo, Bernardo Magnini, Ido Dagan, and Bill Dolan. The third PASCAL
+recognizing textual entailment challenge. In Proceedings of the ACL-PASCAL workshop on
+textual entailment and paraphrasing, pages 1–9. Association for Computational Linguistics,
+2007.
+[31] Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian,
+Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, et al. The
+llama 3 herd of models. arXiv preprint arXiv:2407.21783, 2024.
+[32] Etash Kumar Guha, Ryan Marten, Sedrick Scott Keh, Negin Raoof, Georgios Smyrnis,
+Hritik Bansal, Marianna Nezhurina, Jean-Pierre Mercat, Trung Vu, Zayne Sprague, Ashima
+Suvarna, Ben Feuer, Liangyu Chen, Zaid Khan, Eric Frankel, Sachin Grover, Caroline Choi,
+Niklas Muennighoff, Shiye Su, Wanjia Zhao, John Yang, Shreyas Pimpalgaonkar, Kartik
+Sharma, Charlie Cheng-Jie Ji, Yichuan Deng, Sarah Pratt, Vivek Ramanujan, Jon Saad-Falcon,
+Jeffrey Li, Achal Dave, Alon Albalak, Kushal Arora, Blake Wulfe, Chinmay Hegde, Greg
+Durrett, Sewoong Oh, Mohit Bansal, Saadia Gabriel, Aditya Grover, Kai-Wei Chang, Vaishaal
+Shankar, Aaron Gokaslan, Mike A. Merrill, Tatsunori Hashimoto, Yejin Choi, Jenia Jitsev,
+Reinhard Heckel, Maheswaran Sathiamoorthy, Alexandros G. Dimakis, and Ludwig Schmidt.
+Openthoughts: Data recipes for reasoning models. ArXiv, abs/2506.04178, 2025.
+[33] Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin Xu, Qihao Zhu,
+Shirong Ma, Peiyi Wang, Xiao Bi, et al. Deepseek-r1: Incentivizing reasoning capability in
+llms via reinforcement learning. arXiv preprint arXiv:2501.12948, 2025.
+[34] Moritz Hardt. The emerging science of machine learning benchmarks. Online at https:
+//mlbenchmarks.org, 2025. Manuscript.
+[35] Moritz Hardt and Benjamin Recht. Patterns, predictions, and actions: Foundations of machine
+learning. Princeton University Press, 2022.
+[36] Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Xiaodong
+Song, and Jacob Steinhardt. Measuring massive multitask language understanding. ArXiv,
+abs/2009.03300, 2020.
+[37] Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza
+Rutherford, Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom
+Hennigan, Eric Noland, Katie Millican, George van den Driessche, Bogdan Damoc, Aurelia
+Guy, Simon Osindero, Karen Simonyan, Erich Elsen, Jack W. Rae, Oriol Vinyals, and L. Sifre.
+Training compute-optimal large language models. ArXiv, abs/2203.15556, 2022.
+[38] J. Edward Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, and
+Weizhu Chen. Lora: Low-rank adaptation of large language models. ArXiv, abs/2106.09685,
+2021.
+16
+
+[39] Maggie Huan, Yuetai Li, Tuney Zheng, Xiaoyu Xu, Seungone Kim, Minxin Du, Radha
+Poovendran, Graham Neubig, and Xiang Yue. Does math reasoning improve general llm
+capabilities? understanding transferability of llm reasoning. arXiv preprint arXiv:2507.00432,
+2025.
+[40] Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B Brown, Benjamin Chess, Rewon Child,
+Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei. Scaling laws for neural language
+models. arXiv preprint arXiv:2001.08361, 2020.
+[41] Maurice G Kendall. A new measure of rank correlation. Biometrika, 30(1-2):81–93, 1938.
+[42] Maurice G Kendall. The treatment of ties in ranking problems. Biometrika, 33(3):239–251,
+1945.
+[43] Simon Kornblith, Jonathon Shlens, and Quoc V Le. Do better imagenet models transfer
+better? In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition,
+pages 2661–2671, 2019.
+[44] Tom Kwiatkowski, Jennimaria Palomaki, Olivia Redfield, Michael Collins, Ankur Parikh,
+Chris Alberti, Danielle Epstein, Illia Polosukhin, Jacob Devlin, Kenton Lee, Kristina Toutanova,
+Llion Jones, Matthew Kelcey, Ming-Wei Chang, Andrew M. Dai, Jakob Uszkoreit, Quoc
+Le, and Slav Petrov. Natural questions: A benchmark for question answering research.
+Transactions of the Association for Computational Linguistics, 7:452–466, 2019.
+[45] Brian Lester, Rami Al-Rfou, and Noah Constant. The power of scale for parameter-efficient
+prompt tuning. In Conference on Empirical Methods in Natural Language Processing, 2021.
+[46] Hector J Levesque, Ernest Davis, and Leora Morgenstern. The Winograd schema challenge. In
+AAAI Spring Symposium: Logical Formalizations of Commonsense Reasoning, volume 46, page 47,
+2011.
+[47] Percy Liang, Rishi Bommasani, Tony Lee, Dimitris Tsipras, Dilara Soylu, Michihiro Yasunaga,
+Yian Zhang, Deepak Narayanan, Yuhuai Wu, Ananya Kumar, et al. Holistic evaluation of
+language models. Annals of the New York Academy of Sciences, 1525:140 – 146, 2023.
+[48] Thomas Liao, Rohan Taori, Inioluwa Deborah Raji, and Ludwig Schmidt. Are we learning
+yet? a meta review of evaluation failures across machine learning. In Thirty-fifth Conference on
+Neural Information Processing Systems Datasets and Benchmarks Track (Round 2), 2021.
+[49] Mark Liberman. Obituary: Fred jelinek. Computational Linguistics, 36(4):595–599, 2010.
+[50] Haowei Lin, Baizhou Huang, Haotian Ye, Qinyu Chen, Zihao Wang, Sujian Li, Jianzhu Ma,
+Xiaojun Wan, James Zou, and Yitao Liang. Selecting large language model to fine-tune via
+rectified scaling law. ArXiv, abs/2402.02314, 2024.
+[51] Hong Liu, Sang Michael Xie, Zhiyuan Li, and Tengyu Ma. Same pre-training loss, better
+downstream: Implicit bias matters for language models. In International Conference on Machine
+Learning, pages 22188–22214. PMLR, 2023.
+[52] Nicholas Lourie, Michael Y. Hu, and Kyunghyun Cho. Scaling laws are unreliable for
+downstream tasks: A reality check. ArXiv, abs/2507.00885, 2025.
+17
+
+[53] Nicholas Lourie, Michael Y Hu, and Kyunghyun Cho. Scaling laws are unreliable for
+downstream tasks: A reality check. arXiv preprint arXiv:2507.00885, 2025.
+[54] Ian Magnusson, Akshita Bhagia, Valentin Hofmann, Luca Soldaini, A. Jha, Oyvind Tafjord,
+Dustin Schwenk, Pete Walsh, Yanai Elazar, Kyle Lo, Dirk Groeneveld, Iz Beltagy, Hanna
+Hajishirzi, Noah A. Smith, Kyle Richardson, and Jesse Dodge. Paloma: A benchmark for
+evaluating language model fit. ArXiv, abs/2312.10523, 2023.
+[55] Sourab Mangrulkar, Sylvain Gugger, Lysandre Debut, Younes Belkada, Sayak Paul, and
+Benjamin Bossan. Peft: State-of-the-art parameter-efficient fine-tuning methods. https:
+//github.com/huggingface/peft, 2022.
+[56] Prasanna Mayilvahanan, Thaddäus Wiedemer, Sayak Mallick, Matthias Bethge, and Wieland
+Brendel. Llms on the line: Data determines loss-to-loss scaling laws. In Forty-second International Conference on Machine Learning, 2025.
+[57] Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. Can a suit of armor
+conduct electricity? a new dataset for open book question answering. In Ellen Riloff, David
+Chiang, Julia Hockenmaier, and Jun’ichi Tsujii, editors, Proceedings of the 2018 Conference
+on Empirical Methods in Natural Language Processing, pages 2381–2391, Brussels, Belgium,
+October-November 2018. Association for Computational Linguistics.
+[58] John Miller, Karl Krauth, Benjamin Recht, and Ludwig Schmidt. The effect of natural
+distribution shift on question answering models. In International conference on machine learning,
+pages 6905–6916. PMLR, 2020.
+[59] Yixin Nie, Adina Williams, Emily Dinan, Mohit Bansal, Jason Weston, and Douwe Kiela.
+Adversarial nli: A new benchmark for natural language understanding, 2020.
+[60] OpenAI. Gpt-4 technical report. arXiv, 2023.
+[61] David Owen. How predictable is language model benchmark performance?
+abs/2401.04757, 2024.
+
+ArXiv,
+
+[62] Ankit Pal, Logesh Kumar Umapathi, and Malaikannan Sankarasubbu. Medmcqa : A largescale multi-subject multi-choice dataset for medical domain question answering, 2022.
+[63] Mohammad Taher Pilehvar and Jose Camacho-Collados. Wic: the word-in-context dataset for
+evaluating context-sensitive meaning representations. arXiv preprint arXiv:1808.09121, 2018.
+[64] Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. Language models are unsupervised multitask learners. In OpenAI Technical Report, 2019. OpenAI
+technical report.
+[65] Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. SQuAD: 100,000+
+questions for machine comprehension of text. In Proceedings of EMNLP, pages 2383–2392.
+Association for Computational Linguistics, 2016.
+[66] Aditya Ramesh, Mikhail Pavlov, Gabriel Goh, Scott Gray, Chelsea Voss, Alec Radford, Mark
+Chen, and Ilya Sutskever. Zero-shot text-to-image generation. ArXiv, abs/2102.12092, 2021.
+18
+
+[67] Benjamin Recht, Rebecca Roelofs, Ludwig Schmidt, and Vaishaal Shankar. Do imagenet
+classifiers generalize to imagenet?, 2019.
+[68] Yangjun Ruan, Chris J. Maddison, and Tatsunori B. Hashimoto. Observational scaling laws
+and the predictability of language model performance. ArXiv, abs/2405.10938, 2024.
+[69] Olawale Salaudeen and Moritz Hardt. Imagenot: A contrast with imagenet preserves model
+rankings. arXiv preprint arXiv:2404.02112, 2024.
+[70] Olawale Salaudeen, Anka Reuel, Ahmed M. Ahmed, Suhana Bedi, Zachary Robertson,
+Sudharsan Sundar, Ben Domingue, Angelina Wang, and Oluwasanmi Koyejo. Measurement
+to meaning: A validity-centered framework for ai evaluation. ArXiv, abs/2505.10573, 2025.
+[71] Maarten Sap, Hannah Rashkin, Derek Chen, Ronan LeBras, and Yejin Choi. Socialiqa:
+Commonsense reasoning about social interactions, 2019.
+[72] Tal Shnitzer, Anthony Ou, M’irian Silva, Kate Soule, Yuekai Sun, Justin Solomon, Neil
+Thompson, and Mikhail Yurochkin. Large language model routing with benchmark datasets.
+ArXiv, abs/2309.15789, 2023.
+[73] Richard Socher, Alex Perelygin, Jean Wu, Jason Chuang, Christopher D Manning, Andrew
+Ng, and Christopher Potts. Recursive deep models for semantic compositionality over a
+sentiment treebank. In Proceedings of EMNLP, pages 1631–1642, 2013.
+[74] Aarohi Srivastava, Abhinav Rastogi, Abhishek Rao, Abu Awal Md Shoeb, Abubakar Abid,
+Adam Fisch, Adam R Brown, Adam Santoro, Aditya Gupta, Adrià Garriga-Alonso, et al.
+Beyond the imitation game: Quantifying and extrapolating the capabilities of language
+models. ArXiv, abs/2206.04615, 2022.
+[75] Mirac Suzgun, Nathan Scales, Nathanael Scharli, Sebastian Gehrmann, Yi Tay, Hyung Won
+Chung, Aakanksha Chowdhery, Quoc V. Le, Ed H. Chi, Denny Zhou, and Jason Wei.
+Challenging big-bench tasks and whether chain-of-thought can solve them. In Annual Meeting
+of the Association for Computational Linguistics, 2022.
+[76] Alon Talmor, Jonathan Herzig, Nicholas Lourie, and Jonathan Berant. Commonsenseqa: A
+question answering challenge targeting commonsense knowledge, 2019.
+[77] Rohan Taori, Achal Dave, Vaishaal Shankar, Nicholas Carlini, Benjamin Recht, and Ludwig
+Schmidt. Measuring robustness to natural distribution shifts in image classification. Advances
+in Neural Information Processing Systems, 33:18583–18599, 2020.
+[78] Antonio Torralba and Alexei A Efros. Unbiased look at dataset bias. In CVPR 2011, pages
+1521–1528. IEEE, 2011.
+[79] Dimitris Tsipras, Shibani Santurkar, Logan Engstrom, Andrew Ilyas, and Aleksander Madry.
+From imagenet to image classification: Contextualizing progress on benchmarks. In International Conference on Machine Learning, 2020.
+[80] David Vilares and Carlos Gómez-Rodríguez. HEAD-QA: A healthcare dataset for complex
+reasoning. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, pages 960–966, Florence, Italy, July 2019. Association for Computational Linguistics.
+19
+
+[81] Alex Warstadt, Amanpreet Singh, and Samuel R. Bowman. Neural network acceptability
+judgments. arXiv preprint 1805.12471, 2018.
+[82] Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian Borgeaud, Dani
+Yogatama, Maarten Bosma, Denny Zhou, Donald Metzler, et al. Emergent abilities of large
+language models. Transactions on Machine Learning Research, 2022.
+[83] Laura Weidinger, Deborah Raji, Hanna Wallach, Margaret Mitchell, Angelina Wang, Olawale
+Salaudeen, Rishi Bommasani, Sayash Kapoor, Deep Ganguli, Sanmi Koyejo, and William
+Isaac. Toward an evaluation science for generative ai systems. ArXiv, abs/2503.05336, 2025.
+[84] Johannes Welbl, Nelson F. Liu, and Matt Gardner. Crowdsourcing multiple choice science
+questions, 2017.
+[85] Adina Williams, Nikita Nangia, and Samuel R. Bowman. A broad-coverage challenge corpus
+for sentence understanding through inference. In Proceedings of NAACL-HLT, 2018.
+[86] Mengzhou Xia, Mikel Artetxe, Chunting Zhou, Xi Victoria Lin, Ramakanth Pasunuru, Danqi
+Chen, Luke Zettlemoyer, and Veselin Stoyanov. Training trajectories of language models
+across scales. In The 61st Annual Meeting Of The Association For Computational Linguistics, 2023.
+[87] Chhavi Yadav and Léon Bottou. Cold case: The lost mnist digits. In Neural Information
+Processing Systems, 2019.
+[88] An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan Li,
+Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang,
+Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin
+Yang, Le Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li,
+Tianyi Tang, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang,
+Yu Wan, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, and Zihan Qiu. Qwen2.5 technical report,
+2025.
+[89] Alex Young, Bei Chen, Chao Li, Chengen Huang, Ge Zhang, Guanwei Zhang, Heng Li,
+Jiangcheng Zhu, Jianqun Chen, Jing Chang, Kaidong Yu, Peng Liu, Qiang Liu, Shawn Yue,
+Senbin Yang, Shiming Yang, Tao Yu, Wen Xie, Wenhao Huang, Xiaohui Hu, Xiaoyi Ren,
+Xinyao Niu, Pengcheng Nie, Yuchi Xu, Yudong Liu, Yue Wang, Yuxuan Cai, Zhenyu Gu,
+Zhiyuan Liu, and Zonghong Dai. Yi: Open foundation models by 01.ai. ArXiv, abs/2403.04652,
+2024.
+[90] Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, and Yejin Choi. Hellaswag: Can a
+machine really finish your sentence?, 2019.
+[91] Xinyue Zeng, Haohui Wang, Junhong Lin, Jun Wu, Tyler Cody, and Dawei Zhou. Lensllm:
+Unveiling fine-tuning dynamics for llm selection. ArXiv, abs/2505.03793, 2025.
+[92] Biao Zhang, Zhongtao Liu, Colin Cherry, and Orhan Firat. When scaling meets llm finetuning:
+The effect of data, model and finetuning method. ArXiv, abs/2402.17193, 2024.
+[93] Guanhua Zhang and Moritz Hardt. Inherent trade-offs between diversity and stability in
+multi-task benchmarks. arXiv preprint arXiv:2405.01719, 2024.
+20
+
+[94] Jieyu Zhang, Weikai Huang, Zixian Ma, Oscar Michel, Dong He, Tanmay Gupta, Wei-Chiu
+Ma, Ali Farhadi, Aniruddha Kembhavi, and Ranjay Krishna. Task me anything. ArXiv,
+abs/2406.11775, 2024.
+
+21
+
+A
+
+Additional Experiment Setting
+
+A.1
+
+Benchmark Selection
+
+We begin our study with the lm-eval-harness package [26], which offers a comprehensive suite of
+language model benchmarks. To accommodate the train-before-test methodology which requires
+a dedicated training set for fine-tuning, we first identify benchmarks that provide at least 1,000
+training examples. This yields a total of 37 benchmarks.
+These benchmarks can be broadly categorized as 28 likelihood-based and 9 generation-based
+benchmarks. Likelihood-based evaluations test for the likelihood of different completions given
+some input string; for example, different answer choices given a multiple-choice input question.
+Since the number of completions is usually small, likelihood-based evaluations are generally
+compute-efficient.
+Generation-based evaluations, in contrast, generate some output response given an input
+query. If responses tend to be long, then generation-based evaluations naturally become computeintensive. This is particularly true for base models, which are usually not trained for instruction
+following and therefore continue to generate tokens until hitting their maximum token limit.
+These generation-based benchmarks are also over-challenging for smaller models with limited
+parameters, such as GPT-2 [64]. Therefore, we exclude seven generation-based benchmarks, Drop,
+CoQa, ReCoRD, bAbi, WebQA, TriviaQA and Fld-Default. Nevertheless, we retain two widely used
+generation-based benchmarks, GSM8K and NQ-Open, in our experiments.
+We additionally excluded five benchmarks due to anomalies observed during fine-tuning:
+MedQA-4Options, LogiQA, Mutual, Mela-EN, and Swag. For these benchmarks, more than 20% of
+
+models, most of which are small models with fewer than 0.5B parameters, showed no performance
+improvement after fine-tuning. We also excluded Paws-EN, as its corresponding model ranking
+under direct evaluation was negatively correlated (Kendall’s τ less than zero) with 23 out of
+24 other benchmarks. We attribute this anomaly to the unusual prompting template used by
+lm-eval-harness.
+Our final selection includes 24 benchmarks: MNLI [85], QNLI [65], RTE [17, 30, 7], CoLA [81],
+SST-2 [73], MRPC [19], QQP, WiC [63], ANLI [59], Winogrande [46], CommonsenseQA [76], Hellaswag [90],
+Social-IQA [71], OpenBookQA [57], NQ-Open [44], BoolQ [14], ARC-Easy, ARC-Challenge [15], SciQ [84],
+PIQA [9], MathQA [3], GSM8K [16], MedMCQA [62], HeadQA [80].
+
+A.2
+
+Evaluation Setup
+
+For our train-before-test evaluations, we fine-tune each model for five epochs and select the
+best-performing checkpoint based on evaluations on a separate validation set. We use the AdamW
+optimizer with a weight decay of 0.01. For each model-benchmark combination, we perform a
+hyperparameter search over three learning rates {1e − 5, 2e − 5, 5e − 5} and select the optimal one
+based on validation performance. To reduce memory consumption, we employ parameter-efficient
+fine-tuning (PEFT) [38, 55], We use a LoRA configuration with rank 8, α = 32, and dropout 0.1.
+Most of our experiments are conducted on Quadro RTX 6000, Tesla V100-SXM2-32GB and NVIDIA
+A100-SXM4-80GB GPUs.
+In cases where models show no performance improvement after fine-tuning, we report their
+
+22
+
+pre-fine-tuning results. This scenario is rare and typically occur with smaller models (less than
+500M parameters) that lack the capacity to perform certain tasks, resulting in near-random
+performance both before and after fine-tuning. Additionally, since all training datasets in our
+study are publicly available, some models may have encountered this data during pre-training,
+potentially limiting the benefits of additional fine-tuning.
+For instruction-tuned models, we evaluate performance both with and without chat templates,
+selecting the configuration that yields better results. Specifically, during direct evaluation, we
+assess model performance on the validation set under both conditions and apply the betterperforming configuration to the test set. In the train-before-test setting, we similarly fine-tune two
+variants: one with training data formatted using chat templates and one without. We then select
+the approach that achieves the best performance on the validation set for final evaluation.
+
+23
+
+Kendall's
+MNLI
+
+1 0.61 0.53 0.67 0.12 0.63 0.49 0.58 0.64 0.63 0.63 0.47 0.38 0.72 0.65 0.63 0.65 0.54 0.65 0.41 0.47 0.78 0.46 0.55
+
+1.0
+
+QQP 0.61 1 0.46 0.59-0.0430.54 0.31 0.4 0.55 0.46 0.5 0.31 0.26 0.64 0.46 0.59 0.51 0.51 0.41 0.38 0.29 0.6 0.29 0.36
+MedMCQA 0.53 0.46 1 0.36 0.31 0.47 0.66 0.66 0.61 0.73 0.54 0.64 0.58 0.69 0.63 0.45 0.53 0.34 0.64 0.3 0.62 0.54 0.59 0.67
+QNLI 0.67 0.59 0.36 1 0.004 0.54 0.36 0.38 0.5 0.44 0.5 0.31 0.28 0.52 0.47 0.6 0.57 0.42 0.47 0.27 0.33 0.63 0.33 0.41
+NQ-Open 0.12-0.0430.31 0.004 1 0.067 0.44 0.38 0.26 0.34 0.13 0.47 0.54 0.12 0.27 -0.050.062-0.11 0.37 0.009 0.49 0.11 0.51 0.43
+SST-2 0.63 0.54 0.47 0.54 0.067 1 0.45 0.5 0.58 0.53 0.6 0.4 0.33 0.66 0.61 0.54 0.58 0.56 0.53 0.4 0.39 0.62 0.4 0.48
+
+0.8
+
+Winogrande 0.49 0.31 0.66 0.36 0.44 0.45 1 0.82 0.66 0.75 0.54 0.82 0.65 0.55 0.72 0.39 0.47 0.28 0.76 0.27 0.76 0.49 0.76 0.83
+HellaSwag 0.58 0.4 0.66 0.38 0.38 0.5 0.82 1
+
+0.7 0.76 0.6 0.84 0.58 0.64 0.79 0.44 0.51 0.37 0.81 0.37 0.76 0.56 0.73 0.79
+
+Social-IQA 0.64 0.55 0.61 0.5 0.26 0.58 0.66 0.7
+
+1 0.74 0.64 0.65 0.58 0.72 0.72 0.52 0.57 0.46 0.71 0.4 0.62 0.65 0.65 0.71
+
+MathQA 0.63 0.46 0.73 0.44 0.34 0.53 0.75 0.76 0.74 1
+
+0.6 0.72 0.64 0.7 0.75 0.46 0.55 0.39 0.75 0.36 0.66 0.62 0.69 0.78
+
+ANLI 0.63 0.5 0.54 0.5 0.13 0.6 0.54 0.6 0.64 0.6
+
+1 0.51 0.38 0.67 0.66 0.56 0.54 0.51 0.65 0.41 0.5 0.66 0.49 0.58
+
+0.6
+
+PIQA 0.47 0.31 0.64 0.31 0.47 0.4 0.82 0.84 0.65 0.72 0.51 1 0.66 0.52 0.68 0.34 0.44 0.28 0.73 0.27 0.82 0.46 0.79 0.8
+SciQ 0.38 0.26 0.58 0.28 0.54 0.33 0.65 0.58 0.58 0.64 0.38 0.66 1 0.45 0.53 0.21 0.36 0.18 0.58 0.18 0.65 0.37 0.76 0.7
+CommonsenseQA 0.72 0.64 0.69 0.52 0.12 0.66 0.55 0.64 0.72 0.7 0.67 0.52 0.45 1 0.71 0.62 0.64 0.54 0.63 0.48 0.47 0.71 0.47 0.57
+BoolQ 0.65 0.46 0.63 0.47 0.27 0.61 0.72 0.79 0.72 0.75 0.66 0.68 0.53 0.71 1 0.53 0.61 0.49 0.77 0.42 0.64 0.62 0.65 0.73
+
+0.4
+
+CoLA 0.63 0.59 0.45 0.6 -0.05 0.54 0.39 0.44 0.52 0.46 0.56 0.34 0.21 0.62 0.53 1 0.57 0.52 0.48 0.39 0.35 0.61 0.32 0.41
+GSM8K 0.65 0.51 0.53 0.57 0.062 0.58 0.47 0.51 0.57 0.55 0.54 0.44 0.36 0.64 0.61 0.57 1
+
+0.5 0.55 0.38 0.44 0.62 0.44 0.52
+
+WiC 0.54 0.51 0.34 0.42 -0.11 0.56 0.28 0.37 0.46 0.39 0.51 0.28 0.18 0.54 0.49 0.52 0.5
+
+1 0.39 0.55 0.27 0.51 0.24 0.31
+
+OpenBookQA 0.65 0.41 0.64 0.47 0.37 0.53 0.76 0.81 0.71 0.75 0.65 0.73 0.58 0.63 0.77 0.48 0.55 0.39 1 0.32 0.75 0.65 0.72 0.79
+MRPC 0.41 0.38 0.3 0.27 0.009 0.4 0.27 0.37 0.4 0.36 0.41 0.27 0.18 0.48 0.42 0.39 0.38 0.55 0.32 1 0.26 0.41 0.23 0.29
+
+0.2
+
+HeadQA 0.47 0.29 0.62 0.33 0.49 0.39 0.76 0.76 0.62 0.66 0.5 0.82 0.65 0.47 0.64 0.35 0.44 0.27 0.75 0.26 1 0.45 0.83 0.83
+RTE 0.78 0.6 0.54 0.63 0.11 0.62 0.49 0.56 0.65 0.62 0.66 0.46 0.37 0.71 0.62 0.61 0.62 0.51 0.65 0.41 0.45 1 0.45 0.53
+ARC-Easy 0.46 0.29 0.59 0.33 0.51 0.4 0.76 0.73 0.65 0.69 0.49 0.79 0.76 0.47 0.65 0.32 0.44 0.24 0.72 0.23 0.83 0.45 1 0.86
+ARC-Challenge 0.55 0.36 0.67 0.41 0.43 0.48 0.83 0.79 0.71 0.78 0.58 0.8 0.7 0.57 0.73 0.41 0.52 0.31 0.79 0.29 0.83 0.53 0.86 1
+
+I P A
+I A Q A Q A K C A C A E y e
+I n 2 e g A A
+MNL QQ dMCQ QNLQ-Ope SST- grandllaSwacial-IQMathQ ANL PIQ Sci enseQ Bool CoL GSM8 WiBookQ MRPHeadQ RTRC-Eas alleng
+o He So
+s
+n
+N
+A C-Ch
+n
+i
+Me
+W
+mon
+Ope
+AR
+Com
+
+0.0
+
+Figure 9: Cross benchmark ranking agreement under direct evaluation. Benchmarks are sorted based on
+the training dataset size. Kendall’s τ is calculated for every benchmark pair.
+
+B
+
+Additional Experiment Results
+
+B.1
+
+Downstream Ranking Agreement
+
+We plot detailed pairwise ranking correlation agreement between benchmarks in Figure 9 (direct
+evaluation) and 10 (train-before-test), corresponding to Figure 2 in the main text.
+
+24
+
+Kendall's
+MNLI
+
+1 0.84 0.79 0.77 0.74 0.68 0.84 0.87 0.75 0.83 0.88 0.82 0.74 0.79 0.89 0.76 0.75 0.8 0.82 0.74 0.79 0.83 0.85 0.88
+
+1.0
+
+QQP 0.84 1 0.73 0.75 0.75 0.65 0.81 0.83 0.73 0.74 0.83 0.78 0.71 0.72 0.84 0.8 0.67 0.8 0.79 0.76 0.76 0.8 0.78 0.83
+MedMCQA 0.79 0.73 1 0.71 0.74 0.62 0.78 0.78 0.67 0.82 0.77 0.72 0.67 0.74 0.78 0.68 0.82 0.75 0.74 0.72 0.8 0.75 0.83 0.8
+QNLI 0.77 0.75 0.71 1 0.76 0.65 0.81 0.8 0.79 0.71 0.73 0.8 0.7 0.64 0.79 0.72 0.63 0.72 0.76 0.69 0.77 0.7 0.77 0.78
+NQ-Open 0.74 0.75 0.74 0.76 1 0.68 0.84 0.84 0.78 0.68 0.72 0.82 0.74 0.64 0.77 0.72 0.62 0.68 0.78 0.65 0.81 0.67 0.79 0.79
+SST-2 0.68 0.65 0.62 0.65 0.68 1 0.69 0.68 0.63 0.65 0.69 0.66 0.6 0.67 0.68 0.68 0.6 0.67 0.65 0.62 0.61 0.66 0.64 0.65
+
+0.8
+
+Winogrande 0.84 0.81 0.78 0.81 0.84 0.69 1 0.92 0.83 0.76 0.8 0.87 0.76 0.71 0.87 0.78 0.69 0.77 0.86 0.71 0.85 0.75 0.87 0.88
+HellaSwag 0.87 0.83 0.78 0.8 0.84 0.68 0.92 1 0.81 0.77 0.83 0.9 0.78 0.72 0.9 0.78 0.69 0.76 0.87 0.72 0.86 0.75 0.88 0.9
+Social-IQA 0.75 0.73 0.67 0.79 0.78 0.63 0.83 0.81 1 0.67 0.69 0.83 0.77 0.59 0.77 0.68 0.61 0.69 0.77 0.62 0.77 0.67 0.8 0.79
+MathQA 0.83 0.74 0.82 0.71 0.68 0.65 0.76 0.77 0.67 1 0.83 0.73 0.67 0.85 0.8 0.72 0.84 0.8 0.79 0.77 0.74 0.79 0.81 0.8
+
+0.6
+
+ANLI 0.88 0.83 0.77 0.73 0.72 0.69 0.8 0.83 0.69 0.83 1 0.77 0.72 0.81 0.84 0.79 0.75 0.82 0.8 0.76 0.74 0.83 0.8 0.84
+PIQA 0.82 0.78 0.72 0.8 0.82 0.66 0.87 0.9 0.83 0.73 0.77 1 0.77 0.67 0.83 0.72 0.64 0.74 0.84 0.68 0.84 0.7 0.86 0.87
+SciQ 0.74 0.71 0.67 0.7 0.74 0.6 0.76 0.78 0.77 0.67 0.72 0.77 1 0.62 0.77 0.68 0.59 0.69 0.76 0.6 0.79 0.67 0.78 0.8
+CommonsenseQA 0.79 0.72 0.74 0.64 0.64 0.67 0.71 0.72 0.59 0.85 0.81 0.67 0.62 1 0.75 0.7 0.77 0.78 0.73 0.73 0.65 0.81 0.72 0.73
+BoolQ 0.89 0.84 0.78 0.79 0.77 0.68 0.87 0.9 0.77 0.8 0.84 0.83 0.77 0.75 1 0.77 0.7 0.78 0.86 0.74 0.82 0.78 0.85 0.89
+
+0.4
+
+CoLA 0.76 0.8 0.68 0.72 0.72 0.68 0.78 0.78 0.68 0.72 0.79 0.72 0.68 0.7 0.77 1 0.64 0.73 0.74 0.71 0.72 0.78 0.74 0.76
+GSM8K 0.75 0.67 0.82 0.63 0.62 0.6 0.69 0.69 0.61 0.84 0.75 0.64 0.59 0.77 0.7 0.64 1 0.72 0.68 0.7 0.68 0.74 0.75 0.71
+WiC 0.8 0.8 0.75 0.72 0.68 0.67 0.77 0.76 0.69 0.8 0.82 0.74 0.69 0.78 0.78 0.73 0.72 1 0.75 0.8 0.7 0.8 0.76 0.79
+OpenBookQA 0.82 0.79 0.74 0.76 0.78 0.65 0.86 0.87 0.77 0.79 0.8 0.84 0.76 0.73 0.86 0.74 0.68 0.75 1 0.71 0.83 0.71 0.86 0.87
+MRPC 0.74 0.76 0.72 0.69 0.65 0.62 0.71 0.72 0.62 0.77 0.76 0.68 0.6 0.73 0.74 0.71 0.7 0.8 0.71 1 0.65 0.73 0.69 0.73
+HeadQA 0.79 0.76 0.8 0.77 0.81 0.61 0.85 0.86 0.77 0.74 0.74 0.84 0.79 0.65 0.82 0.72 0.68 0.7 0.83 0.65 1
+
+0.7 0.88 0.86
+
+RTE 0.83 0.8 0.75 0.7 0.67 0.66 0.75 0.75 0.67 0.79 0.83 0.7 0.67 0.81 0.78 0.78 0.74 0.8 0.71 0.73 0.7
+
+1 0.74 0.77
+
+ARC-Easy 0.85 0.78 0.83 0.77 0.79 0.64 0.87 0.88 0.8 0.81 0.8 0.86 0.78 0.72 0.85 0.74 0.75 0.76 0.86 0.69 0.88 0.74 1
+
+0.9
+
+ARC-Challenge 0.88 0.83 0.8 0.78 0.79 0.65 0.88 0.9 0.79 0.8 0.84 0.87 0.8 0.73 0.89 0.76 0.71 0.79 0.87 0.73 0.86 0.77 0.9
+
+1
+
+I P A
+I A Q A Q A K C A C A E y e
+I n 2 e g A A
+MNL QQ dMCQ QNLQ-Ope SST- grandllaSwacial-IQMathQ ANL PIQ Sci enseQ Bool CoL GSM8 WiBookQ MRPHeadQ RTRC-Eas alleng
+o He So
+s
+n
+N
+A C-Ch
+n
+i
+Me
+W
+mon
+Ope
+AR
+m
+o
+C
+
+0.2
+
+0.0
+
+Figure 10: Cross benchmark ranking agreement under train-before-test. Benchmarks are sorted based on
+the training dataset size. Kendall’s τ is calculated for every benchmark pair.
+
+25
+
+Table 3: Bits per byte (BPB) of eight excluded Gemma models compared to Pythia-410M across the three
+newly collected corpora. The Gemma models exhibit abnormally high BPB values on Wiki and Stack, likely
+due to the greater average sequence length in these two datasets. Specifically, Arxiv has an average of 163
+words per document, compared to 250 for Stack and 1502 for Wiki.
+
+B.2
+
+Arxiv
+
+Wiki
+
+Stack
+
+Gemma-2B
+Gemma-2B-IT
+Gemma-7B
+Gemma-7B-IT
+Gemma-2-2B
+Gemma-2-2B-IT
+Gemma-2-9B
+Gemma-2-9B-IT
+
+0.766
+0.770
+1.013
+1.053
+0.730
+0.705
+0.709
+0.638
+
+1.578
+1.524
+4.780
+18.711
+1.784
+1.191
+2.216
+1.234
+
+1.139
+1.222
+4.053
+20.958
+1.340
+0.997
+1.685
+0.978
+
+Pythia-410M
+
+0.791
+
+1.065
+
+0.945
+
+Perplexity Ranking Agreement
+
+In this work, we collect three corpora from Wikipedia, StackExchange, and arXiv. We only
+collect documents from 2025. More specifically, we collect 3,366 documents for Wiki, 6,001 for
+StackExchange and 44,384 documents for arXiv. These datasets are split into training, validation,
+and testing sets, in an 8:1:1 ratio. For arXiv, we utilize only the paper abstracts, while for
+StackExchange, we use only the questions. Consequently, the average document length is 163
+words for arXiv, 250 words for StackExchange, and 1,502 words for Wikipedia.
+We exclude Gemma models from our perplexity agreement experiments, as lm-eval-harness
+provides unreliable perplexity measurements for Gemma models2 . We report the bits per byte
+(BPB) for the Gemma models in Table 3. While the BPB values for Gemma on arXiv (the
+dataset with the shortest average sequence length) are mostly reasonable, the performance on
+StackExchange and Wikipedia is notably worse, even compared to smaller models like Pythia410M.
+This anomaly stems from how lm-eval-harness handles long sequences via a rolling window
+mechanism. Unlike other models, Gemma requires every input sequence to begin with the
+BOS token. If this constraint is not met, perplexity degrades significantly. Consequently, when
+processing long sequences that are chunked into multiple windows, Gemma’s performance
+degrades.
+
+B.3
+
+PC1 Score under Train-before-Test
+
+We plot the PC1 scores under train-before-test in Figure 11. We also provide the pre-training
+compute details for models with publicly available training token counts, as shown in Table 4.
+
+2 See discussion at https://github.com/huggingface/transformers/issues/29250.
+
+26
+
+Qwen2.5­14B
+Qwen2.5­14B­IT
+Gemma­2­9B
+Gemma­2­9B­IT
+Gemma­7B
+Llama­3­8B
+Llama­3­8B­IT
+Llama­3.1­8B
+Qwen1.5­14B
+Llama­3.1­8B­IT
+Qwen2.5­7B
+Qwen2­7B­IT
+Qwen1.5­14B­IT
+Qwen2­7B
+Qwen2.5­7B­IT
+Yi­1.5­9B
+Yi­1.5­9B­IT
+Yi­9B
+Qwen1.5­7B
+Yi­1.5­6B­IT
+Gemma­7B­IT
+Yi­1.5­6B
+Qwen1.5­7B­IT
+Llama­3.2­3B­IT
+Qwen2.5­3B
+Llama­3.2­3B
+Yi­6B­IT
+Yi­6B
+Gemma­2­2B­IT
+Qwen2.5­3B­IT
+Gemma­2­2B
+Qwen1.5­4B
+Qwen1.5­4B­IT
+Qwen2.5­1.5B
+Qwen2.5­1.5B­IT
+Qwen2­1.5B
+Qwen2­1.5B­IT
+Gemma­2B
+Pythia­12B
+Pythia­6.9B
+Qwen1.5­1.8B
+Qwen1.5­1.8B­IT
+Gemma­2B­IT
+Llama­3.2­1B­IT
+Llama­3.2­1B
+Pythia­2.8B
+Qwen2.5­0.5B
+Qwen2.5­0.5B­IT
+Qwen2­0.5B­IT
+Qwen2­0.5B
+Pythia­1.4B
+Qwen1.5­0.5B
+Qwen1.5­0.5B­IT
+Pythia­1B
+GPT2­1.5B
+GPT2­774M
+Pythia­410M
+GPT2­335M
+Pythia­160M
+GPT2­124M
+Pythia­70M
+
+12.5
+
+10.0
+
+7.5
+
+5.0
+2.5
+PC1 Score
+
+0.0
+
+Figure 11: PC1 scores under train-before-test.
+
+27
+
+2.5
+
+5.0
+
+Table 4: The models used in Figure 7. The number of training tokens of these models is publicly available.
+We compute the number of pre-training FLOPs as 6 × #Parameters × #Tokens.
+
+Model
+
+#Parameters (B)
+
+#Tokens (B)
+
+#FLOPs (10^18)
+
+Llama-3-8B
+Llama-3-8B-IT
+Llama-3.1-8B
+Llama-3.1-8B-IT
+Llama-3.2-3B
+Llama-3.2-3B-IT
+Qwen1.5-0.5B
+Qwen1.5-1.8B
+Qwen1.5-4B
+Qwen1.5-7B
+Qwen1.5-14B
+Qwen1.5-0.5B-IT
+Qwen1.5-1.8B-IT
+Qwen1.5-4B-IT
+Qwen1.5-7B-IT
+Qwen1.5-14B-IT
+Gemma-7B
+Gemma-7B-IT
+Gemma-2-2B
+Gemma-2-2B-IT
+Gemma-2-9B
+Gemma-2-9B-IT
+Pythia-70M
+Pythia-160M
+Pythia-410M
+Pythia-1B
+Pythia-1.4B
+Pythia-2.8B
+Pythia-6.9B
+Pythia-12B
+Yi-6B
+Yi-6B-IT
+Yi-9B
+Yi-1.5-6B
+Yi-1.5-6B-IT
+Yi-1.5-9B
+Yi-1.5-9B-IT
+
+8.03
+8.03
+8.03
+8.03
+3.21
+3.21
+0.62
+1.84
+3.95
+7.72
+14.20
+0.62
+1.84
+3.95
+7.72
+14.20
+8.54
+8.54
+2.61
+2.61
+9.24
+9.24
+0.07
+0.16
+0.41
+1.00
+1.40
+2.80
+6.90
+12.00
+6.06
+6.06
+8.83
+6.06
+6.06
+8.83
+8.83
+
+15000.0
+15000.0
+15000.0
+15000.0
+9000.0
+9000.0
+2400.0
+2400.0
+2400.0
+4000.0
+4000.0
+2400.0
+2400.0
+2400.0
+4000.0
+4000.0
+6000.0
+6000.0
+2000.0
+2000.0
+8000.0
+8000.0
+300.0
+300.0
+300.0
+300.0
+300.0
+300.0
+300.0
+300.0
+3000.0
+3000.0
+3800.0
+3600.0
+3600.0
+3600.0
+3600.0
+
+722700.00
+722700.00
+722700.00
+722700.00
+173340.00
+173340.00
+8928.00
+26496.00
+56880.00
+185280.00
+340800.00
+8928.00
+26496.00
+56880.00
+185280.00
+340800.00
+307440.00
+307440.00
+31320.00
+31320.00
+443520.00
+443520.00
+126.00
+288.00
+738.00
+1800.00
+2520.00
+5040.00
+12420.00
+21600.00
+109080.00
+109080.00
+201324.00
+130896.00
+130896.00
+190728.00
+190728.00
+
+28
+
+C
+
+Accounting for Statistical Significance
+
+C.1
+
+Ranking Alignment in Figure 1
+
+We plot the rankings of 61 language models on two question-answering benchmarks: Natural
+Questions Open and ARC Challenge in Figure 1. We greedily align each ranking as much as
+possible without violating confidence intervals, thus revealing only those ranking changes that
+are statistically significant. See Algorithm 3 for more details.
+
+C.2
+
+Downstream Ranking Agreement
+
+We additionally supplement the experiments presented in the main text by modifying the ranking
+correlation metric to account for statistical significance in the benchmark evaluations. Specifically,
+we use Kendall’s τ-b [42], which adjusts for ties in rankings. We consider two models tied
+on a given benchmark if their performance difference is not statistically significant at the 95%
+confidence level. We assess statistical significance using a t-test based on the standard error of the
+mean performances.
+We reproduce the ranking correlation figures of the main text using the modified Kendall’s τ
+which treats non-statistically significant performance differences as ties. See Figure 12 and 13; as
+well as Figure 14 and Figure 15 for more detailed results. We observe that accounting for statistical
+significance in models’ performance differences leads to slightly higher ranking correlations, as
+measured by Kendall’s τ-b. For direct evaluation, average agreement increases from 0.52 to 0.58.
+For train-before-test, average agreement increases from 0.76 to 0.77. Therefore, train-before-test
+continues to lead to large improvements in raking agreement (from Kendall’s τ-b 0.58 to 0.77).
+
+29
+
+Algorithm 1: build_partial_order(scores, stderrs)
+Input: Model performance scores and standard errors
+Output: Directed graph G representing significant model orderings
+Initialize graph G with models as nodes
+foreach pair of distinct models (m1 , m2 ) do
+if m1 is significantly better than m2 then
+Add directed edge (m1 → m2 ) to G
+return G
+
+Algorithm 2: parallel_greedy_rank(models, G1 , G2 , score1 , score2 )
+Input: List of models, two directed graphs G1 , G2 , and two score series
+Output: Two lists representing the parallel ranking order for each task
+Initialize vanillaRank1 , ← rankdata(score1 ), vanillaRank2 ← rankdata(score2 )
+Initialize available1 and available2 as models with zero in-degree in G1 and G2
+Initialize empty lists order1 , order2
+for i = 1 to number of models do
+Initialize empty list pairs
+foreach m1 in available1 do
+foreach m2 in available2 do
+Compute cost for pair (m1 , m2 ) based on:
+(1) Placement of m1 in order2 and m2 in order1
+(2) Whether m1 = m2 (prefer matching)
+(3) Combined vanilla ranks: vanillaRank2 [m1 ] + vanillaRank1 [m2 ]
+Append (cost, m1 , m2 ) to pairs
+Sort pairs by cost (ascending)
+Select (m1 , m2 ) with minimal cost
+Append m1 to order1 , m2 to order2
+Remove m1 from G1 and update available1
+Remove m2 from G2 and update available2
+return order1 , order2
+
+Algorithm 3: rank_models(score1 , stderr1 , score2 , stderr2 )
+Input: Scores and standard errors for two tasks
+Output: Parallel rankings for both tasks
+G1 ← build_partial_order(score1 , stderr1 )
+G2 ← build_partial_order(score2 , stderr2 )
+(order1 , order2 ) ← parallel_greedy_rank(models, G1 , G2 , score1 , score2 )
+rank1 [m] = position of m in order1 (starting from 1)
+rank2 [m] = position of m in order2 (starting from 1)
+return rank1 , rank2
+
+30
+
+Mean Kendall
+
+Direct evaluation
+Train­before­test
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+en PC iC P LI LA iQ 8K ­2 sy A LI A A LI TE de A ag ge A A lQ A
+­Op MR W QQ QN Co ScGSM SSRTC­EHa eadQ MeNdMCQ PIQ AN RograsnenseeQllaSwhalleoncial­IBQookQ BooMathQ
+Q
+N
+A
+M
+Winmon HRC­C S Open
+A
+Com
+
+Figure 12: Mean ranking agreement between each benchmark and all others, measured by Kendall’s tau-b,
+with non-statistically significant performance differences being treated as ties. We calculate Kendall’s τ-b between
+each benchmark and every other one, and then average. Compared to direct evaluation, train-before-test
+consistently improves ranking agreement–often by a large margin. On average, the overall average Kendall’s
+τ is 0.58 for direct evaluation and 0.77 for train-before-test.
+
+0.43
+
+0.39
+
+0.58
+
+0.47
+
+1.0
+
+LU 0.69
+
+0.77
+
+0.77
+
+0.68
+
+0.75
+
+0.76
+
+1.0
+
+CR 0.57
+
+0.76
+
+0.69
+
+0.7
+
+0.7
+
+0.73
+
+0.8
+
+CR 0.77
+
+0.82
+
+0.86
+
+0.73
+
+0.79
+
+0.83
+
+0.8
+
+QA 0.43
+
+0.69
+
+0.67
+
+0.72
+
+0.59
+
+0.7
+
+0.6
+
+QA 0.77
+
+0.86
+
+0.88
+
+0.72
+
+0.79
+
+0.87
+
+0.6
+
+PBC 0.39
+
+0.7
+
+0.72
+
+0.74
+
+0.59
+
+0.73
+
+0.4
+
+PBC 0.68
+
+0.73
+
+0.72
+
+0.64
+
+0.65
+
+0.72
+
+0.4
+
+Math 0.58
+
+0.7
+
+0.59
+
+0.59
+
+0.59
+
+0.65
+
+0.2
+
+Math 0.75
+
+0.79
+
+0.79
+
+0.65
+
+0.88
+
+0.82
+
+0.2
+
+Med 0.47
+
+0.73
+
+0.7
+
+0.73
+
+0.65
+
+0.69
+
+0.0
+
+Med 0.76
+
+0.83
+
+0.87
+
+0.72
+
+0.82
+
+0.85
+
+0.0
+
+CR
+
+QA
+
+PBC
+
+h
+
+Med
+
+CR
+
+QA
+
+PBC
+
+LU
+
+Mat
+
+LU
+
+(a) Direct evaluation.
+
+h
+Mat
+
+Kendall
+
+0.57
+
+Kendall
+
+LU 0.62
+
+Med
+
+(b) Train-before-test.
+
+Figure 13: Cross-category ranking agreement for direct evaluation (left) and train-before-test (right),
+measured by Kendall’s tau-b, with non-statistically significant performance differences being treated as ties.
+We consider language understanding (LU), commonsense reasoning (CR), question answering (QA),
+physics/biology/chemistry (PBC), math (Math), and medicine (Med) categories. Kendall’s τ-b is averaged
+across all pairs of benchmarks that belong to two given categories. The diagonal represents the intracategory agreement and the others represent the inter-category agreement. train-before-test improves both
+intra- and inter-category ranking agreement in all instances.
+
+31
+
+Kendall's
+MNLI
+
+1 0.64 0.59 0.74 0.11 0.71 0.55 0.61 0.7 0.68 0.76 0.52 0.41 0.78 0.69 0.72 0.69 0.61 0.71 0.46 0.5 0.85 0.5 0.6
+
+1.0
+
+QQP 0.64 1 0.48 0.64 -0.06 0.59 0.34 0.41 0.57 0.5 0.57 0.34 0.28 0.68 0.49 0.68 0.53 0.55 0.45 0.41 0.3 0.64 0.3 0.38
+MedMCQA 0.59 0.48 1 0.43 0.36 0.55 0.75 0.73 0.71 0.82 0.64 0.69 0.64 0.75 0.72 0.53 0.58 0.38 0.7 0.38 0.69 0.66 0.67 0.74
+QNLI 0.74 0.64 0.43 1 -0.0070.62 0.41 0.4 0.56 0.49 0.65 0.35 0.3 0.61 0.52 0.72 0.64 0.54 0.56 0.35 0.35 0.7 0.36 0.46
+NQ-Open 0.11 -0.06 0.36-0.007 1 0.095 0.53 0.41 0.33 0.4 0.19 0.54 0.62 0.18 0.3 -0.0120.062-0.0990.46 0.064 0.55 0.21 0.57 0.52
+SST-2 0.71 0.59 0.55 0.62 0.095 1 0.56 0.56 0.66 0.62 0.73 0.51 0.42 0.75 0.69 0.6 0.64 0.59 0.66 0.42 0.46 0.76 0.46 0.56
+
+0.8
+
+Winogrande 0.55 0.34 0.75 0.41 0.53 0.56 1 0.88 0.75 0.82 0.64 0.85 0.72 0.65 0.81 0.48 0.52 0.36 0.82 0.32 0.84 0.65 0.84 0.88
+HellaSwag 0.61 0.41 0.73 0.4 0.41 0.56 0.88 1 0.78 0.84 0.69 0.86 0.64 0.71 0.82 0.52 0.52 0.45 0.84 0.42 0.81 0.67 0.78 0.86
+Social-IQA 0.7 0.57 0.71 0.56 0.33 0.66 0.75 0.78 1 0.81 0.71 0.74 0.64 0.77 0.79 0.51 0.59 0.52 0.8 0.45 0.71 0.7 0.72 0.79
+MathQA 0.68 0.5 0.82 0.49 0.4 0.62 0.82 0.84 0.81 1 0.69 0.79 0.7 0.77 0.82 0.55 0.59 0.44 0.79 0.43 0.74 0.71 0.74 0.85
+
+0.6
+
+ANLI 0.76 0.57 0.64 0.65 0.19 0.73 0.64 0.69 0.71 0.69 1 0.59 0.44 0.77 0.76 0.74 0.65 0.62 0.67 0.53 0.59 0.79 0.55 0.67
+PIQA 0.52 0.34 0.69 0.35 0.54 0.51 0.85 0.86 0.74 0.79 0.59 1 0.74 0.6 0.76 0.37 0.48 0.37 0.81 0.35 0.86 0.59 0.83 0.81
+SciQ 0.41 0.28 0.64 0.3 0.62 0.42 0.72 0.64 0.64 0.7 0.44 0.74 1 0.53 0.59 0.27 0.4 0.23 0.66 0.24 0.71 0.49 0.8 0.74
+CommonsenseQA 0.78 0.68 0.75 0.61 0.18 0.75 0.65 0.71 0.77 0.77 0.77 0.6 0.53 1 0.76 0.66 0.68 0.58 0.72 0.51 0.54 0.81 0.53 0.65
+BoolQ 0.69 0.49 0.72 0.52 0.3 0.69 0.81 0.82 0.79 0.82 0.76 0.76 0.59 0.76 1 0.59 0.64 0.53 0.81 0.45 0.72 0.74 0.71 0.81
+
+0.4
+
+CoLA 0.72 0.68 0.53 0.72-0.012 0.6 0.48 0.52 0.51 0.55 0.74 0.37 0.27 0.66 0.59 1 0.63 0.54 0.5 0.46 0.43 0.66 0.37 0.49
+GSM8K 0.69 0.53 0.58 0.64 0.062 0.64 0.52 0.52 0.59 0.59 0.65 0.48 0.4 0.68 0.64 0.63 1 0.55 0.58 0.42 0.47 0.68 0.45 0.55
+WiC 0.61 0.55 0.38 0.54-0.0990.59 0.36 0.45 0.52 0.44 0.62 0.37 0.23 0.58 0.53 0.54 0.55 1 0.45 0.56 0.32 0.56 0.28 0.36
+OpenBookQA 0.71 0.45 0.7 0.56 0.46 0.66 0.82 0.84 0.8 0.79 0.67 0.81 0.66 0.72 0.81 0.5 0.58 0.45 1
+
+0.4 0.79 0.71 0.77 0.8
+
+MRPC 0.46 0.41 0.38 0.35 0.064 0.42 0.32 0.42 0.45 0.43 0.53 0.35 0.24 0.51 0.45 0.46 0.42 0.56 0.4
+
+1 0.31 0.46 0.29 0.35
+
+0.2
+
+HeadQA 0.5 0.3 0.69 0.35 0.55 0.46 0.84 0.81 0.71 0.74 0.59 0.86 0.71 0.54 0.72 0.43 0.47 0.32 0.79 0.31 1 0.54 0.88 0.86
+RTE 0.85 0.64 0.66 0.7 0.21 0.76 0.65 0.67 0.7 0.71 0.79 0.59 0.49 0.81 0.74 0.66 0.68 0.56 0.71 0.46 0.54 1 0.55 0.64
+ARC-Easy 0.5 0.3 0.67 0.36 0.57 0.46 0.84 0.78 0.72 0.74 0.55 0.83 0.8 0.53 0.71 0.37 0.45 0.28 0.77 0.29 0.88 0.55 1
+
+0.9
+
+ARC-Challenge 0.6 0.38 0.74 0.46 0.52 0.56 0.88 0.86 0.79 0.85 0.67 0.81 0.74 0.65 0.81 0.49 0.55 0.36 0.8 0.35 0.86 0.64 0.9
+
+1
+
+I P A
+I A Q A Q A K C A C A E y e
+I n 2 e g A A
+MNL QQ dMCQ QNLQ-Ope SST- grandllaSwacial-IQMathQ ANL PIQ Sci enseQ Bool CoL GSM8 WiBookQ MRPHeadQ RTRC-Eas alleng
+o He So
+s
+n
+N
+A C-Ch
+n
+i
+Me
+W
+mon
+Ope
+AR
+m
+o
+C
+
+0.0
+
+Figure 14: Cross benchmark ranking agreement under direct evaluation, measured by Kendall’s tau-b with
+insignificant model comparisons treated as ties.
+
+32
+
+Kendall's
+MNLI
+
+1 0.86 0.84 0.84 0.82 0.72 0.85 0.89 0.83 0.86 0.81 0.87 0.77 0.84 0.92 0.73 0.77 0.85 0.78 0.78 0.83 0.8 0.88 0.83
+
+1.0
+
+QQP 0.86 1 0.71 0.82 0.72 0.77 0.64 0.8 0.7 0.71 0.59 0.74 0.8 0.63 0.79 0.44 0.62 0.59 0.49 0.57 0.7 0.49 0.73 0.61
+MedMCQA 0.84 0.71 1 0.75 0.81 0.58 0.85 0.81 0.75 0.88 0.86 0.78 0.61 0.83 0.83 0.78 0.87 0.81 0.83 0.77 0.85 0.81 0.88 0.88
+QNLI 0.84 0.82 0.75 1 0.81 0.7 0.79 0.85 0.83 0.74 0.71 0.84 0.74 0.69 0.84 0.54 0.68 0.72 0.62 0.68 0.79 0.62 0.79 0.74
+NQ-Open 0.82 0.72 0.81 0.81 1 0.64 0.91 0.89 0.85 0.74 0.81 0.88 0.68 0.72 0.86 0.8 0.68 0.78 0.87 0.72 0.89 0.78 0.85 0.86
+SST-2 0.72 0.77 0.58 0.7 0.64 1 0.52 0.65 0.63 0.57 0.45 0.63 0.79 0.52 0.65 0.33 0.51 0.41 0.35 0.4 0.59 0.35 0.6 0.49
+
+0.8
+
+Winogrande 0.85 0.64 0.85 0.79 0.91 0.52 1 0.96 0.83 0.83 0.87 0.87 0.54 0.79 0.91 0.84 0.75 0.82 0.92 0.75 0.91 0.82 0.91 0.92
+HellaSwag 0.89 0.8 0.81 0.85 0.89 0.65 0.96 1 0.86 0.82 0.89 0.92 0.72 0.79 0.93 0.86 0.73 0.83 0.92 0.76 0.91 0.83 0.93 0.94
+Social-IQA 0.83 0.7 0.75 0.83 0.85 0.63 0.83 0.86 1 0.75 0.75 0.88 0.62 0.71 0.86 0.68 0.67 0.76 0.76 0.69 0.83 0.72 0.83 0.79
+MathQA 0.86 0.71 0.88 0.74 0.74 0.57 0.83 0.82 0.75 1 0.89 0.78 0.59 0.91 0.85 0.8 0.88 0.82 0.85 0.79 0.8 0.84 0.86 0.88
+ANLI 0.81 0.59 0.86 0.71 0.81 0.45 0.87 0.89 0.75 0.89 1
+
+0.8 0.47 0.88 0.86 0.83 0.81 0.84 0.86 0.77 0.84 0.86 0.87 0.91
+
+PIQA 0.87 0.74 0.78 0.84 0.88 0.63 0.87 0.92 0.88 0.78 0.8
+
+1 0.64 0.77 0.9 0.77 0.69 0.81 0.82 0.73 0.87 0.79 0.89 0.84
+
+0.6
+
+SciQ 0.77 0.8 0.61 0.74 0.68 0.79 0.54 0.72 0.62 0.59 0.47 0.64 1 0.52 0.7 0.39 0.51 0.46 0.4 0.44 0.61 0.4 0.63 0.5
+CommonsenseQA 0.84 0.63 0.83 0.69 0.72 0.52 0.79 0.79 0.71 0.91 0.88 0.77 0.52 1 0.84 0.84 0.83 0.84 0.82 0.79 0.74 0.88 0.81 0.84
+BoolQ 0.92 0.79 0.83 0.84 0.86 0.65 0.91 0.93 0.86 0.85 0.86 0.9 0.7 0.84 1 0.85 0.77 0.87 0.87 0.78 0.88 0.87 0.9 0.89
+
+0.4
+
+CoLA 0.73 0.44 0.78 0.54 0.8 0.33 0.84 0.86 0.68 0.8 0.83 0.77 0.39 0.84 0.85 1 0.72 0.81 0.82 0.7 0.78 0.86 0.85 0.84
+GSM8K 0.77 0.62 0.87 0.68 0.68 0.51 0.75 0.73 0.67 0.88 0.81 0.69 0.51 0.83 0.77 0.72 1 0.77 0.74 0.73 0.72 0.8 0.79 0.79
+WiC 0.85 0.59 0.81 0.72 0.78 0.41 0.82 0.83 0.76 0.82 0.84 0.81 0.46 0.84 0.87 0.81 0.77 1 0.78 0.82 0.78 0.87 0.83 0.81
+OpenBookQA 0.78 0.49 0.83 0.62 0.87 0.35 0.92 0.92 0.76 0.85 0.86 0.82 0.4 0.82 0.87 0.82 0.74 0.78 1
+
+0.7 0.89 0.8 0.9 0.91
+
+MRPC 0.78 0.57 0.77 0.68 0.72 0.4 0.75 0.76 0.69 0.79 0.77 0.73 0.44 0.79 0.78 0.7 0.73 0.82 0.7
+
+1 0.72 0.75 0.77 0.76
+
+0.2
+
+HeadQA 0.83 0.7 0.85 0.79 0.89 0.59 0.91 0.91 0.83 0.8 0.84 0.87 0.61 0.74 0.88 0.78 0.72 0.78 0.89 0.72 1 0.77 0.91 0.9
+RTE 0.8 0.49 0.81 0.62 0.78 0.35 0.82 0.83 0.72 0.84 0.86 0.79 0.4 0.88 0.87 0.86 0.8 0.87 0.8 0.75 0.77 1 0.84 0.83
+ARC-Easy 0.88 0.73 0.88 0.79 0.85 0.6 0.91 0.93 0.83 0.86 0.87 0.89 0.63 0.81 0.9 0.85 0.79 0.83 0.9 0.77 0.91 0.84 1 0.93
+ARC-Challenge 0.83 0.61 0.88 0.74 0.86 0.49 0.92 0.94 0.79 0.88 0.91 0.84 0.5 0.84 0.89 0.84 0.79 0.81 0.91 0.76 0.9 0.83 0.93 1
+
+I P A
+I A Q A Q A K C A C A E y e
+I n 2 e g A A
+MNL QQ dMCQ QNLQ-Ope SST- grandllaSwacial-IQMathQ ANL PIQ Sci enseQ Bool CoL GSM8 WiBookQ MRPHeadQ RTRC-Eas alleng
+o He So
+s
+n
+N
+A C-Ch
+n
+i
+Me
+W
+mon
+Ope
+AR
+m
+o
+C
+
+0.0
+
+Figure 15: Cross benchmark ranking agreement under train-before-test, measured by Kendall’s tau-b with
+insignificant model comparisons treated as ties.
+
+33

@@ -1,0 +1,163 @@
+Skip to main content
+OECD
+Topics
+Countries & regions
+Publications
+Data
+News & events
+About
+Login on your MyOECD account
+Search
+English
+OECD  Publications  Introducing the OECD AI Capability Indicators
+Introducing the OECD AI Capability Indicators
+Report
+More info
+3 June 2025
+Summary
+Full report
+Support materials
+Available in:
+English
+français
+Download PDF
+Cite this publication
+Abstract
+Executive summary
+Related publications
+Related topics
+Share
+Facebook
+Twitter
+LinkedIn
+Abstract
+
+This report introduces the OECD’s beta AI Capability Indicators. The indicators are designed to assess and compare AI advancements against human abilities. Developed over five years by a collaboration of over 50 experts, the indicators cover nine human abilities, from Language to Manipulation. Unique in the current policy space, these indicators leverage cutting-edge research to provide a clear framework for policymakers to understand AI's potential impacts on education, work, public affairs and private life.
+
+Read the report
+Executive summary
+
+With the launch of ChatGPT in November 2022, the potential impacts of artificial intelligence1 (AI) on human activities began to capture the popular imagination. Yet while AI is progressing rapidly, public understanding of its implications is not keeping up. Much work remains to understand how AI could transform human activity.
+
+This report describes the OECD’s new AI Capability Indicators. The indicators have been developed to provide policy makers with an evidence-based framework to understand AI capabilities and compare them to human abilities. Developed over five years, the indicators draw on a large network of AI researchers, psychologists and other experts. The chapters of the companion technical report (OECD, 2025[1]) were written by 32 experts and reviewed by another 25 experts.
+
+The nine indicators cover a range of human abilities that each describes the development of AI towards full human equivalence: Language; Social interaction; Problem solving; Creativity; Metacognition and critical thinking; Knowledge, learning and memory; Vision; Manipulation; and Robotic intelligence. The indicators are presented in scales of five levels, where the most challenging capabilities for AI systems are found towards the top. Each level includes a short description of the sorts of capabilities that AI systems at that level can perform accurately and consistently. The rating of current AI performance on each scale is linked to available evidence.
+
+The indicators are published here in beta form with an invitation for feedback from two critical groups of stakeholders: AI researchers and policy makers. The AI evaluation work of researchers provides evidence for the indicators, while the ability to interpret and leverage insights from the scales is vital for informed policy. Feedback from other stakeholder groups is invited as well. The OECD will release the first full version of the indicators after feedback from our stakeholders and the development of a systematic updating protocol.
+
+Conclusions
+
+The OECD is uniquely positioned to play a leading role in AI assessment as an intergovernmental organisation accountable to the public that can provide authoritative results to the global community that draw on its experience with comparative international skill assessments.
+
+The OECD's methodology leverages available evidence to produce AI Capability Indicators that both reflect the latest research findings and are understandable to a non-technical audience. These describe the progression of AI capabilities up to full human equivalence.
+
+The report introduces the nine AI Capability Indicators derived from human psychology and their development by the AI and Future of Skills team at the OECD and over 50 external experts.
+
+The indicators are illustrated through five-level scales that describe multiple dimensions and tasks AI systems must incorporate to progress towards human equivalence. Evidence supports each indicator’s level and is used to describe the capabilities of current AI systems, which range between level 2 and level 3 across the indicators’ scales.
+
+The indicators can be used to map AI progress towards the human abilities required at work. Mapping indicators to occupational and task requirements and the resulting “gap” analysis can be the starting point to analyse how particular occupations may evolve as AI becomes able to help or replace workers for some tasks. The indicators can be used to prompt values-based discussions about how the capabilities at each level on the scales should be deployed in occupations across the entire economy.
+
+The indicators can also be used to better understand AI’s implication for education. They can provide a framework for identifying where AI systems could enable transformational change in education, helping to clarify which teaching tasks may be reshaped and which learning goals may need to evolve. While the indicators do not prescribe value-based decisions, they highlight areas where shifts in the delivery and purpose of education are technically feasible, informing future discussions on curriculum, teacher roles, and student competencies.
+
+References
+
+[1] OECD (2025), AI and the Future of Skills Volume 3: The OECD AI Capability Indicators, OECD Publishing.
+
+[2] OECD (2024), “Explanatory memorandum on the updated OECD definition of an AI system”, OECD Artificial Intelligence Papers, No. 8, OECD Publishing, Paris, https://doi.org/10.1787/623da898-en.
+
+Note
+Copy link to Note
+
+← 1.  The OECD defines a system as a machine‑based system that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations, or decisions that can influence physical or virtual environments. Different AI systems vary in their levels of autonomy and adaptiveness after deployment.” (OECD, 2024[2])
+
+Related publications
+See all publications
+Working paper
+An AI‑enhanced granular analysis of Thailand’s mathematics performance
+30 July 2026
+40 Pages
+Report
+A Conceptual Foundation for the Development of a Lifelong Learning Measurement Framework
+28 July 2026
+105 Pages
+Policy paper
+Policies supporting responsible and systematic GenAI adoption in higher education
+17 July 2026
+18 Pages
+Policy paper
+Skills in the AI age
+8 July 2026
+36 Pages
+Working paper
+Co‑ordinating the use of digital tools at the school level
+17 April 2026
+62 Pages
+Working paper
+AI meets trade
+
+Global linkages and the cross‑country distribution of the gains from AI
+
+18 March 2026
+79 Pages
+Report
+Reimagining Teaching in an Accelerating World
+3 March 2026
+59 Pages
+Working paper
+Digital technology diffusion in the age of AI
+
+Cross‑country evidence from microdata
+
+22 January 2026
+88 Pages
+Related topics
+Adult skills and work
+Artificial intelligence
+Future of education and skills
+Student performance (PISA)
+Artificial intelligence and education and skills
+Digital divide in education
+Digital education
+oecd
+
+© Organisation for Economic Co-operation and Development
+
+Topics
+All Topics
+Countries & regions
+All Countries
+Regional and global engagement
+Data
+Indicators
+Dashboards & Tools
+Publications
+Reports
+Policy briefs
+News & Events
+Newsroom
+Events
+Blogs & podcasts
+About
+About the organisation
+Accession to the OECD
+Careers
+Networks
+Procurement at the OECD
+Contact us
+Newsletters
+OECD legal framework
+Web accessibility
+Ethics and integrity
+Social media links
+Facebook
+Twitter
+Youtube
+LinkedIn
+Instagram
+Newsletters
+Podcast
+Whatsapp
+Utility links
+Terms & Conditions
+Privacy Policy
+Go to top
