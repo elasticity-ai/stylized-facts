@@ -325,14 +325,16 @@ def run_bibclean(bib_path: Path) -> TestResult | None:
         return None
 
     # These switches suppress bibclean's cosmetic reformatting suggestions so
-    # that only real problems surface. Which switches a build accepts varies:
-    # Ubuntu's rejects -no-fix-braces. Running it *without* them would report
-    # the very noise they exist to suppress, so an incompatible build is a
-    # skip, not a pass and not a failure — we cannot interpret its output.
+    # that only real problems surface.
+    #
+    # Every switch here must exist in bibclean 2.11.4 (1998), because that is
+    # what Ubuntu still ships and therefore what CI has. -no-fix-braces would
+    # be natural to add but postdates it, and including it made CI skip the
+    # lint entirely. Verified that 2.11.4 and Homebrew's 3.07 both accept this
+    # set and both report nothing on the current bibliography.
     flags = [
         "-no-prettyprint", "-max-width", "0", "-no-align-equals",
-        "-no-fix-braces", "-no-fix-font-changes", "-no-fix-names",
-        "-no-fix-initials",
+        "-no-fix-font-changes", "-no-fix-names", "-no-fix-initials",
     ]
     proc = subprocess.run([bibclean, *flags, str(bib_path)], capture_output=True, text=True)
     stderr = (proc.stderr or "").strip()
