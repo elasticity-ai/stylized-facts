@@ -1,5 +1,5 @@
 # Entry points for this repo. See AGENTS.md for what each check covers.
-.PHONY: check bib arxiv arxiv-refresh validate render fetch reconcile revalidate clean help
+.PHONY: check bib arxiv arxiv-refresh validate status render fetch reconcile revalidate clean help
 
 help:
 	@echo "make check       - bib conventions + arXiv ids + document validation (run before committing)"
@@ -7,6 +7,7 @@ help:
 	@echo "make arxiv       - verify arXiv ids point at the paper each entry claims"
 	@echo "make arxiv-refresh - re-query the arXiv API and rewrite the cache (network)"
 	@echo "make validate    - run the document checks only"
+	@echo "make status      - regenerate the check-status table in README.md"
 	@echo "make render      - render the canonical paper to HTML + PDF"
 	@echo "make fetch       - fetch missing papers into references/ (network; run locally)"
 	@echo "make reconcile   - rewrite references/manifest.csv from what is on disk"
@@ -24,6 +25,7 @@ check:
 	$(MAKE) --no-print-directory bib      || fail=1; \
 	echo; $(MAKE) --no-print-directory arxiv    || fail=1; \
 	echo; $(MAKE) --no-print-directory validate || fail=1; \
+	echo; python3 tools/status_table.py --check || fail=1; \
 	echo; \
 	if [ $$fail -eq 0 ]; then echo "all checks passed"; \
 	else echo "checks FAILED - see above (coverage INFO lines are not failures)"; fi; \
@@ -42,6 +44,11 @@ arxiv-refresh:
 
 validate:
 	python3 tools/qmd_validate.py --all
+
+# Regenerates the table in README.md from the checks. `make check` verifies it
+# is current rather than rewriting it, so CI cannot silently paper over drift.
+status:
+	python3 tools/status_table.py
 
 render:
 	quarto render stylized-facts.qmd

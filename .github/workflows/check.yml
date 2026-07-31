@@ -55,3 +55,6 @@ jobs:
 
       - name: Document checks
         run: python3 tools/qmd_validate.py --all
+
+      - name: README status table is current
+        run: python3 tools/status_table.py --check

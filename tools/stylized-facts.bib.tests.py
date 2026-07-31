@@ -126,7 +126,8 @@ def run_tests(entries: list[Entry]) -> list[TestResult]:
         TestResult(
             name="Duplicate citekeys",
             ok=not duplicates,
-            detail=f" ({summarize_keys(duplicates)})" if duplicates else "",
+            detail=f" ({len(keys) - len(duplicates)}/{len(keys)})"
+            + (f" {summarize_keys(duplicates)}" if duplicates else ""),
         )
     )
 
@@ -134,11 +135,13 @@ def run_tests(entries: list[Entry]) -> list[TestResult]:
     for entry in entries:
         for line_no, line in entry.format_errors:
             formatting_errors.append(f"L{line_no}:{entry.key}")
+    bad_entries = len({entry.key for entry in entries if entry.format_errors})
     results.append(
         TestResult(
             name="One field per line + trailing comma",
             ok=not formatting_errors,
-            detail=f" ({summarize_keys(formatting_errors)})" if formatting_errors else "",
+            detail=f" ({len(entries) - bad_entries}/{len(entries)})"
+            + (f" {summarize_keys(formatting_errors)}" if formatting_errors else ""),
         )
     )
 
@@ -446,6 +449,7 @@ def main() -> int:
                     "name": result.name,
                     "ok": result.ok,
                     "detail": result.detail,
+                    "advisory": bool(getattr(result, "advisory", False)),
                 }
                 for result in results
             ],
