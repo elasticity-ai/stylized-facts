@@ -61,6 +61,12 @@ def rows_from_bib() -> list[tuple]:
         return [("Bibliography", "bibliography tests", FAIL, "—", "could not run")]
     rows = []
     for r in results:
+        # Skip checks whose presence depends on what is installed rather than
+        # on the repo. bibclean runs here but is skipped on Ubuntu, so
+        # including it makes the table differ between a laptop and CI and the
+        # freshness check fails on a table nobody edited.
+        if r["name"] == "bibclean lint":
+            continue
         advisory = r.get("advisory")
         symbol = PASS if r["ok"] else (INFO if advisory else FAIL)
         note = "coverage, advisory" if advisory else ""
