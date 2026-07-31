@@ -308,35 +308,42 @@ def cited_citekeys() -> set[str]:
 
 
 def run_bibclean(bib_path: Path) -> TestResult | None:
+    """Lint with bibclean, when a compatible bibclean is available.
+
+    Returns None (skip) rather than a failure when the tool is missing or too
+    old to accept our flags. Which switches bibclean supports varies by build
+    — Ubuntu's rejects -no-fix-braces, which is how this check spent three CI
+    runs reporting a tool incompatibility as though the bibliography were
+    broken. A linter we cannot run is a skip; only what it actually says about
+    the file is a result.
+    """
     bibclean = shutil.which("bibclean")
     if not bibclean:
         return None
 
-    proc = subprocess.run(
-        [
-            bibclean,
-            "-no-prettyprint",
-            "-max-width",
-            "0",
-            "-no-align-equals",
-            "-no-fix-braces",
-            "-no-fix-font-changes",
-            "-no-fix-names",
-            "-no-fix-initials",
-            str(bib_path),
-        ],
-        capture_output=True,
-        text=True,
-    )
+    # These switches suppress bibclean's cosmetic reformatting suggestions so
+    # that only real problems surface. Which switches a build accepts varies:
+    # Ubuntu's rejects -no-fix-braces. Running it *without* them would report
+    # the very noise they exist to suppress, so an incompatible build is a
+    # skip, not a pass and not a failure — we cannot interpret its output.
+    flags = [
+        "-no-prettyprint", "-max-width", "0", "-no-align-equals",
+        "-no-fix-braces", "-no-fix-font-changes", "-no-fix-names",
+        "-no-fix-initials",
+    ]
+    proc = subprocess.run([bibclean, *flags, str(bib_path)], capture_output=True, text=True)
     stderr = (proc.stderr or "").strip()
+
+    if "Unrecognized option switch" in stderr:
+        return None
+
     if proc.returncode != 0:
         detail = f" (exit {proc.returncode})"
         if stderr:
             detail += f" {stderr.splitlines()[0]}"
         return TestResult(name="bibclean lint", ok=False, detail=detail)
     if stderr:
-        first_line = stderr.splitlines()[0]
-        return TestResult(name="bibclean lint", ok=False, detail=f" ({first_line})")
+        return TestResult(name="bibclean lint", ok=False, detail=f" ({stderr.splitlines()[0]})")
     return TestResult(name="bibclean lint", ok=True)
 
 
