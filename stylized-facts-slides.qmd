@@ -523,7 +523,8 @@ Enormous efficiency gains.
     There is also growth in quality but it's harder to measure (time horizon, latent factor).
 
 Why are prices falling?
-: Not because of lower margins -- we see the same trend looking at raw compute cost for open models.
+: 
+    Not because of lower margins -- we see the same trend looking at raw compute cost for open models.
 
       Smaller models are getting better through (1) better training techniques; (2) more training compute; (3) more training data; (4) better training data.
 

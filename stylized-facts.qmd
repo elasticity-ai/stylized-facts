@@ -494,6 +494,10 @@ Other discussions of bottlenecks:
    - Continual learning post-deployment
    - Original insights
 
+##          There are few forecasts of future capabilities
+
+- Manifold markets https://manifold.markets/SG/eci-2026-epoch-capabilities-index-h
+
 # LLM Performance on Tasks
 
 In this section we discuss performance on tasks that have a measurable output.

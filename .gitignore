@@ -1,0 +1,44 @@
+# Build output from `quarto render`. All regenerable — see AGENTS.md.
+
+# Quarto intermediates
+*_cache/
+*_files/
+.quarto/
+*.quarto_ipynb
+
+# Rendered HTML (regenerate with `quarto render`)
+*.html
+
+# LaTeX / tikz intermediates. Quarto writes one tikz<hash>.{tex,log,aux,pdf}
+# per tikz figure into the repo root on every render. The hash-named files are
+# generated; tikz-matrix-macros.tex is hand-written source and is NOT.
+tikz*
+!tikz-matrix-macros.tex
+latex_output/
+*.log
+*.aux
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+
+# Local paper archive: PDFs are large and are tracked via git-lfs if at all.
+# references/text/ and references/manifest.csv ARE committed — they are what
+# the validation suite greps. See AGENTS.md.
+references/pdf/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editor scratch
+*.mw
+*~
