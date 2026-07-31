@@ -27,10 +27,8 @@ latex_output/
 *.snm
 *.vrb
 
-# Local paper archive: PDFs are large and are tracked via git-lfs if at all.
-# references/text/ and references/manifest.csv ARE committed — they are what
-# the validation suite greps. See AGENTS.md.
-references/pdf/
+# The local paper archive is committed in full — PDFs included. They are
+# immutable once fetched, so git stores each exactly once. See AGENTS.md.
 
 # macOS
 .DS_Store

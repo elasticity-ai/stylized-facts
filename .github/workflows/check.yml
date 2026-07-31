@@ -10,7 +10,16 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      # Sparse checkout: the checks read references/text/ but never
+      # references/pdf/, which is ~200 MB. Cone mode still brings in files
+      # sitting directly in references/ (manifest.csv, arxiv-metadata.csv)
+      # and every root-level file, so the .qmd and .bib arrive too.
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            references/text
+          sparse-checkout-cone-mode: true
 
       - uses: actions/setup-python@v5
         with:

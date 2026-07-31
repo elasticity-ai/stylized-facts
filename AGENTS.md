@@ -19,7 +19,7 @@ about AI capabilities, each backed by cited papers, quotes, and figures.
 | `stylized-facts.qmd` | **CANONICAL** | The paper. This is the source of truth for all content. Edits go here. |
 | `stylized-facts.bib` | **CANONICAL** | The single bibliography. Shared by every document below. |
 | `stylized-facts-slides.qmd` | Live | Beamer deck derived from the paper. |
-| `stylized-facts-slides-BATES.qmd` | Live (variant) | Beamer deck, variant of the above for a specific talk. |
+| `stylized-facts-slides-BATES.qmd` | **NOT LIVE** | Beamer deck for a past talk. Kept for reference; do not update it when the paper changes. |
 | `stylized-facts-matrices.qmd` | Live (separate) | "Model-Task Matrices" — a standalone companion document. |
 | `Copy of stylized-facts.qmd` | **STALE — do not edit** | An old snapshot (776 lines vs the canonical 1039), last touched 2026-01-05. Slated for deletion. |
 | `frontier.md` | Unclear | 75 KB of notes; provenance not documented. See "Open questions". |
@@ -76,11 +76,16 @@ checked against sources offline. Built by `tools/fetch_papers.py`.
 - `references/manifest.csv` — per-key fetch status, **committed**
 - `references/arxiv-metadata.csv` — cached arXiv titles, **committed**, so
   `make arxiv` runs offline. Refresh with `make arxiv-refresh`.
-- `references/pdf/<citekey>.pdf` — **git-ignored** (~200 MB)
+- `references/pdf/<citekey>.pdf` — the PDFs themselves, **committed** (~200 MB)
+
+Committed as ordinary git objects rather than via git-lfs: they are immutable
+once fetched, so git stores each exactly once and lfs would add a dependency
+and a bandwidth quota for no benefit.
 
 **Hard rule: checks read `references/text/` only, never `references/pdf/`.**
-The PDFs are absent in CI, so a check touching them would pass locally and fail
-there.
+CI checks out without them (`git clone --filter` / a sparse checkout is a
+supported way to work here), so a check touching the PDFs would pass locally
+and fail there.
 
 See [references/README.md](references/README.md) for coverage, how to fill a gap
 by hand, and the `pdftotext` caveats that shape how quote matching works.
@@ -180,7 +185,3 @@ locally. Everything else is pure Python with no network and runs anywhere.
 Undocumented; resolve with whoever knows:
 
 - What is `frontier.md`? Live input to the paper, or an archive?
-- Should `references/pdf/` be committed via git-lfs rather than ignored?
-  It is ~200 MB, which fits GitHub's 1 GiB free LFS tier but consumes
-  bandwidth quota on every clone.
-- `stylized-facts-slides-BATES.qmd` — which talk, and is it still needed?

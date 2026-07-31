@@ -10,11 +10,11 @@ Built by `tools/fetch_papers.py`. See AGENTS.md for how this fits the rest.
 |---|---|---|
 | `text/<citekey>.txt` | **yes** | Plaintext from `pdftotext`, or from an HTML reader for non-paper sources. The grep target. |
 | `manifest.csv` | **yes** | One row per citekey: `key, doi, resolver, pdf_url, oa_status, pdf, pdf_bytes, txt, txt_chars, status, note` |
-| `pdf/<citekey>.pdf` | **no** — git-ignored | The PDF itself. ~200 MB; see "Why the PDFs are not committed". |
+| `pdf/<citekey>.pdf` | **yes** | The PDF itself. ~200 MB total, committed as plain git objects (immutable once fetched, so no git-lfs). |
 
 **Every check in the validation suite reads `text/` only, never `pdf/`.** That
-is a hard rule, not a convention: the PDFs are absent in CI, so a check that
-touched them would pass locally and fail there.
+is a hard rule, not a convention: CI checks out without the PDFs, so a check
+that touched them would pass locally and fail there.
 
 `status` is one of:
 
