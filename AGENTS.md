@@ -146,31 +146,40 @@ To validate a new document, create
 
 ## Known gaps
 
-Current, and reported by the tooling rather than hidden:
+Current, and reported by the tooling rather than hidden. `make check` passes;
+what is left below is coverage, not correctness.
 
-- **Six bibliography entries point at the wrong arXiv paper**, two of them at
-  entirely unrelated work (`liu2024mathvista` -> "Credal Learning Theory";
-  `qiu2023videomme` -> a paper on covalent inhibitors). A seventh,
-  `jahani2024earning`, has an arXiv id that does not exist. Run `make arxiv`
-  for the list with both titles side by side.
-
-  All but one are uncited placeholder entries, and they share a signature —
-  plausible author/title/id combinations that are individually wrong — so they
-  are most likely unverified generated citations. Deciding whether to correct
-  the metadata or delete the entries is a judgement call, so they are left as
-  they are and reported.
-
-- **Two quotes do not match their source.** `make validate` names them with
-  line numbers. Both look like version drift (a working paper revised after
-  being quoted) rather than transcription error, but both need a human to
-  decide the fix.
-
-These two are why `make check` currently exits non-zero.
+- **`jahani2024earning` is unidentified.** Its arXiv id was malformed and no
+  arXiv record matches its title or author, so the fabricated locator has been
+  removed and the entry carries a note saying so. Identify the intended work or
+  delete it.
 - **18 bibliography entries have no locator** and 19 are cited by no document.
   Advisory; see the `INFO` lines from `make bib`.
 - **37 of 115 works could not be fetched automatically** — mostly paywalled
   economics journals and vendor pricing pages. Listed in
   `references/manifest.csv` with `status = manual_needed`.
+- **One quote is a non-failing "partial" (L190, `morris2023levels`).** It is
+  quoted verbatim from a table, and `pdftotext` interleaves table cells, so it
+  is genuinely not contiguous in the extracted text. Not an error.
+
+### Resolved
+
+Kept as a record of what the checks caught, since the same failure modes will
+recur:
+
+- Six entries pointed at the wrong arXiv paper, two at entirely unrelated work
+  (`liu2024mathvista` -> "Credal Learning Theory"; `qiu2023videomme` -> a paper
+  on covalent inhibitors). All shared a signature — individually plausible
+  author/title/id triples that were each wrong, with `and others` author lists
+  — which is what unverified generated citations look like. Corrected against
+  the arXiv API; five were uncited and were also renamed so the citekey no
+  longer misnames the authors.
+- Two quotes did not match their source. `brynjolfsson2023callcenter` was
+  quoted as "14% on average" where the paper says 15%, with a "34% improvement
+  for novice and low-skilled workers" clause that appears nowhere in it.
+  `zhang2025trainbeforetest` was quoted with a "0.61 for direct evaluation
+  (5-shot)" clause describing an experiment the paper never ran — it evaluates
+  zero-shot only. Both replaced with verbatim quotes making the same point.
 
 ## Where to run what
 

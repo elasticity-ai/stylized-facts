@@ -10,14 +10,25 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      # Sparse checkout: the checks read references/text/ but never
-      # references/pdf/, which is ~200 MB. Cone mode still brings in files
-      # sitting directly in references/ (manifest.csv, arxiv-metadata.csv)
-      # and every root-level file, so the .qmd and .bib arrive too.
+      # The checks read references/text/ but never references/pdf/ (~200 MB).
+      #
+      # Both settings are needed. sparse-checkout keeps the PDFs out of the
+      # working tree but not out of .git — a plain sparse clone still weighs
+      # 207 MB. filter=blob:none makes it a partial clone that fetches only
+      # the blobs actually checked out, which brings it to 25 MB.
+      #
+      # images/ is needed too: one check verifies every figure the paper
+      # references is on disk, and it fails spuriously without them.
+      #
+      # Cone mode also brings in files sitting directly in references/
+      # (manifest.csv, arxiv-metadata.csv) and every root-level file, so the
+      # .qmd and .bib arrive without being listed.
       - uses: actions/checkout@v4
         with:
+          filter: blob:none
           sparse-checkout: |
             tools
+            images
             references/text
           sparse-checkout-cone-mode: true
 

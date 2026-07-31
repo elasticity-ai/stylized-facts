@@ -72,7 +72,9 @@ def arxiv_id_of(fields: dict[str, str]) -> str | None:
     m = ARXIV_ID_RE.search(eprint)
     if m:
         return m.group(1)
-    for field in ("url", "journal", "note", "howpublished"):
+    # `note` is deliberately not scanned: it is prose, and a note explaining
+    # that an id was wrong would otherwise be read as an id to go and check.
+    for field in ("url", "journal", "howpublished"):
         value = fields.get(field, "")
         if "arxiv" in value.lower():
             m = ARXIV_ID_RE.search(value)
