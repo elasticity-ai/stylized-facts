@@ -26,6 +26,10 @@ format:
          - text: |
             %\usepackage{bm}
             \usepackage{tikz}
+            \usepackage{iftex}
+            \ifLuaTeX
+              \usepackage{luatex85}
+            \fi
             \usepackage[all,2cell]{xy}
             \UseAllTwocells
             \usepackage{sectsty}
