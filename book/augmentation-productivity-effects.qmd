@@ -1,9 +1,11 @@
 ---
-title: "How large are the productivity effects of LLM augmentation?"
+title: "The productivity effects of LLM augmentation"
 claim: "The productivity effects of LLM augmentation varies widely"
 ---
 
-**Short answer.** The productivity effects of LLM augmentation varies widely.
+**The productivity effects of LLM augmentation vary widely.**
+
+We define AI "augmentation" as the effect of combined AI and human ability, compared to human-alone ability. These are sometimes also called "uplift" or "centaur" studies.
 
 These RCTs compare behavior of workers with and without access to an AI system:
 
@@ -26,7 +28,6 @@ These RCTs compare behavior of workers with and without access to an AI system:
 |                      |                                  |                                     |                                                                                                                                                                                                                        |
 :::
 
-   
 ![Distribution of effect sizes, from @coupe2025impact](images/2025-10-20-09-27-43.png){.column-margin}
 
 @coupe2025impact survey 45 studies of the impact of genAI tools on productivity, with an average productivity effect of +17%, however with much variation. They also find strong signs of selection in estimates, suggesting the true effects are likely smaller.

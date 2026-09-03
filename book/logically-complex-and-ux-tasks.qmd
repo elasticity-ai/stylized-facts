@@ -1,5 +1,5 @@
 ---
-title: "Do LLMs struggle with logically complex tasks and tasks requiring UX usage?"
+title: "Logically complex tasks and UX usage"
 claim: "LLMs struggle with tasks that are logically complex (and costly to verify at scale) and those that require UX usage."
 status: "commented out in the paper"
 ---
@@ -8,9 +8,9 @@ status: "commented out in the paper"
 This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
 :::
 
-**Short answer.** LLMs struggle with tasks that are logically complex (and costly to verify at scale) and those that require UX usage.
+**LLMs struggle with tasks that are logically complex (and costly to verify at scale) and those that require UX usage.**
 
-An analysis of 40 publicly available benchmarks found six that LLMs still find particularly challenging (Jun 2025): 
+An analysis of 40 publicly available benchmarks found six that LLMs still find particularly challenging (Jun 2025):
 
  ![](images/image11.png){.column-margin}
 

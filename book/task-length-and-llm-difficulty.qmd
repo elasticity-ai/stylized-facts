@@ -1,15 +1,15 @@
 ---
-title: "Are tasks that take humans longer harder for LLMs?"
+title: "Human task length and LLM difficulty"
 claim: "Benchmark tasks that take humans longer are typically harder for LLMs."
 ---
 
-**Short answer.** Benchmark tasks that take humans longer are typically harder for LLMs.
+**Benchmark tasks that take humans longer are typically harder for LLMs.**
 
-*See also:* [Is human time-to-complete the best predictor of LLM success?](human-time-to-complete.qmd).
+*See also:* [Human time-to-complete as a predictor of LLM success](human-time-to-complete.qmd).
 
 There is a very strong negative correlation between how long it takes for a human to complete a task (in logarithmic terms) and the probability that an LLM will be able to complete it successfully.
 
-- @kwa2025longtasks find that the longest length of task that a frontier LLM has been able to complete with greater than 50% probability has been doubling every seven months over the last six years across a range of software engineering, cybersecurity, and general reasoning tasks. As of June 2025 it stands at just under two hours. A July 2025 update from METR shows that the time horizon is similar across other benchmarks testing quantitative and analytical skills and whilst there are larger differences in other domains (eg. web-browsing tasks) the rate of change over time is similar. The relationship between model success probability and the length of time it takes a human to complete a task is well fit with a logistic curve.  The correlation in the errors of different models is high (79% between claude 3.7 and o1) even after accounting for task length and average model performance suggesting there are features of tasks beyond task length with predictive power for model performance. 
+- @kwa2025longtasks find that the longest length of task that a frontier LLM has been able to complete with greater than 50% probability has been doubling every seven months over the last six years across a range of software engineering, cybersecurity, and general reasoning tasks. As of June 2025 it stands at just under two hours. A July 2025 update from METR shows that the time horizon is similar across other benchmarks testing quantitative and analytical skills and whilst there are larger differences in other domains (eg. web-browsing tasks) the rate of change over time is similar. The relationship between model success probability and the length of time it takes a human to complete a task is well fit with a logistic curve.  The correlation in the errors of different models is high (79% between claude 3.7 and o1) even after accounting for task length and average model performance suggesting there are features of tasks beyond task length with predictive power for model performance.
 ![](images/image5.png){.column-margin}
 
 ![](images/image6.png){.column-margin}

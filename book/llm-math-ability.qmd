@@ -1,9 +1,9 @@
 ---
-title: "How good are LLMs at mathematics?"
+title: "LLM math ability"
 claim: "LLMs perform particularly well on math and programming competition problems."
 ---
 
-**Short answer.** LLMs perform particularly well on math competition problems.
+**LLMs perform particularly well on math competition problems.**
 
 - Frontier LLMs can outperform the vast majority of competitors in math competitions (eg. [AIME](https://www.vals.ai/benchmarks/aime-2025-03-11), [MATH](https://arxiv.org/pdf/2103.03874)).
 

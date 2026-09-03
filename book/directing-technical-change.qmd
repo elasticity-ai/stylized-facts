@@ -1,9 +1,9 @@
 ---
-title: "Can the direction of AI technical change be steered?"
+title: "Directing technical change"
 claim: "We may not be able to direct technical change"
 ---
 
-**Short answer.** We may not be able to direct technical change.
+**We may not be able to direct technical change.**
 
 **Many economists have said we should shift the focus of our AI research:**
 

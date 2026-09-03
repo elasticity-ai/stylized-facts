@@ -1,9 +1,9 @@
 ---
-title: "Can LLMs perform actions in the real world?"
+title: "LLM ability to act in the real world"
 claim: "LLMs show limited ability to perform actions in the real world."
 ---
 
-**Short answer.** LLMs show limited ability to perform actions in the real world.
+**LLMs show limited ability to perform actions in the real world.**
 
 LLMs are able to perform some simple discrete multi-turn tasks in simulated computer environments but have yet to saturate benchmarks of simple web-browsing tasks such as [Tau-Bench](https://hal.cs.princeton.edu/taubench_retail) and [OS-world](https://arxiv.org/pdf/2404.07972).
 

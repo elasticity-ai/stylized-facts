@@ -1,9 +1,9 @@
 ---
-title: "Does augmentation help lower-productivity workers more?"
+title: "Augmentation effects by worker skill"
 claim: "There is some evidence of larger effects on lower-productivity workers"
 ---
 
-**Short answer.** There is some evidence of larger effects on lower-productivity workers.
+**There is some evidence of larger effects on lower-productivity workers.**
 
 The following RCTs find that augmentation has a larger relative effect on workers with lower pre-experimental productivity levels:
 

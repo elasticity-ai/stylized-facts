@@ -1,7 +1,7 @@
-<!-- human-time-to-complete.llm.qmd — LLM-written literature summary for the question
-     “Is human time-to-complete the best predictor of LLM success?”. This file is generated/maintained by an LLM pass and
-     included at the end of the human-written chapter. Do not put YAML
-     frontmatter here: included files cannot carry their own metadata. -->
+<!-- human-time-to-complete.llm.qmd — LLM-written literature summary for “Human time-to-complete as a predictor of LLM success”.
+     Written and maintained by an LLM pass following book/LLM-STYLE-GUIDE.md,
+     and included at the end of the human-written chapter. No YAML frontmatter
+     here: included files cannot carry their own metadata. -->
 
 ::: {.callout-note}
 **Stub.** The literature summary for this question has not been written yet.

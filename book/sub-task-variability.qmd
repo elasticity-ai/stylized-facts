@@ -1,11 +1,11 @@
 ---
-title: "How variable is LLM performance across related sub-tasks?"
+title: "Variability of LLM performance across related sub-tasks"
 claim: "LLM Performance on related sub-tasks is highly variable."
 ---
 
-**Short answer.** LLM Performance on related sub-tasks is highly variable.
+**LLM performance on related sub-tasks is highly variable.**
 
-LLMs generally have much smaller correlations in their ability to successfully complete similar tasks than humans. 
+LLMs generally have much smaller correlations in their ability to successfully complete similar tasks than humans.
 
 - @dreyfuss2025human find that, for a given aggregate SAT score, humans have much larger variations across subjects than LLMs.
 

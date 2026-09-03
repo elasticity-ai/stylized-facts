@@ -1,9 +1,9 @@
 ---
-title: "How much does test-time scaling improve performance?"
+title: "Test-time scaling"
 claim: "Benchmark performance significantly improves with test-time scaling on some tasks."
 ---
 
-**Short answer.** Benchmark performance significantly improves with test-time scaling on some tasks.
+**Benchmark performance significantly improves with test-time scaling on some tasks.**
 
 Test-time scaling (AKA inference-time compute) can be achieved in two ways:
 

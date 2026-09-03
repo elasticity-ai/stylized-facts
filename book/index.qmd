@@ -2,7 +2,7 @@
 
 We discuss stylized facts about the capabilities of recent AI models and how they compare to human capabilities. We particularly draw attention to a common latent factor of capabilities among AI models, and the fact that this latent factor is different from the distribution of human capabilities. We discuss various candidates for the “missing capability” which would unlock a greater economic impact.
 
-This book is a restructuring of the paper *Stylized Facts about AI & Human Capabilities* (`stylized-facts.qmd`). The paper is a list of claims; here each claim is posed as a *question*, one chapter per question. Each chapter has a human-written answer, drawn from the paper, followed by an LLM-written summary of the relevant literature.
+This book is a restructuring of the paper *Stylized Facts about AI & Human Capabilities* (`stylized-facts.qmd`). The paper is a list of claims; here each claim is a chapter, titled by the question it answers. Every chapter opens with the claim as a one-sentence **short answer** in bold, followed by the evidence from the paper, and closes with an LLM-written summary of the relevant literature.
 
 ::: {.column-margin}
    Thanks to many for their suggestions, especially those from the Economic Research team at OpenAI, and Boaz Barak. The document includes significant suggestions from OpenAI staff (Pamela Mishkin, Zoe Hitzig, Gawesha Weeratunga, Ronnie Chatterji), and external academics: Catherine Tucker, David Deming, Erik Brynjolfsson, Anton Korinek, Pascual Restrepo.
@@ -10,51 +10,32 @@ This book is a restructuring of the paper *Stylized Facts about AI & Human Capab
 
 ## We wish to characterize AI capabilities
 
-Our goal is to give a crisp characterization of AI capabilities.
+**Our goal is to give a crisp characterization of AI capabilities.**
 
-: We wish to answer questions like these:
-   
-      1. What types of tasks can AI models do / cannot do?
-      2. How do abilities differ among different AI models?
-      3. How do AI abilities differ from human abilities?
-      4. What are reasonable expectations about future AI abilities?
+We wish to answer questions like these:
 
-A running theme will be that the characterization of AI capabilities is *difficult*.
+1. What types of tasks can AI models do / cannot do?
+2. How do abilities differ among different AI models?
+3. How do AI abilities differ from human abilities?
+4. What are reasonable expectations about future AI abilities?
 
-:  There is a long history of struggle in making accurate generalizations about the capabilities of artificial intelligence. There is little consensus on how to describe the abilities of contemporary models.
+**A running theme will be that the characterization of AI capabilities is *difficult*.**
 
-      In this note we list a series of well-documented facts about AI capabilities, and make some more opinionated generalizations. The target audience is economists who are interested in modeling the effects of AI on various situations.
+There is a long history of struggle in making accurate generalizations about the capabilities of artificial intelligence. There is little consensus on how to describe the abilities of contemporary models.
 
-```{tikz}
-#| fig-column: margin
-\begin{tikzpicture}[scale=0.5]
-  \def\nrows{5} % Number of rows -- I tried to dynamically calculate these but it's painful
-  \def\ncols{6} % Number of columns 
-  \def\blackcells{1/1,1/2,1/3,1/4,1/5,2/2,2/4,2/5,3/3,4/1,3/5} % (format: column/row)
-  \def\rowlabels{Basic Algebra Questions,Trivial Pursuit Questions,Pass LSAT,Complete Super Mario Bros,Prove Reimann hypothesis}
-  \def\columnlabels{Alice,Bob,Charlie,AI in 2020,AI in 2024,AI in 2028}
+In this note we list a series of well-documented facts about AI capabilities, and make some more opinionated generalizations. The target audience is economists who are interested in modeling the effects of AI on various situations.
 
-   \foreach \i/\j in \blackcells {
-      \filldraw[fill=black] (\j - 1,\nrows - \i+1) rectangle ++(1,-1); }
-   \foreach \label [count=\i from 1] in \rowlabels {\node[left] at (6,\nrows - \i + 0.5) {?};}
-   \foreach \label [count=\i from 1] in \rowlabels {
-      \node[left] at (-0.2,\nrows - \i + 0.5) {\label};
-   }
-   \foreach \label [count=\j from 1] in \columnlabels {
-      \node[rotate=90,right] at (\j-0.5,\nrows + 0.2) {\label}; }
-   \draw[gray] (0,0) grid (\ncols,\nrows);
-\end{tikzpicture}
-```
+![](images/tikz-agent-task-matrix.svg){.column-margin}
 
-It is useful to think of a matrix of agents and tasks.
+**It is useful to think of a matrix of agents and tasks.**
 
-: Suppose we can observe whether an agent can perform a task, for a long list of agents and tasks. The agent could be a human, a computer, or a hybrid. We can represent each observation in a matrix with agents and columns and tasks as rows:
+Suppose we can observe whether an agent can perform a task, for a long list of agents and tasks. The agent could be a human, a computer, or a hybrid. We can represent each observation in a matrix with agents and columns and tasks as rows:
 
-We wish to find a low-dimensional factorization of this matrix.
+**We wish to find a low-dimensional factorization of this matrix.**
 
-: In practice the matrix is enormous. We can think of the capability problem as finding a low-dimensional representation of this matrix, i.e. some small set of general-purpose capabilities that are highly predictive of whether an agent can do a task.^[We can think of the reduction either as Principal Components Analysis (we take weighted averages of all rows), or Principal Feature Analysis (we take a subset of rows that are highly predictive).]
+In practice the matrix is enormous. We can think of the capability problem as finding a low-dimensional representation of this matrix, i.e. some small set of general-purpose capabilities that are highly predictive of whether an agent can do a task.^[We can think of the reduction either as Principal Components Analysis (we take weighted averages of all rows), or Principal Feature Analysis (we take a subset of rows that are highly predictive).]
 
-: A single-dimensional factorization would mean each agent would have a latent ability, and each task would have a latent difficulty. However we will see that a single-factor is often a poor fit, i.e. the relatively difficulty of tasks varies substantially across agents.
+A single-dimensional factorization would mean each agent would have a latent ability, and each task would have a latent difficulty. However we will see that a single-factor is often a poor fit, i.e. the relatively difficulty of tasks varies substantially across agents.
 
 <!-- USEFUL THINGS
 - Clone this repo to a local repo (if you open as a remote repo then it's messy)

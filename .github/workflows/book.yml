@@ -1,0 +1,63 @@
+# Render the book (book/) and publish it to GitHub Pages.
+#
+# One-time setup, in the repository settings: Pages -> Build and deployment
+# -> Source: "GitHub Actions". Until that is set, the deploy step fails with
+# "Get Pages site failed" and nothing else is affected.
+#
+# The book needs only Quarto: its tikz figures are pre-rendered SVGs
+# (`make tikz`, committed under images/), so no R or TeX is installed here.
+name: book
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "book/**"
+      - "images/**"
+      - "stylized-facts.bib"
+      - ".github/workflows/book.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      # Same partial/sparse checkout as check.yml: the PDF archive is ~200 MB
+      # and not needed. Root-level files (the .bib) come along in cone mode.
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            book
+            images
+          sparse-checkout-cone-mode: true
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.8.25
+
+      - name: Render book
+        run: quarto render book
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: book/_book
+
+  deploy:
+    needs: render
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

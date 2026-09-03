@@ -1,9 +1,9 @@
 ---
-title: "Can LLMs autonomously complete economically valuable real-world tasks?"
+title: "Autonomous completion of economically valuable tasks"
 claim: "LLMs are able to autonomously complete real-world tasks with significant economic value."
 ---
 
-**Short answer.** LLMs are able to autonomously complete real-world tasks with significant economic value.
+**LLMs are able to autonomously complete real-world tasks with significant economic value.**
 
 Frontier models are able to autonomously complete tasks with high market value. For instance, an open-source benchmark published by OpenAI finds:
 

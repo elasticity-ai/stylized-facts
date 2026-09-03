@@ -1,7 +1,7 @@
-<!-- misperception-of-llm-abilities.llm.qmd — LLM-written literature summary for the question
-     “Do humans perceive LLM abilities accurately?”. This file is generated/maintained by an LLM pass and
-     included at the end of the human-written chapter. Do not put YAML
-     frontmatter here: included files cannot carry their own metadata. -->
+<!-- misperception-of-llm-abilities.llm.qmd — LLM-written literature summary for “Human misperception of LLM abilities”.
+     Written and maintained by an LLM pass following book/LLM-STYLE-GUIDE.md,
+     and included at the end of the human-written chapter. No YAML frontmatter
+     here: included files cannot carry their own metadata. -->
 
 ::: {.callout-note}
 **Stub.** The literature summary for this question has not been written yet.

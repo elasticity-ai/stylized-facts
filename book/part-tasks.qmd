@@ -1,3 +1,0 @@
-# LLM Performance on Tasks
-
-In this section we discuss performance on tasks that have a measurable output.

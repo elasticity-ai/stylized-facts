@@ -1,11 +1,11 @@
 ---
-title: "How do inference costs compare to training costs?"
+title: "Inference costs vs training costs"
 claim: "Inference costs of serving a model are now roughly proportional to the initial training costs."
 ---
 
-**Short answer.** Inference costs of serving a model are now roughly proportional to the initial training costs.
+**Inference costs of serving a model are now roughly proportional to the initial training costs.**
 
-There is a tradeoff between training cost and inference cost through model size. Larger models will have higher inference costs. 
+There is a tradeoff between training cost and inference cost through model size. Larger models will have higher inference costs.
 
 - @epoch2024optimallyallocating concludes AI labs should spend "comparable resources in training and running inference". 
 

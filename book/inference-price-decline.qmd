@@ -1,9 +1,9 @@
 ---
-title: "How fast is the price of inference falling for a fixed capability?"
+title: "The falling price of inference at fixed capability"
 claim: "The price of inference for a fixed level of capability has been falling at 10X/year or faster."
 ---
 
-**Short answer.** The price of inference for a fixed level of capability has been falling at 10X/year or faster.
+**The price of inference for a fixed level of capability has been falling at 10X/year or faster.**
 
 ![From @maslej2025aiindex](images/image15.png){.column-margin}
 

@@ -1,11 +1,11 @@
 ---
-title: "Can LLMs autonomously complete software engineering tasks?"
+title: "Autonomous software engineering"
 claim: "LLMs show some ability to autonomously complete software engineering tasks."
 ---
 
-**Short answer.** LLMs show some ability to autonomously complete software engineering tasks.
+**LLMs show some ability to autonomously complete software engineering tasks.**
 
-- Frontier models can autonomously resolve 75% of a set of curated issues in software systems on github ([SWE-bench-verified](https://openai.com/index/introducing-swe-bench-verified/)). 
+- Frontier models can autonomously resolve 75% of a set of curated issues in software systems on github ([SWE-bench-verified](https://openai.com/index/introducing-swe-bench-verified/)).
 
 - Frontier models can autonomously produce predictive models on 17% of Kaggle datasets with the same error as a highly skilled data scientist (bronze on [MLE-bench](https://openai.com/index/mle-bench/)).  
 

@@ -16,6 +16,10 @@ book/_book/
 # generated; tikz-matrix-macros.tex is hand-written source and is NOT.
 tikz*
 !tikz-matrix-macros.tex
+# The book's tikz sources and their pre-rendered SVGs are hand-maintained
+# inputs (see `make tikz`), not build output.
+!book/tikz/
+!images/tikz-*.svg
 latex_output/
 *.log
 *.aux

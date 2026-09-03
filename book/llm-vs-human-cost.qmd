@@ -1,11 +1,11 @@
 ---
-title: "Are LLMs cheaper than humans?"
+title: "The cost of LLMs vs humans"
 claim: "LLMs are almost always cheaper than humans"
 ---
 
-**Short answer.** LLMs are almost always cheaper than humans.
+**LLMs are almost always cheaper than humans.**
 
-@metr2024capability compare the cost of humans and LLMs to do a variety of tasks, they say “when agents *can* do a task, they can often do so at a fraction of the cost of humans.” 
+@metr2024capability compare the cost of humans and LLMs to do a variety of tasks, they say “when agents *can* do a task, they can often do so at a fraction of the cost of humans.”
 
 ![From @metr2024capability](images/image16.png){.column-margin}
 

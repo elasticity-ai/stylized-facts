@@ -1,7 +1,7 @@
-<!-- latent-factor-of-llm-intelligence.llm.qmd — LLM-written literature summary for the question
-     “Is there a single latent factor of LLM intelligence?”. This file is generated/maintained by an LLM pass and
-     included at the end of the human-written chapter. Do not put YAML
-     frontmatter here: included files cannot carry their own metadata. -->
+<!-- latent-factor-of-llm-intelligence.llm.qmd — LLM-written literature summary for “The latent factor of LLM intelligence”.
+     Written and maintained by an LLM pass following book/LLM-STYLE-GUIDE.md,
+     and included at the end of the human-written chapter. No YAML frontmatter
+     here: included files cannot carry their own metadata. -->
 
 ::: {.callout-note}
 **Stub.** The literature summary for this question has not been written yet.
