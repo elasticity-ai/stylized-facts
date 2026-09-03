@@ -9,7 +9,7 @@ As of July 2025, frontier models have an effective context length (where perform
 
 - LongBench (@bai2024longbench) is a benchmark for long-context understanding, found that the best models as of Sep 2024 (o1-preview) outperformed human baseliners given 15 minutes by 15% on short tasks (<32k context), this dropped to only a 5% gain for long-context tasks (>128k).
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include context-length.llm.qmd >}}

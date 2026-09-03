@@ -23,7 +23,7 @@ In retrospect these estimates seem to have been overly optimistic. There is some
 
 > “AI has beat world champions at chess and Go, surpassed most humans on SAT and bar exams, and reached gold medal level on IOI and IMO. But the world hasn’t changed much, at least judged by economics and GDP. I call this the utility problem, and deem it the most important problem for AI.”*
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include bottleneck-on-llm-abilities.llm.qmd >}}

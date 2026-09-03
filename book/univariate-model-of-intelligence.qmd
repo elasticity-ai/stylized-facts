@@ -5,7 +5,7 @@ claim: "A univariate model of machine and human intelligence will be a poor fit"
 
 **A univariate model of machine and human intelligence will be a poor fit.**
 
-![from @aschenbrenner2024situational](images/2025-07-17-07-40-28.png){.column-margin}
+![from @aschenbrenner2024situational](images/2025-07-17-07-40-28.png)
 
 We sometimes describe AI capability by human equivalent, e.g. years of education (@aschenbrenner2024situational).
 
@@ -14,7 +14,7 @@ What would a two-factor model look like?
 - LLMs have PhD-level knowledge and reasoning.
 - LLMs have preschool-level tactics.
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include univariate-model-of-intelligence.llm.qmd >}}

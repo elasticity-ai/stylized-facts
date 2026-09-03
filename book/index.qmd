@@ -25,7 +25,7 @@ There is a long history of struggle in making accurate generalizations about the
 
 In this note we list a series of well-documented facts about AI capabilities, and make some more opinionated generalizations. The target audience is economists who are interested in modeling the effects of AI on various situations.
 
-![](images/tikz-agent-task-matrix.svg){.column-margin}
+![](images/tikz-agent-task-matrix.svg)
 
 **It is useful to think of a matrix of agents and tasks.**
 

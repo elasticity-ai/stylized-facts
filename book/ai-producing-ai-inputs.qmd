@@ -16,7 +16,7 @@ LLMs are already able to write a significant proportion of the code used by fron
 - Anthropic say over 70% of Anthropic's PRs are “authored” by LLMs (@anthropic2025devday).
 - Google say more than 25% of all the code at Google is written by AI (@google2024codeai).
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include ai-producing-ai-inputs.llm.qmd >}}

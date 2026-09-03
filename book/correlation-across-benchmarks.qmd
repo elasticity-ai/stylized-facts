@@ -7,9 +7,9 @@ claim: "LLM performance is highly correlated across benchmarks"
 
 *See also:* [The latent factor of LLM intelligence](latent-factor-of-llm-intelligence.qmd).
 
-![From @spangher2024generalized](images/image3.png){.column-margin}
+![From @spangher2024generalized](images/image3.png)
 
-![From @ruan2024observational](images/image4.png){.column-margin}
+![From @ruan2024observational](images/image4.png)
 
 **Frontier models that surpass previous models on one benchmark usually outperform them on most other benchmarks.**
 
@@ -25,7 +25,7 @@ claim: "LLM performance is highly correlated across benchmarks"
 
 They also find that the latent factor is very highly correlated with pretraining perplexity.^[Train-before-test also raises rank agreement between benchmarks: "On average, the overall average Kendall’s τ is 0.52 for direct evaluation and 0.76 for train-before-test."]
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include correlation-across-benchmarks.llm.qmd >}}

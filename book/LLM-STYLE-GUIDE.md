@@ -7,15 +7,15 @@ half answers the question; the LLM half shows the reader **what the literature
 says, paper by paper, in the order it appeared**, so they can judge the answer
 for themselves.
 
-The stubs currently in place are placeholders; nothing below has been
-assembled yet.
+`book/latent-factor-of-llm-intelligence.llm.qmd` is the worked example. The
+other files are stubs until written.
 
 ## What the file is for
 
 - **Coverage**, not argument. The human chapter makes the case. The summary
   lists the evidence, including evidence that cuts against the chapter's short
   answer.
-- **Traceability.** Every row, number and quote must be checkable against a
+- **Traceability.** Every number and quote must be checkable against a
   source in `stylized-facts.bib`. The repo's checks run on these files exactly
   as they run on the paper (`make check`).
 - **Chronology.** The table is ordered by date so the reader can see how the
@@ -28,10 +28,10 @@ The file is plain Quarto markdown, included into a chapter. In order:
 
 1. **One-paragraph orientation** (2–4 sentences). What kind of evidence
    exists for this question, how much of it, and the date range. No verdict.
-2. **The table** (see below). This is the body of the file.
-3. **Figures**, where the literature has a chart that carries the finding
-   (see below). Zero to three.
-4. **Gaps** — a short bullet list of what has *not* been measured, or has
+2. **The table** (see below). This is the body of the file. Figures go
+   *inside* the table, in the row of the paper they come from — never
+   outside it.
+3. **Gaps** — a short bullet list of what has *not* been measured, or has
    only been measured on obsolete models. This is the most useful section for
    the authors; do not skip it.
 
@@ -40,16 +40,21 @@ short answer.
 
 ## The table
 
-One row per paper, or per distinct result when a paper has several that
-matter here. Chronological by publication (or preprint) date, oldest first.
+One row per paper. Chronological by publication (or preprint) date, oldest
+first. Five columns:
 
 | Column | Contents |
 |---|---|
 | **Date** | `YYYY-MM`. Preprint date if that is what is cited. |
-| **Source** | The citation, `@citekey`. Nothing else in this cell. |
-| **Setting** | What was measured on what: models (named, with version), benchmark or task, sample size, population if human. Terse; this is a table. |
-| **Finding** | The result as a number wherever the paper gives one, with its unit and comparison baseline. One or two sentences at most. |
-| **Bearing** | One of `supports`, `qualifies`, `contradicts`, `context`, relative to the chapter's short answer. Judge honestly. |
+| **Paper** | The paper's title in italics, then the citation on its own line: `*Title*<br>@citekey`. |
+| **Setting** | What was measured on what: models (named, with version), benchmark or task, sample size, population if human. Terse. |
+| **Findings** | Each finding relevant to the question as **one bold sentence**, typically one per paper, several when the paper has several. Below each bold sentence, at most one or two plain sentences of supporting detail: the numbers, the comparison baseline, a verbatim quote. |
+| **Figure** | The paper's own figure that carries the finding, as an inline image with a caption crediting the source: `![PC1 explains ~80% of variance, from @key](images/key-scree.png)`. Empty when the paper has no such figure. |
+
+Separate a row's multiple findings and their detail with `<br>`; pipe tables
+cannot hold paragraphs. Set the column widths with the separator line, e.g.
+`|:--|:-----|:----|:--------------|:----------|`, so the Findings column gets the
+room.
 
 Rules for cells:
 
@@ -65,22 +70,24 @@ Rules for cells:
   `o3`, `Claude 3.7 Sonnet` are.
 - **Sample sizes and dates** belong in Setting. A result on 12 models from
   2023 is not the same evidence as one on 591 models from 2024.
-- Keep the table wide, not tall: prefer one dense row to three thin ones.
+- **The bold sentence is the finding, not the topic.** "PC1 explains nearly
+  80% of variance across 77 models." Not "Analyses variance structure."
+- No column for the paper's bearing on the chapter's answer. Let the bold
+  findings speak; the reader judges.
 
 ## Figures
 
 Include a figure when the paper's own chart shows the finding better than a
 number can — a scaling curve, a distribution of effect sizes, a
-model-by-benchmark heatmap. Otherwise do not.
+model-by-benchmark heatmap. Otherwise leave the cell empty.
 
 - Save the image to `images/` at the repo root (the book sees it through the
   `book/images` symlink). Name it `<citekey>-<short-description>.png`.
-- Caption it with the credit and what it shows:
-  `![Effect sizes across 45 studies, from @coupe2025impact](images/coupe2025impact-effect-sizes.png){.column-margin}`
-  The `From @citekey` form is what the attribution check reads; the key must
+- Caption it with what it shows and the credit: `![..., from @citekey](...)`.
+  The `from @citekey` form is what the attribution check reads; the key must
   resolve or the build fails.
-- Margin placement (`{.column-margin}`) by default, matching the rest of the
-  book. Use the full column only for a figure that is unreadable small.
+- Figures go in the table cell, in the body of the page. Nothing in the book
+  goes in the margin; do not use `{.column-margin}`.
 - Screenshots of a published chart are fine (that is what the paper does).
   Do not redraw or re-plot data unless the paper provides the numbers and no
   chart.
@@ -90,12 +97,14 @@ model-by-benchmark heatmap. Otherwise do not.
 - Cite only keys that exist in `stylized-facts.bib`. To add a paper, add an
   entry following the conventions in `AGENTS.md` (one field per line,
   trailing commas, a `url`/`doi`/`eprint` locator, arXiv URLs in
-  `https://arxiv.org/pdf/<id>.pdf` form) and run `make bib`.
+  `https://arxiv.org/pdf/<id>.pdf` form) and run `make bib`. A new arXiv
+  entry also needs `make arxiv-refresh` run once from a machine that can
+  reach arXiv.
 - Where possible, fetch the paper into the local archive
   (`make fetch`, run on a local machine) so the quote and number checks can
   see it. A source with no archived text is reported as unchecked, not as
   wrong — but the point of the table is that it *can* be checked.
-- Prefer the primary source. A blog post summarising a paper is `context` at
+- Prefer the primary source. A blog post summarising a paper is context at
   best; cite the paper.
 - Grey literature (lab system cards, Epoch and METR reports, leaderboards)
   is in scope and often the only source for frontier-model numbers. Cite it
@@ -106,8 +115,8 @@ model-by-benchmark heatmap. Otherwise do not.
 - Neutral, declarative, past tense for results ("found", "estimated",
   "reported"). No evaluative adverbs ("impressively", "only").
 - No first person, no hedging boilerplate, no "it is worth noting".
-- Target: 150–400 words of prose outside the table; the table can be as long
-  as the literature requires. If the table exceeds ~15 rows, consider whether
+- Target: 100–300 words of prose outside the table; the table can be as long
+  as the literature requires. If the table exceeds ~20 rows, consider whether
   the question should be split into two chapters (see `tools/book_split.py`).
 - Do not use headings above `###`: the file is included under the chapter's
   `## Literature summary (LLM-written)` heading and must nest beneath it.
@@ -118,6 +127,8 @@ model-by-benchmark heatmap. Otherwise do not.
 
 - YAML frontmatter (included files cannot carry it; it renders as text).
 - The chapter's short answer, or a restatement of it.
+- The literal `**Stub.**` marker — that is how `tools/book_split.py` tells
+  an unwritten stub from a written summary it must preserve.
 - Numbers, quotes, or model names not present in a cited source.
 - Any source not in the bibliography.
 - Claims about the human chapter ("the authors argue"): the summary is about
@@ -131,13 +142,10 @@ model-by-benchmark heatmap. Otherwise do not.
 
 <Orientation paragraph: 2–4 sentences on the shape of the evidence.>
 
-| Date | Source | Setting | Finding | Bearing |
-|---|---|---|---|---|
-| 2023-03 | @key1 | GPT-4; 12 benchmarks; n = 27 models | ... | supports |
-| 2024-05 | @key2 | 77 LLMs, 8 benchmarks | First PC explains 80% of variance | supports |
-| 2025-02 | @key3 | o1, o3-mini; ARC-AGI-2 | ... | qualifies |
-
-![<what it shows>, from @key2](images/key2-<description>.png){.column-margin}
+| Date | Paper | Setting | Findings | Figure |
+|:--|:-----|:----|:--------------|:----------|
+| 2023-06 | *<Title>*<br>@key1 | 29 LLMs on 27 HELM tasks | **<One-sentence finding.>**<br>Detail with numbers. "A verbatim quote of eight or more words." | ![<what it shows>, from @key1](images/key1-<description>.png) |
+| 2024-05 | *<Title>*<br>@key2 | 77 models, 8 benchmarks | **<Finding one.>**<br>Detail.<br>**<Finding two.>**<br>Detail. | |
 
 ### Gaps
 
@@ -149,4 +157,6 @@ model-by-benchmark heatmap. Otherwise do not.
 
 Before committing: `python3 tools/qmd_validate.py --qmd book/<slug>.qmd`
 checks that chapter (with its included summary) on its own; `make check`
-runs everything. Both must pass.
+runs everything. Both must pass. Render with `make render-book` and look at
+the table: a pipe table with a very long cell can render badly, and the fix
+is more `<br>`, not fewer words.

@@ -39,6 +39,7 @@ Chapter format (standardized; see AGENTS.md "The book")
 The paper's definition-list idiom (`Lead sentence.` / `: elaboration`) is
 rewritten as a bold lead paragraph followed by the elaboration, so every
 chapter uses the same devices: bold lead, paragraph, bullet, figure, quote.
+The paper's margin figures (`{.column-margin}`) become body figures.
 
 tikz
 ----
@@ -322,8 +323,8 @@ def extract_tikz(body: str, names: list[str], tikz_dir: Path) -> str:
             f"% Source of images/tikz-{name}.svg. Rebuild with `make tikz`.\n"
             + TIKZ_PREAMBLE + code + "\n" + TIKZ_POSTAMBLE, encoding="utf-8")
         cap = opts.get("fig-cap", "").strip().strip('"')
-        attr = "{.column-margin}" if opts.get("fig-column", "").strip() == "margin" else ""
-        return f"![{cap}](images/tikz-{name}.svg){attr}"
+        # The paper puts figures in the margin; the book keeps them in the body.
+        return f"![{cap}](images/tikz-{name}.svg)"
 
     out = TIKZ_RE.sub(repl, body)
     if idx != len(names):
@@ -513,7 +514,7 @@ def chapter_text(q: Q, sec: Section, body: str, defs: dict[str, str]) -> str:
     parts.append(with_footnotes(tidy(body), defs).rstrip("\n"))
     parts += [
         "",
-        "::: {.llm-summary}",
+        "::: {.llm-summary .column-page-right}",  # body + margin width: the table needs it
         "## Literature summary (LLM-written) {.unnumbered}",
         "",
         f"{{{{< include {q.slug}.llm.qmd >}}}}",
@@ -582,10 +583,8 @@ lightbox: auto
 format:
   html:
     theme: cosmo
-    css: book.css   # tints the LLM-written section
+    css: book.css   # tints the LLM-written section, sizes body figures
     toc: false   # chapters are short; the sidebar is the table of contents
-    grid:
-      margin-width: 400px
     include-in-header:
       - text: |
           <script>window.MathJax = {{
@@ -598,11 +597,20 @@ format:
 """
 
 
+MARGIN_IMG_RE = re.compile(r"(!\[[^\]]*\]\([^)\s]+\))\{\.column-margin\}")
+
+
+def unmargin_images(body: str) -> str:
+    """Figures live in the body in the book, not in the margin."""
+    return MARGIN_IMG_RE.sub(r"\1", body)
+
+
 def render_body(slug: str, lines: list[str], out: Path) -> str:
     """The shared pipeline from paper section lines to chapter body text."""
     lines = convert_definition_lists(lines)
     body = "\n".join(lines)
     body = extract_tikz(body, TIKZ_NAMES.get(slug, []), out / "tikz")
+    body = unmargin_images(body)
     return body
 
 

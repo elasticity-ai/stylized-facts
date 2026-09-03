@@ -9,15 +9,15 @@ claim: "There is no standard taxonomy of AI capabilities."
 
 These benchmarks are often informally grouped into types which test different types of ability, e.g. "knowledge", "reasoning", "programming", "agentic ability", however there is no generally-accepted taxonomy.
 
-![18-dimensional taxonomy from @zhou2025generalscales](images/image2.png){.column-margin}
+![18-dimensional taxonomy from @zhou2025generalscales](images/image2.png)
 
-![10-dimensional taxonomy from @huber2025llmsblooms](images/2025-10-19-15-07-10.png){.column-margin}
+![10-dimensional taxonomy from @huber2025llmsblooms](images/2025-10-19-15-07-10.png)
 
-![10-dimensional taxonomy from @hendrycks2025agidefinition](images/2025-10-19-14-47-17.png){.column-margin}
+![10-dimensional taxonomy from @hendrycks2025agidefinition](images/2025-10-19-14-47-17.png)
 
-![From @ilic2024positive, showing their preferred 2-factor model](images/2025-10-21-15-33-31.png){.column-margin}
+![From @ilic2024positive, showing their preferred 2-factor model](images/2025-10-21-15-33-31.png)
 
-![From @maimon2025iq](images/2025-12-05-06-36-08.png){.column-margin}
+![From @maimon2025iq](images/2025-12-05-06-36-08.png)
 
 **Some taxonomies of AI capabilities have been proposed but none have been widely adopted.**
 
@@ -46,7 +46,7 @@ Some taxonomies are based on variation among human abilities (e.g. @hendrycks202
 
 A difficulty with both of these approaches is that they are designed to measure variation *within* one type of agent (LLM or human), not *between* humans and LLMs. There is reason to expect that there exist important human-LLM differences that are orthogonal to within-human or within-LLM variation, e.g. types of tasks where humans show little variation, and LLMs show little variation, but there are large human-LLM differences in ability.^[A similar argument is made by Zachary Tidler et al. [here](https://aievaluation.substack.com/p/is-the-definition-of-agi-a-percentage).]
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include taxonomy-of-ai-capabilities.llm.qmd >}}

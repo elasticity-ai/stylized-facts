@@ -7,7 +7,7 @@ claim: "The time between benchmark introduction and saturation has been decreasi
 
 If we had a cardinal scale of computer intelligence we could talk about the rate of improvement in a precise way. The best proxy for velocity is the history of AI benchmarks: new benchmarks are introduced when computers achieve human-level performance on the old benchmarks (“saturation”).
 
-![From @maslej2025aiindex](images/image7.png){.column-margin}
+![From @maslej2025aiindex](images/image7.png)
 Since 2012 the rate of benchmark saturation seems to be increasing:
 
 <!-- TODO: is there a better graph from Epoch's data -->
@@ -20,7 +20,7 @@ Since 2012 the rate of benchmark saturation seems to be increasing:
 - [PapersWithCode](https://paperswithcode.com/sota).
  -->
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include benchmark-saturation.llm.qmd >}}

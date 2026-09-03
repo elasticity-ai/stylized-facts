@@ -5,9 +5,9 @@ claim: "Latent LLM intelligence appears to be distinct from latent human intelli
 
 **Latent LLM intelligence appears to be distinct from latent human intelligence.**
 
-![Illustration of LLM vs humans with a single dimension of ability.](images/tikz-one-dimension.svg){.column-margin}
+![Illustration of LLM vs humans with a single dimension of ability.](images/tikz-one-dimension.svg)
 
-![Illustration of LLM vs humans with two dimensions of ability.](images/tikz-two-dimensions.svg){.column-margin}
+![Illustration of LLM vs humans with two dimensions of ability.](images/tikz-two-dimensions.svg)
 
 <!-- ```{tikz}
 #| fig-column: margin
@@ -43,7 +43,7 @@ Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4
 
 LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara to Kazakh), can combine knowledge from two very different domains.
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include llm-vs-human-latent-intelligence.llm.qmd >}}

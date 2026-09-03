@@ -9,7 +9,7 @@ claim: "LLMs show some ability to autonomously complete software engineering tas
 
 - Frontier models can autonomously produce predictive models on 17% of Kaggle datasets with the same error as a highly skilled data scientist (bronze on [MLE-bench](https://openai.com/index/mle-bench/)).  
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include autonomous-software-engineering.llm.qmd >}}

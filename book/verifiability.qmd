@@ -12,11 +12,11 @@ This section is commented out in `stylized-facts.qmd`; it is carried here so the
 
 If a task’s outputs are easily verifiable by both expert humans and a computer this is associated with a 1.4 unit (on a five-point scale) increase in frontier LLM performance on average.
 
-![](images/image14.png){.column-margin}
+![](images/image14.png)
 
 The degree to which the verification can occur autonomously (by computers not expert humans) has gotten more important with reasoning models.
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include verifiability.llm.qmd >}}

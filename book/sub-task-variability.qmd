@@ -11,7 +11,7 @@ LLMs generally have much smaller correlations in their ability to successfully c
 
 <!-- - O*Net data suggests that most current jobs contain bundles of tasks that humans have strong positive correlations over their ability to complete. Given LLMs have much weaker correlations, it suggests that if this trend continues over time they will have to far exceed human performance on individual subtasks before being able to match selected human performance on overall jobs.  -->
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include sub-task-variability.llm.qmd >}}
