@@ -9,6 +9,8 @@ Frontier models are able to autonomously complete tasks with high market value. 
 
 - @miserendino2025swelancer (SWE-lancer) measures LLM's abilities to autonomously complete software engineering and management tasks posted on UpWork priced from $50-$32,000. As of May 2025, frontier LLMs were able to complete 40% of tasks (i.e. earn $400,000 out of $1M).
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include economically-valuable-tasks.llm.qmd >}}
+:::

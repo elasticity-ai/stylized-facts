@@ -9,6 +9,8 @@ claim: "Human + AI teams do not reliably outperform the better of human or AI pe
 
 - @agarwal2024radiology in a radiology-diagnosis experiment, human–AI collaboration improved accuracy by only 0.2 pp over AI-only and did **not** outperform selective automation.  
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include human-ai-teams.llm.qmd >}}
+:::

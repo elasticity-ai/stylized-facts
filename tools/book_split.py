@@ -513,12 +513,18 @@ def chapter_text(q: Q, sec: Section, body: str, defs: dict[str, str]) -> str:
     parts.append(with_footnotes(tidy(body), defs).rstrip("\n"))
     parts += [
         "",
+        "::: {.llm-summary}",
         "## Literature summary (LLM-written) {.unnumbered}",
         "",
         f"{{{{< include {q.slug}.llm.qmd >}}}}",
+        ":::",
         "",
     ]
     return "\n".join(parts)
+
+
+def is_stub(path: Path) -> bool:
+    return not path.exists() or "**Stub.**" in path.read_text(encoding="utf-8")
 
 
 def llm_stub(q: Q, body: str) -> str:
@@ -576,6 +582,7 @@ lightbox: auto
 format:
   html:
     theme: cosmo
+    css: book.css   # tints the LLM-written section
     toc: false   # chapters are short; the sidebar is the table of contents
     grid:
       margin-width: 400px
@@ -629,9 +636,12 @@ def main() -> int:
         sys.exit(f"{out} already has .qmd files; pass --force to overwrite (this is a one-shot script, see docstring)")
     out.mkdir(parents=True, exist_ok=True)
     for stale in existing:
+        if stale.name.endswith(".llm.qmd") and not is_stub(stale):
+            continue  # written summaries survive a regeneration
         stale.unlink()
 
     used: set[str] = set()
+    kept: list[str] = []
     chapters: list[str] = ["index.qmd"]
     for q in QUESTIONS:
         sec = by_claim.get(q.claim)
@@ -645,7 +655,12 @@ def main() -> int:
             body_lines = [l for l in h1_intro[q.prepend_intro_of].lines if l.strip()] + [""] + body_lines
         body = render_body(q.slug, body_lines, out)
         (out / f"{q.slug}.qmd").write_text(chapter_text(q, sec, body, defs), encoding="utf-8")
-        (out / f"{q.slug}.llm.qmd").write_text(llm_stub(q, body), encoding="utf-8")
+        # A written literature summary is never overwritten with a stub.
+        llm_path = out / f"{q.slug}.llm.qmd"
+        if is_stub(llm_path):
+            llm_path.write_text(llm_stub(q, body), encoding="utf-8")
+        else:
+            kept.append(llm_path.name)
         chapters.append(f"{q.slug}.qmd")
 
     # index: the paper's abstract, thanks, and its own introduction section
@@ -692,6 +707,8 @@ def main() -> int:
         for h in unused:
             print(f"  - {h}", file=sys.stderr)
     print(f"wrote {len(QUESTIONS)} chapters (+ index, offcuts, references) to {out}")
+    if kept:
+        print(f"kept {len(kept)} written literature summaries: {', '.join(kept)}")
     return 1 if unused else 0
 
 

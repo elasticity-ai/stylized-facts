@@ -11,6 +11,8 @@ Even on UX usage benchmarks, the difficulty for LLMs appear to be more about too
 
  ![](images/image8.jpg){.column-margin} 
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include where-humans-outperform.llm.qmd >}}
+:::

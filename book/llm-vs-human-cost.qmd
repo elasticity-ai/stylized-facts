@@ -19,6 +19,8 @@ Exceptions:
 - Reasoning tasks with high test-time expenditure ([ARC-AGI](https://arcprize.org/arc-agi)))
 - [Svanberg et al. (2024)](https://futuretech-site.s3.us-east-2.amazonaws.com/2024-01-18+Beyond_AI_Exposure.pdf) argue that "only 23% of worker compensation “exposed” to AI computer vision would be cost-effective for firms to automate because of the large upfront costs of AI systems." However this is almost entirely fixed costs (data collection, fine tuning, scaffolding), not marginal costs.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include llm-vs-human-cost.llm.qmd >}}
+:::

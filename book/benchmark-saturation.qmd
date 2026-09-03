@@ -20,6 +20,8 @@ Since 2012 the rate of benchmark saturation seems to be increasing:
 - [PapersWithCode](https://paperswithcode.com/sota).
  -->
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include benchmark-saturation.llm.qmd >}}
+:::

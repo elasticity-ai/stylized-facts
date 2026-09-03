@@ -13,6 +13,8 @@ The following RCTs find that augmentation has a larger relative effect on worker
 - @peng2023developerproductivity
   - Magnitude: "The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group."
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include augmentation-and-worker-skill.llm.qmd >}}
+:::

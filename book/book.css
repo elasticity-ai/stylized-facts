@@ -1,0 +1,25 @@
+/* The LLM-written literature summary at the end of every chapter sits on a
+   tinted panel so a reader always knows which half of the page a human wrote.
+   The chapter wraps it as `::: {.llm-summary}` (see tools/book_split.py). */
+.llm-summary {
+  background: #f3f6fb;
+  border-left: 4px solid #9db3d6;
+  border-radius: 6px;
+  padding: 0.25rem 1.25rem 1rem 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.llm-summary > h2:first-child {
+  border-bottom: none;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: #3b5480;
+}
+
+.llm-summary table {
+  font-size: 0.9em;
+}
+
+.llm-summary .callout {
+  background: transparent;
+}

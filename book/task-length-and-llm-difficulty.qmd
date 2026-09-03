@@ -16,6 +16,8 @@ There is a very strong negative correlation between how long it takes for a huma
 
 -  @ord2025halflife argues that LLMs performance degradation over time is roughly consistent with a hypothesis that long tasks are random combinations of subtasks, each with a constant half-life of success.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include task-length-and-llm-difficulty.llm.qmd >}}
+:::

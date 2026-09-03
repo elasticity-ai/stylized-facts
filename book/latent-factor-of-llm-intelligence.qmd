@@ -52,6 +52,8 @@ A large part of academic and industry work on AI is spent estimating "scaling la
 - Much less true now than in the 1980s. -->
 \
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include latent-factor-of-llm-intelligence.llm.qmd >}}
+:::

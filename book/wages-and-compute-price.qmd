@@ -23,6 +23,8 @@ Equilibrium task-sharing would require either:
    - An increase in margins.
 2. A dramatic drop in human wages.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include wages-and-compute-price.llm.qmd >}}
+:::

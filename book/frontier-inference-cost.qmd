@@ -11,6 +11,8 @@ The retail price of intelligence is determined by the compute requirement, the c
 
 - The price of compute has been relatively stable over 2023-2025, with A100 priced at around $2/hour (see Lambda Cloud pricing @lambdalabs_gpu_pricing).
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include frontier-inference-cost.llm.qmd >}}
+:::

@@ -11,6 +11,8 @@ LLMs have stochastic outputs and they often have varying success rates when the 
 
 - @song2024good say "we observe that greedy decoding [temperature=0] generally outperforms sampling methods [temperature>0] for most evaluated tasks."
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include within-task-variability.llm.qmd >}}
+:::

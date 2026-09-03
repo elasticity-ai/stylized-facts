@@ -16,7 +16,10 @@ layout, or the bibliography conventions, update this file in the same commit.
   machine-parseable; the tests enforce it.
 - Every entry needs a source locator: `url`, `doi`, or `eprint`.
 - arXiv entries: use `https://arxiv.org/pdf/<id>.pdf` as the `url`, with
-  `eprint` and `archiveprefix = {arXiv}`.
+  `eprint` and `archiveprefix = {arXiv}`. `make arxiv` only reads the
+  committed cache, so a new arXiv entry is unverified until someone runs
+  `make arxiv-refresh` on a machine that can reach arXiv; do that when you
+  add one.
 - URL preference order: full-text PDF > abstract page > journal landing page.
 - Every entry should be cited by at least one document in the repo (the
   paper, the decks, the matrices document, or a book chapter — see
@@ -58,10 +61,14 @@ work: repository Settings → Pages → Source: "GitHub Actions".
   idiom (`Lead.` / `: detail`) is not used in the book — it becomes a bold
   lead paragraph.
 - `book/<slug>.llm.qmd` — **LLM-written** literature summary, pulled in with
-  `{{< include >}}`. Specified by `book/LLM-STYLE-GUIDE.md` (chronological
-  table of results, figures where the literature has them, gaps). No YAML
-  frontmatter: included files cannot carry any. Stubs for now: a callout and
-  the citekeys the chapter already cites.
+  `{{< include >}}` inside a `::: {.llm-summary}` div that `book/book.css`
+  tints, so a reader can always tell which half a human wrote. Specified by
+  `book/LLM-STYLE-GUIDE.md` (chronological table of results, figures where
+  the literature has them, gaps). No YAML frontmatter: included files cannot
+  carry any. Unwritten ones are stubs: a callout containing `**Stub.**` and
+  the citekeys the chapter already cites. That marker is what
+  `tools/book_split.py` keys on — a `.llm.qmd` without it is a written
+  summary and is never overwritten by a regeneration.
 - `book/tikz/<name>.tex` — standalone sources of the four figures the paper
   draws with knitr `{tikz}` chunks. `make tikz` compiles them to
   `images/tikz-<name>.svg` (pdflatex + pdftocairo), which are committed, so
@@ -77,8 +84,9 @@ work: repository Settings → Pages → Source: "GitHub Actions".
 
 `tools/book_split.py` produced every chapter and holds the claim→question
 mapping (`QUESTIONS`) plus the transformations (definition lists, tikz
-extraction, footnote distribution). It is **one-shot**: once the human
-chapters are hand-edited, re-running it would clobber them. It refuses to
+extraction, footnote distribution). It is **one-shot** for the human
+chapters: once they are hand-edited, re-running it would clobber them
+(written `.llm.qmd` summaries are preserved, see above). It refuses to
 write into a non-empty `book/` without `--force`; use `--out <dir>` to
 preview. If the paper gains a section, add a `Q(...)` to the mapping and
 either run with `--out` and copy the one new chapter across, or write the

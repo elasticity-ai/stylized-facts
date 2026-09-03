@@ -14,6 +14,8 @@ Frontier LLMs struggle playing games that are simple for children to solve.
 - LMGame-Bench (@hu2025lmgamebench) finds that as of early 2025, LLMs are still below human performance across 6 computergames: Sokoban, Super Mario Bros, Tetris, 2048, Candy Crush, and Ace Attorney.
 - TextQuests (@phan2025textquests) find as of August 2025 LLMs are unable to solve text-based adventure games that would take human players around 30 hours and hundreds of actions to solve without assistance. With clues granted recent models are able to make greater progress- whilst no model prior to 2025 is able to solve any adventure completely, GPT-5 is able to solve 5/25. 
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include llm-ability-to-play-games.llm.qmd >}}
+:::

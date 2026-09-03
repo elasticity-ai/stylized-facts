@@ -17,6 +17,8 @@ claim: "The price of inference for a fixed level of capability has been falling 
 
 - @epoch2025llminferencepricetrends find price declines over 2023-2025 from between 9X/year (for gpt-3.5 ability on MMLU), up to 900X/year (for gpt-4o ability on GPQA).
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include inference-price-decline.llm.qmd >}}
+:::

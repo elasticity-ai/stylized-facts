@@ -13,6 +13,8 @@ The performance of LLMs on certain benchmarks can vary signficantly depending on
 
 - @li2025perturbation find that performance on math problems degrades somewhat when reworded. The declines are particularly severe for small open-source models.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include prompt-sensitivity.llm.qmd >}}
+:::

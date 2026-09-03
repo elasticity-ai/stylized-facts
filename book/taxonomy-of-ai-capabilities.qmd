@@ -46,6 +46,8 @@ Some taxonomies are based on variation among human abilities (e.g. @hendrycks202
 
 A difficulty with both of these approaches is that they are designed to measure variation *within* one type of agent (LLM or human), not *between* humans and LLMs. There is reason to expect that there exist important human-LLM differences that are orthogonal to within-human or within-LLM variation, e.g. types of tasks where humans show little variation, and LLMs show little variation, but there are large human-LLM differences in ability.^[A similar argument is made by Zachary Tidler et al. [here](https://aievaluation.substack.com/p/is-the-definition-of-agi-a-percentage).]
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include taxonomy-of-ai-capabilities.llm.qmd >}}
+:::
