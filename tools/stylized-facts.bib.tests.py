@@ -23,12 +23,14 @@ TEXT_ARCHIVE_DIR = REPO_ROOT / "references" / "text"
 
 # Every document that cites from stylized-facts.bib. Used by the
 # "entry is cited somewhere" test; an entry cited by none of these is dead
-# weight and should be removed or the citation restored.
+# weight and should be removed or the citation restored. Globs are allowed
+# (the book is one chapter per file).
 CITING_DOCS = [
     "stylized-facts.qmd",
     "stylized-facts-slides.qmd",
     "stylized-facts-slides-BATES.qmd",
     "stylized-facts-matrices.qmd",
+    "book/*.qmd",
 ]
 
 # citekey-like tokens in the documents that are LaTeX macros, not references
@@ -301,12 +303,12 @@ def cited_citekeys() -> set[str]:
     """Every citekey referenced by any document listed in CITING_DOCS."""
     keys: set[str] = set()
     for name in CITING_DOCS:
-        path = REPO_ROOT / name
-        if not path.exists():
-            continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        raw = re.findall(r"@([A-Za-z][A-Za-z0-9:_-]*)", text)
-        keys |= {k.rstrip(":_-") for k in raw}
+        for path in sorted(REPO_ROOT.glob(name)):
+            if not path.is_file():
+                continue
+            text = path.read_text(encoding="utf-8", errors="replace")
+            raw = re.findall(r"@([A-Za-z][A-Za-z0-9:_-]*)", text)
+            keys |= {k.rstrip(":_-") for k in raw}
     return keys - NON_CITES
 
 

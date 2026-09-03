@@ -1,0 +1,81 @@
+---
+title: "How does latent LLM intelligence differ from latent human intelligence?"
+claim: "Latent LLM intelligence appears to be distinct from latent human intelligence."
+---
+
+**Short answer.** Latent LLM intelligence appears to be distinct from latent human intelligence.
+
+```{tikz}
+#| fig-column: margin
+#| fig-cap: Illustration of LLM vs humans with a single dimension of ability.
+   \begin{tikzpicture}[scale=7]
+   \draw[thick,->] (0,0)  -- (1,0) node[anchor=north east]{ability};
+   \fill[red,opacity=0.5,thick,domain=0:1,samples=100] (0,0)-- plot(\x,{0.3*exp(-((\x-0.5)^2)/(0.2^2))}) -- (1,0) -- cycle;
+   \node[red!50!black] at (.5,.4) {humans};
+
+   \fill[green!50!black] (.1,.1) circle(0.03);
+   \fill[green!50!black] (.2,.1) circle(0.03);
+   \fill[green!50!black] (.3,.1) circle(0.03);
+   \fill[green!50!black] (.4,.1) circle(0.03);
+   \fill[green!50!black] (.5,.1) circle(0.03);
+   \node[green!50!black,below] at (.1,.3) {LLMs};
+\end{tikzpicture}
+```
+
+```{tikz}
+#| fig-column: margin
+#| fig-cap: Illustration of LLM vs humans with two dimensions of ability.
+   \begin{tikzpicture}[scale=7]
+      \draw[thick,<->] (1,0) -- node[midway,below]{ability 1} (0,0)
+         -- node[midway,rotate=90,above]{ability 2} (0,1.1);
+      % \fill[green!50!black,opacity=0.5,rotate=65] (.3,-.2) ellipse (0.25 and 0.1);
+      \fill[red,opacity=0.5,rotate=10] (.5,.5) ellipse (0.3 and 0.1);
+      
+      \node[red!50!black] at (.5,.8) {humans};
+      % \draw[->,thick,green!50!black] (.26,.1)--(.45,.45);
+
+      \fill[green!50!black] (.1,.1) circle(0.03);
+      \fill[green!50!black] (.2,.2) circle(0.03);
+      \fill[green!50!black] (.3,.3) circle(0.03);
+      \fill[green!50!black] (.4,.4) circle(0.03);
+      \node[green!30!black,align=left] at (.6,.3) {LLMs};
+\end{tikzpicture}
+```
+
+<!-- ```{tikz}
+#| fig-column: margin
+   \begin{tikzpicture}[scale=4]
+   \draw[<->] (1,0) -- node[midway,below]{ability 1} (0,0)
+      -- node[midway,rotate=90,above]{ability 2} (0,1.1);
+   \fill[green!50!black,opacity=0.5,rotate=65] (.3,-.2) ellipse (0.25 and 0.1);
+   \fill[red,opacity=0.5,rotate=10] (.5,.5) ellipse (0.3 and 0.1);
+   \node[green!50!black,align=left] at (.6,.3) {LLMs};
+   \node[red!50!black] at (.5,.8) {humans};
+   \draw[->,thick,green!50!black] (.26,.1)--(.45,.45);
+   %\fill[black!20!white] (0.5,0.5) ellipse (0.4 and 0.3);
+   \end{tikzpicture}
+``` -->
+
+Humans have a fairly positive correlation among abilities.
+
+:  There is a reasonable correlation among different measures of general ability (IQ, g-factor).
+
+    There is a reasonable correlation between years of education, IQ, standardized tests score, and wage.
+
+Ideally we would compare human and LLM performance on the same tasks.
+
+: If we had a full matrix of human and LLM performance we would be able to compare latent factors of each. Unfortunately there are few datasets which collect human performance across a range of distinct benchmarks. 
+
+We can compare the average human with the average LLM.
+
+: Many benchmarks do report performance for the average or expert human, so we can make those comparisons. Additionally we can run LLMs on many human standardized tests and exams.
+
+Latent factors for human and LLM ability appear to be significantly different.
+
+: Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4 was able to get human-level scores at most aptitude tests: SAT, LSAT, civil service. But GPT-4 did not have the aptitudes passing such tests implies for humans.
+
+     LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara to Kazakh), can combine knowledge from two very different domains.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include llm-vs-human-latent-intelligence.llm.qmd >}}

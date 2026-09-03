@@ -20,6 +20,9 @@ jobs:
       # images/ is needed too: one check verifies every figure the paper
       # references is on disk, and it fails spuriously without them.
       #
+      # book/ is the question-per-chapter book; its checks run alongside the
+      # paper's. book/images is a symlink to ../images.
+      #
       # Cone mode also brings in files sitting directly in references/
       # (manifest.csv, arxiv-metadata.csv) and every root-level file, so the
       # .qmd and .bib arrive without being listed.
@@ -29,6 +32,7 @@ jobs:
           sparse-checkout: |
             tools
             images
+            book
             references/text
           sparse-checkout-cone-mode: true
 

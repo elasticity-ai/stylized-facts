@@ -1,0 +1,12 @@
+---
+title: "How good are LLMs at programming?"
+claim: "LLMs perform particularly well on math and programming competition problems."
+---
+
+**Short answer.** LLMs perform particularly well on programming competition problems.
+
+- In a prominent programming competition, [ Codeforces](https://arxiv.org/pdf/2501.01257v2), o3's performance would place it as the 175th ranked competitive programmer in the world.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include llm-programming-ability.llm.qmd >}}

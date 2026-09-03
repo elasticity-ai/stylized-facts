@@ -1,0 +1,3 @@
+# LLM Augmentation Studies
+
+We define AI "augmentation" as the effect of combined AI and human ability, compared to human-alone ability. These are sometimes also called "uplift" or "centaur" studies.

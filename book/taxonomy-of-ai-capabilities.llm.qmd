@@ -1,0 +1,19 @@
+<!-- taxonomy-of-ai-capabilities.llm.qmd — LLM-written literature summary for the question
+     “Is there a standard taxonomy of AI capabilities?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @burnell2023reveal
+- @hendrycks2025agidefinition
+- @huber2025llmsblooms
+- @ilic2024positive
+- @maimon2025iq
+- @oecd2025aicapabilityindicatorsfullreport
+- @polo2025sloth
+- @zhou2025generalscales

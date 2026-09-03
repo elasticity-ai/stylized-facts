@@ -1,0 +1,40 @@
+---
+title: "Is there a standard measure of machine intelligence?"
+claim: "There is no standard measure of machine intelligence"
+---
+
+**Short answer.** There is no standard measure of machine intelligence.
+
+Many proposed measures of AGI have already been satisfied.
+
+:    Scott Alexander [says](https://www.astralcodexten.com/p/sakana-strawberry-and-scary-ai) *“The history of AI is people saying ‘We’ll believe AI is Actually Intelligent when it does X!’ – and then, after AI does X, not believing it’s Actually Intelligent.”*
+
+      Some examples:
+
+      | Measure                                                                                                                                  | Year passed |
+      | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+      | Chess -- *"Chess is generally considered to require ‘thinking’ for skilful play."* — Shannon, 1950. | 1997|
+      | [Winograd Schemas](https://en.wikipedia.org/wiki/Winograd_schema_challenge) - *"when people pass the test, we would say they were thinking."*                                                       | 2019                   |
+      | [MMMU](https://mmmu-benchmark.github.io/) – *"Benchmark for Expert AGI."*                                                                | 2025                   |
+      | [ARC-AGI](https://github.com/fchollet/ARC-AGI) – *"the only formal benchmark of AGI progress."*                                          | 2024                   |
+      | [AGIEval](https://github.com/ruixiangcui/AGIEval) - *"general abilities ... in tasks pertinent to human cognition and problem-solving."* | 2025                   |
+
+      
+
+There are some proposed definitions but none have become canonical:
+
+:    - @legg2007universal proposed "intelligence measures an agent’s ability to achieve goals in a wide range of environments."^[Additionally, @legg2007definitions surveyed 70 different definitions of intelligence as of 2007.]
+
+     - @chollet2019measureintelligence proposed intelligence be defined as "skill-acquisition efficiency", and proposed a formal benchmark (ARC-AGI).
+
+     - @morris2023levels proposed five "levels of AGI", based on the percentile human performance across all tasks. E.g. they classified ChatGPT as being able to do a *"wide range of non-physical tasks, including metacognitive tasks like learning new skills equal to or somewhat better than an unskilled human."*
+
+     - In 2024 OpenAI internally developed a five-level scale of AGI, but it has not been publicly released.[^levels]
+
+     - @hendrycks2025agidefinition proposed an AGI definition based on 10 different sub-dimensions.
+
+[^levels]: https://www.bloomberg.com/news/articles/2024-07-11/openai-sets-levels-to-track-progress-toward-superintelligent-ai
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include measure-of-machine-intelligence.llm.qmd >}}

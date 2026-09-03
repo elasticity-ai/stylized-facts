@@ -1,0 +1,23 @@
+---
+title: "How much does test-time scaling improve performance?"
+claim: "Benchmark performance significantly improves with test-time scaling on some tasks."
+---
+
+**Short answer.** Benchmark performance significantly improves with test-time scaling on some tasks.
+
+Test-time scaling (AKA inference-time compute) can be achieved in two ways:
+
+   1. Aggregating multiple models calls (self-consistency AKA majority vote @wang2023selfconsistency, tree-of-thought, etc.)
+   2. Training a model with a variable budget of inference-time tokens ("reasoning" models).
+
+The returns to inference-time compute seem to vary by the nature of the problem.
+
+Test-time scaling is not a perfect substitute for model scale: @wu2025inferencescaling shows that small models with inference-time compute have performance that asymptotes below those of large models.
+
+- @beeching2024scalingtesttimecompute find that traditional test-time scaling (majority vote, best-of-N, beam search) shows sub-log-linear returns on a math problems benchmark.
+- @epoch2025howfarcanreasoningmodelsscale (Epoch) say that existing evidence from OpenAI and DeepSeek shows log-linear relationships between test-time compute and performance on benchmarks, and say "this suggests that performance scales with reasoning training in a way similar to pre-training, at least for math and coding tasks."
+- @balachandran2025inference compare inference-time compute across a variety of tasks and say *"Although inference-time scaling improves performance, its effectiveness varies between domains and tasks, with diminishing returns as task complexity increases."*
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include test-time-scaling.llm.qmd >}}

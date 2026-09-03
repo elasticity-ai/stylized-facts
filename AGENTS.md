@@ -18,7 +18,9 @@ layout, or the bibliography conventions, update this file in the same commit.
 - arXiv entries: use `https://arxiv.org/pdf/<id>.pdf` as the `url`, with
   `eprint` and `archiveprefix = {arXiv}`.
 - URL preference order: full-text PDF > abstract page > journal landing page.
-- Every entry should be cited by at least one document in the repo.
+- Every entry should be cited by at least one document in the repo (the
+  paper, the decks, the matrices document, or a book chapter — see
+  `CITING_DOCS` in the bib tests).
 - Run the bibliography tests after editing (see below); they write a
   machine-generated PASS/FAIL block into the top of the `.bib` itself, so the
   current state is visible in the file you are already reading.
@@ -32,6 +34,44 @@ python3 tools/bib_normalize.py
 
 It adds the trailing commas and canonicalizes arXiv URLs, and is idempotent.
 `--check` reports without writing.
+
+## The book (`book/`)
+
+The paper restructured as a Quarto book: one *question* per chapter, where
+each question was a claim (a level-2 heading) in `stylized-facts.qmd`.
+
+- `book/_quarto.yml` — the chapter list, grouped into the paper's four parts.
+  `bibliography: ../stylized-facts.bib`; there is still exactly one
+  bibliography. `book/images` is a symlink to `../images`, likewise.
+- `book/<slug>.qmd` — **human-written**. Frontmatter carries `title:` (the
+  question) and `claim:` (the paper's original heading, so the mapping back
+  to the paper survives edits). The body opens with a one-line
+  `**Short answer.**`, then the prose. Ends with an `{.unnumbered}` heading
+  that includes the LLM file.
+- `book/<slug>.llm.qmd` — **LLM-written** literature summary for the question,
+  pulled in with `{{< include >}}`. No YAML frontmatter (included files cannot
+  carry any). Stubs for now: a callout and the citekeys the chapter already
+  cites, as the reading list for whichever pass writes them.
+- `book/part-*.qmd` — part pages carrying the paper's section intros;
+  `index.qmd` is the paper's own introduction; `offcuts.qmd` and
+  `references.qmd` close the book.
+- Chapters marked `status: "commented out in the paper"` correspond to
+  sections the paper hides inside `<!-- -->`. They are shown with a warning
+  callout so the claims are not lost; delete the chapter or the callout when
+  you decide.
+
+`tools/book_split.py` produced the first version of every chapter and holds
+the claim→question mapping (`PARTS`). It is **one-shot**: the human chapters
+are hand-edited from here, so re-running it would clobber them. It refuses to
+write into a non-empty `book/` without `--force`; use `--out <dir>` to
+preview. If the paper gains a section, add a `Q(...)` to the mapping and
+either run with `--out` and copy the one new chapter across, or write the
+chapter by hand following the layout above.
+
+Rendering: `make render-book` (HTML only, to `book/_book/`, git-ignored). The
+paper's tikz/sidenotes PDF preamble has not been ported. Quarto is not
+available in every environment this repo is edited from, so a render is not
+part of `make check`.
 
 ## Local paper archive (`references/`)
 
@@ -82,8 +122,21 @@ you add a switch, check it against 2.11.4.
 
 ### What the checks cover
 
-`tools/qmd_validate.py` runs per-document plugins from
-`tools/qmd_validate/docs/<document>.qmd.py`. The plugin for the paper checks:
+`tools/qmd_validate.py` runs the plugins in `tools/qmd_validate/docs/`. There
+are two kinds:
+
+- `<document>.qmd.py` checks the single root-level `<document>.qmd`
+  (`stylized-facts.qmd.py` is the paper).
+- `<name>.py` checks a **collection** it lists itself via
+  `documents(repo_root)` (`book.py` is every `book/*.qmd`). Its
+  `post_checks()` run per file and are merged into one row per check, counts
+  summed and failures named by file; its `collection_checks()` run once over
+  the concatenation, for checks that only make sense on the whole (the
+  numeric claims, which live in one chapter each).
+
+The check functions are shared, in `tools/qmd_validate/checks/document.py`,
+and the numeric claims list in `tools/qmd_validate/claims.py`, so the paper
+and the book are held to the same standard. Together they check:
 
 | Check | Catches |
 |---|---|
@@ -111,9 +164,13 @@ stops being read. So:
 ### Adding a check
 
 Add a function taking a `ValidationContext` and returning a `TestResult` to
-`tools/qmd_validate/docs/stylized-facts.qmd.py`, and list it in `doc_checks()`.
-To validate a new document, create
-`tools/qmd_validate/docs/<name>.qmd.py` — the runner discovers it.
+`tools/qmd_validate/checks/document.py`, and list it in the paper plugin's
+`doc_checks()` and the book plugin's `post_checks()` (or `collection_checks()`
+if it needs the whole book at once). A check that runs per book chapter
+should put its counts at the front of `detail` as `(n/d ...)` so the merge
+can sum them. To validate a new root-level document, create
+`tools/qmd_validate/docs/<name>.qmd.py` — the runner discovers it. To check
+one chapter while editing: `python3 tools/qmd_validate.py --qmd book/<slug>.qmd`.
 
 ## Where to run what
 

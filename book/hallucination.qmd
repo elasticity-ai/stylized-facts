@@ -1,0 +1,20 @@
+---
+title: "When do LLMs hallucinate?"
+claim: "LLMs hallucinate with obscure or long-form answers."
+---
+
+**Short answer.** LLMs hallucinate with obscure or long-form answers.
+
+LLMs struggle with reliability and often make up plausible-sounding but factually incorrect hallucinations.
+
+- GPT-4o and o1-preview hallucinate 30-60 % of the time when asked obscure factual questions, e.g. “Which Dutch player scored an open-play goal in the 2022 Netherlands vs Argentina game in the men’s FIFA World Cup?” [^12]. 
+- When evaluated on a proprietary benchmark of open-ended questions they included incorrect facts in their answers around 80 % of the time [^13].
+
+However, there has been recent progress made in reducing hallucination rates. GPT-5, released in August 2025, had six times fewer hallucinations than o3 as measured by LongFact -@wei2024longformfactuality and FActScore -@min2023factscore.
+
+[^12]: https://assets.ctfassets.net/kftzwdyauwt9/67qJD51Aur3eIc96iOfeOP/71551c3d223cd97e591aa89567306912/o1_system_card.pdf
+[^13]: https://assets.ctfassets.net/kftzwdyauwt9/67qJD51Aur3eIc96iOfeOP/71551c3d223cd97e591aa89567306912/o1_system_card.pdf
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include hallucination.llm.qmd >}}

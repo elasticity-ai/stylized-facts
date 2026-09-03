@@ -1,0 +1,16 @@
+---
+title: "How variable is LLM performance across related sub-tasks?"
+claim: "LLM Performance on related sub-tasks is highly variable."
+---
+
+**Short answer.** LLM Performance on related sub-tasks is highly variable.
+
+LLMs generally have much smaller correlations in their ability to successfully complete similar tasks than humans. 
+
+- @dreyfuss2025human find that, for a given aggregate SAT score, humans have much larger variations across subjects than LLMs.
+
+<!-- - O*Net data suggests that most current jobs contain bundles of tasks that humans have strong positive correlations over their ability to complete. Given LLMs have much weaker correlations, it suggests that if this trend continues over time they will have to far exceed human performance on individual subtasks before being able to match selected human performance on overall jobs.  -->
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include sub-task-variability.llm.qmd >}}

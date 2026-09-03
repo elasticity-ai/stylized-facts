@@ -1,0 +1,20 @@
+---
+title: "Are LLMs calibrated about what they know?"
+claim: "LLMs struggle to give calibrated answers."
+---
+
+**Short answer.** LLMs struggle to give calibrated answers.
+
+LLMs usually are not aware of what they know or do not know.
+
+- @kadavath2022know have found that large-parameter models are fairly well calibrated in standard benchmarks. 
+- However a recent OpenAI -@openai2024simpleqa study found that models are fairly overconfident on tests of obscure facts:  
+![](images/image10.png){.column-margin}
+
+- A Metactulus study in October 2024 found that pro human forecasters were "signficantly better" than top bots on a set of 113 forecasting questions across various domains (eg. politics, economics, the rate of technological progress, etc ) and that the bots displayed a positive bias (overestimating the likelihood of all events on average)[^26]. 
+
+[^26]: https://www.metaculus.com/notebooks/28784/aibq3results/
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include calibration.llm.qmd >}}

@@ -1,0 +1,32 @@
+---
+title: "Do humans perceive LLM abilities accurately?"
+claim: "Humans often misperceive the abilities of LLMs."
+---
+
+**Short answer.** Humans often misperceive the abilities of LLMs.
+
+- @dreyfuss2025human find “projection of human difficulty onto AI predictably distorts subjects' beliefs”.
+
+- @vafa2024humangeneralization say “We collect a dataset of 19K examples of how humans make generalizations across 79 tasks from the MMLU and BIG-Bench benchmarks … based on short interactions, humans reach overconfident conclusions about the capabilities of the largest models.” 
+
+ - @agarwal2024radiology find that radiologists do not use AI data efficiently. 
+
+ - @becker2025developerproductivity find that experienced software engineers inaccurately believe that they have experienced productivity speedups when using AI tools. 
+
+However there are limits on what these studies can tell us.
+
+They measure short-run outcomes, but in most jobs the performance cannot be easily measured with short-run outcomes. E.g. it is challenging to interpret experiments which measure the effect of LLMs on office workers’ measurable activities (emails, pull requests).
+
+ The effects of AI are highly heterogenous across tasks and occupations. 
+
+ It is difficult to extrapolate the results into the future given the advance in model capabilities (@merali2024scaling attempts to fit model scale to productivity.) 
+
+These experiments often do not measure the ability of models to perform tasks autonomously. 
+
+These experiments do not incorporate general equilibrium effects. 
+
+A similar discussion of the limitations of augmentation experiments is made in a recent [Andrey Fradkin blog post](https://empiricrafting.substack.com/p/sci-fi-economics?r=365z3v&utm_campaign=post&utm_medium=web&triedRedirect=true).
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include misperception-of-llm-abilities.llm.qmd >}}

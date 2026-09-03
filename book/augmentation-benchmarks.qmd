@@ -1,0 +1,12 @@
+---
+title: "Are there benchmarks of augmentation?"
+claim: "There are few benchmarks of augmentation"
+---
+
+**Short answer.** There are few benchmarks of augmentation.
+
+- @haupt2025position argues for creating standardized benchmarks of augmentation/uplift they refer to as "centaur" evaluations.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include augmentation-benchmarks.llm.qmd >}}

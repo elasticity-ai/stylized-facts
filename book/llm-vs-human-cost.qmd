@@ -1,0 +1,24 @@
+---
+title: "Are LLMs cheaper than humans?"
+claim: "LLMs are almost always cheaper than humans"
+---
+
+**Short answer.** LLMs are almost always cheaper than humans.
+
+@metr2024capability compare the cost of humans and LLMs to do a variety of tasks, they say “when agents *can* do a task, they can often do so at a fraction of the cost of humans.” 
+
+![From @metr2024capability](images/image16.png){.column-margin}
+
+Similarly @metr2025gpt5evaluation finds:
+
+![Agent Performance on HCAST & RE-Bench by Cost](images/2025-09-19-16-04-34.png){.column-margin}
+
+Exceptions:
+
+- Computer transcription was for a period more accurate but less cost-effective than humans.
+- Reasoning tasks with high test-time expenditure ([ARC-AGI](https://arcprize.org/arc-agi)))
+- [Svanberg et al. (2024)](https://futuretech-site.s3.us-east-2.amazonaws.com/2024-01-18+Beyond_AI_Exposure.pdf) argue that "only 23% of worker compensation “exposed” to AI computer vision would be cost-effective for firms to automate because of the large upfront costs of AI systems." However this is almost entirely fixed costs (data collection, fine tuning, scaffolding), not marginal costs.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include llm-vs-human-cost.llm.qmd >}}

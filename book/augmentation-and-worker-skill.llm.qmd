@@ -1,0 +1,15 @@
+<!-- augmentation-and-worker-skill.llm.qmd — LLM-written literature summary for the question
+     “Does augmentation help lower-productivity workers more?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @brynjolfsson2023callcenter
+- @choi2023legal
+- @noy2023writing
+- @peng2023developerproductivity

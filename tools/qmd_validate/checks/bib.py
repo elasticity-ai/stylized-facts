@@ -48,12 +48,20 @@ def bib_keys(bib_path: Path, bib_tests_path: Path) -> set[str]:
     return {entry.key for entry in entries}
 
 
-def citekeys_resolve() -> callable:
+def citekeys_resolve(allow_none: bool = False) -> callable:
+    """Every `@key` in the document is an entry in the bibliography.
+
+    A document with no citations at all is suspicious for the paper (the
+    check would be vacuous) but normal for a book chapter that is a part page
+    or an unwritten stub, hence `allow_none`.
+    """
+
     def _check(ctx: ValidationContext) -> TestResult:
         citekeys = extract_citekeys(ctx.qmd_text)
         name = f"Citekeys resolve in {ctx.bib_path.name}"
         if not citekeys:
-            return TestResult(name=name, ok=False, detail="(no citekeys found)")
+            return TestResult(name=name, ok=allow_none, detail="(0/0, no citekeys found)",
+                              meta={"missing": [], "citekeys": 0})
         try:
             keys = bib_keys(ctx.bib_path, ctx.bib_tests_path)
         except Exception as exc:

@@ -1,0 +1,16 @@
+---
+title: "How variable is LLM performance on repeated attempts at the same task?"
+claim: "LLM performance on benchmarks is highly variable within the same task."
+---
+
+**Short answer.** LLM performance on benchmarks is highly variable within the same task.
+
+LLMs have stochastic outputs and they often have varying success rates when the same task is repeated. As a consequence an LLM’s average score on a benchmark can be very different from their best-of-n and worst-of-n scores (note that if output was deterministic then all three scores would be identical). 
+
+- @renze2024effect find "changes in temperature from 0.0 to 1.0 do not have a statistically significant impact on LLM performance for problem-solving tasks"
+
+- @song2024good say "we observe that greedy decoding [temperature=0] generally outperforms sampling methods [temperature>0] for most evaluated tasks."
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include within-task-variability.llm.qmd >}}

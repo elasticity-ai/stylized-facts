@@ -1,0 +1,21 @@
+---
+title: "Does the verifiability of a task's output predict LLM success?"
+claim: "The ease of verifying the outputs of a task is the most important attribute in leading LLMs to be successful at a task."
+status: "commented out in the paper"
+---
+
+::: {.callout-warning}
+This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
+:::
+
+**Short answer.** The ease of verifying the outputs of a task is the most important attribute in leading LLMs to be successful at a task.
+
+If a task’s outputs are easily verifiable by both expert humans and a computer this is associated with a 1.4 unit (on a five-point scale) increase in frontier LLM performance on average. 
+
+![](images/image14.png){.column-margin} 
+
+The degree to which the verification can occur autonomously (by computers not expert humans) has gotten more important with reasoning models.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include verifiability.llm.qmd >}}

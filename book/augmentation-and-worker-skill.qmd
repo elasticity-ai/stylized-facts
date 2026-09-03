@@ -1,0 +1,18 @@
+---
+title: "Does augmentation help lower-productivity workers more?"
+claim: "There is some evidence of larger effects on lower-productivity workers"
+---
+
+**Short answer.** There is some evidence of larger effects on lower-productivity workers.
+
+The following RCTs find that augmentation has a larger relative effect on workers with lower pre-experimental productivity levels:
+
+- @brynjolfsson2023callcenter: "Less experienced and lower-skilled workers improve both the speed and quality of their output while the most experienced and highest-skilled workers see small gains in speed and small declines in quality."
+- @noy2023writing: "there is a correlation of 0.49 between a control participant’s average grade on the first task and their average grade on the second task. In the treatment group, initial inequalities are half-erased by the treatment: the correlation between first-task and second-task grades is only 0.25"
+- @choi2023legal
+- @peng2023developerproductivity
+  - Magnitude: "The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group."
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include augmentation-and-worker-skill.llm.qmd >}}

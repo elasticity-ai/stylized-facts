@@ -1,0 +1,25 @@
+---
+title: "Is human time-to-complete the best predictor of LLM success?"
+claim: "The Human Time-to-Complete a task is the best univariate predictor of LLM success rates"
+status: "commented out in the paper"
+---
+
+::: {.callout-warning}
+This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
+:::
+
+**Short answer.** The Human Time-to-Complete a task is the best univariate predictor of LLM success rates.
+
+*See also:* [Are tasks that take humans longer harder for LLMs?](task-length-and-llm-difficulty.qmd).
+
+Taking correlations between LLM performance in 40 benchmarks across nine different features, the human time-to-complete had the highest (negative) correlation. 
+
+![](images/image12.png)
+
+However, the strength of this correlation is mainly due to the strong correlation between human time-to-complete and whether a turn requires multiple-turns or is highly logically complex. Indeed, in a multivariable regression, time-to-complete has one of the weakest effects of any task attribute. 
+
+![](images/image13.png)
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include human-time-to-complete.llm.qmd >}}
