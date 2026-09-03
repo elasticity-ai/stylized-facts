@@ -11,7 +11,7 @@ LLMs are able to perform some simple discrete multi-turn tasks in simulated comp
 
 - Vending-Bench (@backlund2025vending) is a fully simulated vending machine setup: frontier agents routinely drive the business to bankruptcy within a few in-game weeks, suggesting a lack of long-term navigation abilities. 
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include real-world-actions.llm.qmd >}}

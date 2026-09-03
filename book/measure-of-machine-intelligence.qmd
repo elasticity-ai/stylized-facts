@@ -33,7 +33,7 @@ Some examples:
 
 [^levels]: https://www.bloomberg.com/news/articles/2024-07-11/openai-sets-levels-to-track-progress-toward-superintelligent-ai
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include measure-of-machine-intelligence.llm.qmd >}}

@@ -17,7 +17,7 @@ LLM performance is very highly correlated across benchmarks: if model A beats mo
 
 We discuss some literature below which tries to quantify the strength of this correlation.
 
-![From @ruan2024observational](images/image4.png){.column-margin}
+![From @ruan2024observational](images/image4.png)
 
 **AI researchers often treat intelligence as a scalar.**
 
@@ -52,7 +52,7 @@ A large part of academic and industry work on AI is spent estimating "scaling la
 - Much less true now than in the 1980s. -->
 \
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include latent-factor-of-llm-intelligence.llm.qmd >}}

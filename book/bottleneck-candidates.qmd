@@ -124,7 +124,7 @@ Other discussions of bottlenecks:
    - Continual learning post-deployment
    - Original insights
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include bottleneck-candidates.llm.qmd >}}

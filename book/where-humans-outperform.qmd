@@ -9,9 +9,9 @@ It's challenging to find benchmarks in which humans can still outperform compute
 
 Even on UX usage benchmarks, the difficulty for LLMs appear to be more about tooling (which may be more easily rectifiable) than planning capabilities (the OSWorld paper notes that 75% of failed attempts are due to inaccurate mouse clicks rather than planning mistakes).
 
- ![](images/image8.jpg){.column-margin} 
+ ![](images/image8.jpg) 
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include where-humans-outperform.llm.qmd >}}

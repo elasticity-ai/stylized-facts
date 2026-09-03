@@ -19,7 +19,7 @@ Frontier LLMs have very high accuracy on typical exam questions up to the PhD an
 
 However it is notable that most benchmarks rely on *short answer* questions, i.e. they are not evaluated on essays or research papers. Short answer questions are popular in part because they can be automatically graded by a computer, whereas long answers typically require human grading, and so there is far less data available.
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include exam-questions.llm.qmd >}}

@@ -25,13 +25,13 @@ Most enterprises have adopted AI in some form, but they typically report small e
 
    > "Most companies that report financial impacts from using AI within a business function estimate the benefits as being at low levels. 49% of respondents whose organizations use AI in service operations report cost savings, followed by supply chain management (43%) and software engineering (41%), but most of them report cost savings of less than 10%."
 
-![](images/tikz-frozen-capabilities.svg){.column-margin}
+![](images/tikz-frozen-capabilities.svg)
 
 **Most growth in impact is likely due to capabilities rather than diffusion.** Thought experiment: if we had frozen capabilities at gpt-3.5, gpt-4.0, what would be the impact today?
 
 We can observe the causal effect of model improvement on existing cohorts with AB tests, it is harder to attribute user acquisition.
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include economic-impact-so-far.llm.qmd >}}

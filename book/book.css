@@ -17,9 +17,36 @@
 }
 
 .llm-summary table {
-  font-size: 0.9em;
+  font-size: 0.85em;
+}
+
+.llm-summary table td {
+  vertical-align: top;
+}
+
+/* Figures sit in a table cell in the literature summary. The panel spans the
+   page width (`.column-page`) so the figure column has room. */
+.llm-summary table td:last-child {
+  min-width: 14rem;
+}
+
+.llm-summary table img {
+  max-width: 100%;
+  display: block;
 }
 
 .llm-summary .callout {
   background: transparent;
+}
+
+/* Figures are in the body, not the margin. Screenshots from papers vary a
+   lot in size; cap their height so a tall one does not take the page. */
+main figure img,
+main p > img {
+  max-width: 100%;
+  max-height: 480px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

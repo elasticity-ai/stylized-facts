@@ -18,7 +18,7 @@ Test-time scaling is not a perfect substitute for model scale: @wu2025inferences
 - @epoch2025howfarcanreasoningmodelsscale (Epoch) say that existing evidence from OpenAI and DeepSeek shows log-linear relationships between test-time compute and performance on benchmarks, and say "this suggests that performance scales with reasoning training in a way similar to pre-training, at least for math and coding tasks."
 - @balachandran2025inference compare inference-time compute across a variety of tasks and say *"Although inference-time scaling improves performance, its effectiveness varies between domains and tasks, with diminishing returns as task complexity increases."*
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include test-time-scaling.llm.qmd >}}

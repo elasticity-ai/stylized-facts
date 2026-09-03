@@ -55,16 +55,18 @@ work: repository Settings → Pages → Source: "GitHub Actions".
   frontmatter with `title:` (a noun phrase naming the question, e.g. "LLM math
   ability") and `claim:` (the paper's heading verbatim, so the mapping back to
   the paper survives edits); the short answer as **one bold sentence**; the
-  evidence, using only bold lead sentences, paragraphs, bullets, margin
-  figures and block quotes; a closing `## Literature summary (LLM-written)
+  evidence, using only bold lead sentences, paragraphs, bullets, figures
+  and block quotes; a closing `## Literature summary (LLM-written)
   {.unnumbered}` that includes the LLM file. The paper's definition-list
   idiom (`Lead.` / `: detail`) is not used in the book — it becomes a bold
-  lead paragraph.
+  lead paragraph — and the paper's margin figures become body figures (no
+  `{.column-margin}` anywhere in the book).
 - `book/<slug>.llm.qmd` — **LLM-written** literature summary, pulled in with
   `{{< include >}}` inside a `::: {.llm-summary}` div that `book/book.css`
   tints, so a reader can always tell which half a human wrote. Specified by
-  `book/LLM-STYLE-GUIDE.md` (chronological table of results, figures where
-  the literature has them, gaps). No YAML frontmatter: included files cannot
+  `book/LLM-STYLE-GUIDE.md` (a chronological table, one row per paper: title,
+  setting, each relevant finding as one bold sentence, the paper's figure in
+  the row; then gaps). No YAML frontmatter: included files cannot
   carry any. Unwritten ones are stubs: a callout containing `**Stub.**` and
   the citekeys the chapter already cites. That marker is what
   `tools/book_split.py` keys on — a `.llm.qmd` without it is a written

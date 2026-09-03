@@ -12,9 +12,9 @@ This section is commented out in `stylized-facts.qmd`; it is carried here so the
 
 An analysis of 40 publicly available benchmarks found six that LLMs still find particularly challenging (Jun 2025):
 
- ![](images/image11.png){.column-margin}
+ ![](images/image11.png)
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include logically-complex-and-ux-tasks.llm.qmd >}}

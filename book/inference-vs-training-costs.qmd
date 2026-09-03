@@ -9,7 +9,7 @@ There is a tradeoff between training cost and inference cost through model size.
 
 - @epoch2024optimallyallocating concludes AI labs should spend "comparable resources in training and running inference". 
 
-::: {.llm-summary}
+::: {.llm-summary .column-page-right}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include inference-vs-training-costs.llm.qmd >}}
