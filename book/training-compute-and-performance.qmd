@@ -1,9 +1,9 @@
 ---
-title: "How well does training compute predict benchmark performance?"
+title: "Training compute as a predictor of benchmark performance"
 claim: "The best predictor of benchmark performance is training compute."
 ---
 
-**Short answer.** The best predictor of benchmark performance is training compute.
+**The best predictor of benchmark performance is training compute.**
 
 There is a well-known literature on "scaling laws" finding that pretraining loss (i.e. error in predicting the next token) is a predictable function of the training parameters.
 

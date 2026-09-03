@@ -1,9 +1,9 @@
 ---
-title: "What forecasts exist of future AI capabilities?"
+title: "Forecasts of future capabilities"
 claim: "There are few forecasts of future capabilities"
 ---
 
-**Short answer.** There are few forecasts of future capabilities.
+**There are few forecasts of future capabilities.**
 
 - Manifold markets https://manifold.markets/SG/eci-2026-epoch-capabilities-index-h
 

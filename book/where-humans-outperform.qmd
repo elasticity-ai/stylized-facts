@@ -1,11 +1,11 @@
 ---
-title: "On which benchmarks do humans still outperform LLMs?"
+title: "Benchmarks where humans still outperform LLMs"
 claim: "There are few benchmarks in which humans significantly outperform computers."
 ---
 
-**Short answer.** There are few benchmarks in which humans significantly outperform computers.
+**There are few benchmarks in which humans significantly outperform computers.**
 
-It's challenging to find benchmarks in which humans can still outperform computers. A recent list of [“useful benchmarks that have human scores beyond AI SOTA”](https://docs.google.com/document/d/1cwvepQwLXoZJvgsBpUU5gXmgXml2TOqBRqRV_akfmbA/edit?tab=t.0) finds benchmarks that require UX usage have so far (Nov 2024) resisted saturation. 
+It's challenging to find benchmarks in which humans can still outperform computers. A recent list of [“useful benchmarks that have human scores beyond AI SOTA”](https://docs.google.com/document/d/1cwvepQwLXoZJvgsBpUU5gXmgXml2TOqBRqRV_akfmbA/edit?tab=t.0) finds benchmarks that require UX usage have so far (Nov 2024) resisted saturation.
 
 Even on UX usage benchmarks, the difficulty for LLMs appear to be more about tooling (which may be more easily rectifiable) than planning capabilities (the OSWorld paper notes that 75% of failed attempts are due to inaccurate mouse clicks rather than planning mistakes).
 

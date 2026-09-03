@@ -1,7 +1,7 @@
-<!-- prompt-sensitivity.llm.qmd — LLM-written literature summary for the question
-     “How sensitive is LLM performance to prompt wording?”. This file is generated/maintained by an LLM pass and
-     included at the end of the human-written chapter. Do not put YAML
-     frontmatter here: included files cannot carry their own metadata. -->
+<!-- prompt-sensitivity.llm.qmd — LLM-written literature summary for “Sensitivity to prompt wording”.
+     Written and maintained by an LLM pass following book/LLM-STYLE-GUIDE.md,
+     and included at the end of the human-written chapter. No YAML frontmatter
+     here: included files cannot carry their own metadata. -->
 
 ::: {.callout-note}
 **Stub.** The literature summary for this question has not been written yet.

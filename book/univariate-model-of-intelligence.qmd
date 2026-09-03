@@ -1,9 +1,9 @@
 ---
-title: "Is a univariate model of machine and human intelligence a good fit?"
+title: "Univariate models of intelligence"
 claim: "A univariate model of machine and human intelligence will be a poor fit"
 ---
 
-**Short answer.** A univariate model of machine and human intelligence will be a poor fit.
+**A univariate model of machine and human intelligence will be a poor fit.**
 
 ![from @aschenbrenner2024situational](images/2025-07-17-07-40-28.png){.column-margin}
 

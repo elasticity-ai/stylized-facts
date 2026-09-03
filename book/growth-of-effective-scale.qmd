@@ -1,15 +1,15 @@
 ---
-title: "How fast is the effective scale of frontier models growing?"
+title: "Growth in the effective scale of frontier models"
 claim: "The effective scale of frontier models has been growing at around 15X per year."
 ---
 
-**Short answer.** The effective scale of frontier models has been growing at around 15X per year.
+**The effective scale of frontier models has been growing at around 15X per year.**
 
 The effective scale of frontier models takes into account both the increase in training compute used as well as the algorthmic efficiency in utilizing each unit of compute.
 
 - [Epoch AI](https://epochai.org/trends) (Jan 2025) estimate that over 2015-2025:
-  1. Training compute on frontier LLMs has increased around 5X per year; 
-  2. Algorithmic efficiency increased around 3X per year. 
+  1. Training compute on frontier LLMs has increased around 5X per year;
+  2. Algorithmic efficiency increased around 3X per year.
   - Combined, these imply that the “effective” compute used on frontier models is growing at around 15X per year.
 
 ## Literature summary (LLM-written) {.unnumbered}

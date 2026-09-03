@@ -1,5 +1,5 @@
 # Entry points for this repo. See AGENTS.md for what each check covers.
-.PHONY: check bib arxiv arxiv-refresh validate status render render-book fetch reconcile revalidate clean help
+.PHONY: check bib arxiv arxiv-refresh validate status render render-book tikz fetch reconcile revalidate clean help
 
 help:
 	@echo "make check       - bib conventions + arXiv ids + document validation (run before committing)"
@@ -10,6 +10,7 @@ help:
 	@echo "make status      - regenerate the check-status table in README.md"
 	@echo "make render      - render the canonical paper to HTML + PDF"
 	@echo "make render-book - render the question-per-chapter book (book/) to book/_book/"
+	@echo "make tikz        - rebuild the book's tikz figures (book/tikz/*.tex -> images/tikz-*.svg)"
 	@echo "make fetch       - fetch missing papers into references/ (network; run locally)"
 	@echo "make reconcile   - rewrite references/manifest.csv from what is on disk"
 	@echo "make revalidate  - re-check archived texts against the bibliography"
@@ -54,9 +55,23 @@ status:
 render:
 	quarto render stylized-facts.qmd
 
-# HTML only for now; the paper's tikz/sidenotes PDF preamble is not ported.
+# HTML only. No engine, no R, no TeX needed: the tikz figures are pre-rendered
+# SVGs (see `tikz`).
 render-book:
 	quarto render book
+
+# The book's tikz figures. Sources in book/tikz/<name>.tex (standalone
+# documents), output images/tikz-<name>.svg, committed so `quarto render`
+# needs no TeX. Needs pdflatex (texlive-pictures) and pdftocairo (poppler).
+tikz:
+	@set -e; tmp=$$(mktemp -d); \
+	for src in book/tikz/*.tex; do \
+	  name=$$(basename $$src .tex); \
+	  pdflatex -interaction=batchmode -halt-on-error -output-directory $$tmp $$src >/dev/null \
+	    || { echo "pdflatex failed on $$src; see $$tmp/$$name.log"; exit 1; }; \
+	  pdftocairo -svg $$tmp/$$name.pdf images/tikz-$$name.svg; \
+	  echo "images/tikz-$$name.svg"; \
+	done; rm -rf $$tmp
 
 # Network-bound; see AGENTS.md for why this belongs on a local machine.
 # --skip-existing matters: title-search resolvers are non-deterministic, so a

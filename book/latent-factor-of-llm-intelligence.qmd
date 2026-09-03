@@ -1,42 +1,42 @@
 ---
-title: "Is there a single latent factor of LLM intelligence?"
+title: "The latent factor of LLM intelligence"
 claim: "There does appears to be a single latent component of intelligence across LLMs"
 ---
 
-**Short answer.** There does appear to be a single latent component of intelligence across LLMs.
+**There does appear to be a single latent component of intelligence across LLMs.**
 
-*See also:* [How correlated is LLM performance across benchmarks?](correlation-across-benchmarks.qmd).
+*See also:* [Correlation of LLM performance across benchmarks](correlation-across-benchmarks.qmd).
 
 <!-- Historically, the AI capabilities distribution was very varied.
 
-: For most of the history of AI specialized systems were built for different tasks, thus DeepBlue was good at Chess and Watson was good at Jeopardy, but each of them was bad at the other task. -->
+For most of the history of AI specialized systems were built for different tasks, thus DeepBlue was good at Chess and Watson was good at Jeopardy, but each of them was bad at the other task. -->
 
-LLM abilities are highly correlated across models.
+**LLM abilities are highly correlated across models.**
 
-: LLM performance is very highly correlated across benchmarks: if model A beats model B on benchmark X, then it very likely also beats model B on benchmark Y.
+LLM performance is very highly correlated across benchmarks: if model A beats model B on benchmark X, then it very likely also beats model B on benchmark Y.
 
-      We discuss some literature below which tries to quantify the strength of this correlation.
+We discuss some literature below which tries to quantify the strength of this correlation.
 
 ![From @ruan2024observational](images/image4.png){.column-margin}
 
-AI researchers often treat intelligence as a scalar.
+**AI researchers often treat intelligence as a scalar.**
 
-: A common sentiment among AI researchers is that it is best to spend time on making a model generally better, rather than fine-tuning for a specific case.
+A common sentiment among AI researchers is that it is best to spend time on making a model generally better, rather than fine-tuning for a specific case.
 
-      This sentiment famously named the "bitter lesson" by @sutton2019bitter:
+This sentiment famously named the "bitter lesson" by @sutton2019bitter:
 
-      > “general methods that leverage computation are ultimately the most effective, and by a large margin.”
+> “general methods that leverage computation are ultimately the most effective, and by a large margin.”
 
-Much work on "scaling laws" treats model intelligence as a scalar.
+**Much work on "scaling laws" treats model intelligence as a scalar.**
 
-: A large part of academic and industry work on AI is spent estimating "scaling laws", i.e. predicting model performance based on various inputs (e.g. training compute, training data size, model scale, and test-time compute). Most work on scaling laws uses a scalar outcome to represent model intelligence, e.g. prediction error on a corpus, or performance on a difficult benchmark. In principle scaling laws could estimate a *vector* of intelligence outputs however this is relatively rare, researchers tend to treat a single scalar as a sufficient proxy for model intelligence.^[polo2025sloth propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following.]
+A large part of academic and industry work on AI is spent estimating "scaling laws", i.e. predicting model performance based on various inputs (e.g. training compute, training data size, model scale, and test-time compute). Most work on scaling laws uses a scalar outcome to represent model intelligence, e.g. prediction error on a corpus, or performance on a difficult benchmark. In principle scaling laws could estimate a *vector* of intelligence outputs however this is relatively rare, researchers tend to treat a single scalar as a sufficient proxy for model intelligence.^[polo2025sloth propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following.]
 
-Some theories of the latent component.
+**Some theories of the latent component.**
 
-: - The Bitter Lesson.
-   - The "cognitive core": ([Sean Goedeck](https://www.seangoedecke.com/cognitive-core/#fn-1))
-   - The Manifold Hypothesis.
-   - The Platonic Representation hypothesis.
+- The Bitter Lesson.
+- The "cognitive core": ([Sean Goedeck](https://www.seangoedecke.com/cognitive-core/#fn-1))
+- The Manifold Hypothesis.
+- The Platonic Representation hypothesis.
 
 <!-- TO ADD: discuss more seriously reasoning models: e.g. o4-mini is frontier at math, but not at general knowledge.  -->
 

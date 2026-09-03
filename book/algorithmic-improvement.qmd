@@ -1,15 +1,15 @@
 ---
-title: "Can LLMs improve on algorithmic tasks?"
+title: "LLM ability to improve algorithms"
 claim: "LLMs are showing ability to improve on algorithmic tasks."
 ---
 
-**Short answer.** LLMs are showing ability to improve on algorithmic tasks.
+**LLMs are showing ability to improve on algorithmic tasks.**
 
-- @google2025alphaevolve reports a 0.7% saving in Google’s worldwide compute resources) and aid in the design of new TPU chips. 
+- @google2025alphaevolve reports a 0.7% saving in Google’s worldwide compute resources) and aid in the design of new TPU chips.
 
 <!-- Further, published results from Open Source LLM creators underscore the importance of synthethic data for frontier model performance:
 
--  Kimi-K2 -@kimi2025openagentic, a leading open source model released in July 2025, finds "a key advancement... is the introduction of a synthetic data generation strategy to increase token utility." 
+-  Kimi-K2 -@kimi2025openagentic, a leading open source model released in July 2025, finds "a key advancement... is the introduction of a synthetic data generation strategy to increase token utility."
 - DeepSeek -@xin2024deepseekprover trained an automated theorem proving LLM in 2024 and found the model trained on "large-scale synthetic data becomes significantly more powerful." -->
 
 ## Literature summary (LLM-written) {.unnumbered}

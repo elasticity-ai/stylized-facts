@@ -1,5 +1,5 @@
 ---
-title: "How do LLM long-form outputs compare to human ones?"
+title: "LLM long-form outputs"
 claim: "LLMs can produce long-form outputs that are preferred to a large share of human long-form outputs."
 status: "commented out in the paper"
 ---
@@ -8,7 +8,7 @@ status: "commented out in the paper"
 This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
 :::
 
-**Short answer.** LLMs can produce long-form outputs that are preferred to a large share of human long-form outputs.
+**LLMs can produce long-form outputs that are preferred to a large share of human long-form outputs.**
 
 There are many fewer results on AI performance on long-form output, because these typically require humans to judge quality and so these are much more costly to collect data on. A few studies show that frontier LLMs perform well, but not at peak human level.
 

@@ -1,5 +1,5 @@
 ---
-title: "Are new benchmarks stretching the limits of human ability?"
+title: "Benchmarks beyond human ability"
 claim: "New benchmarks are being produced that stretch the limits of human ability."
 status: "commented out in the paper"
 ---
@@ -8,11 +8,11 @@ status: "commented out in the paper"
 This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
 :::
 
-**Short answer.** New benchmarks are being produced that stretch the limits of human ability.
+**New benchmarks are being produced that stretch the limits of human ability.**
 
-The Financial Times [reports](https://www.ft.com/content/866ad6e9-f8fe-451f-9b00-cb9f638c7c59) *“Tech groups are rushing to redesign how they test and evaluate their artificial intelligence models, as the fast advancing technology surpasses current benchmarks.”*  
+The Financial Times [reports](https://www.ft.com/content/866ad6e9-f8fe-451f-9b00-cb9f638c7c59) *“Tech groups are rushing to redesign how they test and evaluate their artificial intelligence models, as the fast advancing technology surpasses current benchmarks.”*
 
-Scale.ai and the CAIS have created a new eval called [“humanity’s last exam](https://agi.safe.ai/submit\\).” When released in January 2025 frontier model performance was at single-digits- by July 2025 several frontier models have surpassed 20% with Grok 4 claiming (with tool use such as internet browsing) results of up to 50%. 
+Scale.ai and the CAIS have created a new eval called [“humanity’s last exam](https://agi.safe.ai/submit\\).” When released in January 2025 frontier model performance was at single-digits- by July 2025 several frontier models have surpassed 20% with Grok 4 claiming (with tool use such as internet browsing) results of up to 50%.
 
 Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/frontiermath/the-benchmark)), of particularly challenging mathematical problems (“expert-level mathematics problems that specialists spend days solving”). They have since created a new level (Tier 4) of even harder such problems after frontier models have made progress on the earlier levels.
 

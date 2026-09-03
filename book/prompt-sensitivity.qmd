@@ -1,9 +1,9 @@
 ---
-title: "How sensitive is LLM performance to prompt wording?"
+title: "Sensitivity to prompt wording"
 claim: "LLM performance is sensitive to prompt wording."
 ---
 
-**Short answer.** LLM performance is sensitive to prompt wording.
+**LLM performance is sensitive to prompt wording.**
 
 The performance of LLMs on certain benchmarks can vary signficantly depending on the prompting given to the model.
 

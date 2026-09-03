@@ -1,7 +1,7 @@
-<!-- training-compute-and-performance.llm.qmd — LLM-written literature summary for the question
-     “How well does training compute predict benchmark performance?”. This file is generated/maintained by an LLM pass and
-     included at the end of the human-written chapter. Do not put YAML
-     frontmatter here: included files cannot carry their own metadata. -->
+<!-- training-compute-and-performance.llm.qmd — LLM-written literature summary for “Training compute as a predictor of benchmark performance”.
+     Written and maintained by an LLM pass following book/LLM-STYLE-GUIDE.md,
+     and included at the end of the human-written chapter. No YAML frontmatter
+     here: included files cannot carry their own metadata. -->
 
 ::: {.callout-note}
 **Stub.** The literature summary for this question has not been written yet.

@@ -1,9 +1,9 @@
 ---
-title: "How quickly do benchmarks saturate?"
+title: "The speed of benchmark saturation"
 claim: "The time between benchmark introduction and saturation has been decreasing"
 ---
 
-**Short answer.** The time between benchmark introduction and saturation has been decreasing.
+**The time between benchmark introduction and saturation has been decreasing.**
 
 If we had a cardinal scale of computer intelligence we could talk about the rate of improvement in a precise way. The best proxy for velocity is the history of AI benchmarks: new benchmarks are introduced when computers achieve human-level performance on the old benchmarks (“saturation”).
 
@@ -13,9 +13,9 @@ Since 2012 the rate of benchmark saturation seems to be increasing:
 <!-- TODO: is there a better graph from Epoch's data -->
 
 <!-- Good sources of benchmark data:
-- [EPOCH AI benchmarking hub](https://epoch.ai/data/ai-benchmarking-dashboard#explore-the-data). 
-- [Stanford AI Index](https://aiindex.stanford.edu/report/) (2025) tracks 8 benchmarks over time, visual and language. 
-- Kiela/Dynabench/Contextual.ai (2023) [“Plotting Progress in AI”](https://contextual.ai/blog/plotting-progress-in-ai/). The data is not shared publicly. 
+- [EPOCH AI benchmarking hub](https://epoch.ai/data/ai-benchmarking-dashboard#explore-the-data).
+- [Stanford AI Index](https://aiindex.stanford.edu/report/) (2025) tracks 8 benchmarks over time, visual and language.
+- Kiela/Dynabench/Contextual.ai (2023) [“Plotting Progress in AI”](https://contextual.ai/blog/plotting-progress-in-ai/). The data is not shared publicly.
 - [Killed by LLM](https://r0bk.github.io/killedbyllm/), Robert Kopel ([discussion](https://news.ycombinator.com/item?id=42606231), [data](https://github.com/R0bk/killedbyllm/blob/main/src/data.ts))
 - [PapersWithCode](https://paperswithcode.com/sota).
  -->

@@ -37,41 +37,57 @@ It adds the trailing commas and canonicalizes arXiv URLs, and is idempotent.
 
 ## The book (`book/`)
 
-The paper restructured as a Quarto book: one *question* per chapter, where
-each question was a claim (a level-2 heading) in `stylized-facts.qmd`.
+The paper restructured as a Quarto book: a flat list of chapters, one per
+*question*, where each question was a claim (a level-2 heading) in
+`stylized-facts.qmd`. Published to GitHub Pages
+(<https://elasticity-ai.github.io/stylized-facts/>) by
+`.github/workflows/book.yml` on push to `main`. One-time setting for that to
+work: repository Settings → Pages → Source: "GitHub Actions".
 
-- `book/_quarto.yml` — the chapter list, grouped into the paper's four parts.
+- `book/_quarto.yml` — the chapter list, in the paper's order, no parts.
   `bibliography: ../stylized-facts.bib`; there is still exactly one
-  bibliography. `book/images` is a symlink to `../images`, likewise.
-- `book/<slug>.qmd` — **human-written**. Frontmatter carries `title:` (the
-  question) and `claim:` (the paper's original heading, so the mapping back
-  to the paper survives edits). The body opens with a one-line
-  `**Short answer.**`, then the prose. Ends with an `{.unnumbered}` heading
-  that includes the LLM file.
-- `book/<slug>.llm.qmd` — **LLM-written** literature summary for the question,
-  pulled in with `{{< include >}}`. No YAML frontmatter (included files cannot
-  carry any). Stubs for now: a callout and the citekeys the chapter already
-  cites, as the reading list for whichever pass writes them.
-- `book/part-*.qmd` — part pages carrying the paper's section intros;
-  `index.qmd` is the paper's own introduction; `offcuts.qmd` and
+  bibliography. `book/images` is a symlink to `../images`, likewise. No
+  engine: the book has no executable code.
+- `book/<slug>.qmd` — **human-written**. Standard format, in this order:
+  frontmatter with `title:` (a noun phrase naming the question, e.g. "LLM math
+  ability") and `claim:` (the paper's heading verbatim, so the mapping back to
+  the paper survives edits); the short answer as **one bold sentence**; the
+  evidence, using only bold lead sentences, paragraphs, bullets, margin
+  figures and block quotes; a closing `## Literature summary (LLM-written)
+  {.unnumbered}` that includes the LLM file. The paper's definition-list
+  idiom (`Lead.` / `: detail`) is not used in the book — it becomes a bold
+  lead paragraph.
+- `book/<slug>.llm.qmd` — **LLM-written** literature summary, pulled in with
+  `{{< include >}}`. Specified by `book/LLM-STYLE-GUIDE.md` (chronological
+  table of results, figures where the literature has them, gaps). No YAML
+  frontmatter: included files cannot carry any. Stubs for now: a callout and
+  the citekeys the chapter already cites.
+- `book/tikz/<name>.tex` — standalone sources of the four figures the paper
+  draws with knitr `{tikz}` chunks. `make tikz` compiles them to
+  `images/tikz-<name>.svg` (pdflatex + pdftocairo), which are committed, so
+  rendering the book needs Quarto and nothing else. Edit the `.tex`, run
+  `make tikz`, commit both. `.gitignore` un-ignores these two paths from its
+  blanket `tikz*` rule for the paper's build residue.
+- `index.qmd` is the paper's own introduction; `offcuts.qmd` and
   `references.qmd` close the book.
 - Chapters marked `status: "commented out in the paper"` correspond to
   sections the paper hides inside `<!-- -->`. They are shown with a warning
   callout so the claims are not lost; delete the chapter or the callout when
   you decide.
 
-`tools/book_split.py` produced the first version of every chapter and holds
-the claim→question mapping (`PARTS`). It is **one-shot**: the human chapters
-are hand-edited from here, so re-running it would clobber them. It refuses to
+`tools/book_split.py` produced every chapter and holds the claim→question
+mapping (`QUESTIONS`) plus the transformations (definition lists, tikz
+extraction, footnote distribution). It is **one-shot**: once the human
+chapters are hand-edited, re-running it would clobber them. It refuses to
 write into a non-empty `book/` without `--force`; use `--out <dir>` to
 preview. If the paper gains a section, add a `Q(...)` to the mapping and
 either run with `--out` and copy the one new chapter across, or write the
-chapter by hand following the layout above.
+chapter by hand following the format above.
 
-Rendering: `make render-book` (HTML only, to `book/_book/`, git-ignored). The
-paper's tikz/sidenotes PDF preamble has not been ported. Quarto is not
-available in every environment this repo is edited from, so a render is not
-part of `make check`.
+Rendering: `make render-book` (HTML, to `book/_book/`, git-ignored). Verified
+with Quarto 1.8.25: no warnings, no citeproc misses. A render is not part of
+`make check` because Quarto is not installed everywhere this repo is edited;
+the Pages workflow is the render check.
 
 ## Local paper archive (`references/`)
 

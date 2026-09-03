@@ -1,0 +1,19 @@
+% Source of images/tikz-two-dimensions.svg. Rebuild with `make tikz`.
+\documentclass[tikz,border=4pt]{standalone}
+\begin{document}
+   \begin{tikzpicture}[scale=7]
+      \draw[thick,<->] (1,0) -- node[midway,below]{ability 1} (0,0)
+         -- node[midway,rotate=90,above]{ability 2} (0,1.1);
+      % \fill[green!50!black,opacity=0.5,rotate=65] (.3,-.2) ellipse (0.25 and 0.1);
+      \fill[red,opacity=0.5,rotate=10] (.5,.5) ellipse (0.3 and 0.1);
+      
+      \node[red!50!black] at (.5,.8) {humans};
+      % \draw[->,thick,green!50!black] (.26,.1)--(.45,.45);
+
+      \fill[green!50!black] (.1,.1) circle(0.03);
+      \fill[green!50!black] (.2,.2) circle(0.03);
+      \fill[green!50!black] (.3,.3) circle(0.03);
+      \fill[green!50!black] (.4,.4) circle(0.03);
+      \node[green!30!black,align=left] at (.6,.3) {LLMs};
+\end{tikzpicture}
+\end{document}

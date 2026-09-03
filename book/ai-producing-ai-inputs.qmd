@@ -1,5 +1,5 @@
 ---
-title: "Can LLMs augment the production of their own inputs?"
+title: "LLMs producing their own inputs"
 claim: "LLMs show ability in augmenting the production of all three of its key inputs (algorithmic improvements, hardware, and data)."
 status: "commented out in the paper"
 ---
@@ -8,7 +8,7 @@ status: "commented out in the paper"
 This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
 :::
 
-**Short answer.** LLMs show ability in augmenting the production of all three of its key inputs (algorithmic improvements, hardware, and data).
+**LLMs show ability in augmenting the production of all three of its key inputs (algorithmic improvements, hardware, and data).**
 
 LLMs are already able to write a significant proportion of the code used by frontier AI labs:
 

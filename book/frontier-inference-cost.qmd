@@ -1,11 +1,11 @@
 ---
-title: "How has the cost of frontier inference changed?"
+title: "The cost of frontier inference"
 claim: "The cost of inference for frontier capabilities has remained roughly stable."
 ---
 
-**Short answer.** The cost of inference for frontier capabilities has remained roughly stable.
+**The cost of inference for frontier capabilities has remained roughly stable.**
 
-The retail price of intelligence is determined by the compute requirement, the cost of compute, and the markup. Also note that the per-token price can be very different from the per-request price for reasoning models. 
+The retail price of intelligence is determined by the compute requirement, the cost of compute, and the markup. Also note that the per-token price can be very different from the per-request price for reasoning models.
 
 - [Artificial Analysis](https://artificialanalysis.ai/trends) show that the per-token price of frontier intelligence over time shows no clear trend (the chart above). Note that this chart does not include the current highest-tier models, as of July 16 Grok4 has a price of $6/M tokens.
 

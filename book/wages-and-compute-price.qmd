@@ -1,9 +1,9 @@
 ---
-title: "Are wages pinned down by the price of compute?"
+title: "Wages and the price of compute"
 claim: "Wages are unlikely to be pinned down by the price of compute"
 ---
 
-**Short answer.** Wages are unlikely to be pinned down by the price of compute.
+**Wages are unlikely to be pinned down by the price of compute.**
 
 Some models feature "equilibrium task-sharing": humans perform tasks that computers are able to do, but it is too expensive for computers:
 
@@ -13,7 +13,7 @@ Some models feature "equilibrium task-sharing": humans perform tasks that comput
 - @acemoglu2024simple
 - @jones2025aiinrnd assumes that all tasks which an AI can do will be done by an AI in equilibrium (assumption 1, p8). However he also expects that significant progress through a reduction in the price of AI tasks.
 
-We argued above that equilibrium task-sharing has historically been true only for a small share of tasks. 
+We argued above that equilibrium task-sharing has historically been true only for a small share of tasks.
 
 Equilibrium task-sharing would require either:
 

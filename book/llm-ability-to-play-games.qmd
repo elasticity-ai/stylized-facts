@@ -1,12 +1,12 @@
 ---
-title: "How well can LLMs play games?"
+title: "LLM ability to play games"
 claim: "LLMs show limited ability to play single-player and multiplayer games."
 ---
 
-**Short answer.** LLMs show limited ability to play single-player and multiplayer games.
+**LLMs show limited ability to play single-player and multiplayer games.**
 
 Frontier LLMs struggle playing games that are simple for children to solve.
-![](images/image9.png){.column-margin} 
+![](images/image9.png){.column-margin}
 
 - Paul Calcraft [discusses](https://x.com/paul_cal/status/1890824247792037898) the state of LLM-gameplaying in early 2025: their performance in tic-tac-toe, connect 4, codenames, and chess, is still well below that of human experts.
 

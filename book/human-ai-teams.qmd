@@ -1,11 +1,11 @@
 ---
-title: "Do human plus AI teams outperform the better of the two alone?"
+title: "Human + AI teams"
 claim: "Human + AI teams do not reliably outperform the better of human or AI performance individually"
 ---
 
-**Short answer.** Human + AI teams do not reliably outperform the better of human or AI performance individually.
+**Human + AI teams do not reliably outperform the better of human or AI performance individually.**
 
-- @vaccaro2024humanai across 16 decision-making tasks hybrid pairs under-performed the top human-or-AI agent in 70 % of cases, though they sometimes added creative diversity. 
+- @vaccaro2024humanai across 16 decision-making tasks hybrid pairs under-performed the top human-or-AI agent in 70 % of cases, though they sometimes added creative diversity.
 
 - @agarwal2024radiology in a radiology-diagnosis experiment, human–AI collaboration improved accuracy by only 0.2 pp over AI-only and did **not** outperform selective automation.  
 

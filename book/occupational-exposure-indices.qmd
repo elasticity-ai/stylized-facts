@@ -1,5 +1,5 @@
 ---
-title: "How correlated are the different occupational exposure indices?"
+title: "Correlation among occupational exposure indices"
 claim: "The correlation between different occupational exposure indices is fairly strong."
 status: "commented out in the paper"
 ---
@@ -8,7 +8,7 @@ status: "commented out in the paper"
 This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
 :::
 
-**Short answer.** The correlation between different occupational exposure indices is fairly strong.
+**The correlation between different occupational exposure indices is fairly strong.**
 
 -[Eloundou et al. (2024)](https://www.science.org/doi/abs/10.1126/science.adj0998)*: “We find generally positive and statistically significant correlations between our LLM exposure measures and previous measurements targeting software and AI.”*
 
