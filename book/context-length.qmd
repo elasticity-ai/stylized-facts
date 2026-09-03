@@ -1,0 +1,14 @@
+---
+title: "How does LLM performance change with context length?"
+claim: "LLM performance degrades significantly with context length."
+---
+
+**Short answer.** LLM performance degrades significantly with context length.
+
+As of July 2025, frontier models have an effective context length (where performance is >85% of a short-context task) of around ~16,000 words in the [NoLiMa Benchmark](https://github.com/adobe-research/NoLiMa). 
+
+- LongBench (@bai2024longbench) is a benchmark for long-context understanding, found that the best models as of Sep 2024 (o1-preview) outperformed human baseliners given 15 minutes by 15% on short tasks (<32k context), this dropped to only a 5% gain for long-context tasks (>128k).
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include context-length.llm.qmd >}}

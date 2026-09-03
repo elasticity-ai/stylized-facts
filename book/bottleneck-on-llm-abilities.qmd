@@ -1,0 +1,28 @@
+---
+title: "Is there a bottleneck on LLM abilities?"
+claim: "There is *some* bottleneck on LLM abilities, but disagreement about where"
+---
+
+**Short answer.** There is *some* bottleneck on LLM abilities, but disagreement about where.
+
+In 2023 many people thought GPT-4 could do a significant fraction of work:
+
+:     - @eloundou2023gpts estimated that GPT-4 would halve the time required to perform a task for between 14% and 56% of all tasks in the economy.
+
+      - @chui2023economic (McKinsey) claimed *"the total percentage of hours that could theoretically be automated by integrating technologies that exist today ... [is] 60–70 percent."*
+
+      In retrospect these estimates seem to have been overly optimistic. There is some missing capability in GPT-4 level ability.
+
+AI researchers are not sure what is the bottleneck.
+
+:     [Andrej Karpathy](https://x.com/karpathy/status/1855659091877937385), Nov 2024:
+
+      > "Even though by many accounts (evals), LLMs are inching well into top expert territory (e.g. in math and coding etc.), you wouldn't hire them over a person for the most menial jobs. It's an interesting challenge how we can create evals for all the "easy" stuff that is secretly hard. Very long context windows, coherence, autonomy, common sense, multimodal I/O that works, ... How do we build good "menial job" evals?"* 
+
+      [Shunyu Yao](https://ysymyth.github.io/The-Second-Half/), April 2025: 
+
+      > “AI has beat world champions at chess and Go, surpassed most humans on SAT and bar exams, and reached gold medal level on IOI and IMO. But the world hasn’t changed much, at least judged by economics and GDP. I call this the utility problem, and deem it the most important problem for AI.”* 
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include bottleneck-on-llm-abilities.llm.qmd >}}

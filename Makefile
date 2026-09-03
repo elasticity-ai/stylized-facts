@@ -1,5 +1,5 @@
 # Entry points for this repo. See AGENTS.md for what each check covers.
-.PHONY: check bib arxiv arxiv-refresh validate status render fetch reconcile revalidate clean help
+.PHONY: check bib arxiv arxiv-refresh validate status render render-book fetch reconcile revalidate clean help
 
 help:
 	@echo "make check       - bib conventions + arXiv ids + document validation (run before committing)"
@@ -9,6 +9,7 @@ help:
 	@echo "make validate    - run the document checks only"
 	@echo "make status      - regenerate the check-status table in README.md"
 	@echo "make render      - render the canonical paper to HTML + PDF"
+	@echo "make render-book - render the question-per-chapter book (book/) to book/_book/"
 	@echo "make fetch       - fetch missing papers into references/ (network; run locally)"
 	@echo "make reconcile   - rewrite references/manifest.csv from what is on disk"
 	@echo "make revalidate  - re-check archived texts against the bibliography"
@@ -52,6 +53,10 @@ status:
 
 render:
 	quarto render stylized-facts.qmd
+
+# HTML only for now; the paper's tikz/sidenotes PDF preamble is not ported.
+render-book:
+	quarto render book
 
 # Network-bound; see AGENTS.md for why this belongs on a local machine.
 # --skip-existing matters: title-search resolvers are non-deterministic, so a

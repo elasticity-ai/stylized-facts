@@ -1,0 +1,118 @@
+---
+title: "What are the candidates for the bottleneck?"
+claim: "There are many candidates for the bottleneck"
+---
+
+**Short answer.** There are many candidates for the bottleneck.
+
+Here we list a variety of abilities that LLMs lack, which might explain the bottleneck to adoption. To make the bottleneck question concrete: LLMs can pass many tests used to test for human aptitudes (SAT, LSAT, civil service exams), and many interview questions, yet LLMs clearly lack the aptitude to perform the associated jobs. Thus there must be some other missing skill.
+
+| Capability               | Benchmark                    | Apr 2023 (GPT-4) | Dec 2025  | Human  |
+| ------------------------ | ---------------------------- | :--------------: | :-------: | :----: |
+| Deductive reasoning      | MATH[^MATH]                  |       23%        |    98%    |        |
+|                          | GPQA[^GPQA]                  |       36%        |    93%    |        |
+| Information-gathering    | GAIA[^GAIA]                  |       15%        |    88%    |        |
+| Accuracy / Hallucination | SimpleQA Verified[^SimpleQA] |       ~30%       |    72%    |        |
+| Long context             | Needle[^needle]              |    50% @ 128K    | 99.7% @ 1M |        |
+| Multimodal inputs        | MMMU-Pro [^MMMU]             |       ~35%       |    81%    |  85%   |
+| In-context learning      | ARC-AGI[^ARCAGI]             |        7%        |    88%    | 77-98% |
+|                          | ARC-AGI 2[^ARCAGI]           |       ~0%        |    45%    |  98%   |
+
+[^needle]: https://cloud.google.com/blog/products/ai-machine-learning/the-needle-in-the-haystack-test-and-how-gemini-pro-solves-it
+[^MATH]:
+[^GPQA]:
+[^SimpleQA]: https://arxiv.org/pdf/2509.07968v1 and https://blog.google/products/gemini/gemini-3/#gemini-3
+[^MMMU]: https://mmmu-benchmark.github.io/#leaderboard and https://blog.google/products/gemini/gemini-3/#gemini-3
+[^ARCAGI]: https://arcprize.org/leaderboard
+
+| Bottleneck                   | Benchmarks                       | Benchmarks  |
+| ---------------------------- | -------------------------------- | ----------- |
+| Continual learning.          | Amodei, Karpathy, Hasssabis.     |             |
+| Novel situations             | RL generalization, world models. |             |
+| Interactive decision-making. |                                  | BALROG, 44% |
+|                              |                                  |             |
+
+
+Data density.
+: @vonwerra2025jaggeddata argues that jaggedness is mainly due to availability of data.
+
+Accuracy.
+: LLMs have often made confident false claims ("hallucinations"), and this has clearly been a barrier to their adoption. This behavior is not penalized in classic benchmarks which score only right and wrong answers, and so the LLM has an incentive to guess. Similarly user pairwise preference does not penalize hallucinations when the user is not immediately aware of the accuracy of claims.
+: Benchmarks can test for accuracy in a variety of ways: (1) score based on confidence; (2) elicit open-ended responses, with a penalty based on claims that are false or misleading.
+
+Deductive reasoning.
+: Many questions involving reasoning are drawn from a fairly stylized pool, and LLMs historically performed poorly on questions that are novel, or have misleading associations ("Alice in Wonderland"). Since the launch of reasoning models in late 2024 LLMs have become far better at deductive problems.  <!-- compositionality -->
+
+Novel situations.
+: LLMs sometimes fail on problems that are very dissimilar to their training data ("out of distribution"). Because LLMs are trained on enormous amounts of data their skills could reflect memorization or interpolation rather than general intelligence.
+
+      @vafa2024worldmodel argue that Transformer-based LLMs can generalize well along some axes but badly along others. They say "such incoherence creates fragility: using a generative model to solve related but subtly different tasks can lead to failures." They propose tests of world model coherence.
+
+High context.
+: Questions on aptitude tests have short prompts, while real-world problems involve rich context.
+
+Continual learning.
+: Typically LLMs have been used in a *stateless* manner, where the model weights are fixed and only the prompt changes. This means that any learning about the environment must happen with a separate system, or by through recursive updates to the prompt. This has been cited by many people as a critical bottleneck: Karpathy, Hassabis, Altman, Amodei.
+
+    [Hassabis, August 2025](https://aipositive.substack.com/p/decoding-deepminds-vision-an-analysis)
+
+    [Dwarkesh Patel, July 2025](https://www.dwarkesh.com/p/timelines-june-2025):
+
+    > "the fundamental problem is that LLMs don’t get better over time the way a human would. The lack of continual learning is a huge huge problem."
+
+    Dario Amodei, August 2025:
+   
+    > "Models learn within the context ... Maybe we'll train the model in such a way that it is specialized for learning over the context. You could, even during the context, update the model's weights ... So, there are lots of ideas that are very close to the ideas we have now that could perhaps do [continual learning].”
+
+    [Noam Brown, Nov 2025](https://x.com/polynoamial/status/1994439121243169176):
+
+    > "More research breakthroughs are probably needed to achieve AGI/ASI. (Continual learning and sample efficiency are two examples that researchers commonly point to.)"
+
+   [Shane Legg](https://www.youtube.com/watch?v=l3u_FAv33G0&t=3s):
+
+   > "So there are all sorts of things like this [continual learning and visual reasoning], that we currently see. I don't think there are fundamental blockers on any of these things. ... So my expectation is over a number of years these things will all get addressed. But they're not there yet.""
+
+   
+
+Planning / long-horizon decision-making.
+: @dorn2025temporal argue that current LLMs are poor at "sequential coherence", they estimate the time-length of ONET tasks as a proxy for sequential coherence required.
+
+In-context learning.
+
+: @chollet2019measureintelligence argues that most benchmarks test for *existing* skills instead of requiring the agent to learn *new* skills, which is distinctive for human intelligence. He introduced the Abstraction and Reasoning Corpus (ARC) task to test for the ability to do skill acquisition (also sometimes called in-context learning).
+: LLMs made significant progress on the ARC benchmark, approaching human levels in 2024. However a new version was introduced (ARC-AGI-2), which is again relatively straight-forward for a human but difficult for an LLM.
+
+Multimodal inputs and outputs.
+
+: LLMs primarily operate on text inputs and outputs.
+
+Interactive decision-making.
+: Questions on aptitude tests do not require a series of decisions, navigating an uncertain situation.
+<!-- Kaggle GameArena -->
+
+Predictability.
+: Some people have claimed a bottleneck is the *unpredictability* of LLM abilities. This can be interpreted in two ways: (1) humans have systematically biased beliefs about LLM abilities; (2)  i.e. even if LLM accuracy might be high over a broad class of questions, the accuracy varies across subclasses. @vafa2024humangeneralization say "when the cost of mistakes is high, more capable models can perform worse on the instances people choose to use them for because they are not aligned with the human generalization function."
+
+      A related point is that LLMs can be inconsistent, giving qualitatively different answers to a question when the wording is slightly different.
+
+Cost.
+: (...)
+
+I have not added separate category for "reliability," meaning lack of randomness, because it is relatively to run an LLM in a mostly deterministic fashion, and so eliminate concerns about randomness.
+
+Other discussions of bottlenecks:
+
+- @toner2025takingjaggedness discusses reasons for jaggedness: (1) easier vs harder to verify tasks; (2) can you put the context in the context window; (3) level of adversarialness; (4) cognitive vs physical.
+- @heitmann2025trajectories 
+   - Performance on tasks that are hard to verify 
+   - Performance on long tasks (that take human workers a long time)
+   - Performance in complex environments
+   - Sufficiently low error rate
+   - Meta-awareness and calibration
+   - Adaptability to the deployment environment
+   - Continual learning post-deployment
+   - Original insights
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include bottleneck-candidates.llm.qmd >}}

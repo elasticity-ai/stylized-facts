@@ -82,6 +82,9 @@ def rows_from_documents() -> list[tuple]:
         return [("Document", "document checks", FAIL, "—", "could not run")]
     rows = []
     for doc in docs:
+        # One group per validated target: the paper, and the book (whose rows
+        # are each check merged across its ~100 chapter files).
+        group = "Book" if doc["qmd"].startswith("book/") else "Paper"
         for item in doc["items"]:
             # The shared bibliography check is already broken out above.
             if item["name"] == "Bibliography tests":
@@ -100,7 +103,7 @@ def rows_from_documents() -> list[tuple]:
                 note = f"{len(meta['skipped'])} source not archived, skipped"
             if item["name"].startswith("Local archive"):
                 symbol, note = INFO, "informational"
-            rows.append(("Document", item["name"], symbol, counts_from(item.get("detail", ""), meta), note))
+            rows.append((group, item["name"], symbol, counts_from(item.get("detail", ""), meta), note))
     return rows
 
 

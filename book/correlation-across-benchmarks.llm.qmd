@@ -1,0 +1,15 @@
+<!-- correlation-across-benchmarks.llm.qmd — LLM-written literature summary for the question
+     “How correlated is LLM performance across benchmarks?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @kipnis2025metabench
+- @ruan2024observational
+- @spangher2024generalized
+- @zhang2025trainbeforetest

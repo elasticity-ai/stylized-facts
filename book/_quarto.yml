@@ -1,0 +1,107 @@
+# Quarto book built from stylized-facts.qmd, one question per chapter.
+# See AGENTS.md ("The book") and tools/book_split.py for the claim→question mapping.
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Stylized Facts about AI & Human Capabilities"
+  author: "Tom Cunningham & Ali Merali"
+  date: today
+  repo-url: https://github.com/elasticity-ai/stylized-facts
+  chapters:
+    - index.qmd
+    - part: "Overview"
+      chapters:
+        - measure-of-machine-intelligence.qmd
+        - taxonomy-of-ai-capabilities.qmd
+        - latent-factor-of-llm-intelligence.qmd
+        - llm-vs-human-latent-intelligence.qmd
+        - bottleneck-on-llm-abilities.qmd
+        - bottleneck-candidates.qmd
+        - forecasts-of-future-capabilities.qmd
+    - part: part-tasks.qmd
+      chapters:
+        - benchmark-saturation.qmd
+        - correlation-across-benchmarks.qmd
+        - training-compute-and-performance.qmd
+        - growth-of-effective-scale.qmd
+        - test-time-scaling.qmd
+        - human-difficulty-vs-llm-difficulty.qmd
+        - context-length.qmd
+        - within-task-variability.qmd
+        - sub-task-variability.qmd
+        - prompt-sensitivity.qmd
+        - task-length-and-llm-difficulty.qmd
+        - llm-math-ability.qmd
+        - llm-programming-ability.qmd
+        - exam-questions.qmd
+        - autonomous-software-engineering.qmd
+        - ai-producing-ai-inputs.qmd
+        - algorithmic-improvement.qmd
+        - long-form-outputs.qmd
+        - economically-valuable-tasks.qmd
+        - where-humans-outperform.qmd
+        - benchmarks-beyond-human-ability.qmd
+        - real-world-actions.qmd
+        - llm-ability-to-play-games.qmd
+        - hallucination.qmd
+        - calibration.qmd
+        - logically-complex-and-ux-tasks.qmd
+        - human-time-to-complete.qmd
+        - verifiability.qmd
+    - part: part-augmentation.qmd
+      chapters:
+        - augmentation-productivity-effects.qmd
+        - augmentation-and-worker-skill.qmd
+        - augmentation-benchmarks.qmd
+        - human-ai-teams.qmd
+        - misperception-of-llm-abilities.qmd
+        - occupational-exposure-indices.qmd
+    - part: "Implications for LLM Economic Impact"
+      chapters:
+        - inference-price-decline.qmd
+        - frontier-inference-cost.qmd
+        - inference-vs-training-costs.qmd
+        - llm-vs-human-cost.qmd
+        - economic-impact-so-far.qmd
+        - directing-technical-change.qmd
+        - univariate-model-of-intelligence.qmd
+        - wages-and-compute-price.qmd
+    - offcuts.qmd
+    - references.qmd
+
+# Shared with the paper: exactly one bibliography and one image directory
+# (book/images is a symlink to ../images).
+bibliography: ../stylized-facts.bib
+
+engine: knitr
+execute:
+  echo: false
+  warning: false
+  error: false
+  cache: true
+
+number-sections: true
+toc-depth: 2
+lightbox: auto
+
+format:
+  html:
+    theme: cosmo
+    grid:
+      margin-width: 400px
+    include-in-header:
+      - text: |
+          <script>window.MathJax = {
+                   tex: { macros: {
+                      bm: ["\\boldsymbol{#1}", 1],
+                      ut: ["\\underbrace{#1}_{\\text{#2}}", 2],
+                      utt: ["\\underbrace{#1}_{\\substack{\\text{#2}\\\\\\text{#3}}}", 3]
+                   } } };
+          </script>
+          <style>
+             dl { display: grid; grid-template-columns: 10em auto; }
+             dt { grid-column-start: 1; font-weight: bold; margin-right: 10px; }
+             dd { grid-column-start: 2; }
+          </style>

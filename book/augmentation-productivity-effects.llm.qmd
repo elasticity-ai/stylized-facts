@@ -1,0 +1,25 @@
+<!-- augmentation-productivity-effects.llm.qmd — LLM-written literature summary for the question
+     “How large are the productivity effects of LLM augmentation?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @agarwal2024radiology
+- @becker2025developerproductivity
+- @brynjolfsson2023callcenter
+- @choi2023legal
+- @coupe2025impact
+- @cui2024software
+- @dellacqua2023consultants
+- @gao2024github
+- @hoffmann2025generative
+- @merali2024scaling
+- @noy2023writing
+- @otis2024entrepreneurs
+- @peng2023developerproductivity
+- @vaccaro2024humanai

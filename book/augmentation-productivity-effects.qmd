@@ -1,0 +1,40 @@
+---
+title: "How large are the productivity effects of LLM augmentation?"
+claim: "The productivity effects of LLM augmentation varies widely"
+---
+
+**Short answer.** The productivity effects of LLM augmentation varies widely.
+
+These RCTs compare behavior of workers with and without access to an AI system:
+
+::: {.column-page}
+
+| Domain               | Reference(s)                     | Productivity                        | Quote                                                                                                                                                                                                                  |
+| -------------------- | -------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Software engineering | @cui2024software                 |                                     |                                                                                                                                                                                                                        |
+|                      | @hoffmann2025generative |                                     |                                                                                                                                                                                                                        |
+|                      | @gao2024github                   | +9% pull requests/day               | “Accenture developers saw an 8.69% increase in pull requests … a 15% increase to the pull request merge rate … an 84% increase in successful builds … developers accepted around 30% of GitHub Copilot’s suggestions.” |
+|                      | @peng2023developerproductivity   | +126% tasks/minute                  | "The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group." (implies +126% tasks/minute)                                                                     |
+|                      | @becker2025developerproductivity | -16% tasks/minute                   | "Allowing AI actually increases completion time by 19%—AI tooling slowed developers down." (implies -16% tasks/minute)                                                                                                 |
+| Consultants          | @dellacqua2023consultants        |                                     |                                                                                                                                                                                                                        |
+| Writing tasks        | @noy2023writing                  |                                     |                                                                                                                                                                                                                        |
+| Call centre workers  | @brynjolfsson2023callcenter      | +15% issues/hour                    | “Access to AI assistance increases worker productivity, as measured by issues resolved per hour, by 15% on average, with substantial heterogeneity across workers.”                                                    |
+| Translators          | @merali2024scaling               | +24% translations/minute            | “With access to any AI model [time taken] was reduced ... [by] 31.1%.” (=+24% translations/minute)                                                                                                                     |
+| Entrepreneurs        | @otis2024entrepreneurs           | no statistically significant effect |                                                                                                                                                                                                                        |
+| Legal tasks          | @choi2023legal                   | +12%--+32% tasks/minute             |                                                                                                                                                                                                                        |
+| Radiology            | @agarwal2024radiology            | +0.2%                               |                                                                                                                                                                                                                        |
+|                      |                                  |                                     |                                                                                                                                                                                                                        |
+:::
+
+   
+![Distribution of effect sizes, from @coupe2025impact](images/2025-10-20-09-27-43.png){.column-margin}
+
+@coupe2025impact survey 45 studies of the impact of genAI tools on productivity, with an average productivity effect of +17%, however with much variation. They also find strong signs of selection in estimates, suggesting the true effects are likely smaller.
+
+@vaccaro2024humanai survey 106 studies published between 2020 and 2023. They found:
+
+   > on average, human–AI combinations performed significantly worse than the best of humans or AI alone (Hedges’ g = −0.23; 95% confidence interval, −0.39 to −0.07). Second, we found performance losses in tasks that involved making decisions and significantly greater gains in tasks that involved creating content. Finally, when humans outperformed AI alone, we found performance gains in the combination, but when AI outperformed humans alone, we found losses.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include augmentation-productivity-effects.llm.qmd >}}

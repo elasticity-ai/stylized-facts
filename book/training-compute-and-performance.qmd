@@ -1,0 +1,29 @@
+---
+title: "How well does training compute predict benchmark performance?"
+claim: "The best predictor of benchmark performance is training compute."
+---
+
+**Short answer.** The best predictor of benchmark performance is training compute.
+
+There is a well-known literature on "scaling laws" finding that pretraining loss (i.e. error in predicting the next token) is a predictable function of the training parameters.
+
+- @kaplan2020scalinglaws predict LLM performance in next-token prediction error, as a function of model size, dataset size, and training compute. They find scaling laws that are reliable across 7 orders of magnitude. Their equations implied that model size was the most important parameter (not dataset size).^["Larger models are significantly more sample-efficient, such that optimally compute-efficient training involves training very large models on a relatively modest amount of data and stopping significantly before convergence."]
+
+- @hoffmann2022computeoptimal revisit scaling laws with more data and a different functional form:
+   $$\ut{\hat{L}}{loss}(\ut{N}{parameters},\ut{D}{data}) \simeq \utt{E}{irreducible}{loss} + aN^{-.3} + bD^{-.3}$$
+
+   Their fit finds that training data and model size should optimaly scale at the same rate. Their model predicted that it would be optimal to train a model with much smaller size and larger amount of data, compared to existing models. They trained such a model ("chinchilla") and indeed found that it significantly outperformed other models with the same compute inputs.
+
+- @choshen2024hitchhiker surveys scaling-law best-practices in 2025, and largely confirms the functional-form and parameters proposed in @hoffmann2022computeoptimal.
+
+The classical "scaling laws" literature predicts the fit on training loss, meaning next-token prediction error.  There is a smaller literature which predicts performance on task benchmarks (note that these are usually from a model with post-training):
+
+![From @owen2024predictable](images/2025-10-21-15-38-28.png)
+
+- @owen2024predictable find that model scale is highly predictive of benchmark performance, and the relationship remains relatively stable across five orders of magnitude.^["when extrapolating BIG-Bench Hard performance across one order of magnitude in compute, we observe average absolute errors of 6 percentage points."] The strongest model in their dataset is GPT-4. This paper also discusses a number of previous contributions on benchmark scaling.
+
+- @ruan2024observational find tight relationships between training compute, simple capability measures, and complex downstream metrics.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include training-compute-and-performance.llm.qmd >}}

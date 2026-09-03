@@ -1,0 +1,21 @@
+---
+title: "How do LLM long-form outputs compare to human ones?"
+claim: "LLMs can produce long-form outputs that are preferred to a large share of human long-form outputs."
+status: "commented out in the paper"
+---
+
+::: {.callout-warning}
+This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
+:::
+
+**Short answer.** LLMs can produce long-form outputs that are preferred to a large share of human long-form outputs.
+
+There are many fewer results on AI performance on long-form output, because these typically require humans to judge quality and so these are much more costly to collect data on. A few studies show that frontier LLMs perform well, but not at peak human level.
+
+- https://openai.com/index/o3-mini-system-card/ can perform better than many humans on writing poems.
+
+- https://www.nature.com/articles/s41562-025-02194-6.pdf in multiround debates GPT-4 was found to be more persuasive than humans in making simple arguments (eg. on questions such as 'Should students have to wear school uniforms?').
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include long-form-outputs.llm.qmd >}}

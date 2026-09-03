@@ -1,0 +1,18 @@
+<!-- bottleneck-candidates.llm.qmd — LLM-written literature summary for the question
+     “What are the candidates for the bottleneck?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @chollet2019measureintelligence
+- @dorn2025temporal
+- @heitmann2025trajectories
+- @toner2025takingjaggedness
+- @vafa2024humangeneralization
+- @vafa2024worldmodel
+- @vonwerra2025jaggeddata

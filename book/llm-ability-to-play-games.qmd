@@ -1,0 +1,19 @@
+---
+title: "How well can LLMs play games?"
+claim: "LLMs show limited ability to play single-player and multiplayer games."
+---
+
+**Short answer.** LLMs show limited ability to play single-player and multiplayer games.
+
+Frontier LLMs struggle playing games that are simple for children to solve.
+![](images/image9.png){.column-margin} 
+
+- Paul Calcraft [discusses](https://x.com/paul_cal/status/1890824247792037898) the state of LLM-gameplaying in early 2025: their performance in tic-tac-toe, connect 4, codenames, and chess, is still well below that of human experts.
+
+- @payne2025strategic find that LLMs are "highly competitive" with the most successful strategies in playing iterated prisoners dilemma games.
+- LMGame-Bench (@hu2025lmgamebench) finds that as of early 2025, LLMs are still below human performance across 6 computergames: Sokoban, Super Mario Bros, Tetris, 2048, Candy Crush, and Ace Attorney.
+- TextQuests (@phan2025textquests) find as of August 2025 LLMs are unable to solve text-based adventure games that would take human players around 30 hours and hundreds of actions to solve without assistance. With clues granted recent models are able to make greater progress- whilst no model prior to 2025 is able to solve any adventure completely, GPT-5 is able to solve 5/25. 
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include llm-ability-to-play-games.llm.qmd >}}

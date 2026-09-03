@@ -1,0 +1,11 @@
+# Offcuts {.unnumbered}
+
+Material from the paper's appendix that is not (yet) attached to a question.
+
+[Jason Wei blog post](https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law) *"The ease of training AI to solve a task is proportional to how verifiable the task is. All tasks that are possible to solve and easy to verify will be solved by AI".* Five specific factors:
+
+   1. Objective truth: everyone agrees what good solutions are
+   2. Fast to verify: any given solution can be verified in a few seconds
+   3. Scalable to verify: many solutions can be verified simultaneously
+   4. Low noise: verification is as tightly correlated to the solution quality as possible
+   5. Continuous reward: it’s easy to rank the goodness of many solutions for a single problem

@@ -1,0 +1,24 @@
+---
+title: "Can the direction of AI technical change be steered?"
+claim: "We may not be able to direct technical change"
+---
+
+**Short answer.** We may not be able to direct technical change.
+
+**Many economists have said we should shift the focus of our AI research:**
+
+@brynjolfsson2023turing
+
+> "an excessive focus on developing and deploying [human-level AI] can lead us into a trap ... when AI is focused on augmenting humans rather than mimicking them, then humans retain the power to insist on a share of the value created"
+
+@acemoglu2021ai:
+
+> "our current trajectory automates work to an excessive degree while refusing to invest in human productivity
+
+**This may not be possible:** augmenting AI and automating AI may be the same AI.
+
+If there is a single latent factor of model ability, then work to train an augmenting model looks very similar to work to train an automating model.  The ability to significantly steer AI capabilities seems limited.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include directing-technical-change.llm.qmd >}}

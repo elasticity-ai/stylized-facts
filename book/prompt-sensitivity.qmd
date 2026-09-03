@@ -1,0 +1,18 @@
+---
+title: "How sensitive is LLM performance to prompt wording?"
+claim: "LLM performance is sensitive to prompt wording."
+---
+
+**Short answer.** LLM performance is sensitive to prompt wording.
+
+The performance of LLMs on certain benchmarks can vary signficantly depending on the prompting given to the model.
+
+- @mirzadeh2024gsm find that adding irrelevant instructions to a prompt significantly lowers performance on grade-school level questions. However [Andrew Mayne (2024)](https://andrewmayne.com/2024/10/18/can-you-dramatically-improve-results-on-the-latest-large-language-model-reasoning-benchmark-with-a-simple-prompt/) shows that this performance penalty disappears when the prompt included a warning (“*this might be a trick question designed to confuse LLMs with additional information.”*).
+
+-  @valmeekam2024llms finds that translating an ordinary problem into an artificial language significantly lowers performance on planning problems (e.g. “mystery blocksworld” in PlanBench). However o1-preview was still able to perform at 50%.
+
+- @li2025perturbation find that performance on math problems degrades somewhat when reworded. The declines are particularly severe for small open-source models.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include prompt-sensitivity.llm.qmd >}}

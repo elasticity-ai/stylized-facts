@@ -1,0 +1,16 @@
+<!-- test-time-scaling.llm.qmd — LLM-written literature summary for the question
+     “How much does test-time scaling improve performance?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @balachandran2025inference
+- @beeching2024scalingtesttimecompute
+- @epoch2025howfarcanreasoningmodelsscale
+- @wang2023selfconsistency
+- @wu2025inferencescaling

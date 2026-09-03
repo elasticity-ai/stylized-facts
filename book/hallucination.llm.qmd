@@ -1,0 +1,13 @@
+<!-- hallucination.llm.qmd — LLM-written literature summary for the question
+     “When do LLMs hallucinate?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @min2023factscore
+- @wei2024longformfactuality

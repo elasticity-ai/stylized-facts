@@ -1,0 +1,16 @@
+---
+title: "Can LLMs perform actions in the real world?"
+claim: "LLMs show limited ability to perform actions in the real world."
+---
+
+**Short answer.** LLMs show limited ability to perform actions in the real world.
+
+LLMs are able to perform some simple discrete multi-turn tasks in simulated computer environments but have yet to saturate benchmarks of simple web-browsing tasks such as [Tau-Bench](https://hal.cs.princeton.edu/taubench_retail) and [OS-world](https://arxiv.org/pdf/2404.07972).
+
+- Anthropic reported on a [2025 project](https://www.anthropic.com/research/project-vend-1)   for Claude to run as a "shopkeeper" for a vending machine inside the Anthropic offices. They found that the agent hallucinated payment accounts, sold items at a loss, and got talked into severe discounts.
+
+- Vending-Bench (@backlund2025vending) is a fully simulated vending machine setup: frontier agents routinely drive the business to bankruptcy within a few in-game weeks, suggesting a lack of long-term navigation abilities. 
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include real-world-actions.llm.qmd >}}

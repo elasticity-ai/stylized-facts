@@ -1,0 +1,52 @@
+---
+title: "How large has the economic impact of LLMs been so far?"
+claim: "The economic impact of LLMs has been modest so far"
+---
+
+**Short answer.** The economic impact of LLMs has been modest so far.
+
+Around 1/2 of US adults regularly use an LLM-based chatbot.
+: The productivity impact is perhaps 0.1-1% of GDP:
+
+   - @bick2024rapid: 0.1-0.9% aggregate productivity boost through time-savings on work tasks.
+   - @humlum2025large: 3% average self-reported time saving among users.
+   - @collis2025wta: genAI app users report valuations (Willingness-to-Accept) equivalent to around 0.3% of GDP ($98 per user, $97B total).
+
+Probably the biggest economic impact is on home production.
+: Working on a paper documenting ChatGPT use. Note that Anthropic and Microsoft papers only focus on use at work tasks.
+
+Enterprise impacts are still small.
+: Most enterprises have adopted AI in some form, but they typically report small effects on revenue or costs.
+
+@maslej2025aiindex say:
+
+   > "Most companies that report financial impacts from using AI within a business function estimate the benefits as being at low levels. 49% of respondents whose organizations use AI in service operations report cost savings, followed by supply chain management (43%) and software engineering (41%), but most of them report cost savings of less than 10%."
+
+```{tikz}
+#| fig-column: margin
+\begin{tikzpicture}[scale=4]
+  \draw[<->] (1,0)  node[right] {time}--(0,0) -- (0,1);
+  \draw[gray!50!white] (.2,1)--(.2,0) node[left,rotate=90,gray] {2023};
+  \draw[gray!50!white] (.4,1)--(.4,0) node[left,rotate=90,gray] {2024};
+  \draw[gray!50!white] (.6,1)--(.6,0) node[left,rotate=90,gray] {2025};
+  \draw[gray!50!white] (.8,1)--(.8,0) node[left,rotate=90,gray] {2026};
+  \draw[gray!50!white] (1,1)--(1,0) node[left,rotate=90,gray] {2027};
+  \draw[dashed] (0.45,1)--(0.45,0);
+  \draw[domain=0.1:.65,smooth,samples=100,blue!25!white,very thick] plot (\x,{0.08*exp(4*\x)});
+  \draw[domain=0.1:.45,smooth,samples=100,blue,very thick] plot (\x,{0.08*exp(4*\x)});
+  \draw[blue,very thick] (0.45,0.48)--(0.65,0.48)  node[right,align=left] {frozen capabilities};
+
+  \draw[domain=0.1:.65,smooth,samples=100,red!25!white,very thick] plot (\x,{0.03*exp(4*\x)});
+  \draw[domain=0.1:.45,smooth,samples=100,red,very thick] plot (\x,{0.03*exp(4*\x)});
+  \draw[red,very thick] plot[smooth,tension=1] coordinates{(0.45,0.18) (0.55,0.24) (0.65,0.28)}
+      node[right,align=left] {realized value of AI};
+\end{tikzpicture}
+```
+
+**Most growth in impact is likely due to capabilities rather than diffusion.** Thought experiment: if we had frozen capabilities at gpt-3.5, gpt-4.0, what would be the impact today?
+
+We can observe the causal effect of model improvement on existing cohorts with AB tests, it is harder to attribute user acquisition.
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include economic-impact-so-far.llm.qmd >}}

@@ -1,0 +1,30 @@
+---
+title: "How correlated is LLM performance across benchmarks?"
+claim: "LLM performance is highly correlated across benchmarks"
+---
+
+**Short answer.** LLM performance is highly correlated across benchmarks.
+
+*See also:* [Is there a single latent factor of LLM intelligence?](latent-factor-of-llm-intelligence.qmd).
+
+![From @spangher2024generalized](images/image3.png){.column-margin}
+
+![From @ruan2024observational](images/image4.png){.column-margin}
+
+Frontier models that surpass previous models on one benchmark usually outperform them on most other benchmarks.
+
+: @spangher2024generalized construct an aggregatation across benchmark scores (MPG = Model Performance and Goodness), which they find is highly correlated with Elo rating on LMArena. The strongest model in their dataset is `o1-preview`.
+
+: @ruan2024observational create "observational scaling laws" from the performance of 77 LLMs (as of May 2024) on 8 benchmarks. They find the first component explains 80% of the variation, also that training compute is highly predictive of this factor (for open models, which have known scale). They also fit scaling laws for the effect of inference-time techniques such as Chain-of-Thought and Self-Consistency.
+
+: @kipnis2025metabench find a small set of questions which are highly predictive of overall model scores, and that "a single underlying common factor whose Spearman correlation with the total score is r= 0.93."
+
+: @zhang2025trainbeforetest find that differences in model abilities across benchmarks decline substantially when the models are given a small fine-tuning on the specific benchmark (train-before-test).
+
+    > "train-before-test reduces the model-score matrix to essentially rank one, indicating that model potential is dominated by one latent factor, uncovered by train-before-test."
+
+    They also find that the latent factor is very highly correlated with pretraining perplexity.^[Train-before-test also raises rank agreement between benchmarks: "On average, the overall average Kendall’s τ is 0.52 for direct evaluation and 0.76 for train-before-test."]
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include correlation-across-benchmarks.llm.qmd >}}

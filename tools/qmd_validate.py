@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Validate the Quarto documents in this repo against per-document checks.
 
-Each document with a plugin in tools/qmd_validate/docs/ is checked. See
-AGENTS.md for what the checks cover and how to add one.
+Each plugin in tools/qmd_validate/docs/ names what it checks: `<name>.qmd.py`
+checks the root-level `<name>.qmd`; a plain `<name>.py` checks a collection
+of files it lists itself (the book). See AGENTS.md for what the checks cover
+and how to add one.
 
     python3 tools/qmd_validate.py --all
     python3 tools/qmd_validate.py --qmd stylized-facts.qmd
+    python3 tools/qmd_validate.py --qmd book/hallucination.qmd   # one chapter
     python3 tools/qmd_validate.py --all --json
 """
 from __future__ import annotations
@@ -20,7 +23,13 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from tools.qmd_validate.core import ValidationContext
-from tools.qmd_validate.plugin import load_plugin, plugin_path_for_qmd, run_plugin_checks
+from tools.qmd_validate.plugin import (
+    PostPlugin,
+    load_plugin,
+    plugin_path_for_qmd,
+    run_collection,
+    run_plugin_checks,
+)
 from tools.qmd_validate.report import overall_ok, render_json, render_text
 from tools.qmd_validate.util import find_repo_root, read_text, to_json
 
@@ -38,29 +47,53 @@ def build_context(repo_root: Path, qmd_path: Path) -> ValidationContext:
     )
 
 
-def discover_qmd_paths_from_plugins(repo_root: Path) -> list[Path]:
+def discover_plugins(repo_root: Path) -> list[PostPlugin]:
     plugin_dir = repo_root / "tools/qmd_validate/docs"
     if not plugin_dir.exists():
         return []
-    qmds: list[Path] = []
-    seen: set[Path] = set()
-    for plugin in sorted(plugin_dir.glob("*.qmd.py")):
-        qmd_name = plugin.name[: -len(".py")]
-        qmd_path = repo_root / qmd_name
-        if qmd_path.exists() and qmd_path not in seen:
-            qmds.append(qmd_path)
-            seen.add(qmd_path)
-    return qmds
+    singles: list[PostPlugin] = []
+    collections: list[PostPlugin] = []
+    for path in sorted(plugin_dir.glob("*.py")):
+        if path.name.startswith("_"):
+            continue
+        plugin = load_plugin(path)
+        if plugin.is_collection():
+            collections.append(plugin)
+        else:
+            qmd_path = repo_root / path.name[: -len(".py")]
+            if qmd_path.exists():
+                singles.append(plugin)
+    # Canonical documents first, derived collections (the book) after, so the
+    # report and the README table read top-down from the source of truth.
+    return singles + collections
+
+
+def run_plugin(repo_root: Path, plugin: PostPlugin, only: list[Path] | None = None) -> dict:
+    """Run one plugin. Returns {"qmd": label, "results": [...]}. For a
+    collection the label names the plugin and the file count."""
+    if plugin.is_collection():
+        results, files = run_collection(
+            plugin, repo_root, lambda p: build_context(repo_root, p), only=only
+        )
+        label = f"{plugin.label}/ ({len(files)} files)"
+        return {"qmd": label, "results": results}
+    qmd_path = repo_root / plugin.label
+    ctx = build_context(repo_root, qmd_path)
+    return {"qmd": str(qmd_path), "results": run_plugin_checks(ctx, plugin)}
 
 
 def run_one(repo_root: Path, qmd_path: Path) -> dict:
-    ctx = build_context(repo_root, qmd_path)
+    """`--qmd path`: a root document with its own plugin, or one file of a
+    collection (then only that file's per-file checks run)."""
     plugin_path = plugin_path_for_qmd(repo_root, qmd_path)
-    if not plugin_path.exists():
-        raise SystemExit(f"No plugin for {qmd_path.name}. Expected: {plugin_path}")
-    plugin = load_plugin(plugin_path)
-    results = run_plugin_checks(ctx, plugin)
-    return {"qmd": str(qmd_path), "results": results}
+    if plugin_path.exists():
+        plugin = load_plugin(plugin_path)
+        ctx = build_context(repo_root, qmd_path)
+        return {"qmd": str(qmd_path), "results": run_plugin_checks(ctx, plugin)}
+    for plugin in discover_plugins(repo_root):
+        if plugin.is_collection() and qmd_path in plugin.documents(repo_root):
+            return run_plugin(repo_root, plugin, only=[qmd_path])
+    raise SystemExit(f"No plugin for {qmd_path}. Expected {plugin_path}, or a collection plugin listing it.")
 
 
 def main() -> int:
@@ -79,11 +112,10 @@ def main() -> int:
     repo_root = find_repo_root(Path.cwd())
 
     if args.all:
-        qmds = discover_qmd_paths_from_plugins(repo_root)
         docs = []
         any_fail = False
-        for qmd_path in qmds:
-            doc = run_one(repo_root, qmd_path)
+        for plugin in discover_plugins(repo_root):
+            doc = run_plugin(repo_root, plugin)
             doc_json = render_json(doc["results"])
             doc_json["qmd"] = doc["qmd"]
             docs.append({"qmd": doc["qmd"], "results": doc["results"], "json": doc_json})
@@ -93,7 +125,7 @@ def main() -> int:
             print(to_json({"overall_ok": not any_fail, "docs": [d["json"] for d in docs]}))
         else:
             for d in docs:
-                name = Path(d["qmd"]).name
+                name = Path(d["qmd"]).name if "/" not in d["qmd"] or d["qmd"].startswith("/") else d["qmd"]
                 print(render_text(d["results"], title=f"Validation Checks ({name})"))
                 print()
         return 1 if any_fail else 0
@@ -110,7 +142,7 @@ def main() -> int:
     if args.json:
         print(to_json(render_json(results)))
     else:
-        print(render_text(results))
+        print(render_text(results, title=f"Validation Checks ({doc['qmd']})"))
     return 0 if overall_ok(results) else 1
 
 

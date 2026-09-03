@@ -1,0 +1,22 @@
+---
+title: "How fast is the price of inference falling for a fixed capability?"
+claim: "The price of inference for a fixed level of capability has been falling at 10X/year or faster."
+---
+
+**Short answer.** The price of inference for a fixed level of capability has been falling at 10X/year or faster.
+
+![From @maslej2025aiindex](images/image15.png){.column-margin}
+
+- @maslej2025aiindex estimate that inference costs, for a given level of intelligence, fell over 2022-2024 at annual rates exceeding 10X/year.
+
+![](images/2025-07-16-22-25-34.png){.column-margin}
+
+- [Artificial Analysis](https://artificialanalysis.ai/trends) track per-token price trends since 2022: within each tier of model intelligence, the price typically halves every few months.
+
+![From @epoch2025llminferencepricetrends](images/2025-10-20-12-31-11.png){.column-margin}
+
+- @epoch2025llminferencepricetrends find price declines over 2023-2025 from between 9X/year (for gpt-3.5 ability on MMLU), up to 900X/year (for gpt-4o ability on GPQA).
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include inference-price-decline.llm.qmd >}}

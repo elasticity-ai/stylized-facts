@@ -1,0 +1,15 @@
+<!-- economic-impact-so-far.llm.qmd — LLM-written literature summary for the question
+     “How large has the economic impact of LLMs been so far?”. This file is generated/maintained by an LLM pass and
+     included at the end of the human-written chapter. Do not put YAML
+     frontmatter here: included files cannot carry their own metadata. -->
+
+::: {.callout-note}
+**Stub.** The literature summary for this question has not been written yet.
+:::
+
+Sources already cited in the human-written chapter:
+
+- @bick2024rapid
+- @collis2025wta
+- @humlum2025large
+- @maslej2025aiindex

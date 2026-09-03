@@ -1,0 +1,21 @@
+---
+title: "Can LLMs augment the production of their own inputs?"
+claim: "LLMs show ability in augmenting the production of all three of its key inputs (algorithmic improvements, hardware, and data)."
+status: "commented out in the paper"
+---
+
+::: {.callout-warning}
+This section is commented out in `stylized-facts.qmd`; it is carried here so the claim is not lost. Treat as a draft.
+:::
+
+**Short answer.** LLMs show ability in augmenting the production of all three of its key inputs (algorithmic improvements, hardware, and data).
+
+LLMs are already able to write a significant proportion of the code used by frontier AI labs:
+
+- OpenAI say o3 succeeds autonomously on 44% of OpenAI’s pull-request (PR) tasks (@openai2025o3o4systemcard).
+- Anthropic say over 70% of Anthropic's PRs are “authored” by LLMs (@anthropic2025devday).
+- Google say more than 25% of all the code at Google is written by AI (@google2024codeai).
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include ai-producing-ai-inputs.llm.qmd >}}

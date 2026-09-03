@@ -1,0 +1,41 @@
+---
+title: "Is there a standard taxonomy of AI capabilities?"
+claim: "There is no standard taxonomy of AI capabilities."
+---
+
+**Short answer.** There is no standard taxonomy of AI capabilities.
+
+There are hundreds of different AI benchmarks of capability.
+: These benchmarks are often informally grouped into types which test different types of ability, e.g. "knowledge", "reasoning", "programming", "agentic ability", however there is no generally-accepted taxonomy.
+
+![18-dimensional taxonomy from @zhou2025generalscales](images/image2.png){.column-margin}
+
+![10-dimensional taxonomy from @huber2025llmsblooms](images/2025-10-19-15-07-10.png){.column-margin}
+
+![10-dimensional taxonomy from @hendrycks2025agidefinition](images/2025-10-19-14-47-17.png){.column-margin}
+
+![From @ilic2024positive, showing their preferred 2-factor model](images/2025-10-21-15-33-31.png){.column-margin}
+
+![From @maimon2025iq](images/2025-12-05-06-36-08.png){.column-margin}
+
+Some taxonomies of AI capabilities have been proposed but none have been widely adopted.
+: @burnell2023reveal look at variation across 29 LLMs and 27 benchmarks (all prior to GPT-4). The first 3 factors explain 33%, 31%, and 17% of performance, and they interpret those factors as "reasoning", "comprehension" and "core language modeling." They say "capabilities are not monolithic. Instead, they are better explained by three well-delineated factors that represent reasoning, comprehension and core language modeling."
+: @ilic2024positive tested 591 LLMs on 12 different evaluations, as of March 2024. In their preferred specification the first factor had a loading of 0.81, implying an R^2 of 0.66. They also found that the "number of LLM parameters correlated positively with this general ability."
+: @polo2025sloth propose a decomposition with three latent factors: reasoning, knowledge, and instruction-following. However they do not seem to report overall variance explained by each of the factors.
+: @maimon2025iq analyze 60 LLMs on 44 tasks, and propose eight latent factors.
+: @zhou2025generalscales propose an index of 18 different human-interpretable capabilities (ADeLe). They use an LLM to label 16,000 "task instances" from 20 benchmarks, using rubrics to define each capability. This allows them to predict LLM performance on a task just based on its content, without any prior LLM successes. The scores on each dimension are 1-5, they note that they scores approximately correspond to frequency of achievement among humans, where score $L$ will be achieved by $1/10^{L-1}$ people.^["an item is at level $l$ if l is the highest number such that, in at least 95% of samples of $n = 10^l$ individuals, there is at least one correct."]
+response.")
+: @oecd2025aicapabilityindicatorsfullreport organize capabilities across nine dimensions. The criteria are mostly qualitative, and their scoring is done by a panel of experts with reference to various benchmark scores. OECD's dimension: Language; Social interaction; Problem solving; Creativity; Metacognition and critical thinking; Knowledge, learning and memory; Vision; Manipulation; Robotic intelligence.
+: @huber2025llmsblooms organize benchmark tasks according to "Bloom's Taxonomy", a heirarchical framework designed to classify educational learning objectives for humans, with 6 levels: Remember, Understand, Apply, Analyze, Evaluate, Create. They say there are a lack of benchmarks to measure the two highest levels ("evaluate" and "create").
+: @hendrycks2025agidefinition define capabilities along 10 dimensions, based on the Cattell-Horn-Carroll (CHC) theory of cognitive abilities. They give testable evals for only some of these capacities.
+
+Many taxonomies are based on components of between-agent variation.
+: Many taxonomies are based on latent factors in variation in performance in a range of tasks.
+
+    Some taxonomies are based on variation among human abilities (e.g. @hendrycks2025agidefinition, @huber2025llmsblooms). Some taxonomies are based on variation across LLM abilities (@burnell2023reveal, @ilic2024positive, @polo2025sloth, @maimon2025iq, @zhou2025generalscales).
+
+    A difficulty with both of these approaches is that they are designed to measure variation *within* one type of agent (LLM or human), not *between* humans and LLMs. There is reason to expect that there exist important human-LLM differences that are orthogonal to within-human or within-LLM variation, e.g. types of tasks where humans show little variation, and LLMs show little variation, but there are large human-LLM differences in ability.^[A similar argument is made by Zachary Tidler et al. [here](https://aievaluation.substack.com/p/is-the-definition-of-agi-a-percentage).]
+
+## Literature summary (LLM-written) {.unnumbered}
+
+{{< include taxonomy-of-ai-capabilities.llm.qmd >}}
