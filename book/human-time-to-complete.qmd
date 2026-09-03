@@ -20,6 +20,8 @@ However, the strength of this correlation is mainly due to the strong correlatio
 
 ![](images/image13.png)
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include human-time-to-complete.llm.qmd >}}
+:::

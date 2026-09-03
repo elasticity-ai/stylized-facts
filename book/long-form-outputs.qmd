@@ -16,6 +16,8 @@ There are many fewer results on AI performance on long-form output, because thes
 
 - https://www.nature.com/articles/s41562-025-02194-6.pdf in multiround debates GPT-4 was found to be more persuasive than humans in making simple arguments (eg. on questions such as 'Should students have to wear school uniforms?').
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include long-form-outputs.llm.qmd >}}
+:::

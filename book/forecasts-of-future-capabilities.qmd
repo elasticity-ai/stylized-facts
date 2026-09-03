@@ -7,6 +7,8 @@ claim: "There are few forecasts of future capabilities"
 
 - Manifold markets https://manifold.markets/SG/eci-2026-epoch-capabilities-index-h
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include forecasts-of-future-capabilities.llm.qmd >}}
+:::

@@ -81,6 +81,7 @@ lightbox: auto
 format:
   html:
     theme: cosmo
+    css: book.css   # tints the LLM-written section
     toc: false   # chapters are short; the sidebar is the table of contents
     grid:
       margin-width: 400px

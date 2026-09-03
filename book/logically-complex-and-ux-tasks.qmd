@@ -14,6 +14,8 @@ An analysis of 40 publicly available benchmarks found six that LLMs still find p
 
  ![](images/image11.png){.column-margin}
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include logically-complex-and-ux-tasks.llm.qmd >}}
+:::

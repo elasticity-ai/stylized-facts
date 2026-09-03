@@ -19,6 +19,8 @@ claim: "We may not be able to direct technical change"
 
 If there is a single latent factor of model ability, then work to train an augmenting model looks very similar to work to train an automating model.  The ability to significantly steer AI capabilities seems limited.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include directing-technical-change.llm.qmd >}}
+:::

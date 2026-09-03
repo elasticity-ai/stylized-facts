@@ -16,6 +16,8 @@ If a task’s outputs are easily verifiable by both expert humans and a computer
 
 The degree to which the verification can occur autonomously (by computers not expert humans) has gotten more important with reasoning models.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include verifiability.llm.qmd >}}
+:::

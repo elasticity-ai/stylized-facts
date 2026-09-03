@@ -43,6 +43,8 @@ Aptitude tests that are predictive for humans are not predictive for LLMs. GPT-4
 
 LLMs are able to do tasks no human can: LLMs can translate between pairs of languages which no human knows (Aymara to Kazakh), can combine knowledge from two very different domains.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include llm-vs-human-latent-intelligence.llm.qmd >}}
+:::

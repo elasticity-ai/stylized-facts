@@ -31,6 +31,8 @@ Most enterprises have adopted AI in some form, but they typically report small e
 
 We can observe the causal effect of model improvement on existing cohorts with AB tests, it is harder to attribute user acquisition.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include economic-impact-so-far.llm.qmd >}}
+:::

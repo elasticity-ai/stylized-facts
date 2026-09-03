@@ -25,6 +25,8 @@ claim: "LLM performance is highly correlated across benchmarks"
 
 They also find that the latent factor is very highly correlated with pretraining perplexity.^[Train-before-test also raises rank agreement between benchmarks: "On average, the overall average Kendall’s τ is 0.52 for direct evaluation and 0.76 for train-before-test."]
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include correlation-across-benchmarks.llm.qmd >}}
+:::

@@ -12,6 +12,8 @@ The effective scale of frontier models takes into account both the increase in t
   2. Algorithmic efficiency increased around 3X per year.
   - Combined, these imply that the “effective” compute used on frontier models is growing at around 15X per year.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include growth-of-effective-scale.llm.qmd >}}
+:::

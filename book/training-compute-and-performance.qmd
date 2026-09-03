@@ -24,6 +24,8 @@ The classical "scaling laws" literature predicts the fit on training loss, meani
 
 - @ruan2024observational find tight relationships between training compute, simple capability measures, and complex downstream metrics.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include training-compute-and-performance.llm.qmd >}}
+:::

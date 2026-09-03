@@ -16,6 +16,8 @@ Scale.ai and the CAIS have created a new eval called [“humanity’s last exam]
 
 Epoch.AI recently compiled a benchmark, [FrontierMATH]((https://epochai.org/frontiermath/the-benchmark)), of particularly challenging mathematical problems (“expert-level mathematics problems that specialists spend days solving”). They have since created a new level (Tier 4) of even harder such problems after frontier models have made progress on the earlier levels.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include benchmarks-beyond-human-ability.llm.qmd >}}
+:::

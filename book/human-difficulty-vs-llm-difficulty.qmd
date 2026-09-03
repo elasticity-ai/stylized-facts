@@ -10,6 +10,8 @@ There is typically a positive correlation betwen the tasks that humans find more
 - @zhou2024reliable find a positive correlation between human difficulty and AI difficulty.
 - @dreyfuss2025human find no correlation between human and AI success rate across a set of math questions, however note that the results are using GPT-3.5.
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include human-difficulty-vs-llm-difficulty.llm.qmd >}}
+:::

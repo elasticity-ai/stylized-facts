@@ -27,6 +27,8 @@ These experiments do not incorporate general equilibrium effects.
 
 A similar discussion of the limitations of augmentation experiments is made in a recent [Andrey Fradkin blog post](https://empiricrafting.substack.com/p/sci-fi-economics?r=365z3v&utm_campaign=post&utm_medium=web&triedRedirect=true).
 
+::: {.llm-summary}
 ## Literature summary (LLM-written) {.unnumbered}
 
 {{< include misperception-of-llm-abilities.llm.qmd >}}
+:::
